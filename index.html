@@ -278,14 +278,12 @@
       <div class="section-label reveal">Never Miss a Story</div>
       <h2 class="subscribe-title reveal reveal-delay-1">Get the story<br><em>before Sunday</em></h2>
       <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community. Get a gentle reminder every weekend when a new story goes live — straight to your inbox.</p>
-      <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="subscribe-form reveal reveal-delay-2" id="subForm">
-        <input type="hidden" name="form-name" value="subscribe" />
-        <input type="hidden" name="bot-field" />
-        <input type="email" name="email" id="emailInput" placeholder="Your email address…" required />
-        <button type="submit" id="subBtn">Subscribe</button>
-      </form>
+      <div class="subscribe-form reveal reveal-delay-2">
+        <input type="email" id="emailInput" placeholder="Your email address…" />
+        <button type="button" id="subBtn" onclick="handleSubscribe()">Subscribe</button>
+      </div>
       <p class="subscribe-note reveal">No spam. Just one story, every weekend. Unsubscribe anytime.</p>
-      <div id="successMsg">✓ You're subscribed! See you this Sunday. 🎉</div>
+      <div id="successMsg">✓ Redirecting you to subscribe… 🎉</div>
       <div class="yt-subscribe-block reveal reveal-delay-3">
         <p>Or join us directly on YouTube</p>
         <a href="https://www.youtube.com/@booksnmuchmore" target="_blank" class="btn-yt-big">
@@ -313,22 +311,22 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-    const subForm = document.getElementById('subForm');
-    if (subForm) {
-      subForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('subBtn');
-        btn.textContent = 'Joining…'; btn.disabled = true;
-        const params = new URLSearchParams(new FormData(subForm)).toString();
-        try {
-          await fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:params });
-          subForm.style.display = 'none';
-          document.getElementById('successMsg').style.display = 'block';
-        } catch(err) {
-          btn.textContent = 'Subscribe'; btn.disabled = false;
-          alert('Something went wrong. Please try again!');
-        }
-      });
+    function handleSubscribe() {
+      const email = document.getElementById('emailInput').value;
+      if (!email.includes('@') || !email.includes('.')) {
+        document.getElementById('emailInput').style.outline = '2px solid #D4A84B';
+        document.getElementById('emailInput').placeholder = 'Please enter a valid email…';
+        setTimeout(() => {
+          document.getElementById('emailInput').style.outline = '';
+          document.getElementById('emailInput').placeholder = 'Your email address…';
+        }, 2000);
+        return;
+      }
+      document.getElementById('successMsg').style.display = 'block';
+      document.querySelector('.subscribe-form').style.display = 'none';
+      setTimeout(() => {
+        window.open('https://docs.google.com/forms/d/e/1FAIpQLSdxClppjbZTm6JWkDKqYiPv9Cg3CKvKo-3FcDwGm9bIJLjXUA/viewform?usp=publish-editor', '_blank');
+      }, 800);
     }
   </script>
 </body>
