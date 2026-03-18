@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaj ka Vichar — Books 'n' Much More</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Tiro+Devanagari+Hindi:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sienna: #8B3A2A;
+    --amber: #C8782A;
+    --gold: #D4A843;
+    --parchment: #F5EDD6;
+    --deep: #2C1810;
+    --cream: #FAF5E8;
+    --rust: #A0412E;
+  }
+
+  body {
+    background: var(--deep);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ── Card ── */
+  .card {
+    width: 680px;
+    max-width: 100%;
+    background: var(--parchment);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,168,67,0.3);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Texture overlay ── */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Top ornament band ── */
+  .top-band {
+    background: var(--sienna);
+    padding: 14px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .top-band::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--amber), var(--gold), transparent);
+  }
+
+  .channel-name {
+    font-family: 'Rozha One', serif;
+    color: var(--parchment);
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  .date-label {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  /* ── Main body ── */
+  .body {
+    padding: 44px 52px 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .section-label .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .section-label .line.right {
+    background: linear-gradient(270deg, var(--gold), transparent);
+  }
+
+  .section-label span {
+    font-family: 'Rozha One', serif;
+    color: var(--sienna);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ── Quote mark ── */
+  .quote-mark {
+    font-family: 'Rozha One', serif;
+    font-size: 96px;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 0.6;
+    margin-bottom: 4px;
+    display: block;
+    user-select: none;
+  }
+
+  /* ── Thought text ── */
+  .thought {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 26px;
+    line-height: 1.75;
+    color: var(--deep);
+    text-align: center;
+    padding: 0 8px;
+    margin-bottom: 28px;
+    min-height: 80px;
+  }
+
+  .thought-placeholder {
+    color: var(--amber);
+    opacity: 0.5;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+  }
+
+  /* ── Attribution ── */
+  .attribution {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    min-height: 22px;
+    margin-bottom: 32px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .divider .d-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+
+  .divider .d-line.r {
+    background: linear-gradient(270deg, transparent, var(--gold));
+  }
+
+  .divider .d-diamond {
+    width: 7px;
+    height: 7px;
+    background: var(--amber);
+    transform: rotate(45deg);
+  }
+
+  .divider .d-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    background: var(--sienna);
+    margin: 0 -52px;
+    padding: 16px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--amber), var(--gold), transparent);
+  }
+
+  .cta-text {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: var(--parchment);
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  .cta-handle {
+    font-family: 'Rozha One', serif;
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  /* ── Bottom strip ── */
+  .bottom-strip {
+    height: 6px;
+    background: linear-gradient(90deg, var(--sienna), var(--amber), var(--gold), var(--amber), var(--sienna));
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── Corner ornaments ── */
+  .corner {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    z-index: 3;
+    opacity: 0.45;
+  }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 52px; left: 20px; }
+  .corner.tr { top: 52px; right: 20px; transform: scaleX(-1); }
+  .corner.bl { bottom: 36px; left: 20px; transform: scaleY(-1); }
+  .corner.br { bottom: 36px; right: 20px; transform: scale(-1); }
+
+  /* ── Controls (not part of final image) ── */
+  .controls {
+    margin-top: 36px;
+    width: 680px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .ctrl-row {
+    display: flex;
+    gap: 12px;
+  }
+
+  .ctrl-input {
+    flex: 1;
+    background: rgba(245,237,214,0.06);
+    border: 1px solid rgba(212,168,67,0.3);
+    color: var(--parchment);
+    padding: 12px 16px;
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+  }
+
+  .ctrl-input::placeholder {
+    color: rgba(245,237,214,0.3);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  .ctrl-input:focus {
+    border-color: var(--gold);
+  }
+
+  .ctrl-btn {
+    background: var(--sienna);
+    color: var(--parchment);
+    border: none;
+    padding: 12px 24px;
+    font-family: 'Rozha One', serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid rgba(212,168,67,0.3);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .ctrl-btn:hover {
+    background: var(--rust);
+    border-color: var(--gold);
+  }
+
+  .ctrl-btn.secondary {
+    background: transparent;
+    color: var(--gold);
+  }
+
+  .ctrl-btn.secondary:hover {
+    background: rgba(212,168,67,0.1);
+  }
+
+  .hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: rgba(245,237,214,0.3);
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ CARD ══════════ -->
+<div class="card" id="card">
+
+  <!-- Corner ornaments -->
+  <div class="corner tl">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 L2 20 M2 2 L20 2" stroke="#D4A843" stroke-width="1.5"/>
+      <path d="M2 2 L12 12" stroke="#D4A843" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="2" cy="2" r="2.5" fill="#D4A843"/>
+      <circle cx="20" cy="2" r="1.5" fill="#D4A843" opacity="0.5"/>
+      <circle cx="2" cy="20" r="1.5" fill="#D4A843" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="corner tr">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M2 2 L2 20 M2 2 L20 2" stroke="#D4A843" stroke-width="1.5"/>
+      <path d="M2 2 L12 12" stroke="#D4A843" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="2" cy="2" r="2.5" fill="#D4A843"/>
+      <circle cx="20" cy="2" r="1.5" fill="#D4A843" opacity="0.5"/>
+      <circle cx="2" cy="20" r="1.5" fill="#D4A843" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="corner bl">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M2 2 L2 20 M2 2 L20 2" stroke="#D4A843" stroke-width="1.5"/>
+      <path d="M2 2 L12 12" stroke="#D4A843" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="2" cy="2" r="2.5" fill="#D4A843"/>
+      <circle cx="20" cy="2" r="1.5" fill="#D4A843" opacity="0.5"/>
+      <circle cx="2" cy="20" r="1.5" fill="#D4A843" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="corner br">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M2 2 L2 20 M2 2 L20 2" stroke="#D4A843" stroke-width="1.5"/>
+      <path d="M2 2 L12 12" stroke="#D4A843" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="2" cy="2" r="2.5" fill="#D4A843"/>
+      <circle cx="20" cy="2" r="1.5" fill="#D4A843" opacity="0.5"/>
+      <circle cx="2" cy="20" r="1.5" fill="#D4A843" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Top band -->
+  <div class="top-band">
+    <span class="channel-name">Books 'n' Much More</span>
+    <span class="date-label" id="date-label">आज का विचार</span>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <div class="section-label">
+      <div class="line"></div>
+      <span>आज का विचार</span>
+      <div class="line right"></div>
+    </div>
+
+    <span class="quote-mark">"</span>
+
+    <p class="thought" id="thought-display">
+      <span class="thought-placeholder">अपना विचार यहाँ लिखें…</span>
+    </p>
+
+    <p class="attribution" id="attr-display"></p>
+
+    <div class="divider">
+      <div class="d-dot"></div>
+      <div class="d-line"></div>
+      <div class="d-diamond"></div>
+      <div class="d-line r"></div>
+      <div class="d-dot"></div>
+    </div>
+
+    <div class="cta">
+      <span class="cta-text">रोज़ एक नया विचार • हर सप्ताह एक नई कहानी</span>
+      <span class="cta-handle">@booksnmuchmore</span>
+    </div>
+
+  </div>
+
+  <div class="bottom-strip"></div>
+</div>
+
+<!-- ══════════ CONTROLS ══════════ -->
+<div class="controls">
+  <div class="ctrl-row">
+    <textarea class="ctrl-input" id="thought-input" rows="3"
+      placeholder="अपना आज का विचार यहाँ लिखें (Hindi में)…"></textarea>
+  </div>
+  <div class="ctrl-row">
+    <input class="ctrl-input" id="attr-input" type="text"
+      placeholder="— Attribution (optional, e.g. — Kabir Das)">
+    <button class="ctrl-btn" onclick="updateCard()">Update</button>
+  </div>
+  <p class="hint">Screenshot the card above to post on YouTube Community / WhatsApp / Instagram</p>
+</div>
+
+<script>
+  // Set today's date
+  const days = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+  const months = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+  const now = new Date();
+  document.getElementById('date-label').textContent =
+    `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+  function updateCard() {
+    const thought = document.getElementById('thought-input').value.trim();
+    const attr    = document.getElementById('attr-input').value.trim();
+
+    const display = document.getElementById('thought-display');
+    const attrEl  = document.getElementById('attr-display');
+
+    if (thought) {
+      display.innerHTML = thought;
+      display.style.color = '#2C1810';
+    } else {
+      display.innerHTML = '<span class="thought-placeholder">अपना विचार यहाँ लिखें…</span>';
+    }
+
+    attrEl.textContent = attr ? `— ${attr}` : '';
+  }
+
+  // Live update on typing
+  document.getElementById('thought-input').addEventListener('input', updateCard);
+  document.getElementById('attr-input').addEventListener('input', updateCard);
+</script>
+
+</body>
+</html>
