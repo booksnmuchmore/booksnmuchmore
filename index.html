@@ -111,6 +111,22 @@
     .reveal-delay-2 { transition-delay:0.3s; }
     .reveal-delay-3 { transition-delay:0.45s; }
     #successMsg { display:none; font-family:'Raleway',sans-serif; font-size:0.85rem; color:var(--gold); letter-spacing:0.05em; margin-top:0.5rem; }
+    #books { background:var(--parchment); }
+    .books-promo-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; }
+    .books-promo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.2rem; margin-bottom:2.5rem; }
+    .bk { background:var(--cream); border:1px solid rgba(200,129,58,0.18); border-radius:4px; overflow:hidden; text-align:center; transition:transform 0.25s,box-shadow 0.25s; }
+    .bk:hover { transform:translateY(-4px); box-shadow:0 10px 32px var(--warm-shadow); }
+    .bk img { width:100%; height:140px; object-fit:cover; object-position:top; display:block; }
+    .bk-info { padding:0.7rem 0.6rem 0.9rem; }
+    .bk-title { font-family:'Playfair Display',serif; font-size:0.8rem; font-weight:700; color:var(--ink); line-height:1.3; margin-bottom:0.3rem; }
+    .bk-author { font-family:'Raleway',sans-serif; font-size:0.62rem; letter-spacing:0.06em; color:var(--muted); margin-bottom:0.6rem; }
+    .bk-btn { display:inline-block; font-family:'Raleway',sans-serif; font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#fff; background:var(--amber); padding:0.3rem 0.7rem; border-radius:2px; text-decoration:none; transition:background 0.2s; }
+    .bk-btn:hover { background:var(--sienna); }
+    .books-cta-strip { background:var(--ink); border-radius:4px; padding:1.6rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+    .books-cta-strip p { font-family:'Lora',serif; font-style:italic; font-size:1rem; color:var(--parchment); opacity:0.85; }
+    .books-cta-strip p span { color:var(--gold); font-style:normal; font-weight:500; }
+    @media (max-width:900px) { .books-promo-grid { grid-template-columns:repeat(3,1fr); } }
+    @media (max-width:600px) { .books-promo-grid { grid-template-columns:repeat(2,1fr); } .books-cta-strip { flex-direction:column; text-align:center; } }
     @media (max-width:900px) {
       .hero-inner { grid-template-columns:1fr; }
       .hero-visual { display:none; }
@@ -147,6 +163,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="stories.html">Stories</a></li>
+      <li><a href="books.html">Books</a></li>
       <li><a href="#subscribe">Subscribe</a></li>
     </ul>
     <a href="https://www.youtube.com/watch?v=MKEMfrzPwIo" target="_blank" class="btn-primary">
@@ -291,6 +308,28 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- BOOKS -->
+  <section id="books">
+    <div class="books-promo-header">
+      <div>
+        <div class="section-label reveal">Prashant की पसंदीदा किताबें</div>
+        <h2 class="section-title reveal reveal-delay-1">Books that <em>changed me</em></h2>
+      </div>
+      <a href="books.html" class="view-all reveal">View All 10 Books &rarr;</a>
+    </div>
+    <div class="books-promo-grid">
+      <div class="bk reveal"><img src="https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" alt="Think and Grow Rich"><div class="bk-info"><div class="bk-title">Think and Grow Rich</div><div class="bk-author">Napoleon Hill</div><a href="books.html" class="bk-btn">Buy &rarr;</a></div></div>
+      <div class="bk reveal reveal-delay-1"><img src="https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" alt="Atomic Habits"><div class="bk-info"><div class="bk-title">Atomic Habits</div><div class="bk-author">James Clear</div><a href="books.html" class="bk-btn">Buy &rarr;</a></div></div>
+      <div class="bk reveal reveal-delay-2"><img src="https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg" alt="Rich Dad Poor Dad"><div class="bk-info"><div class="bk-title">Rich Dad Poor Dad</div><div class="bk-author">Robert Kiyosaki</div><a href="books.html" class="bk-btn">Buy &rarr;</a></div></div>
+      <div class="bk reveal reveal-delay-3"><img src="https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" alt="The Alchemist"><div class="bk-info"><div class="bk-title">The Alchemist</div><div class="bk-author">Paulo Coelho</div><a href="books.html" class="bk-btn">Buy &rarr;</a></div></div>
+      <div class="bk reveal reveal-delay-3"><img src="https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" alt="Ikigai"><div class="bk-info"><div class="bk-title">Ikigai</div><div class="bk-author">García &amp; Miralles</div><a href="books.html" class="bk-btn">Buy &rarr;</a></div></div>
+    </div>
+    <div class="books-cta-strip reveal">
+      <p>इन किताबों ने मुझे inspire किया — शायद ये आपकी ज़िंदगी भी बदल दें। <span>Amazon पर खरीदें, channel को support करें।</span></p>
+      <a href="books.html" class="btn-primary">सभी 10 Books देखें &rarr;</a>
     </div>
   </section>
 
