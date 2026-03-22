@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>किताबें | Books 'n' Much More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --parchment: #f5f0e8;
+      --parchment-dark: #ede6d6;
+      --amber: #c8860a;
+      --amber-light: #e8a020;
+      --amber-pale: #fdf3dc;
+      --sienna: #8b3a1a;
+      --sienna-light: #b04a24;
+      --gold: #d4a843;
+      --gold-light: #f0c865;
+      --ink: #2c1f0e;
+      --ink-soft: #4a3520;
+      --ink-muted: #7a6248;
+      --cream: #faf7f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--parchment);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--ink);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: 'Lora', serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--ink) 0%, #3d2a12 60%, var(--sienna) 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(212,168,67,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,134,10,0.06) 0%, transparent 50%);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(212,168,67,0.15);
+      border: 1px solid rgba(212,168,67,0.35);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+      font-family: 'Lora', serif;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      color: var(--parchment);
+      line-height: 1.18;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero p {
+      color: rgba(245,240,232,0.72);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+      position: relative;
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.6rem auto 0;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--ink);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(212,168,67,0.2);
+    }
+
+    .filter-label {
+      color: var(--ink-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 0.4rem;
+      color: rgba(245,240,232,0.4);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(212,168,67,0.25);
+      color: rgba(245,240,232,0.65);
+      font-size: 0.78rem;
+      padding: 0.32rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Lora', serif;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: rgba(212,168,67,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── GRID ── */
+    .books-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--amber);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(200,134,10,0.4), transparent);
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ── BOOK CARD ── */
+    .book-card {
+      background: var(--cream);
+      border: 1px solid rgba(200,134,10,0.18);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(44,31,14,0.18);
+      border-color: rgba(200,134,10,0.45);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .book-card:nth-child(1)  { animation-delay: 0.05s; }
+    .book-card:nth-child(2)  { animation-delay: 0.10s; }
+    .book-card:nth-child(3)  { animation-delay: 0.15s; }
+    .book-card:nth-child(4)  { animation-delay: 0.20s; }
+    .book-card:nth-child(5)  { animation-delay: 0.25s; }
+    .book-card:nth-child(6)  { animation-delay: 0.30s; }
+    .book-card:nth-child(7)  { animation-delay: 0.35s; }
+    .book-card:nth-child(8)  { animation-delay: 0.40s; }
+    .book-card:nth-child(9)  { animation-delay: 0.45s; }
+    .book-card:nth-child(10) { animation-delay: 0.50s; }
+
+    .book-cover-wrap {
+      position: relative;
+      background: var(--parchment-dark);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .book-cover-wrap img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.35s;
+    }
+
+    .book-card:hover .book-cover-wrap img {
+      transform: scale(1.04);
+    }
+
+    .book-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--sienna);
+      color: #fff;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.6rem;
+      border-radius: 2px;
+      font-family: 'Lora', serif;
+    }
+
+    .book-body {
+      padding: 1.1rem 1.1rem 0.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .book-category {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-family: 'Lora', serif;
+    }
+
+    .book-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .book-author {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    .book-quote {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-top: 0.3rem;
+      padding-left: 0.7rem;
+      border-left: 2px solid var(--gold);
+      font-style: italic;
+    }
+
+    .book-footer {
+      padding: 0.8rem 1.1rem 1.1rem;
+      border-top: 1px solid rgba(200,134,10,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .book-stars {
+      color: var(--amber);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    .buy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--amber);
+      color: #fff;
+      font-size: 0.78rem;
+      font-family: 'Lora', serif;
+      letter-spacing: 0.05em;
+      padding: 0.45rem 0.9rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .buy-btn:hover {
+      background: var(--sienna);
+      transform: scale(1.04);
+    }
+
+    .buy-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── AFFILIATE NOTICE ── */
+    .affiliate-notice {
+      max-width: 1100px;
+      margin: 0 auto 1rem;
+      padding: 0 1.5rem;
+    }
+
+    .affiliate-notice p {
+      background: var(--amber-pale);
+      border: 1px solid rgba(200,134,10,0.25);
+      border-radius: 3px;
+      padding: 0.7rem 1.1rem;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .affiliate-notice strong { color: var(--sienna); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(245,240,232,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(212,168,67,0.15);
+    }
+
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .books-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+      .hero { padding: 3.5rem 1.2rem 3rem; }
+      .filter-bar { padding: 0.7rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Books 'n' Much More</a>
+  <ul class="nav-links">
+    <li><a href="index.html">होम</a></li>
+    <li><a href="stories.html">कहानियाँ</a></li>
+    <li><a href="books.html" class="active">किताबें</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Prashant की पसंदीदा किताबें</div>
+  <h1>वो किताबें जो <em>ज़िंदगी बदल दें</em></h1>
+  <p>हर किताब एक नई सोच का दरवाज़ा है। ये मेरी personally recommended books हैं — जिन्होंने मुझे inspire किया।</p>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterBooks('all', this)">सभी</button>
+  <button class="filter-btn" onclick="filterBooks('mindset', this)">Mindset</button>
+  <button class="filter-btn" onclick="filterBooks('finance', this)">Finance</button>
+  <button class="filter-btn" onclick="filterBooks('productivity', this)">Productivity</button>
+  <button class="filter-btn" onclick="filterBooks('habits', this)">Habits</button>
+</div>
+
+<!-- AFFILIATE NOTICE -->
+<div class="affiliate-notice" style="margin-top:2rem">
+  <p>
+    <strong>📌 Disclosure:</strong> इस page पर दिए गए Amazon links affiliate links हैं। जब आप इनसे कोई book खरीदते हैं, तो मुझे एक छोटा commission मिलता है — आपकी कोई extra cost नहीं होती। यह channel को support करने का एक तरीका है। 🙏
+  </p>
+</div>
+
+<!-- BOOKS GRID -->
+<section class="books-section">
+  <div class="section-heading">10 Must-Read Books</div>
+  <div class="books-grid" id="booksGrid">
+
+    <!-- 1. Think and Grow Rich -->
+    <div class="book-card" data-cat="mindset finance">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" alt="Think and Grow Rich" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Think+%26+Grow+Rich'"/>
+        <span class="book-badge">Bestseller</span>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Mindset · Finance</span>
+        <div class="book-title">Think and Grow Rich</div>
+        <div class="book-author">Napoleon Hill</div>
+        <div class="book-quote">जो आप सोच सकते हैं, वो आप पा सकते हैं।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. Atomic Habits -->
+    <div class="book-card" data-cat="habits productivity">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" alt="Atomic Habits" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Atomic+Habits'"/>
+        <span class="book-badge">Most Popular</span>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Habits · Productivity</span>
+        <div class="book-title">Atomic Habits</div>
+        <div class="book-author">James Clear</div>
+        <div class="book-quote">छोटी-छोटी आदतें मिलकर बड़े नतीजे देती हैं।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Atomic-Habits-Proven-Build-Break/dp/1847941834?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. Rich Dad Poor Dad -->
+    <div class="book-card" data-cat="finance">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg" alt="Rich Dad Poor Dad" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Rich+Dad+Poor+Dad'"/>
+        <span class="book-badge">Classic</span>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Finance</span>
+        <div class="book-title">Rich Dad Poor Dad</div>
+        <div class="book-author">Robert T. Kiyosaki</div>
+        <div class="book-quote">पैसा आपके लिए काम करे, आप पैसे के लिए नहीं।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Rich-Dad-Poor-Middle-Class/dp/1612680194?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. The Alchemist -->
+    <div class="book-card" data-cat="mindset">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" alt="The Alchemist" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=The+Alchemist'"/>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Mindset · Fiction</span>
+        <div class="book-title">The Alchemist</div>
+        <div class="book-author">Paulo Coelho</div>
+        <div class="book-quote">जब तुम कुछ चाहते हो, तो पूरी कायनात उसे पाने में मदद करती है।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Alchemist-Paulo-Coelho/dp/0062315005?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Growth Mindset -->
+    <div class="book-card" data-cat="mindset">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/611PNAzNLhL._SY466_.jpg" alt="Mindset by Carol Dweck" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Mindset'"/>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Mindset</span>
+        <div class="book-title">Mindset: The New Psychology of Success</div>
+        <div class="book-author">Carol S. Dweck</div>
+        <div class="book-quote">Growth mindset वाले लोग हर challenge में opportunity देखते हैं।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Mindset-Psychology-Carol-S-Dweck/dp/0345472322?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. Mind Management Not Time Management -->
+    <div class="book-card" data-cat="productivity mindset">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/71CGBiMpTRL._SY466_.jpg" alt="Mind Management Not Time Management" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Mind+Management'"/>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Productivity · Mindset</span>
+        <div class="book-title">Mind Management, Not Time Management</div>
+        <div class="book-author">David Kadavy</div>
+        <div class="book-quote">सही समय पर सही काम करना ही असली productivity है।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★☆</span>
+        <a class="buy-btn" href="https://www.amazon.in/Mind-Management-Not-Time-Productivity/dp/0996435476?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 7. Ikigai -->
+    <div class="book-card" data-cat="mindset">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" alt="Ikigai" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Ikigai'"/>
+        <span class="book-badge">Trending</span>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Mindset · Lifestyle</span>
+        <div class="book-title">Ikigai</div>
+        <div class="book-author">Héctor García & Francesc Miralles</div>
+        <div class="book-quote">जीने का एक purpose ढूंढो — यही है ikigai।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Ikigai-Japanese-Secret-Long-Happy/dp/178633089X?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 8. Deep Work -->
+    <div class="book-card" data-cat="productivity">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/81lCyFIJoZL._SY466_.jpg" alt="Deep Work" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Deep+Work'"/>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Productivity</span>
+        <div class="book-title">Deep Work</div>
+        <div class="book-author">Cal Newport</div>
+        <div class="book-quote">Distraction-free concentration — यही आपकी superpower है।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Deep-Work-Focused-Success-Distracted/dp/0349413681?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 9. Linchpin -->
+    <div class="book-card" data-cat="mindset productivity">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/71HEL6oRSHL._SY466_.jpg" alt="Linchpin" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Linchpin'"/>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Mindset · Career</span>
+        <div class="book-title">Linchpin</div>
+        <div class="book-author">Seth Godin</div>
+        <div class="book-quote">Replace होने वाले मत बनो — indispensable बनो।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★☆</span>
+        <a class="buy-btn" href="https://www.amazon.in/Linchpin-Are-Indispensable-Seth-Godin/dp/0749953357?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+    <!-- 10. 7 Habits -->
+    <div class="book-card" data-cat="habits mindset">
+      <div class="book-cover-wrap">
+        <img src="https://m.media-amazon.com/images/I/71ZMnxLMkQL._SY466_.jpg" alt="7 Habits of Highly Effective People" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=7+Habits'"/>
+        <span class="book-badge">All-time Classic</span>
+      </div>
+      <div class="book-body">
+        <span class="book-category">Habits · Leadership</span>
+        <div class="book-title">7 Habits of Highly Effective People</div>
+        <div class="book-author">Stephen R. Covey</div>
+        <div class="book-quote">Effective लोग react नहीं करते — वो choose करते हैं।</div>
+      </div>
+      <div class="book-footer">
+        <span class="book-stars">★★★★★</span>
+        <a class="buy-btn" href="https://www.amazon.in/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=YOUR-AFFILIATE-TAG" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+          Amazon पर खरीदें
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /books-grid -->
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a></p>
+  <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">Affiliate Disclosure: इस page पर Amazon affiliate links हैं।</p>
+</footer>
+
+<script>
+  function filterBooks(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.book-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat.includes(cat)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
