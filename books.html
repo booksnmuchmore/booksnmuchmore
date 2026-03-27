@@ -322,9 +322,52 @@
       padding: 0.8rem 1.1rem 1.1rem;
       border-top: 1px solid rgba(200,134,10,0.12);
       display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .book-footer-top {
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
+    }
+
+    .buy-btn-com {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      font-size: 0.72rem;
+      font-family: 'Lora', serif;
+      letter-spacing: 0.05em;
+      padding: 0.38rem 0.9rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      white-space: nowrap;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .buy-btn-com:hover {
+      background: var(--amber);
+      color: #fff;
+      transform: scale(1.03);
+    }
+
+    .buy-btn-com svg {
+      width: 11px;
+      height: 11px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .buy-btn {
+      flex: 1;
+      justify-content: center;
     }
 
     .book-stars {
@@ -434,7 +477,7 @@
 <!-- AFFILIATE NOTICE -->
 <div class="affiliate-notice" style="margin-top:2rem">
   <p>
-    <strong>📌 Disclosure:</strong> इस page पर दिए गए Amazon links affiliate links हैं। जब आप इनसे कोई book खरीदते हैं, तो मुझे एक छोटा commission मिलता है — आपकी कोई extra cost नहीं होती। यह channel को support करने का एक तरीका है। 🙏
+    <strong>📌 Disclosure:</strong> इस page पर दिए गए Amazon links affiliate links हैं। भारत के readers के लिए 🇮🇳 Amazon.in और US/Canada के readers के लिए 🌍 Amazon.com के links दिए गए हैं। जब आप इनसे कोई book खरीदते हैं, तो मुझे एक छोटा commission मिलता है — आपकी कोई extra cost नहीं होती। यह channel को support करने का एक तरीका है। 🙏
   </p>
 </div>
 
@@ -456,10 +499,16 @@
         <div class="book-quote">जो आप सोच सकते हैं, वो आप पा सकते हैं।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -477,10 +526,16 @@
         <div class="book-quote">छोटी-छोटी आदतें मिलकर बड़े नतीजे देती हैं।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Atomic-Habits-Proven-Build-Break/dp/1847941834?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Atomic-Habits-Proven-Build-Break/dp/1847941834?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -498,10 +553,16 @@
         <div class="book-quote">पैसा आपके लिए काम करे, आप पैसे के लिए नहीं।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Rich-Dad-Poor-Teach-Middle/dp/B07C7M8SX9?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Rich-Dad-Poor-Teach-Middle/dp/B07C7M8SX9?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Rich-Dad-Poor-Teach-Middle/dp/1612681131?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -518,10 +579,16 @@
         <div class="book-quote">जब तुम कुछ चाहते हो, तो पूरी कायनात उसे पाने में मदद करती है।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Alchemist-Paulo-Coelho/dp/0062315005?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Alchemist-Paulo-Coelho/dp/0062315005?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Alchemist-Paulo-Coelho/dp/0062315005?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -538,10 +605,16 @@
         <div class="book-quote">Growth mindset वाले लोग हर challenge में opportunity देखते हैं।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/MINDSET-REVISED-UPDATED-Paperback-Dweck/dp/1780332009?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/MINDSET-REVISED-UPDATED-Paperback-Dweck/dp/1780332009?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Mindset-Psychology-Carol-S-Dweck/dp/0345472322?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -558,10 +631,16 @@
         <div class="book-quote">सही समय पर सही काम करना ही असली productivity है।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★☆</span>
-        <a class="buy-btn" href="https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy&tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★☆</span>
+          <a class="buy-btn" href="https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy&tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Mind-Management-Not-Time-Productivity/dp/0578733692?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -579,10 +658,16 @@
         <div class="book-quote">जीने का एक purpose ढूंढो — यही है ikigai।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Ikigai-Japanese-Secret-Long-Happy/dp/178633089X?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Ikigai-Japanese-Secret-Long-Happy/dp/178633089X?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Ikigai-Japanese-Secret-Long-Happy/dp/0143130722?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -599,10 +684,16 @@
         <div class="book-quote">Distraction-free concentration — यही आपकी superpower है।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Deep-Work-Focused-Success-Distracted/dp/0349413681?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Deep-Work-Focused-Success-Distracted/dp/0349413681?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -619,10 +710,16 @@
         <div class="book-quote">Replace होने वाले मत बनो — indispensable बनो।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★☆</span>
-        <a class="buy-btn" href="https://www.amazon.in/Linchpin-Are-Indispensable-Seth-Godin/dp/0749953357?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★☆</span>
+          <a class="buy-btn" href="https://www.amazon.in/Linchpin-Are-Indispensable-Seth-Godin/dp/0749953357?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Linchpin-Are-Indispensable-Seth-Godin/dp/1591843162?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
@@ -640,10 +737,16 @@
         <div class="book-quote">Effective लोग react नहीं करते — वो choose करते हैं।</div>
       </div>
       <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <a class="buy-btn" href="https://www.amazon.in/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+        <div class="book-footer-top">
+          <span class="book-stars">★★★★★</span>
+          <a class="buy-btn" href="https://www.amazon.in/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            🇮🇳 Amazon.in
+          </a>
+        </div>
+        <a class="buy-btn-com" href="https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=booksnmuchmor-20" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          Amazon पर खरीदें
+          🌍 Amazon.com (US/Canada)
         </a>
       </div>
     </div>
