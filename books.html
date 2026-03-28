@@ -323,7 +323,7 @@
       border-top: 1px solid rgba(200,134,10,0.12);
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.4rem;
     }
 
     .book-footer-top {
@@ -340,8 +340,9 @@
     }
 
     .buy-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.4rem;
       background: var(--amber);
       color: #fff;
@@ -355,11 +356,12 @@
       white-space: nowrap;
       border: none;
       cursor: pointer;
+      width: 100%;
     }
 
     .buy-btn:hover {
       background: var(--sienna);
-      transform: scale(1.04);
+      transform: scale(1.02);
     }
 
     .buy-btn svg {
@@ -370,10 +372,10 @@
     }
 
     .geo-note {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       color: var(--ink-muted);
-      margin-top: 0.35rem;
       font-family: 'Lora', serif;
+      text-align: center;
     }
 
     /* ── AFFILIATE NOTICE ── */
@@ -471,13 +473,11 @@
         <div class="book-quote">जो आप सोच सकते हैं, वो आप पा सकते हैं।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -494,13 +494,11 @@
         <div class="book-quote">छोटी-छोटी आदतें मिलकर बड़े नतीजे देती हैं।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1847941834', 'https://www.amazon.com/dp/0735211299', 'https://www.amazon.ca/dp/0735211299')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1847941834', 'https://www.amazon.com/dp/0735211299', 'https://www.amazon.ca/dp/0735211299')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -517,13 +515,11 @@
         <div class="book-quote">पैसा आपके लिए काम करे, आप पैसे के लिए नहीं।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/B07C7M8SX9', 'https://www.amazon.com/dp/1612681131', 'https://www.amazon.ca/dp/1612681131')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/B07C7M8SX9', 'https://www.amazon.com/dp/1612681131', 'https://www.amazon.ca/dp/1612681131')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -539,13 +535,11 @@
         <div class="book-quote">जब तुम कुछ चाहते हो, तो पूरी कायनात उसे पाने में मदद करती है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062315005', 'https://www.amazon.com/dp/0062315005', 'https://www.amazon.ca/dp/0062315005')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062315005', 'https://www.amazon.com/dp/0062315005', 'https://www.amazon.ca/dp/0062315005')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -561,13 +555,11 @@
         <div class="book-quote">Growth mindset वाले लोग हर challenge में opportunity देखते हैं।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1780332009', 'https://www.amazon.com/dp/0345472322', 'https://www.amazon.ca/dp/0345472322')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1780332009', 'https://www.amazon.com/dp/0345472322', 'https://www.amazon.ca/dp/0345472322')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -583,13 +575,11 @@
         <div class="book-quote">सही समय पर सही काम करना ही असली productivity है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★☆</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy', 'https://www.amazon.com/dp/0578733692', 'https://www.amazon.ca/dp/0578733692')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★☆</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy', 'https://www.amazon.com/dp/0578733692', 'https://www.amazon.ca/dp/0578733692')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -606,13 +596,11 @@
         <div class="book-quote">जीने का एक purpose ढूंढो — यही है ikigai।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/178633089X', 'https://www.amazon.com/dp/0143130722', 'https://www.amazon.ca/dp/0143130722')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/178633089X', 'https://www.amazon.com/dp/0143130722', 'https://www.amazon.ca/dp/0143130722')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -628,13 +616,11 @@
         <div class="book-quote">Distraction-free concentration — यही आपकी superpower है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0349413681', 'https://www.amazon.com/dp/1455586692', 'https://www.amazon.ca/dp/1455586692')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0349413681', 'https://www.amazon.com/dp/1455586692', 'https://www.amazon.ca/dp/1455586692')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -650,13 +636,11 @@
         <div class="book-quote">Replace होने वाले मत बनो — indispensable बनो।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★☆</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0749953357', 'https://www.amazon.com/dp/1591843162', 'https://www.amazon.ca/dp/1591843162')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★☆</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0749953357', 'https://www.amazon.com/dp/1591843162', 'https://www.amazon.ca/dp/1591843162')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -673,13 +657,11 @@
         <div class="book-quote">Effective लोग react नहीं करते — वो choose करते हैं।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1982137274', 'https://www.amazon.com/dp/1982137274', 'https://www.amazon.ca/dp/1982137274')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1982137274', 'https://www.amazon.com/dp/1982137274', 'https://www.amazon.ca/dp/1982137274')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -696,13 +678,11 @@
         <div class="book-quote">हर चीज़ पर ध्यान मत दो — सिर्फ वो चुनो जो सच में मायने रखता है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062457713', 'https://www.amazon.com/dp/0062457713', 'https://www.amazon.ca/dp/0062457713')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062457713', 'https://www.amazon.com/dp/0062457713', 'https://www.amazon.ca/dp/0062457713')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -718,13 +698,11 @@
         <div class="book-quote">लोगों को समझना ही असली कला है — यही सफलता की नींव है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9389847354', 'https://www.amazon.com/dp/0671027034', 'https://www.amazon.ca/dp/0671027034')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9389847354', 'https://www.amazon.com/dp/0671027034', 'https://www.amazon.ca/dp/0671027034')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -741,13 +719,11 @@
         <div class="book-quote">जब तक हम अपनी आत्मा की आवाज़ नहीं सुनते, सच्ची ख़ुशी नहीं मिलती।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/817992162X', 'https://www.amazon.com/dp/0062515675', 'https://www.amazon.ca/dp/0062515675')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/817992162X', 'https://www.amazon.com/dp/0062515675', 'https://www.amazon.ca/dp/0062515675')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -764,13 +740,11 @@
         <div class="book-quote">पैसे का सही मनोविज्ञान समझो — तो ज़िंदगी बदल जाती है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9390166268', 'https://www.amazon.com/dp/0857197681', 'https://www.amazon.ca/dp/0857197681')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9390166268', 'https://www.amazon.com/dp/0857197681', 'https://www.amazon.ca/dp/0857197681')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
@@ -786,13 +760,11 @@
         <div class="book-quote">Result पर नहीं, process पर ध्यान दो — तभी असली mastery मिलती है।</div>
       </div>
       <div class="book-footer">
-        <div class="book-footer-top">
-          <span class="book-stars">★★★★★</span>
-          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9386867109', 'https://www.amazon.com/dp/1608680908', 'https://www.amazon.ca/dp/1608680908')">
-            <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        <span class="book-stars">★★★★★</span>
+        <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9386867109', 'https://www.amazon.com/dp/1608680908', 'https://www.amazon.ca/dp/1608680908')">
+          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             🛒 Buy on Amazon
-          </button>
-        </div>
+        </button>
         <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
