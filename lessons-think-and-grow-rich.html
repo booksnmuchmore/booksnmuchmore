@@ -43,7 +43,7 @@
     .book-strip img { width: 80px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.2); flex-shrink: 0; }
     .book-strip-info h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--dark); }
     .book-strip-info p { font-size: .88rem; color: var(--mid); margin: .2rem 0 .6rem; }
-    .buy-btn { display: inline-block; background: var(--amber); color: #fff; padding: .4rem 1.2rem; border-radius: 20px; text-decoration: none; font-size: .82rem; transition: background .2s; }
+    .buy-btn { display: inline-block; background: var(--amber); color: #fff; padding: .4rem 1.2rem; border-radius: 20px; text-decoration: none; font-size: .82rem; transition: background .2s; border: none; cursor: pointer; }
     .buy-btn:hover { background: #A06020; }
     .affiliate-note { font-size: .75rem; color: var(--lite); margin-top: .4rem; }
 
@@ -95,7 +95,7 @@
   <h1>Think and <em>Grow Rich</em></h1>
   <p class="author">— Napoleon Hill</p>
   <p class="hero-desc">First published in 1937, this timeless classic has transformed millions of lives worldwide. Here are the 10 most powerful lessons that can change the way you think, act, and succeed.</p>
-  <a class="hero-cta" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank">📦 Get the Book on Amazon</a>
+  <a class="hero-cta" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')" href="javascript:void(0)">📦 Get the Book on Amazon</a>
 </div>
 
 <div class="book-strip-wrap">
@@ -104,7 +104,8 @@
     <div class="book-strip-info">
       <h3>Think and Grow Rich</h3>
       <p>Napoleon Hill &nbsp;·&nbsp; Mindset &amp; Finance &nbsp;·&nbsp; ★★★★★</p>
-      <a class="buy-btn" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank">Amazon पर खरीदें →</a>
+      <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')">🛒 Buy on Amazon →</button>
+      <p class="affiliate-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* No extra cost to you. Your purchase supports this channel. 🙏</p>
       <p class="affiliate-note">* Affiliate link — आपकी कोई extra cost नहीं 🙏</p>
     </div>
   </div>
@@ -218,8 +219,8 @@
 <div class="bottom-cta">
   <h3>Ready to Read the Full Book?</h3>
   <p>These 10 lessons are just the surface. The real transformation happens when you read every page yourself.</p>
-  <a class="buy-btn" style="font-size:1rem;padding:.75rem 2.2rem;" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank">📦 Buy on Amazon India →</a>
-  <p style="margin-top:.8rem;font-size:.78rem;color:#a0907a;">* Affiliate link — no extra cost to you. Your purchase supports this channel. 🙏</p>
+  <button class="buy-btn" style="font-size:1rem;padding:.75rem 2.2rem;" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')">📦 Buy on Amazon →</button>
+  <p style="margin-top:.8rem;font-size:.78rem;color:#a0907a;">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* Affiliate link — no extra cost to you. Your purchase supports this channel. 🙏</p>
 </div>
 
 <div class="more-books">
@@ -235,5 +236,18 @@
   <p style="margin-top:.4rem;">Affiliate Disclosure: This page contains Amazon affiliate links.</p>
 </footer>
 
+<script>
+  const TAGS = { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' };
+  let userCountry = null;
+  async function detectCountry() {
+    try { const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); userCountry = d.country_code; }
+    catch(e) { userCountry = 'US'; }
+  }
+  function geoRedirect(inUrl, usUrl, caUrl) {
+    let url = userCountry === 'IN' ? inUrl + '?tag=' + TAGS.IN : userCountry === 'CA' ? caUrl + '?tag=' + TAGS.CA : usUrl + '?tag=' + TAGS.US;
+    window.open(url, '_blank');
+  }
+  detectCountry();
+</script>
 </body>
 </html>

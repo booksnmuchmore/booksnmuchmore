@@ -323,7 +323,7 @@
       border-top: 1px solid rgba(200,134,10,0.12);
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.3rem;
     }
 
     .book-footer-top {
@@ -331,43 +331,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
-    }
-
-    .buy-btn-com {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: transparent;
-      color: var(--amber);
-      border: 1px solid var(--amber);
-      font-size: 0.72rem;
-      font-family: 'Lora', serif;
-      letter-spacing: 0.05em;
-      padding: 0.38rem 0.9rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
-      white-space: nowrap;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .buy-btn-com:hover {
-      background: var(--amber);
-      color: #fff;
-      transform: scale(1.03);
-    }
-
-    .buy-btn-com svg {
-      width: 11px;
-      height: 11px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    .buy-btn {
-      flex: 1;
-      justify-content: center;
     }
 
     .book-stars {
@@ -390,6 +353,8 @@
       text-decoration: none;
       transition: background 0.2s, transform 0.15s;
       white-space: nowrap;
+      border: none;
+      cursor: pointer;
     }
 
     .buy-btn:hover {
@@ -402,6 +367,13 @@
       height: 12px;
       fill: currentColor;
       flex-shrink: 0;
+    }
+
+    .geo-note {
+      font-size: 0.65rem;
+      color: var(--ink-muted);
+      margin-top: 0.35rem;
+      font-family: 'Lora', serif;
     }
 
     /* ── AFFILIATE NOTICE ── */
@@ -477,7 +449,7 @@
 <!-- AFFILIATE NOTICE -->
 <div class="affiliate-notice" style="margin-top:2rem">
   <p>
-    <strong>📌 Disclosure:</strong> इस page पर दिए गए Amazon links affiliate links हैं। भारत के readers के लिए 🇮🇳 Amazon.in और US/Canada के readers के लिए 🌍 Amazon.com के links दिए गए हैं। जब आप इनसे कोई book खरीदते हैं, तो मुझे एक छोटा commission मिलता है — आपकी कोई extra cost नहीं होती। यह channel को support करने का एक तरीका है। 🙏
+    <strong>📌 Disclosure:</strong> इस page पर दिए गए links Amazon affiliate links हैं। आपकी location के अनुसार आपको सही Amazon store पर redirect किया जाएगा — 🇮🇳 India के लिए Amazon.in, 🇨🇦 Canada के लिए Amazon.ca, और 🇺🇸 US व अन्य देशों के लिए Amazon.com। खरीदारी पर आपकी कोई extra cost नहीं होती। यह channel को support करने का एक तरीका है। 🙏
   </p>
 </div>
 
@@ -501,18 +473,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1585424331', 'https://www.amazon.com/dp/1585424331', 'https://www.amazon.ca/dp/1585424331')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Think-Grow-Rich-Landmark-Bestseller/dp/1585424331?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 2. Atomic Habits -->
     <div class="book-card" data-cat="habits productivity">
       <div class="book-cover-wrap">
@@ -528,18 +496,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Atomic-Habits-Proven-Build-Break/dp/1847941834?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1847941834', 'https://www.amazon.com/dp/0735211299', 'https://www.amazon.ca/dp/0735211299')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Atomic-Habits-Proven-Build-Break/dp/0735211299?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 3. Rich Dad Poor Dad -->
     <div class="book-card" data-cat="finance">
       <div class="book-cover-wrap">
@@ -555,18 +519,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Rich-Dad-Poor-Teach-Middle/dp/B07C7M8SX9?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/B07C7M8SX9', 'https://www.amazon.com/dp/1612681131', 'https://www.amazon.ca/dp/1612681131')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Rich-Dad-Poor-Teach-Middle/dp/1612681131?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 4. The Alchemist -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -581,18 +541,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Alchemist-Paulo-Coelho/dp/0062315005?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062315005', 'https://www.amazon.com/dp/0062315005', 'https://www.amazon.ca/dp/0062315005')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Alchemist-Paulo-Coelho/dp/0062315005?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 5. Growth Mindset -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -607,18 +563,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/MINDSET-REVISED-UPDATED-Paperback-Dweck/dp/1780332009?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1780332009', 'https://www.amazon.com/dp/0345472322', 'https://www.amazon.ca/dp/0345472322')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Mindset-Psychology-Carol-S-Dweck/dp/0345472322?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 6. Mind Management Not Time Management -->
     <div class="book-card" data-cat="productivity mindset">
       <div class="book-cover-wrap">
@@ -633,18 +585,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★☆</span>
-          <a class="buy-btn" href="https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy&tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/s?k=Mind+Management+Not+Time+Management+David+Kadavy', 'https://www.amazon.com/dp/0578733692', 'https://www.amazon.ca/dp/0578733692')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Mind-Management-Not-Time-Productivity/dp/0578733692?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 7. Ikigai -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -660,18 +608,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Ikigai-Japanese-Secret-Long-Happy/dp/178633089X?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/178633089X', 'https://www.amazon.com/dp/0143130722', 'https://www.amazon.ca/dp/0143130722')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Ikigai-Japanese-Secret-Long-Happy/dp/0143130722?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 8. Deep Work -->
     <div class="book-card" data-cat="productivity">
       <div class="book-cover-wrap">
@@ -686,18 +630,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Deep-Work-Focused-Success-Distracted/dp/0349413681?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0349413681', 'https://www.amazon.com/dp/1455586692', 'https://www.amazon.ca/dp/1455586692')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 9. Linchpin -->
     <div class="book-card" data-cat="mindset productivity">
       <div class="book-cover-wrap">
@@ -712,18 +652,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★☆</span>
-          <a class="buy-btn" href="https://www.amazon.in/Linchpin-Are-Indispensable-Seth-Godin/dp/0749953357?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0749953357', 'https://www.amazon.com/dp/1591843162', 'https://www.amazon.ca/dp/1591843162')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Linchpin-Are-Indispensable-Seth-Godin/dp/1591843162?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 10. 7 Habits -->
     <div class="book-card" data-cat="habits mindset">
       <div class="book-cover-wrap">
@@ -739,18 +675,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/1982137274', 'https://www.amazon.com/dp/1982137274', 'https://www.amazon.ca/dp/1982137274')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Habits-Highly-Effective-People-Powerful/dp/1982137274?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 11. The Subtle Art of Not Giving a F*ck -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -766,18 +698,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Subtle-Art-Not-Giving-Counterintuitive/dp/0062457713?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/0062457713', 'https://www.amazon.com/dp/0062457713', 'https://www.amazon.ca/dp/0062457713')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Subtle-Art-Not-Giving-Counterintuitive/dp/0062457713?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 12. How to Win Friends and Influence People -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -792,18 +720,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/How-Win-Friends-Influence-People/dp/9389847354?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9389847354', 'https://www.amazon.com/dp/0671027034', 'https://www.amazon.ca/dp/0671027034')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 13. The Monk Who Sold His Ferrari -->
     <div class="book-card" data-cat="mindset">
       <div class="book-cover-wrap">
@@ -819,18 +743,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/dp/817992162X?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/817992162X', 'https://www.amazon.com/dp/0062515675', 'https://www.amazon.ca/dp/0062515675')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/dp/0062515675?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 14. The Psychology of Money -->
     <div class="book-card" data-cat="finance">
       <div class="book-cover-wrap">
@@ -846,18 +766,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Psychology-Money-Morgan-Housel/dp/9390166268?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9390166268', 'https://www.amazon.com/dp/0857197681', 'https://www.amazon.ca/dp/0857197681')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Psychology-Money-Timeless-Lessons-Happiness/dp/0857197681?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
     <!-- 15. The Practicing Mind -->
     <div class="book-card" data-cat="mindset productivity">
       <div class="book-cover-wrap">
@@ -872,18 +788,14 @@
       <div class="book-footer">
         <div class="book-footer-top">
           <span class="book-stars">★★★★★</span>
-          <a class="buy-btn" href="https://www.amazon.in/Practicing-Mind-Thomas-M-Sterner/dp/9386867109?tag=booksnmuchm02-21" target="_blank" rel="noopener">
+          <button class="buy-btn" onclick="geoRedirect('https://www.amazon.in/dp/9386867109', 'https://www.amazon.com/dp/1608680908', 'https://www.amazon.ca/dp/1608680908')">
             <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🇮🇳 Amazon.in
-          </a>
+            🛒 Buy on Amazon
+          </button>
         </div>
-        <a class="buy-btn-com" href="https://www.amazon.com/Practicing-Mind-Developing-Discipline-Challenge/dp/1608680908?tag=booksnmuchmor-20" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          🌍 Amazon.com (US/Canada)
-        </a>
+        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
       </div>
     </div>
-
   </div><!-- /books-grid -->
 </section>
 
@@ -905,6 +817,7 @@
 </footer>
 
 <script>
+  // ── Filter ──
   function filterBooks(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -916,6 +829,38 @@
       }
     });
   }
+
+  // ── Geo Redirect ──
+  const TAGS = {
+    IN: 'booksnmuchm02-21',
+    US: 'booksnmuchmor-20',
+    CA: 'booksnmuchm08-20',
+  };
+  let userCountry = null;
+
+  async function detectCountry() {
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      userCountry = data.country_code;
+    } catch (e) {
+      userCountry = 'US';
+    }
+  }
+
+  function geoRedirect(inUrl, usUrl, caUrl) {
+    let finalUrl;
+    if (userCountry === 'IN') {
+      finalUrl = inUrl + '?tag=' + TAGS.IN;
+    } else if (userCountry === 'CA') {
+      finalUrl = caUrl + '?tag=' + TAGS.CA;
+    } else {
+      finalUrl = usUrl + '?tag=' + TAGS.US;
+    }
+    window.open(finalUrl, '_blank');
+  }
+
+  detectCountry();
 </script>
 
 </body>
