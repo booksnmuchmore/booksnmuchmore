@@ -17,26 +17,6 @@ const SITE = {
   rawBase: "https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main"
 };
 
-// ── Affiliate tags ────────────────────────────────────────────
-const AFFILIATE = {
-  tags: { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' },
-  _country: null,
-  async detect() {
-    try {
-      const r = await fetch('https://ipapi.co/json/');
-      const d = await r.json();
-      this._country = d.country_code;
-    } catch(e) { this._country = 'US'; }
-  },
-  url(amazon) {
-    const c = this._country;
-    const tag  = c === 'IN' ? this.tags.IN : c === 'CA' ? this.tags.CA : this.tags.US;
-    const base = c === 'IN' ? amazon.IN   : c === 'CA' ? amazon.CA   : amazon.US;
-    return base + '?tag=' + tag;
-  },
-  open(amazon) { window.open(this.url(amazon), '_blank'); }
-};
-
 // Most recent episode FIRST — homepage always shows top 3
 const EPISODES = [
   {
@@ -113,11 +93,11 @@ const EPISODES = [
 
 // Books shown in the homepage promo strip
 const PROMO_BOOKS = [
-  { title: "Think and Grow Rich", author: "Napoleon Hill",    cover: "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1585424331",  US: "https://www.amazon.com/dp/1585424331",  CA: "https://www.amazon.ca/dp/1585424331"  } },
-  { title: "Atomic Habits",       author: "James Clear",      cover: "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1847941834",  US: "https://www.amazon.com/dp/0735211299",  CA: "https://www.amazon.ca/dp/0735211299"  } },
-  { title: "Rich Dad Poor Dad",   author: "Robert Kiyosaki",  cover: "https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1612680194",  US: "https://www.amazon.com/dp/1612680194",  CA: "https://www.amazon.ca/dp/1612680194"  } },
-  { title: "The Alchemist",       author: "Paulo Coelho",     cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/0062315005",  US: "https://www.amazon.com/dp/0062315005",  CA: "https://www.amazon.ca/dp/0062315005"  } },
-  { title: "Ikigai",              author: "García & Miralles", cover: "https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/0143454293",  US: "https://www.amazon.com/dp/0143130722",  CA: "https://www.amazon.ca/dp/0143130722"  } }
+  { title: "Think and Grow Rich", author: "Napoleon Hill",    cover: "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" },
+  { title: "Atomic Habits",       author: "James Clear",      cover: "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" },
+  { title: "Rich Dad Poor Dad",   author: "Robert Kiyosaki",  cover: "https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg" },
+  { title: "The Alchemist",       author: "Paulo Coelho",     cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" },
+  { title: "Ikigai",              author: "García & Miralles", cover: "https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" }
 ];
 
 // Lessons preview cards on homepage
@@ -151,6 +131,17 @@ const HOMEPAGE_LESSONS = [
     author: "Paulo Coelho",
     cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg",
     desc: "अपनी Personal Legend की खोज — एक ऐसा सफर जो हर सपने देखने वाले का दिल छू लेता है।",
+    count: "✦ 10 Lessons · Hindi + English",
+    live: true,
+    featured: false
+  },
+  {
+    slug: "rich-dad-poor-dad",
+    genre: "Finance · Mindset",
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+    cover: "https://m.media-amazon.com/images/I/81BE7eeKzAL._SY466_.jpg",
+    desc: "पैसा कमाना और पैसा काम करवाना — दो अलग-अलग सोच। अमीर लोग बच्चों को जो सिखाते हैं, वो school नहीं सिखाता।",
     count: "✦ 10 Lessons · Hindi + English",
     live: true,
     featured: false

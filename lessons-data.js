@@ -244,7 +244,7 @@ const BOOKS_DATA = {
   },
 
   "rich-dad-poor-dad": {
-    live: false,
+    live: true,
     slug: "rich-dad-poor-dad",
     title: "Rich Dad Poor Dad",
     titleHtml: "Rich Dad <em>Poor Dad</em>",
@@ -252,13 +252,74 @@ const BOOKS_DATA = {
     genre: "Finance · Mindset",
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/81BE7eeKzAL._SY466_.jpg",
-    heroDesc: "Coming soon.",
+    heroDesc: "First published in 1997, Rich Dad Poor Dad has sold over 32 million copies and remains the #1 personal finance book of all time. Through the story of two fathers, Kiyosaki shatters the myths about money that keep most people trapped — and shows a different path entirely.",
     amazon: {
       IN: "https://www.amazon.in/dp/1612680194",
       US: "https://www.amazon.com/dp/1612680194",
       CA: "https://www.amazon.ca/dp/1612680194"
     },
-    lessons: []
+    lessons: [
+      {
+        title: "The Rich Don't Work for Money — Money Works for Them",
+        en: "The poor and middle class work for money. The rich make money work for them. Most people spend their entire lives chasing a paycheck, never pausing to ask: what if instead of me working for money, I made money work for me? This mindset shift — from employee to investor — is where financial freedom begins.",
+        hi: "गरीब और मध्यम वर्ग पैसे के लिए काम करते हैं। अमीर लोग पैसे को अपने लिए काम करवाते हैं। ज़्यादातर लोग पूरी ज़िंदगी तनख्वाह के पीछे भागते हैं, यह सोचे बिना कि पैसा उनके लिए काम कर सकता है। यही सोच बदलना — नौकरी से निवेशक बनना — वित्तीय स्वतंत्रता की शुरुआत है।",
+        quote: '"The poor and the middle class work for money. The rich have money work for them." — Robert Kiyosaki'
+      },
+      {
+        title: "Financial Literacy — Know the Difference Between Asset and Liability",
+        en: "The single most important financial lesson: an asset puts money into your pocket, a liability takes money out. Rich people acquire assets. Poor people acquire liabilities thinking they are assets. Your house, your car, your gadgets — most of what people call 'assets' are actually liabilities draining their wealth every month.",
+        hi: "सबसे ज़रूरी वित्तीय सबक: Asset वो है जो आपकी जेब में पैसा डाले, Liability वो है जो पैसा निकाले। अमीर लोग assets खरीदते हैं। गरीब लोग liabilities खरीदते हैं और सोचते हैं कि वो assets हैं। आपका घर, गाड़ी, gadgets — जिसे लोग 'asset' कहते हैं वो अक्सर उनकी दौलत हर महीने खींच रहे होते हैं।",
+        quote: '"Rich people acquire assets. The poor and middle class acquire liabilities that they think are assets." — Robert Kiyosaki'
+      },
+      {
+        title: "Mind Your Own Business — Build Your Asset Column",
+        en: "Kiyosaki's advice is blunt: keep your day job, but start building your own asset column on the side. Don't spend your life making someone else rich. Real businesses, stocks, real estate, intellectual property — these are the assets that generate income while you sleep. Your job is your income; your business is your wealth.",
+        hi: "Kiyosaki की सलाह सीधी है: नौकरी करते रहो, लेकिन साथ में अपना asset column बनाओ। पूरी ज़िंदगी किसी और को अमीर मत बनाओ। Business, stocks, real estate, intellectual property — ये वो assets हैं जो सोते वक्त भी कमाते हैं। नौकरी आपकी आमदनी है; business आपकी दौलत है।",
+        quote: '"Keep your daytime job, but start buying real assets, not liabilities." — Robert Kiyosaki'
+      },
+      {
+        title: "The History of Taxes — The Rich Don't Pay the Same Way",
+        en: "Taxes were originally created to tax the rich, but over time the rich learned to use corporations and legal structures to minimise what they owe. The rich earn, spend, then pay tax. Employees earn, pay tax, then spend with what's left. Understanding how the tax system works — and using it legally — is a skill the wealthy cultivate and the poor ignore.",
+        hi: "Tax मूल रूप से अमीरों पर लगाने के लिए बना था, लेकिन धीरे-धीरे अमीरों ने corporations और legal structures का उपयोग करके अपना tax कम करना सीख लिया। अमीर पहले कमाते हैं, खर्च करते हैं, फिर tax देते हैं। नौकरीपेशा पहले कमाते हैं, tax देते हैं, फिर जो बचता है उससे खर्च करते हैं। Tax system को समझना एक कला है जो अमीर सीखते हैं।",
+        quote: '"Corporations earn, spend, and pay taxes on what is left. Employees earn, pay taxes, and then spend." — Robert Kiyosaki'
+      },
+      {
+        title: "The Rich Invent Money — Overcome the Fear of Losing",
+        en: "The greatest obstacle to wealth is not lack of money — it is fear and self-doubt. Most people play it safe, keep their money in a savings account, and never invest because they are terrified of losing. But Kiyosaki argues that real financial intelligence is the ability to create money out of opportunities that others cannot see because fear blinds them.",
+        hi: "दौलत की राह में सबसे बड़ी रुकावट पैसे की कमी नहीं — डर और आत्म-संदेह है। ज़्यादातर लोग safe खेलते हैं, savings account में पैसा रखते हैं, और नुकसान के डर से कभी invest नहीं करते। लेकिन Kiyosaki कहते हैं कि असली financial intelligence उन अवसरों से पैसा बनाने की क्षमता है जो डर की वजह से दूसरों को दिखते ही नहीं।",
+        quote: '"It\'s not how much money you make, but how much money you keep, how hard it works for you." — Robert Kiyosaki'
+      },
+      {
+        title: "Work to Learn — Not Just to Earn",
+        en: "Kiyosaki recommends taking jobs not just for the salary but for the skills they teach. Sales, marketing, accounting, investing, communication — these are the skills that build wealth. Most people specialise in one skill and feel secure, but that security is fragile. The rich are generalists who can see the whole financial picture.",
+        hi: "Kiyosaki सलाह देते हैं कि नौकरी सिर्फ तनख्वाह के लिए नहीं, बल्कि सीखने के लिए करो। Sales, marketing, accounting, investing, communication — ये वो skills हैं जो दौलत बनाती हैं। ज़्यादातर लोग एक skill में माहिर होकर safe महसूस करते हैं, लेकिन वो सुरक्षा नाजुक है। अमीर लोग पूरी financial तस्वीर देख सकते हैं।",
+        quote: '"Job is an acronym for Just Over Broke." — Robert Kiyosaki'
+      },
+      {
+        title: "Overcome Obstacles — The Five Roadblocks to Financial Freedom",
+        en: "Even financially literate people fail to build wealth because of five roadblocks: fear of losing money, cynicism about what others will think, laziness disguised as busyness, bad habits of paying everyone else before yourself, and arrogance — thinking what you don't know doesn't matter. Recognising these in yourself is half the battle.",
+        hi: "वित्तीय रूप से समझदार लोग भी इन पाँच रुकावटों से दौलत नहीं बना पाते: पैसा खोने का डर, दूसरों की राय की चिंता, व्यस्तता की आड़ में आलस्य, पहले खुद को नहीं दूसरों को भुगतान करने की आदत, और घमंड — यह सोचना कि जो नहीं जानते वो मायने नहीं रखता। इन्हें खुद में पहचानना आधी जीत है।",
+        quote: '"The primary difference between a rich person and a poor person is how they manage fear." — Robert Kiyosaki'
+      },
+      {
+        title: "Pay Yourself First — The Golden Rule of Personal Finance",
+        en: "Before paying your bills, before paying anyone else, pay yourself first — put money into your asset column. Most people pay everyone else first and save what's left, which is usually nothing. The pressure of not having enough forces you to find new income. It builds discipline, resourcefulness, and the habit of wealth.",
+        hi: "बिल भरने से पहले, किसी और को देने से पहले — पहले खुद को दो। अपने asset column में पैसा डालो। ज़्यादातर लोग पहले सबको देते हैं और जो बचता है उसे बचाते हैं — जो अक्सर कुछ नहीं होता। खुद के लिए पैसे न होने का दबाव आपको नई आमदनी खोजने पर मजबूर करता है। यही अनुशासन और दौलत की आदत बनाता है।",
+        quote: '"Pay yourself first. Invest in your education and your assets before you pay your bills." — Robert Kiyosaki'
+      },
+      {
+        title: "Use Assets to Buy Luxuries — Not Your Salary",
+        en: "Want a luxury car? A vacation? Fine jewellery? Don't buy it with your paycheck. Instead, build or buy an asset first — let that asset generate the income to pay for the luxury. This single discipline separates those who build wealth from those who spend it before it arrives. The luxury feels better when it's truly paid for by your money working.",
+        hi: "luxury car चाहिए? Vacation? Fine jewellery? इसे तनख्वाह से मत खरीदो। पहले एक asset बनाओ — उसे उस luxury के लिए income generate करने दो। यही एक अनुशासन उन लोगों को अलग करता है जो दौलत बनाते हैं उनसे जो आने से पहले ही खर्च कर देते हैं। जब आपका पैसा आपके लिए काम करता है तो luxury का मज़ा और भी ज़्यादा होता है।",
+        quote: '"If you want to be rich, you need to think like a rich person." — Robert Kiyosaki'
+      },
+      {
+        title: "Teach Your Children About Money — The School System Won't",
+        en: "Schools teach children to be good employees — how to study, pass exams, and get a job. They do not teach financial literacy, investing, or how money actually works. Kiyosaki's deepest message is that the greatest gift you can give a child is not money — it is financial education. The cycle of poverty is broken not by hard work alone, but by knowledge.",
+        hi: "स्कूल बच्चों को अच्छा employee बनना सिखाते हैं — पढ़ना, exam पास करना, नौकरी पाना। वो financial literacy, investing या पैसा कैसे काम करता है — यह नहीं सिखाते। Kiyosaki का सबसे गहरा संदेश यही है: बच्चे को सबसे बड़ा तोहफा पैसा नहीं — financial education है। गरीबी का चक्र सिर्फ मेहनत से नहीं, ज्ञान से टूटता है।",
+        quote: '"The most important investment you can make is in yourself and your financial education." — Robert Kiyosaki'
+      }
+    ]
   }
 
 };
