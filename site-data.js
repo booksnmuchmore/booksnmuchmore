@@ -1,0 +1,158 @@
+// ============================================================
+//  Books 'n' Much More — Site Data
+//
+//  HOW TO UPDATE FOR A NEW EPISODE:
+//  1. Add a new object at the TOP of the EPISODES array
+//  2. Set isLatest: true on it, isLatest: false on the previous one
+//  3. Update SITE.latestYoutubeUrl to the new episode's YouTube link
+//  4. That's it — hero, stats, stories grid, book stack all update automatically
+// ============================================================
+
+const SITE = {
+  name: "Books 'n' Much More",
+  youtubeChannel: "https://www.youtube.com/@booksnmuchmore",
+  latestYoutubeUrl: "https://www.youtube.com/watch?v=uD9SxI19GLQ",
+  googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdxClppjbZTm6JWkDKqYiPv9Cg3CKvKo-3FcDwGm9bIJLjXUA/viewform?usp=publish-editor",
+  logoUrl: "https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp",
+  rawBase: "https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main"
+};
+
+// ── Affiliate tags ────────────────────────────────────────────
+const AFFILIATE = {
+  tags: { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' },
+  _country: null,
+  async detect() {
+    try {
+      const r = await fetch('https://ipapi.co/json/');
+      const d = await r.json();
+      this._country = d.country_code;
+    } catch(e) { this._country = 'US'; }
+  },
+  url(amazon) {
+    const c = this._country;
+    const tag  = c === 'IN' ? this.tags.IN : c === 'CA' ? this.tags.CA : this.tags.US;
+    const base = c === 'IN' ? amazon.IN   : c === 'CA' ? amazon.CA   : amazon.US;
+    return base + '?tag=' + tag;
+  },
+  open(amazon) { window.open(this.url(amazon), '_blank'); }
+};
+
+// Most recent episode FIRST — homepage always shows top 3
+const EPISODES = [
+  {
+    num: 5,
+    slug: "ep5",
+    title: "Talent is Not Everything… Hard Work Beats Talent Every Time",
+    titleHindi: "टैलेंट काफी नहीं है",
+    desc: "रेलवे कॉलोनी की पीली रोशनी में टूटे बल्ले से अभ्यास करने वाला एक लड़का — जिसे सबने कहा \"इसमें कुछ नहीं है।\" लेकिन उसकी मेहनत ने एक दिन पूरी दुनिया को चौंका दिया।",
+    lesson: "💡 \"टैलेंट आपको शुरुआत देता है, मेहनत आपको पहचान दिलाती है।\"",
+    thumb: "ep5.webp",
+    thumbBg: "linear-gradient(135deg,#1a0a00,#3d1a00)",
+    duration: "~9 min",
+    week: "This Week",
+    youtubeUrl: "https://www.youtube.com/watch?v=uD9SxI19GLQ",
+    isLatest: true
+  },
+  {
+    num: 4,
+    slug: "ep4",
+    title: "\"सही क्या है?\" — धर्म की जटिलता",
+    titleHindi: "सही क्या है?",
+    desc: "अर्जुन एक ईमानदार इंसान था — पर एक दिन उसे एक ऐसे फैसले का सामना करना पड़ा जहाँ सच और झूठ की लकीर धुंधली थी। क्या हमेशा सच बोलना ही धर्म है?",
+    lesson: "💡 \"धर्म हमेशा काला या सफेद नहीं होता — सही इरादा + सही निर्णय + सही संतुलन ही असली धर्म है।\"",
+    thumb: "ep4.webp",
+    thumbBg: "linear-gradient(135deg,#1a3a5c,#0d1f33)",
+    duration: "~8 min",
+    week: "Week 4",
+    youtubeUrl: "https://www.youtube.com/watch?v=MKEMfrzPwIo&t=26s",
+    isLatest: false
+  },
+  {
+    num: 3,
+    slug: "ep3",
+    title: "\"Woh Ek Kadam\" — वो एक कदम",
+    titleHindi: "Woh Ek Kadam",
+    desc: "आयुष के पास था एक पुराना घिसा camera और बड़े सपने। हर rejection के बाद वो टूटता गया। फिर एक बारिश की सुबह एक बुज़ुर्ग औरत की चुप्पी ने सब कुछ बदल दिया।",
+    lesson: "💡 \"आपको पूरी सीढ़ी एक साथ नहीं चढ़नी — बस वो एक कदम उठाइए, बाकी रास्ता खुद बन जाता है।\"",
+    thumb: "ep3.webp",
+    thumbBg: "linear-gradient(135deg,#5A2008,#2C0E04)",
+    duration: "~7 min",
+    week: "Week 3",
+    youtubeUrl: "https://youtu.be/Hid4iBiUNSg?si=MxizJMcM42XJbJ_L",
+    isLatest: false
+  },
+  {
+    num: 2,
+    slug: "ep2",
+    title: "ज़िंदगी का जार",
+    titleHindi: "ज़िंदगी का जार",
+    desc: "",
+    lesson: "",
+    thumb: "ep2.webp",
+    thumbBg: "linear-gradient(135deg,#2a1a00,#5c3a00)",
+    duration: "~7 min",
+    week: "Week 2",
+    youtubeUrl: "",
+    isLatest: false
+  },
+  {
+    num: 1,
+    slug: "ep1",
+    title: "Episode 01",
+    titleHindi: "Episode 01",
+    desc: "",
+    lesson: "",
+    thumb: "ep1.webp",
+    thumbBg: "linear-gradient(135deg,#1a2a1a,#0d1f0d)",
+    duration: "~7 min",
+    week: "Week 1",
+    youtubeUrl: "",
+    isLatest: false
+  }
+];
+
+// Books shown in the homepage promo strip
+const PROMO_BOOKS = [
+  { title: "Think and Grow Rich", author: "Napoleon Hill",    cover: "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1585424331",  US: "https://www.amazon.com/dp/1585424331",  CA: "https://www.amazon.ca/dp/1585424331"  } },
+  { title: "Atomic Habits",       author: "James Clear",      cover: "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1847941834",  US: "https://www.amazon.com/dp/0735211299",  CA: "https://www.amazon.ca/dp/0735211299"  } },
+  { title: "Rich Dad Poor Dad",   author: "Robert Kiyosaki",  cover: "https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/1612680194",  US: "https://www.amazon.com/dp/1612680194",  CA: "https://www.amazon.ca/dp/1612680194"  } },
+  { title: "The Alchemist",       author: "Paulo Coelho",     cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/0062315005",  US: "https://www.amazon.com/dp/0062315005",  CA: "https://www.amazon.ca/dp/0062315005"  } },
+  { title: "Ikigai",              author: "García & Miralles", cover: "https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg", amazon: { IN: "https://www.amazon.in/dp/0143454293",  US: "https://www.amazon.com/dp/0143130722",  CA: "https://www.amazon.ca/dp/0143130722"  } }
+];
+
+// Lessons preview cards on homepage
+const HOMEPAGE_LESSONS = [
+  {
+    slug: "think-and-grow-rich",
+    genre: "Mindset · Finance",
+    title: "Think and Grow Rich",
+    author: "Napoleon Hill",
+    cover: "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg",
+    desc: "इच्छाशक्ति, विश्वास और दृढ़ संकल्प से सफलता कैसे पाएं — 1937 का यह क्लासिक आज भी उतना ही प्रासंगिक है।",
+    count: "✦ 10 Lessons · Hindi + English",
+    live: true,
+    featured: true
+  },
+  {
+    slug: "atomic-habits",
+    genre: "Habits · Productivity",
+    title: "Atomic Habits",
+    author: "James Clear",
+    cover: "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg",
+    desc: "छोटी आदतें, बड़े बदलाव — 1% बेहतर बनने की कला और compound growth का रहस्य।",
+    count: "✦ 10 Lessons · Hindi + English",
+    live: true,
+    featured: false
+  },
+  {
+    slug: "the-alchemist",
+    genre: "Philosophy · Inspiration",
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg",
+    desc: "अपनी Personal Legend की खोज — एक ऐसा सफर जो हर सपने देखने वाले का दिल छू लेता है।",
+    count: "✦ 10 Lessons · Hindi + English",
+    live: true,
+    featured: false
+  }
+];
