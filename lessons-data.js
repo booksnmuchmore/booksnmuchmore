@@ -320,6 +320,85 @@ const BOOKS_DATA = {
         quote: '"The most important investment you can make is in yourself and your financial education." — Robert Kiyosaki'
       }
     ]
+  },
+
+  "how-to-win-friends": {
+    live: true,
+    slug: "how-to-win-friends",
+    title: "How to Win Friends and Influence People",
+    titleHtml: "How to Win Friends and <em>Influence People</em>",
+    author: "Dale Carnegie",
+    genre: "Communication · Leadership",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg",
+    heroDesc: "First published in 1936, this all-time bestseller has helped millions become better communicators, leaders, and human beings. These 10 lessons distil Carnegie's timeless wisdom on building genuine relationships and inspiring others — without manipulation, without force.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/0671027034",
+      US: "https://www.amazon.com/dp/0671027034",
+      CA: "https://www.amazon.ca/dp/0671027034"
+    },
+    lessons: [
+      {
+        title: "Don't Criticise, Condemn or Complain",
+        en: "Criticism is futile because it puts people on the defensive and makes them justify themselves. It wounds their pride, hurts their sense of importance, and arouses resentment. Carnegie's first and most fundamental principle: if you want to change someone, never start with blame. People don't change through criticism — they change when they feel understood.",
+        hi: "आलोचना व्यर्थ है — यह लोगों को defensive बना देती है और उन्हें खुद को सही साबित करने पर मजबूर करती है। यह उनके अहंकार को चोट पहुँचाती है और नाराज़गी पैदा करती है। Carnegie का पहला और सबसे बुनियादी सिद्धांत: किसी को बदलना हो तो कभी दोष से शुरुआत मत करो। लोग आलोचना से नहीं — समझे जाने पर बदलते हैं।",
+        quote: '"Criticism is dangerous, because it wounds a person\'s precious pride, hurts his sense of importance." — Dale Carnegie'
+      },
+      {
+        title: "Give Honest and Sincere Appreciation",
+        en: "The deepest craving in human nature is the desire to feel important and appreciated. Not flattery — that is hollow and is seen through quickly. Carnegie calls for sincere, genuine appreciation: noticing what someone does well and telling them so. This simple act costs nothing and yet it is the foundation of every strong relationship, personal and professional.",
+        hi: "इंसान की सबसे गहरी चाहत है — महत्वपूर्ण और सराहा हुआ महसूस करना। चापलूसी नहीं — वो खोखली होती है और लोग जल्दी पकड़ लेते हैं। Carnegie वास्तविक, दिल से की गई प्रशंसा की बात करते हैं: जब कोई कुछ अच्छा करे, तो उसे बताओ। यह सरल काम कुछ नहीं माँगता — पर हर मज़बूत रिश्ते की नींव यही है।",
+        quote: '"Give honest and sincere appreciation — not flattery, but the real desire to acknowledge someone\'s worth." — Dale Carnegie'
+      },
+      {
+        title: "Arouse in the Other Person an Eager Want",
+        en: "You can get anyone to do almost anything if you frame it in terms of what they want. Carnegie teaches that the only way to influence people is to talk about what they want and show them how to get it. Stop thinking about what you want. Ask: what does this person want? Then connect your request to their desire. This is not manipulation — it is empathy in action.",
+        hi: "आप किसी को भी कुछ करवा सकते हैं अगर उसे उनकी इच्छा के नज़रिये से पेश करें। Carnegie सिखाते हैं कि दूसरों को प्रभावित करने का एकमात्र तरीका है — उनकी चाहत के बारे में बात करना और दिखाना कि वो कैसे पूरी होगी। अपनी इच्छा छोड़ो और पूछो: इस इंसान को क्या चाहिए? फिर अपनी बात को उनकी चाहत से जोड़ो। यह हेरफेर नहीं — यह empathy है।",
+        quote: '"The only way to influence other people is to talk about what they want and show them how to get it." — Dale Carnegie'
+      },
+      {
+        title: "Become Genuinely Interested in Other People",
+        en: "You can make more friends in two months by becoming genuinely interested in other people than you can in two years by trying to get other people interested in you. People are not interested in you or me — they are interested in themselves. Stop performing and start listening. Ask questions. Remember details. Show that you care about their world, not just yours.",
+        hi: "दो महीने में दूसरों में सच्ची दिलचस्पी लेकर आप उससे ज़्यादा दोस्त बना सकते हैं, जितने दो साल में खुद को interesting दिखाने की कोशिश से बनेंगे। लोग आप में या मुझ में नहीं — खुद में रुचि रखते हैं। दिखावा छोड़ो, सुनो। सवाल पूछो। उनकी बातें याद रखो। दिखाओ कि उनकी दुनिया आपके लिए मायने रखती है।",
+        quote: '"You can make more friends in two months by being interested in them than in two years trying to get them interested in you." — Dale Carnegie'
+      },
+      {
+        title: "Smile — The Most Powerful Greeting in the World",
+        en: "A smile costs nothing but creates everything. It enriches those who receive it without impoverishing those who give it. Carnegie devotes an entire chapter to the smile because actions speak louder than words — and a genuine smile says: I am happy to see you, you matter to me. It is the simplest, cheapest, and most powerful relationship-building tool there is.",
+        hi: "एक मुस्कान की कोई कीमत नहीं — पर यह सब कुछ बना सकती है। यह उसे समृद्ध करती है जो इसे पाता है, और देने वाले का कुछ नहीं जाता। Carnegie ने इस पर पूरा अध्याय लिखा क्योंकि कार्य शब्दों से ज़्यादा बोलते हैं — और एक सच्ची मुस्कान कहती है: मैं आपको देखकर खुश हूँ, आप मेरे लिए मायने रखते हैं। यह सबसे सरल, सबसे सस्ता और सबसे शक्तिशाली रिश्ता-निर्माण का साधन है।",
+        quote: '"A smile costs nothing, but creates much. It enriches those who receive it without impoverishing those who give." — Dale Carnegie'
+      },
+      {
+        title: "Remember That a Person's Name Is the Sweetest Sound",
+        en: "A person's name is, to that person, the sweetest and most important sound in any language. Using someone's name in conversation makes them feel seen, respected, and valued. Carnegie trained himself to remember names as a deliberate habit. Forgetting a name sends a clear signal: you are not important enough for me to remember. Remembering it says the opposite.",
+        hi: "किसी के लिए उनके अपने नाम से ज़्यादा मीठी और महत्वपूर्ण कोई आवाज़ नहीं। बातचीत में किसी का नाम लेना उन्हें देखा हुआ, सम्मानित और मूल्यवान महसूस कराता है। Carnegie ने जानबूझकर नाम याद रखने की आदत बनाई। नाम भूलना साफ संदेश देता है: आप मेरे लिए याद करने लायक नहीं। याद रखना इसका उल्टा कहता है।",
+        quote: '"A person\'s name is to that person, the sweetest, most important sound in any language." — Dale Carnegie'
+      },
+      {
+        title: "Be a Good Listener — Encourage Others to Talk About Themselves",
+        en: "Exclusive attention paid to the person who is speaking to you is very rare and very rewarding. Most people do not listen with the intent to understand — they listen with the intent to reply. Carnegie found that the secret to being an interesting conversationalist is to be an interested listener. Ask questions the other person will enjoy answering and listen without interrupting.",
+        hi: "जो आपसे बात कर रहा हो, उसे पूरा ध्यान देना बहुत दुर्लभ है — और बहुत मूल्यवान भी। ज़्यादातर लोग समझने के लिए नहीं, जवाब देने के लिए सुनते हैं। Carnegie ने पाया कि एक interesting वार्ताकार बनने का रहस्य है — एक interested श्रोता बनना। ऐसे सवाल पूछो जिनका जवाब देकर सामने वाला खुश हो, और बिना टोके सुनो।",
+        quote: '"To be interesting, be interested. Ask questions the other person will enjoy answering." — Dale Carnegie'
+      },
+      {
+        title: "Talk in Terms of the Other Person's Interests",
+        en: "Every person you meet knows something you don't and has something they care deeply about. Before any important conversation, think: what does this person love? What gets them excited? Then begin there. Theodore Roosevelt stayed up the night before any meeting to read about his guest's interests. When you talk to someone about what they love, their eyes light up — and they remember you.",
+        hi: "आप जिससे भी मिलते हैं, वो कुछ ऐसा जानता है जो आप नहीं जानते — और कुछ ऐसा है जो उसे गहराई से प्रिय है। किसी भी ज़रूरी बातचीत से पहले सोचो: इस इंसान को क्या पसंद है? क्या चीज़ उसे उत्साहित करती है? वहाँ से शुरू करो। Roosevelt हर मुलाकात से पहले अपने मेहमान की रुचियाँ पढ़ते थे। जब आप किसी से उनकी पसंद की बात करते हैं, उनकी आँखें चमक उठती हैं — और वो आपको याद रखते हैं।",
+        quote: '"Talk to someone about themselves and they\'ll listen for hours." — Dale Carnegie'
+      },
+      {
+        title: "Make the Other Person Feel Important — and Do It Sincerely",
+        en: "The desire to be important is one of the greatest human motivations. Almost everything people do — the clothes they wear, the car they drive, the stories they tell — is driven by the desire to feel significant. Carnegie's principle: make people feel important and do it sincerely. Notice their strengths. Acknowledge their contributions. A person treated as important will rise to meet your expectations of them.",
+        hi: "महत्वपूर्ण महसूस करने की चाहत इंसान की सबसे बड़ी प्रेरणाओं में से एक है। लोग जो पहनते हैं, जो गाड़ी चलाते हैं, जो कहानियाँ सुनाते हैं — सब में यही भाव है कि मुझे महत्वपूर्ण माना जाए। Carnegie का सिद्धांत: लोगों को महत्वपूर्ण महसूस कराओ — और सच्चाई से। उनकी खूबियाँ देखो। उनके योगदान को मानो। जिसे महत्वपूर्ण माना जाए, वो उस उम्मीद पर खरा उतरने की कोशिश करता है।",
+        quote: '"The deepest principle in human nature is the craving to be appreciated." — Dale Carnegie'
+      },
+      {
+        title: "If You're Wrong, Admit It Quickly and Emphatically",
+        en: "When you know you are wrong, admit it clearly, openly, and before the other person has a chance to say it. This takes the wind out of any argument and disarms the other person completely. By criticising yourself, you take away the need for anyone else to do so. People who can admit their mistakes earn far more respect and trust than those who defend the indefensible. It is not weakness — it is strength.",
+        hi: "जब आप जानते हों कि आप गलत हैं, तो इसे साफ और खुलकर स्वीकार करो — इससे पहले कि दूसरा कहे। यह हर बहस की हवा निकाल देता है और सामने वाले को पूरी तरह निरस्त्र कर देता है। खुद की आलोचना करने से किसी और को करने की ज़रूरत नहीं रहती। जो लोग अपनी गलती मान सकते हैं वो उन लोगों से कहीं ज़्यादा सम्मान और विश्वास कमाते हैं जो गलत बात का भी बचाव करते हैं। यह कमज़ोरी नहीं — यह ताकत है।",
+        quote: '"If you are wrong, admit it quickly and emphatically. There\'s magic in it." — Dale Carnegie'
+      }
+    ]
   }
 
 };
