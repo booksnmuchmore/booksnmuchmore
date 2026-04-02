@@ -415,6 +415,102 @@
       .hero { padding: 3.5rem 1.2rem 3rem; }
       .filter-bar { padding: 0.7rem 1rem; }
     }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      background: var(--ink);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(212,168,67,0.15);
+    }
+    .search-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+    .search-box-wrap {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-clear {
+      position: absolute;
+      right: 0.8rem;
+      background: none;
+      border: none;
+      color: var(--ink-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      display: none;
+      line-height: 1;
+    }
+    .search-clear:hover { color: var(--sienna); }
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      color: rgba(212,168,67,0.5);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+    #bookSearch {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(212,168,67,0.3);
+      border-radius: 3px;
+      color: var(--parchment);
+      font-family: 'Lora', serif;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.9rem 0.6rem 2.3rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    #bookSearch::placeholder { color: rgba(245,240,232,0.35); }
+    #bookSearch:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.09);
+    }
+    .search-amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #FF9900;
+      color: #111;
+      font-family: 'Lora', serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.6rem 1.1rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .search-amazon-btn:hover { opacity: 0.88; transform: scale(1.02); }
+    .search-hint {
+      text-align: center;
+      font-size: 0.7rem;
+      color: rgba(245,240,232,0.3);
+      margin-top: 0.45rem;
+      font-family: 'Lora', serif;
+    }
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--ink-muted);
+      grid-column: 1 / -1;
+    }
+    .no-results p { font-size: 1rem; margin-bottom: 0.5rem; }
+    .no-results small { font-size: 0.82rem; color: var(--amber); }
+    .highlight-match {
+      background: rgba(212,168,67,0.2);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
   </style>
 </head>
 <body>
@@ -438,6 +534,16 @@
   <div class="hero-divider"></div>
 </section>
 
+<!-- SEARCH BAR -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="bookSearch" placeholder="कोई भी किताब खोजें — title, author, या topic…" autocomplete="off" spellcheck="false"/>
+    <button class="search-clear" id="searchClear" title="Clear">✕</button>
+  </div>
+  <div class="search-results-panel" id="searchPanel"></div>
+</div>
+
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <span class="filter-label">Filter:</span>
@@ -460,8 +566,13 @@
   <div class="section-heading">15 Must-Read Books</div>
   <div class="books-grid" id="booksGrid">
 
+    <div class="no-results" id="noResults">
+      <p>📚 "<span id="noResultsTerm"></span>" — इस page पर नहीं मिली</p>
+      <small>Amazon पर पूरी search के लिए ऊपर का button दबाएं →</small>
+    </div>
+
     <!-- 1. Think and Grow Rich -->
-    <div class="book-card" data-cat="mindset finance">
+    <div class="book-card" data-cat="mindset finance" data-title="Think and Grow Rich" data-author="Napoleon Hill" data-keywords="wealth success desire mindset money richness धन सफलता">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" alt="Think and Grow Rich" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Think+%26+Grow+Rich'"/>
         <span class="book-badge">Bestseller</span>
@@ -482,7 +593,7 @@
       </div>
     </div>
     <!-- 2. Atomic Habits -->
-    <div class="book-card" data-cat="habits productivity">
+    <div class="book-card" data-cat="habits productivity" data-title="Atomic Habits" data-author="James Clear" data-keywords="habits routine system 1% change behaviour productivity आदत बदलाव">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" alt="Atomic Habits" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Atomic+Habits'"/>
         <span class="book-badge">Most Popular</span>
@@ -503,7 +614,7 @@
       </div>
     </div>
     <!-- 3. Rich Dad Poor Dad -->
-    <div class="book-card" data-cat="finance">
+    <div class="book-card" data-cat="finance" data-title="Rich Dad Poor Dad" data-author="Robert T. Kiyosaki" data-keywords="money finance asset liability investment wealth पैसा निवेश अमीर">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg" alt="Rich Dad Poor Dad" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Rich+Dad+Poor+Dad'"/>
         <span class="book-badge">Classic</span>
@@ -524,7 +635,7 @@
       </div>
     </div>
     <!-- 4. The Alchemist -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="The Alchemist" data-author="Paulo Coelho" data-keywords="dream journey purpose legend fiction philosophy सपना यात्रा उद्देश्य">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" alt="The Alchemist" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=The+Alchemist'"/>
       </div>
@@ -544,7 +655,7 @@
       </div>
     </div>
     <!-- 5. Growth Mindset -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="Mindset: The New Psychology of Success" data-author="Carol S. Dweck" data-keywords="growth fixed mindset psychology success learning विकास मनोविज्ञान">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/0345472322-L.jpg" alt="Mindset by Carol Dweck" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Mindset'"/>
       </div>
@@ -564,7 +675,7 @@
       </div>
     </div>
     <!-- 6. Mind Management Not Time Management -->
-    <div class="book-card" data-cat="productivity mindset">
+    <div class="book-card" data-cat="productivity mindset" data-title="Mind Management, Not Time Management" data-author="David Kadavy" data-keywords="productivity creativity energy focus time management मन समय प्रबंधन">
       <div class="book-cover-wrap">
         <img src="https://books.google.com/books/content?id=xcK-zQEACAAJ&printsec=frontcover&img=1&zoom=1" alt="Mind Management Not Time Management" onerror="this.src='https://covers.openlibrary.org/b/isbn/0578733692-L.jpg'"/>
       </div>
@@ -584,7 +695,7 @@
       </div>
     </div>
     <!-- 7. Ikigai -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="Ikigai" data-author="Héctor García &amp; Francesc Miralles" data-keywords="purpose happiness japan lifestyle longevity meaning जापान खुशी उद्देश्य">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" alt="Ikigai" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Ikigai'"/>
         <span class="book-badge">Trending</span>
@@ -605,7 +716,7 @@
       </div>
     </div>
     <!-- 8. Deep Work -->
-    <div class="book-card" data-cat="productivity">
+    <div class="book-card" data-cat="productivity" data-title="Deep Work" data-author="Cal Newport" data-keywords="focus concentration distraction productivity flow work एकाग्रता ध्यान">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/0349413681-L.jpg" alt="Deep Work" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Deep+Work'"/>
       </div>
@@ -625,7 +736,7 @@
       </div>
     </div>
     <!-- 9. Linchpin -->
-    <div class="book-card" data-cat="mindset productivity">
+    <div class="book-card" data-cat="mindset productivity" data-title="Linchpin" data-author="Seth Godin" data-keywords="career indispensable art work leadership creativity करियर नेतृत्व">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/0749953357-L.jpg" alt="Linchpin" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Linchpin'"/>
       </div>
@@ -645,7 +756,7 @@
       </div>
     </div>
     <!-- 10. 7 Habits -->
-    <div class="book-card" data-cat="habits mindset">
+    <div class="book-card" data-cat="habits mindset" data-title="7 Habits of Highly Effective People" data-author="Stephen R. Covey" data-keywords="habits effectiveness leadership proactive synergy character आदत नेतृत्व">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/1982137274-L.jpg" alt="7 Habits of Highly Effective People" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=7+Habits'"/>
         <span class="book-badge">All-time Classic</span>
@@ -666,7 +777,7 @@
       </div>
     </div>
     <!-- 11. The Subtle Art of Not Giving a F*ck -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="The Subtle Art of Not Giving a F*ck" data-author="Mark Manson" data-keywords="values priorities happiness acceptance counterintuitive mindset खुशी प्राथमिकता">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/71QKQ9mwV7L._SY466_.jpg" alt="The Subtle Art of Not Giving a F*ck" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Subtle+Art'"/>
         <span class="book-badge">Bestseller</span>
@@ -687,7 +798,7 @@
       </div>
     </div>
     <!-- 12. How to Win Friends and Influence People -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="How to Win Friends and Influence People" data-author="Dale Carnegie" data-keywords="communication relationships influence people leadership social skills रिश्ते संचार">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/71vK0WVQ4rL._SY466_.jpg" alt="How to Win Friends and Influence People" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=How+to+Win+Friends'"/>
       </div>
@@ -707,7 +818,7 @@
       </div>
     </div>
     <!-- 13. The Monk Who Sold His Ferrari -->
-    <div class="book-card" data-cat="mindset">
+    <div class="book-card" data-cat="mindset" data-title="The Monk Who Sold His Ferrari" data-author="Robin Sharma" data-keywords="purpose soul happiness simplicity spirituality life philosophy आत्मा खुशी सरलता">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/817992162X-L.jpg" alt="The Monk Who Sold His Ferrari" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Monk+Ferrari'"/>
         <span class="book-badge">Bestseller</span>
@@ -728,7 +839,7 @@
       </div>
     </div>
     <!-- 14. The Psychology of Money -->
-    <div class="book-card" data-cat="finance">
+    <div class="book-card" data-cat="finance" data-title="The Psychology of Money" data-author="Morgan Housel" data-keywords="money wealth finance investing behaviour psychology savings पैसा मनोविज्ञान बचत">
       <div class="book-cover-wrap">
         <img src="https://m.media-amazon.com/images/I/71g2ednj0JL._SY466_.jpg" alt="The Psychology of Money" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Psychology+of+Money'"/>
         <span class="book-badge">Trending</span>
@@ -749,7 +860,7 @@
       </div>
     </div>
     <!-- 15. The Practicing Mind -->
-    <div class="book-card" data-cat="mindset productivity">
+    <div class="book-card" data-cat="mindset productivity" data-title="The Practicing Mind" data-author="Thomas M. Sterner" data-keywords="mastery process focus patience discipline practice skill अभ्यास धैर्य कौशल">
       <div class="book-cover-wrap">
         <img src="https://covers.openlibrary.org/b/isbn/9386867109-L.jpg" alt="The Practicing Mind" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Practicing+Mind'"/>
       </div>
@@ -789,50 +900,182 @@
 </footer>
 
 <script>
-  // ── Filter ──
-  function filterBooks(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.book-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat.includes(cat)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-  // ── Geo Redirect ──
-  const TAGS = {
-    IN: 'booksnmuchm02-21',
-    US: 'booksnmuchmor-20',
-    CA: 'booksnmuchm08-20',
-  };
+  // ══════════════════════════════════════════
+  //  GEO REDIRECT
+  // ══════════════════════════════════════════
+  const TAGS = { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' };
   let userCountry = null;
 
   async function detectCountry() {
     try {
-      const res = await fetch('https://ipapi.co/json/');
+      const res  = await fetch('https://ipapi.co/json/');
       const data = await res.json();
       userCountry = data.country_code;
-    } catch (e) {
-      userCountry = 'US';
-    }
+    } catch (e) { userCountry = 'US'; }
   }
 
   function geoRedirect(inUrl, usUrl, caUrl) {
-    let finalUrl;
-    if (userCountry === 'IN') {
-      finalUrl = inUrl + '?tag=' + TAGS.IN;
-    } else if (userCountry === 'CA') {
-      finalUrl = caUrl + '?tag=' + TAGS.CA;
-    } else {
-      finalUrl = usUrl + '?tag=' + TAGS.US;
-    }
-    window.open(finalUrl, '_blank');
+    const map = { IN: [inUrl, TAGS.IN], CA: [caUrl, TAGS.CA] };
+    const [base, tag] = map[userCountry] || [usUrl, TAGS.US];
+    window.open(base + '?tag=' + tag, '_blank');
   }
 
   detectCountry();
+
+  // ══════════════════════════════════════════
+  //  FILTER
+  // ══════════════════════════════════════════
+  function filterBooks(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    clearSearch();
+    document.querySelectorAll('.book-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat.includes(cat)) ? '' : 'none';
+    });
+  }
+
+  // ══════════════════════════════════════════
+  //  SEARCH
+  // ══════════════════════════════════════════
+  function escapeRx(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function highlight(text, q) {
+    return text.replace(new RegExp(`(${escapeRx(q)})`, 'gi'),
+      '<mark style="background:rgba(200,134,10,0.18);color:#8b3a1a;border-radius:2px;padding:0 2px">$1</mark>');
+  }
+
+  function amazonFallbackUrl(q) {
+    const store = userCountry === 'IN' ? 'amazon.in' : userCountry === 'CA' ? 'amazon.ca' : 'amazon.com';
+    const tag   = TAGS[userCountry] || TAGS.US;
+    return `https://www.${store}/s?k=${encodeURIComponent(q)}&tag=${tag}`;
+  }
+
+  function buildIndex() {
+    return Array.from(document.querySelectorAll('.book-card')).map(card => ({
+      el:      card,
+      title:   card.dataset.title    || card.querySelector('.book-title')?.textContent  || '',
+      author:  card.dataset.author   || card.querySelector('.book-author')?.textContent || '',
+      keys:    card.dataset.keywords || '',
+      img:     card.querySelector('img')?.src || '',
+      cat:     card.querySelector('.book-category')?.textContent || '',
+    }));
+  }
+
+  let bookIndex = [];
+
+  function renderPanel(rawQuery) {
+    const panel = document.getElementById('searchPanel');
+    const q     = rawQuery.trim().toLowerCase();
+
+    if (!q) { closePanel(); clearHighlights(); return; }
+
+    const matches = bookIndex.filter(b =>
+      `${b.title} ${b.author} ${b.keys}`.toLowerCase().includes(q)
+    );
+
+    panel.innerHTML = '';
+
+    if (matches.length > 0) {
+      matches.forEach(book => {
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.innerHTML = `
+          <img src="${book.img}" alt="" onerror="this.src='https://placehold.co/36x50/ede6d6/8b3a1a?text=📖'"/>
+          <div class="search-result-info">
+            <div class="search-result-title">${highlight(book.title, rawQuery.trim())}</div>
+            <div class="search-result-author">${book.author}</div>
+            <div class="search-result-cat">${book.cat}</div>
+          </div>
+          <span class="search-result-action">देखें →</span>`;
+        item.addEventListener('click', () => {
+          closePanel();
+          // show all cards, reset filter
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          document.querySelector('.filter-btn').classList.add('active');
+          document.querySelectorAll('.book-card').forEach(c => c.style.display = '');
+          // highlight and scroll
+          clearHighlights();
+          book.el.classList.add('search-highlight');
+          book.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+        panel.appendChild(item);
+      });
+
+      const hint = document.createElement('div');
+      hint.className = 'search-hint';
+      hint.textContent = `${matches.length} किताब${matches.length > 1 ? 'ें' : ''} मिली — card पर click करें`;
+      panel.appendChild(hint);
+
+    } else {
+      const notFound = document.createElement('div');
+      notFound.className = 'search-not-found';
+      notFound.innerHTML = `
+        <p>"${rawQuery.trim()}" हमारी list में नहीं है अभी…</p>
+        <a class="search-amazon-btn" href="${amazonFallbackUrl(rawQuery.trim())}" target="_blank" rel="noopener">
+          🛒 Amazon पर खोजें
+        </a>`;
+      panel.appendChild(notFound);
+    }
+
+    panel.classList.add('visible');
+
+    // dim non-matching cards subtly
+    bookIndex.forEach(b => {
+      b.el.style.opacity = matches.includes(b) || matches.length === 0 ? '1' : '0.4';
+    });
+  }
+
+  function clearHighlights() {
+    document.querySelectorAll('.book-card.search-highlight')
+      .forEach(c => c.classList.remove('search-highlight'));
+    bookIndex.forEach(b => b.el.style.opacity = '1');
+  }
+
+  function closePanel() {
+    const panel = document.getElementById('searchPanel');
+    panel.classList.remove('visible');
+    panel.innerHTML = '';
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('bookSearch');
+    if (!input) return;
+    input.value = '';
+    document.getElementById('searchClear').style.display = 'none';
+    closePanel();
+    clearHighlights();
+  }
+
+  // ── Wire up ──
+  document.addEventListener('DOMContentLoaded', () => {
+    bookIndex = buildIndex();
+
+    const input    = document.getElementById('bookSearch');
+    const clearBtn = document.getElementById('searchClear');
+
+    input.addEventListener('input', () => {
+      clearBtn.style.display = input.value ? 'block' : 'none';
+      renderPanel(input.value);
+    });
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Escape') clearSearch();
+      // Enter with no match → open Amazon
+      if (e.key === 'Enter' && input.value.trim()) {
+        const q = input.value.trim().toLowerCase();
+        const hasMatch = bookIndex.some(b =>
+          `${b.title} ${b.author} ${b.keys}`.toLowerCase().includes(q)
+        );
+        if (!hasMatch) window.open(amazonFallbackUrl(input.value.trim()), '_blank');
+      }
+    });
+
+    clearBtn.addEventListener('click', clearSearch);
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search-wrap')) { closePanel(); clearHighlights(); }
+    });
+  });
 </script>
 
 </body>
