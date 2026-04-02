@@ -399,6 +399,85 @@ const BOOKS_DATA = {
         quote: '"If you are wrong, admit it quickly and emphatically. There\'s magic in it." — Dale Carnegie'
       }
     ]
+  },
+
+  "7-habits-of-highly-effective-people": {
+    live: true,
+    slug: "7-habits-of-highly-effective-people",
+    title: "The 7 Habits of Highly Effective People",
+    titleHtml: "The 7 Habits of <em>Highly Effective People</em>",
+    author: "Stephen R. Covey",
+    genre: "Leadership · Personal Development",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9781982137137-L.jpg",
+    heroDesc: "First published in 1989, Stephen Covey's masterwork has sold over 40 million copies and been called the most influential business book of the 20th century. These 10 lessons are not quick fixes — they are a complete framework for living with integrity, purpose, and lasting effectiveness.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/1982137134",
+      US: "https://www.amazon.com/dp/1982137134",
+      CA: "https://www.amazon.ca/dp/1982137134"
+    },
+    lessons: [
+      {
+        title: "Habit 1 — Be Proactive: You Are the Author, Not the Actor",
+        en: "Between stimulus and response, there is a space. In that space lies your freedom — your power to choose. Covey's first and most foundational habit is this: you are not a product of your circumstances, you are a product of your choices. Proactive people focus their energy on what they can influence — their own attitude, effort, and actions. Reactive people spend their energy blaming the weather, their boss, their past. The moment you accept full responsibility for your life, everything changes.",
+        hi: "हर घटना और हमारी प्रतिक्रिया के बीच एक पल का अंतर होता है। उसी अंतर में हमारी स्वतंत्रता है — चुनाव करने की शक्ति। Covey की पहली और सबसे ज़रूरी आदत यह है: आप अपनी परिस्थितियों की उपज नहीं — आप अपने चुनावों की उपज हैं। Proactive लोग अपनी ऊर्जा उस पर लगाते हैं जो उनके नियंत्रण में है — अपना नज़रिया, मेहनत, और कार्य। Reactive लोग मौसम, बॉस, और अपने अतीत को दोष देने में ऊर्जा खर्च करते हैं। जिस पल आप अपनी ज़िंदगी की पूरी ज़िम्मेदारी लेते हैं — सब कुछ बदल जाता है।",
+        quote: '"Between stimulus and response there is a space. In that space is our power to choose our response." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 2 — Begin With the End in Mind: Live by Design, Not by Default",
+        en: "All things are created twice — first in the mind, then in the world. Before you build a house, you draw a blueprint. Before you live a life, you must know what kind of life you want to build. Covey asks you to imagine your own funeral and think: what would you want the people who loved you to say? That answer is your personal mission statement. Most people spend their lives climbing a ladder — only to find at the top that it was leaning against the wrong wall.",
+        hi: "हर चीज़ दो बार बनती है — पहले मन में, फिर दुनिया में। घर बनाने से पहले नक्शा बनता है। ज़िंदगी जीने से पहले यह जानना ज़रूरी है कि आप किस तरह की ज़िंदगी बनाना चाहते हैं। Covey आपसे पूछते हैं — कल्पना करो कि आपका अंतिम संस्कार हो रहा है। आप चाहते हैं कि जो लोग आपसे प्यार करते थे, वो आपके बारे में क्या कहें? वही जवाब आपका Personal Mission Statement है। ज़्यादातर लोग ज़िंदगी भर सीढ़ी चढ़ते रहते हैं — और ऊपर पहुँचकर पाते हैं कि सीढ़ी गलत दीवार पर टिकी थी।",
+        quote: '"Begin with the end in mind." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 3 — Put First Things First: Manage Your Life, Not Just Your Time",
+        en: "Habit 1 says you are the creator. Habit 2 says create the blueprint. Habit 3 is the daily execution of that vision. Covey introduces his famous Time Management Matrix — four quadrants of Urgent/Not Urgent and Important/Not Important. Highly effective people ruthlessly prioritise Quadrant II: things that are important but not yet urgent — relationships, planning, health, growth. Most people live in Quadrant I (crisis) or Quadrant IV (distraction). The secret is not to manage time — it is to manage yourself.",
+        hi: "Habit 1 कहती है — आप रचयिता हैं। Habit 2 कहती है — नक्शा बनाओ। Habit 3 है उस दृष्टि का रोज़ाना क्रियान्वयन। Covey अपना प्रसिद्ध Time Management Matrix पेश करते हैं — चार भाग: Urgent/Not Urgent और Important/Not Important। अत्यधिक प्रभावशाली लोग Quadrant II पर ध्यान देते हैं: जो ज़रूरी है पर अभी आपातकाल नहीं — रिश्ते, योजना, स्वास्थ्य, विकास। ज़्यादातर लोग Quadrant I (संकट) या Quadrant IV (विचलन) में रहते हैं। राज़ समय प्रबंधन नहीं — खुद को manage करना है।",
+        quote: '"The key is not to prioritise what\'s on your schedule, but to schedule your priorities." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 4 — Think Win-Win: Success Is Not a Finite Pie",
+        en: "Most of us were taught to see life as a competition — if you win, I lose. Covey calls this a Scarcity Mentality. Win-Win is a belief in the Abundance Mentality: there is enough success, recognition, and joy for everyone. A Win-Win agreement says: I will not sacrifice your interests to serve mine, and I will not sacrifice mine to serve yours — we will find a solution that genuinely works for both of us. This is not compromise. It is a higher standard. People with Win-Win thinking build relationships that compound over time.",
+        hi: "हम में से ज़्यादातर को यह सिखाया गया है कि ज़िंदगी एक प्रतियोगिता है — तुम जीते तो मैं हारा। Covey इसे Scarcity Mentality कहते हैं। Win-Win एक Abundance Mentality में विश्वास है: सफलता, सम्मान और खुशी सबके लिए पर्याप्त है। Win-Win का मतलब है — मैं अपने हित के लिए तुम्हारा नुकसान नहीं करूँगा, और तुम्हारे लिए अपना भी नहीं। हम एक ऐसा रास्ता निकालेंगे जो दोनों के लिए सही हो। यह compromise नहीं — यह एक ऊँचा मानदंड है। Win-Win सोच वाले लोग ऐसे रिश्ते बनाते हैं जो समय के साथ और मज़बूत होते हैं।",
+        quote: '"Win-Win is not a technique; it\'s a total philosophy of human interaction." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 5 — Seek First to Understand, Then to Be Understood",
+        en: "Most people do not listen with the intent to understand — they listen with the intent to reply. They are either speaking or preparing to speak. Covey calls this Autobiographical Listening: we filter everything through our own story and experience. Empathic listening means you listen with the intent to truly understand the other person's world — their feelings, their fears, their frame of reference. Only when someone feels genuinely heard will they be open to hearing you. This is the most powerful habit for building trust and resolving conflict.",
+        hi: "ज़्यादातर लोग समझने के लिए नहीं, जवाब देने के लिए सुनते हैं। वे या तो बोल रहे हैं या बोलने की तैयारी में हैं। Covey इसे Autobiographical Listening कहते हैं — हम सब कुछ अपनी कहानी और अनुभव के चश्मे से देखते हैं। Empathic listening का मतलब है — आप सच में समझने के इरादे से सुनते हैं: उनकी भावनाएं, उनके डर, उनका नज़रिया। जब कोई सच में सुना हुआ महसूस करता है, तभी वो आपको सुनने के लिए तैयार होता है। यह आदत विश्वास बनाने और संघर्ष सुलझाने की सबसे शक्तिशाली आदत है।",
+        quote: '"Most people do not listen with the intent to understand; they listen with the intent to reply." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 6 — Synergise: The Whole Is Greater Than the Sum of Its Parts",
+        en: "Synergy is what happens when the combined result of two people working together is greater than what either could achieve alone. It is not 1+1=2. It is 1+1=3, or 10, or 100. Synergy is born when people with different strengths, perspectives, and experiences genuinely value each other's differences and build on them. It requires the vulnerability of Habit 4 and the listening of Habit 5. The result is creative solutions that no one person could have imagined alone. The greatest achievements in history were born in synergy.",
+        hi: "Synergy वो होता है जब दो लोग मिलकर काम करें और जो नतीजा आए वो अकेले किसी के काम से बड़ा हो। यह 1+1=2 नहीं — यह 1+1=3, या 10, या 100 है। Synergy तब पैदा होती है जब अलग-अलग ताकत, नज़रिये और अनुभव वाले लोग एक-दूसरे के अंतर को सच में महत्व दें और उस पर निर्माण करें। इसके लिए Habit 4 की Win-Win सोच और Habit 5 की empathic सुनने की ज़रूरत है। नतीजा होते हैं ऐसे रचनात्मक समाधान जो अकेला कोई सोच भी नहीं सकता था। इतिहास की सबसे बड़ी उपलब्धियाँ Synergy में जन्मी हैं।",
+        quote: '"Synergy is the highest activity in all life — the true test and manifestation of all the other habits combined." — Stephen R. Covey'
+      },
+      {
+        title: "Habit 7 — Sharpen the Saw: Renew Yourself Before You Break",
+        en: "Imagine a man desperately sawing a log. A passer-by suggests he stop to sharpen his saw. 'I don't have time to sharpen the saw,' the man replies, 'I'm too busy sawing.' This is Habit 7. It is the habit of continuous self-renewal across four dimensions: physical (exercise, nutrition, rest), mental (reading, learning, writing), social-emotional (relationships, empathy, service), and spiritual (values, meditation, purpose). You cannot give from an empty cup. The most effective people treat renewal not as a luxury but as a sacred obligation to themselves and those who depend on them.",
+        hi: "एक आदमी बड़ी मेहनत से लकड़ी काट रहा है। एक राहगीर सुझाता है — रुको, पहले आरी तेज़ करो। वो आदमी कहता है: 'मेरे पास आरी तेज़ करने का वक्त नहीं, मैं बहुत व्यस्त हूँ लकड़ी काटने में।' यही है Habit 7। यह चार आयामों में लगातार खुद को नवीनीकृत करने की आदत है: शारीरिक (व्यायाम, पोषण, नींद), मानसिक (पढ़ना, सीखना, लिखना), सामाजिक-भावनात्मक (रिश्ते, empathy, सेवा), और आध्यात्मिक (मूल्य, ध्यान, उद्देश्य)। खाली कप से कुछ नहीं दे सकते। सबसे प्रभावशाली लोग खुद को renew करना एक ज़िम्मेदारी मानते हैं — अपने प्रति और उन सभी के प्रति जो उन पर निर्भर हैं।",
+        quote: '"Sharpen the saw means preserving and enhancing the greatest asset you have — you." — Stephen R. Covey'
+      },
+      {
+        title: "Private Victory Comes Before Public Victory",
+        en: "The first three habits — Be Proactive, Begin With the End in Mind, and Put First Things First — Covey calls the Private Victory. They are inward habits of self-mastery: controlling your responses, clarifying your values, managing your own time. Only after you have won the battle with yourself are you ready for the Public Victory — the three outward habits of working with others (Win-Win, Seek First to Understand, Synergise). You cannot build deep relationships from a foundation of inner chaos. Master yourself first.",
+        hi: "पहली तीन आदतें — Proactive बनो, अंत को ध्यान में रखो, पहले ज़रूरी काम करो — Covey इन्हें Private Victory कहते हैं। ये आत्म-नियंत्रण की अंदरूनी आदतें हैं: अपनी प्रतिक्रियाओं पर काबू, अपने मूल्यों की स्पष्टता, अपने समय का प्रबंधन। जब आप खुद पर जीत हासिल कर लेते हैं, तभी आप Public Victory के लिए तैयार होते हैं — दूसरों के साथ काम करने की तीन बाहरी आदतें। अंदरूनी अव्यवस्था की नींव पर गहरे रिश्ते नहीं बन सकते। पहले खुद को जीतो।",
+        quote: '"Private Victory precedes Public Victory. You can\'t invert that process any more than you can harvest a crop before you plant it." — Stephen R. Covey'
+      },
+      {
+        title: "Character Ethic vs. Personality Ethic: Roots vs. Branches",
+        en: "Covey opens the book with a crucial observation: modern self-help is obsessed with the Personality Ethic — techniques, quick fixes, how to dress, how to smile, how to network. But for most of human history, the foundation of success literature was the Character Ethic: integrity, humility, courage, patience, and service. Personality Ethic is the branches; Character Ethic is the roots. Without deep roots, no amount of leaf-polishing will keep the tree standing in a storm. Covey's entire framework is a return to character as the foundation of lasting effectiveness.",
+        hi: "Covey किताब की शुरुआत एक महत्वपूर्ण अवलोकन से करते हैं: आधुनिक self-help Personality Ethic पर ज़्यादा ध्यान देती है — तकनीक, quick fixes, कैसे कपड़े पहनें, कैसे मुस्कुराएं, कैसे networking करें। लेकिन इतिहास में अधिकांश समय सफलता का आधार Character Ethic था: ईमानदारी, विनम्रता, साहस, धैर्य और सेवा। Personality Ethic है शाखाएं; Character Ethic है जड़ें। गहरी जड़ों के बिना, पत्तियों को कितना भी चमकाओ — तूफान में पेड़ टिकेगा नहीं। Covey का पूरा framework एक वापसी है — चरित्र को दीर्घकालिक प्रभावशीलता की नींव के रूप में।",
+        quote: '"The character has to be there — techniques and tactics of social influence without character are manipulation." — Stephen R. Covey'
+      },
+      {
+        title: "The Paradigm Shift: Change How You See, Change How You Act",
+        en: "A paradigm is the lens through which you see the world — your assumptions, your mental maps, your deeply held beliefs about how things are. Covey shows that most personal and organisational problems are not problems of attitude or behaviour — they are problems of perception. He illustrates this with the story of a man on a subway whose children are running wild — and the moment he learns the man just lost his wife, the entire situation is seen differently. You don't just see with your eyes; you see with your whole being. Change the lens — change the world.",
+        hi: "Paradigm वो चश्मा है जिससे आप दुनिया देखते हैं — आपकी मान्यताएं, मानसिक नक्शे, और गहरे विश्वास कि चीज़ें कैसी हैं। Covey दिखाते हैं कि अधिकांश व्यक्तिगत और संगठनात्मक समस्याएं attitude या behavior की नहीं — perception की समस्याएं हैं। वे subway की एक कहानी सुनाते हैं — एक आदमी के बच्चे शोर मचा रहे हैं, और जब पता चलता है कि उसकी पत्नी अभी गुज़री है, तो पूरा दृश्य अलग नज़र आता है। आप सिर्फ आँखों से नहीं देखते — पूरे अस्तित्व से देखते हैं। चश्मा बदलो — दुनिया बदल जाएगी।",
+        quote: '"We see the world not as it is, but as we are — or as we are conditioned to see it." — Stephen R. Covey'
+      }
+    ]
   }
 
 };
