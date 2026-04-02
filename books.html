@@ -943,7 +943,7 @@
   //  CONFIG
   // ═══════════════════════════════════════════════════════
   const TAGS = { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' };
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyLDnDErBiDaiQWGgIWFKwJqniW3Gdo_99pBWg6EIt-CRXIU4i7DhKD_bASu18YgRzweA/exec';
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwgetwnWjO_4d_xuuXitRtKD13Q-emm7IXgd0bqeWoTPe0z_190y-wiYONqi6UqInvpuA/exec';
 
   // ═══════════════════════════════════════════════════════
   //  GEO — detect FIRST, before anything else runs
@@ -1022,15 +1022,11 @@
   function logToSheet(term) {
     if (logged.has(term.toLowerCase())) return;
     logged.add(term.toLowerCase());
-    fetch(SHEETS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        term,
-        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-        country: userCountry
-      })
-    }).catch(() => {});
+    const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    const params = new URLSearchParams({ term, timestamp, country: userCountry });
+    // GET request — works without CORS issues
+    fetch(`${SHEETS_URL}?${params.toString()}`)
+      .catch(() => {});
   }
 
   // ═══════════════════════════════════════════════════════
