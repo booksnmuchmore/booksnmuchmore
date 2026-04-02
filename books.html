@@ -416,138 +416,101 @@
       .filter-bar { padding: 0.7rem 1rem; }
     }
 
-    /* ── SEARCH ── */
+    /* ── SEARCH BAR ── */
     .search-wrap {
       background: var(--ink);
-      padding: 1.1rem 2rem 1rem;
+      padding: 1rem 2rem;
       border-bottom: 1px solid rgba(212,168,67,0.15);
-      position: relative; z-index: 50;
     }
-    .search-box {
-      max-width: 680px; margin: 0 auto;
-      position: relative; display: flex; align-items: center;
+    .search-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
     }
+    .search-box-wrap {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-clear {
+      position: absolute;
+      right: 0.8rem;
+      background: none;
+      border: none;
+      color: var(--ink-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      display: none;
+      line-height: 1;
+    }
+    .search-clear:hover { color: var(--sienna); }
     .search-icon {
-      position: absolute; left: 0.9rem;
-      color: rgba(212,168,67,0.55); font-size: 0.95rem; pointer-events: none;
+      position: absolute;
+      left: 0.85rem;
+      color: rgba(212,168,67,0.5);
+      font-size: 0.95rem;
+      pointer-events: none;
     }
     #bookSearch {
       width: 100%;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(212,168,67,0.3);
-      border-radius: 4px;
+      border-radius: 3px;
       color: var(--parchment);
-      font-family: 'Lora', serif; font-size: 0.9rem;
-      padding: 0.65rem 2.5rem 0.65rem 2.3rem;
-      outline: none; transition: border-color 0.2s, background 0.2s;
+      font-family: 'Lora', serif;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.9rem 0.6rem 2.3rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
     }
-    #bookSearch::placeholder { color: rgba(245,240,232,0.32); }
-    #bookSearch:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
-    .search-clear {
-      position: absolute; right: 0.75rem;
-      background: none; border: none;
-      color: rgba(245,240,232,0.35); font-size: 1rem;
-      cursor: pointer; padding: 0.2rem 0.3rem; display: none; line-height: 1;
+    #bookSearch::placeholder { color: rgba(245,240,232,0.35); }
+    #bookSearch:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.09);
     }
-    .search-clear:hover { color: var(--gold); }
-
-    /* dropdown panel */
-    .search-panel {
-      display: none; position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-      background: var(--cream);
-      border: 1.5px solid rgba(200,134,10,0.3);
-      border-radius: 6px; overflow: hidden;
-      box-shadow: 0 12px 40px rgba(44,31,14,0.22);
-      max-height: 480px; overflow-y: auto;
-      z-index: 200;
+    .search-amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #FF9900;
+      color: #111;
+      font-family: 'Lora', serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.6rem 1.1rem;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
     }
-    .search-panel.open { display: block; }
-
-    /* section label inside panel */
-    .panel-section-label {
-      padding: 0.5rem 1rem 0.3rem;
-      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--amber); font-family: 'Lora', serif;
-      border-bottom: 1px solid rgba(200,134,10,0.12);
-      background: var(--amber-pale);
-    }
-
-    /* curated result row */
-    .panel-row {
-      display: flex; align-items: center; gap: 0.85rem;
-      padding: 0.7rem 1rem; cursor: pointer;
-      border-bottom: 1px solid rgba(200,134,10,0.08);
-      transition: background 0.15s;
-    }
-    .panel-row:last-child { border-bottom: none; }
-    .panel-row:hover { background: var(--amber-pale); }
-    .panel-row img {
-      width: 34px; height: 48px; object-fit: cover;
-      border-radius: 2px; flex-shrink: 0;
-      border: 1px solid rgba(200,134,10,0.2);
-    }
-    .panel-row-info { flex: 1; min-width: 0; }
-    .panel-row-title {
-      font-family: 'Playfair Display', serif; font-size: 0.88rem;
-      color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .panel-row-title mark {
-      background: rgba(200,134,10,0.2); color: var(--sienna);
-      border-radius: 2px; padding: 0 2px; font-style: normal;
-    }
-    .panel-row-author { font-size: 0.74rem; color: var(--ink-muted); font-style: italic; margin-top: 0.1rem; }
-    .panel-row-cat { font-size: 0.63rem; color: var(--amber); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.1rem; }
-    .panel-row-action { font-size: 0.72rem; color: var(--amber); flex-shrink: 0; }
-
-    /* open library result row */
-    .panel-ol-row {
-      display: flex; align-items: center; gap: 0.85rem;
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid rgba(200,134,10,0.08);
-      transition: background 0.15s;
-    }
-    .panel-ol-row:last-child { border-bottom: none; }
-    .panel-ol-row img {
-      width: 34px; height: 48px; object-fit: cover;
-      border-radius: 2px; flex-shrink: 0;
-      border: 1px solid rgba(200,134,10,0.15);
-      background: var(--parchment-dark);
-    }
-    .panel-ol-row-info { flex: 1; min-width: 0; }
-    .panel-ol-row-title {
-      font-family: 'Playfair Display', serif; font-size: 0.88rem;
-      color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .panel-ol-row-author { font-size: 0.74rem; color: var(--ink-muted); font-style: italic; margin-top: 0.1rem; }
-    .panel-ol-row-year { font-size: 0.63rem; color: var(--amber); margin-top: 0.1rem; }
-    .panel-ol-buy {
-      flex-shrink: 0;
-      background: var(--amber); color: #fff;
-      font-size: 0.7rem; font-family: 'Lora', serif;
-      padding: 0.3rem 0.7rem; border-radius: 3px;
-      text-decoration: none; white-space: nowrap;
-      transition: background 0.2s;
-    }
-    .panel-ol-buy:hover { background: var(--sienna); }
-
-    /* loading / empty states */
-    .panel-loading, .panel-empty {
-      padding: 1rem 1.2rem;
-      font-size: 0.84rem; color: var(--ink-muted);
-      font-style: italic; text-align: center;
-    }
-    .panel-hint {
-      padding: 0.35rem 1rem 0.5rem;
-      font-size: 0.67rem; color: rgba(122,98,72,0.55);
-      font-style: italic; border-top: 1px solid rgba(200,134,10,0.08);
+    .search-amazon-btn:hover { opacity: 0.88; transform: scale(1.02); }
+    .search-hint {
+      text-align: center;
+      font-size: 0.7rem;
+      color: rgba(245,240,232,0.3);
+      margin-top: 0.45rem;
       font-family: 'Lora', serif;
     }
-    /* card highlight */
-    .book-card.search-highlight {
-      border-color: var(--amber) !important;
-      box-shadow: 0 0 0 3px rgba(200,134,10,0.18) !important;
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--ink-muted);
+      grid-column: 1 / -1;
     }
-
+    .no-results p { font-size: 1rem; margin-bottom: 0.5rem; }
+    .no-results small { font-size: 0.82rem; color: var(--amber); }
+    .highlight-match {
+      background: rgba(212,168,67,0.2);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
   </style>
 </head>
 <body>
@@ -575,12 +538,10 @@
 <div class="search-wrap">
   <div class="search-box">
     <span class="search-icon">🔍</span>
-    <input type="text" id="bookSearch"
-      placeholder="कोई भी किताब खोजें — title, author, topic…"
-      autocomplete="off" spellcheck="false"/>
+    <input type="text" id="bookSearch" placeholder="कोई भी किताब खोजें — title, author, या topic…" autocomplete="off" spellcheck="false"/>
     <button class="search-clear" id="searchClear" title="Clear">✕</button>
-    <div class="search-panel" id="searchPanel"></div>
   </div>
+  <div class="search-results-panel" id="searchPanel"></div>
 </div>
 
 <!-- FILTER BAR -->
@@ -939,31 +900,18 @@
 </footer>
 
 <script>
-  // ═══════════════════════════════════════════════════════
-  //  CONFIG
-  // ═══════════════════════════════════════════════════════
+  // ══════════════════════════════════════════
+  //  GEO REDIRECT
+  // ══════════════════════════════════════════
   const TAGS = { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' };
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyLDnDErBiDaiQWGgIWFKwJqniW3Gdo_99pBWg6EIt-CRXIU4i7DhKD_bASu18YgRzweA/exec';
   let userCountry = null;
 
-  // ═══════════════════════════════════════════════════════
-  //  GEO
-  // ═══════════════════════════════════════════════════════
   async function detectCountry() {
     try {
-      const d = await (await fetch('https://ipapi.co/json/')).json();
-      userCountry = d.country_code;
-    } catch { userCountry = 'US'; }
-  }
-
-  function amazonUrl(query, asin_in, asin_us, asin_ca) {
-    // If ASIN provided build direct link, else search
-    const store = userCountry === 'IN' ? 'amazon.in' : userCountry === 'CA' ? 'amazon.ca' : 'amazon.com';
-    const tag   = TAGS[userCountry] || TAGS.US;
-    if (asin_in && userCountry === 'IN') return `https://www.amazon.in/dp/${asin_in}?tag=${tag}`;
-    if (asin_ca && userCountry === 'CA') return `https://www.amazon.ca/dp/${asin_ca}?tag=${tag}`;
-    if (asin_us) return `https://www.amazon.com/dp/${asin_us}?tag=${tag}`;
-    return `https://www.${store}/s?k=${encodeURIComponent(query)}&tag=${tag}`;
+      const res  = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+      userCountry = data.country_code;
+    } catch (e) { userCountry = 'US'; }
   }
 
   function geoRedirect(inUrl, usUrl, caUrl) {
@@ -974,138 +922,52 @@
 
   detectCountry();
 
-  // ═══════════════════════════════════════════════════════
+  // ══════════════════════════════════════════
   //  FILTER
-  // ═══════════════════════════════════════════════════════
+  // ══════════════════════════════════════════
   function filterBooks(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     clearSearch();
-    document.querySelectorAll('.book-card').forEach(c => {
-      c.style.display = (cat === 'all' || c.dataset.cat.includes(cat)) ? '' : 'none';
+    document.querySelectorAll('.book-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat.includes(cat)) ? '' : 'none';
     });
   }
 
-  // ═══════════════════════════════════════════════════════
-  //  CURATED INDEX
-  // ═══════════════════════════════════════════════════════
+  // ══════════════════════════════════════════
+  //  SEARCH
+  // ══════════════════════════════════════════
+  function escapeRx(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function highlight(text, q) {
+    return text.replace(new RegExp(`(${escapeRx(q)})`, 'gi'),
+      '<mark style="background:rgba(200,134,10,0.18);color:#8b3a1a;border-radius:2px;padding:0 2px">$1</mark>');
+  }
+
+  function amazonFallbackUrl(q) {
+    const store = userCountry === 'IN' ? 'amazon.in' : userCountry === 'CA' ? 'amazon.ca' : 'amazon.com';
+    const tag   = TAGS[userCountry] || TAGS.US;
+    return `https://www.${store}/s?k=${encodeURIComponent(q)}&tag=${tag}`;
+  }
+
   function buildIndex() {
     return Array.from(document.querySelectorAll('.book-card')).map(card => ({
-      el:     card,
-      title:  card.dataset.title    || card.querySelector('.book-title')?.textContent  || '',
-      author: card.dataset.author   || card.querySelector('.book-author')?.textContent || '',
-      keys:   card.dataset.keywords || '',
-      img:    card.querySelector('img')?.src || '',
-      cat:    card.querySelector('.book-category')?.textContent || '',
+      el:      card,
+      title:   card.dataset.title    || card.querySelector('.book-title')?.textContent  || '',
+      author:  card.dataset.author   || card.querySelector('.book-author')?.textContent || '',
+      keys:    card.dataset.keywords || '',
+      img:     card.querySelector('img')?.src || '',
+      cat:     card.querySelector('.book-category')?.textContent || '',
     }));
   }
+
   let bookIndex = [];
 
-  // ═══════════════════════════════════════════════════════
-  //  HELPERS
-  // ═══════════════════════════════════════════════════════
-  function escRx(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-
-  function hl(text, q) {
-    if (!q) return text;
-    return text.replace(new RegExp(`(${escRx(q)})`, 'gi'),
-      '<mark>$1</mark>');
-  }
-
-  // ═══════════════════════════════════════════════════════
-  //  GOOGLE SHEETS LOGGING
-  // ═══════════════════════════════════════════════════════
-  function logToSheet(term) {
-    // fire-and-forget — no await, don't block UX
-    fetch(SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        term: term,
-        timestamp: new Date().toISOString(),
-        country: userCountry || 'unknown'
-      })
-    }).catch(() => {}); // silently ignore errors
-  }
-
-  // ═══════════════════════════════════════════════════════
-  //  OPEN LIBRARY SEARCH
-  // ═══════════════════════════════════════════════════════
-  let olTimer = null;
-  let lastOlQuery = '';
-
-  async function fetchOpenLibrary(query) {
-    if (query === lastOlQuery) return;
-    lastOlQuery = query;
-
-    const panel = document.getElementById('searchPanel');
-    // show loading in OL section only
-    const olSection = panel.querySelector('.ol-section');
-    if (olSection) {
-      olSection.innerHTML = '<div class="panel-loading">किताबें खोज रहे हैं…</div>';
-    }
-
-    try {
-      const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=5&fields=key,title,author_name,first_publish_year,cover_i,isbn`;
-      const data = await (await fetch(url)).json();
-      renderOLResults(query, data.docs || []);
-    } catch {
-      const olSec = panel.querySelector('.ol-section');
-      if (olSec) olSec.innerHTML = '<div class="panel-empty">Results load करने में problem हुई।</div>';
-    }
-  }
-
-  function renderOLResults(query, docs) {
-    const panel = document.getElementById('searchPanel');
-    const olSection = panel.querySelector('.ol-section');
-    if (!olSection) return;
-
-    if (docs.length === 0) {
-      olSection.innerHTML = '<div class="panel-empty">Open Library पर भी नहीं मिली। Amazon पर try करें।</div>';
-      return;
-    }
-
-    olSection.innerHTML = '';
-    docs.forEach(doc => {
-      const title   = doc.title || 'Unknown Title';
-      const author  = (doc.author_name || []).join(', ') || 'Unknown Author';
-      const year    = doc.first_publish_year || '';
-      const coverId = doc.cover_i;
-      const coverUrl = coverId
-        ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
-        : `https://placehold.co/34x48/ede6d6/8b3a1a?text=📖`;
-      const isbn = (doc.isbn || [])[0] || '';
-      const buyUrl = amazonUrl(title + ' ' + author, null, isbn || null, null);
-
-      const row = document.createElement('div');
-      row.className = 'panel-ol-row';
-      row.innerHTML = `
-        <img src="${coverUrl}" alt="${title}" onerror="this.src='https://placehold.co/34x48/ede6d6/8b3a1a?text=📖'"/>
-        <div class="panel-ol-row-info">
-          <div class="panel-ol-row-title">${title}</div>
-          <div class="panel-ol-row-author">${author}</div>
-          ${year ? `<div class="panel-ol-row-year">प्रकाशित: ${year}</div>` : ''}
-        </div>
-        <a class="panel-ol-buy" href="${buyUrl}" target="_blank" rel="noopener"
-           onclick="event.stopPropagation()">🛒 Buy</a>`;
-      olSection.appendChild(row);
-    });
-
-    const hint = document.createElement('div');
-    hint.className = 'panel-hint';
-    hint.textContent = 'Open Library के results · Buy पर click करें → Amazon (affiliate link)';
-    olSection.appendChild(hint);
-  }
-
-  // ═══════════════════════════════════════════════════════
-  //  RENDER PANEL
-  // ═══════════════════════════════════════════════════════
   function renderPanel(rawQuery) {
     const panel = document.getElementById('searchPanel');
-    const q = rawQuery.trim().toLowerCase();
+    const q     = rawQuery.trim().toLowerCase();
 
-    if (!q) { closePanel(); restoreCards(); return; }
+    if (!q) { closePanel(); clearHighlights(); return; }
 
     const matches = bookIndex.filter(b =>
       `${b.title} ${b.author} ${b.keys}`.toLowerCase().includes(q)
@@ -1113,82 +975,66 @@
 
     panel.innerHTML = '';
 
-    // ── Section 1: Curated matches ──
     if (matches.length > 0) {
-      const lbl = document.createElement('div');
-      lbl.className = 'panel-section-label';
-      lbl.textContent = `✦ हमारी collection में (${matches.length})`;
-      panel.appendChild(lbl);
-
       matches.forEach(book => {
-        const row = document.createElement('div');
-        row.className = 'panel-row';
-        row.innerHTML = `
-          <img src="${book.img}" alt="" onerror="this.src='https://placehold.co/34x48/ede6d6/8b3a1a?text=📖'"/>
-          <div class="panel-row-info">
-            <div class="panel-row-title">${hl(book.title, rawQuery.trim())}</div>
-            <div class="panel-row-author">${book.author}</div>
-            <div class="panel-row-cat">${book.cat}</div>
+        const item = document.createElement('div');
+        item.className = 'search-result-item';
+        item.innerHTML = `
+          <img src="${book.img}" alt="" onerror="this.src='https://placehold.co/36x50/ede6d6/8b3a1a?text=📖'"/>
+          <div class="search-result-info">
+            <div class="search-result-title">${highlight(book.title, rawQuery.trim())}</div>
+            <div class="search-result-author">${book.author}</div>
+            <div class="search-result-cat">${book.cat}</div>
           </div>
-          <span class="panel-row-action">देखें →</span>`;
-        row.addEventListener('click', () => {
-          closePanel(); restoreCards();
+          <span class="search-result-action">देखें →</span>`;
+        item.addEventListener('click', () => {
+          closePanel();
+          // show all cards, reset filter
           document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
           document.querySelector('.filter-btn').classList.add('active');
           document.querySelectorAll('.book-card').forEach(c => c.style.display = '');
-          document.querySelectorAll('.book-card.search-highlight').forEach(c => c.classList.remove('search-highlight'));
+          // highlight and scroll
+          clearHighlights();
           book.el.classList.add('search-highlight');
           book.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-        panel.appendChild(row);
+        panel.appendChild(item);
       });
+
+      const hint = document.createElement('div');
+      hint.className = 'search-hint';
+      hint.textContent = `${matches.length} किताब${matches.length > 1 ? 'ें' : ''} मिली — card पर click करें`;
+      panel.appendChild(hint);
+
+    } else {
+      const notFound = document.createElement('div');
+      notFound.className = 'search-not-found';
+      notFound.innerHTML = `
+        <p>"${rawQuery.trim()}" हमारी list में नहीं है अभी…</p>
+        <a class="search-amazon-btn" href="${amazonFallbackUrl(rawQuery.trim())}" target="_blank" rel="noopener">
+          🛒 Amazon पर खोजें
+        </a>`;
+      panel.appendChild(notFound);
     }
 
-    // ── Section 2: Open Library ──
-    const olLbl = document.createElement('div');
-    olLbl.className = 'panel-section-label';
-    olLbl.textContent = matches.length > 0
-      ? '📚 और किताबें — Open Library से'
-      : '📚 Open Library पर results';
-    panel.appendChild(olLbl);
+    panel.classList.add('visible');
 
-    const olSection = document.createElement('div');
-    olSection.className = 'ol-section';
-    olSection.innerHTML = '<div class="panel-loading">खोज रहे हैं…</div>';
-    panel.appendChild(olSection);
-
-    // dim non-matching curated cards
+    // dim non-matching cards subtly
     bookIndex.forEach(b => {
       b.el.style.opacity = matches.includes(b) || matches.length === 0 ? '1' : '0.4';
     });
+  }
 
-    panel.classList.add('open');
-
-    // debounce OL fetch — log only after 800ms pause (intentional search)
-    clearTimeout(olTimer);
-    olTimer = setTimeout(() => {
-      fetchOpenLibrary(rawQuery.trim());
-      // log to sheet only if NOT in curated list
-      if (matches.length === 0) {
-        logToSheet(rawQuery.trim());
-      }
-    }, 800);
+  function clearHighlights() {
+    document.querySelectorAll('.book-card.search-highlight')
+      .forEach(c => c.classList.remove('search-highlight'));
+    bookIndex.forEach(b => b.el.style.opacity = '1');
   }
 
   function closePanel() {
     const panel = document.getElementById('searchPanel');
-    panel.classList.remove('open');
+    panel.classList.remove('visible');
     panel.innerHTML = '';
-    lastOlQuery = '';
-    clearTimeout(olTimer);
-  }
-
-  function restoreCards() {
-    document.querySelectorAll('.book-card').forEach(c => {
-      c.style.opacity = '1';
-      c.classList.remove('search-highlight');
-    });
-    bookIndex.forEach(b => b.el.style.opacity = '1');
   }
 
   function clearSearch() {
@@ -1197,12 +1043,10 @@
     input.value = '';
     document.getElementById('searchClear').style.display = 'none';
     closePanel();
-    restoreCards();
+    clearHighlights();
   }
 
-  // ═══════════════════════════════════════════════════════
-  //  WIRE UP
-  // ═══════════════════════════════════════════════════════
+  // ── Wire up ──
   document.addEventListener('DOMContentLoaded', () => {
     bookIndex = buildIndex();
 
@@ -1216,12 +1060,20 @@
 
     input.addEventListener('keydown', e => {
       if (e.key === 'Escape') clearSearch();
+      // Enter with no match → open Amazon
+      if (e.key === 'Enter' && input.value.trim()) {
+        const q = input.value.trim().toLowerCase();
+        const hasMatch = bookIndex.some(b =>
+          `${b.title} ${b.author} ${b.keys}`.toLowerCase().includes(q)
+        );
+        if (!hasMatch) window.open(amazonFallbackUrl(input.value.trim()), '_blank');
+      }
     });
 
     clearBtn.addEventListener('click', clearSearch);
 
     document.addEventListener('click', e => {
-      if (!e.target.closest('.search-wrap')) { closePanel(); restoreCards(); }
+      if (!e.target.closest('.search-wrap')) { closePanel(); clearHighlights(); }
     });
   });
 </script>
