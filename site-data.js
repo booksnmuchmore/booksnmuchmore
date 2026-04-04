@@ -145,5 +145,16 @@ const HOMEPAGE_LESSONS = [
     count: "✦ 10 Lessons · Hindi + English",
     live: true,
     featured: false
-  }
+  },
+  {
+  slug: "deep-work",
+  genre: "Productivity · Focus",
+  title: "Deep Work",
+  author: "Cal Newport",
+  cover: "https://covers.openlibrary.org/b/isbn/9780349411903-L.jpg",
+  desc: "बिजी रहना और productive होना एक नहीं है — Deep Work वो कला है जो आपको भीड़ से अलग करती है और सफलता की राह खोलती है।",
+  count: "✦ 10 Lessons · Hindi + English",
+  live: true,
+  featured: false
+},
 ];
