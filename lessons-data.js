@@ -478,6 +478,84 @@ const BOOKS_DATA = {
         quote: '"We see the world not as it is, but as we are — or as we are conditioned to see it." — Stephen R. Covey'
       }
     ]
-  }
+  },
+  "deep-work": {
+  live: true,
+  slug: "deep-work",
+  title: "Deep Work",
+  titleHtml: "Deep <em>Work</em>",
+  author: "Cal Newport",
+  genre: "Productivity · Focus",
+  rating: "★★★★★",
+  cover: "https://covers.openlibrary.org/b/isbn/9780349411903-L.jpg",
+  heroDesc: "In a world of constant distraction, Cal Newport's Deep Work is a manifesto for focus. These 10 lessons will help you reclaim your attention, do your best work, and build a life that truly matters.",
+  amazon: {
+    IN: "https://www.amazon.in/dp/B00N5YJKIS",
+    US: "https://www.amazon.com/dp/1455586692",
+    CA: "https://www.amazon.ca/dp/1455586692"
+  },
+  lessons: [
+    {
+      title: "Deep Work vs. Shallow Work — Know the Difference",
+      en: "Deep Work is professional activity performed in a state of distraction-free concentration that pushes your cognitive capabilities to their limit. Shallow Work is non-cognitively demanding, logistical-style tasks often performed while distracted — emails, meetings, messages. The tragedy of the modern workplace is that we have filled our days with Shallow Work and wonder why we feel busy but not productive.",
+      hi: "Deep Work वो काम है जो पूरी एकाग्रता और बिना किसी रुकावट के किया जाए — जो आपकी मानसिक क्षमता को उसकी सीमा तक ले जाए। Shallow Work वो है जो बिखरे ध्यान से होता है — ईमेल, मीटिंग्स, मैसेजेस। आधुनिक कार्यस्थल की सबसे बड़ी त्रासदी यह है कि हमने अपना पूरा दिन Shallow Work से भर लिया है — और फिर सोचते हैं कि व्यस्त होने के बाद भी आगे क्यों नहीं बढ़ रहे।",
+      quote: '"Deep Work: Professional activities performed in a state of distraction-free concentration that push your cognitive capabilities to their limit." — Cal Newport'
+    },
+    {
+      title: "Deep Work Is Becoming Rare — and More Valuable",
+      en: "As the economy becomes more complex and information-driven, the ability to do Deep Work is becoming increasingly rare. Simultaneously, it is becoming more valuable. Those who can master deep focus will produce at an elite level and thrive. Those who cannot will struggle to compete. Newport argues that the ability to perform Deep Work is the superpower of the 21st century.",
+      hi: "जैसे-जैसे अर्थव्यवस्था जटिल और सूचना-आधारित होती जा रही है, Deep Work की क्षमता दुर्लभ होती जा रही है — और साथ ही अधिक मूल्यवान भी। जो लोग गहरे focus में काम करना सीख लेंगे, वो शीर्ष पर पहुँचेंगे। जो नहीं सीखेंगे, वो पीछे रह जाएंगे। Newport कहते हैं कि Deep Work 21वीं सदी की सबसे बड़ी महाशक्ति है।",
+      quote: '"The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable." — Cal Newport'
+    },
+    {
+      title: "The Deep Work Hypothesis — A Life Well Lived",
+      en: "Newport's central thesis is this: the ability to do Deep Work is not just a career advantage — it is the foundation of a meaningful life. Craftsmanship, mastery, and the satisfaction of doing difficult work well are sources of deep fulfillment that no amount of social media scrolling can replicate. A deep life, Newport argues, is a good life.",
+      hi: "Newport का मूल विचार यह है: Deep Work की क्षमता सिर्फ एक career advantage नहीं — यह एक सार्थक जीवन की नींव है। किसी कठिन काम में महारत हासिल करने का संतोष, जो social media scrolling से कभी नहीं मिल सकता। Newport कहते हैं — एक गहरा जीवन ही एक अच्छा जीवन है।",
+      quote: '"A deep life is a good life." — Cal Newport'
+    },
+    {
+      title: "Choose Your Deep Work Philosophy",
+      en: "Newport outlines four approaches to scheduling Deep Work. The Monastic Philosophy means eliminating all shallow obligations entirely. The Bimodal Philosophy divides time between deep and shallow — deep for days or weeks at a stretch. The Rhythmic Philosophy builds a daily habit of deep work at a fixed time. The Journalistic Philosophy fits deep work whenever possible. For most people, the Rhythmic approach — a fixed daily block — is the most practical and sustainable.",
+      hi: "Newport Deep Work schedule करने के चार तरीके बताते हैं। Monastic Philosophy: सभी shallow कामों को पूरी तरह छोड़ दो। Bimodal Philosophy: कुछ दिन या हफ्ते सिर्फ deep work के लिए। Rhythmic Philosophy: रोज़ एक निश्चित समय पर deep work का block। Journalistic Philosophy: जब भी मौका मिले, deep work करो। ज़्यादातर लोगों के लिए Rhythmic approach — रोज़ एक fixed block — सबसे practical और टिकाऊ है।",
+      quote: '"The key to developing a deep work habit is to move beyond good intentions and add routines and rituals." — Cal Newport'
+    },
+    {
+      title: "Ritualize — Build Your Deep Work Environment",
+      en: "Waiting for inspiration or motivation to do deep work is a losing strategy. Instead, build rituals that remove the need for willpower. Decide in advance: where will you work? For how long? How will you handle distractions? What will you do when you get stuck? The more you ritualize the beginning of a deep work session, the less mental energy you waste on deciding how to start — and the more you have for the work itself.",
+      hi: "Deep work के लिए प्रेरणा या motivation का इंतज़ार करना एक हारी हुई रणनीति है। इसकी जगह — ऐसी rituals बनाएं जो willpower की ज़रूरत ही न रहने दें। पहले से तय करें: कहाँ काम करेंगे? कितनी देर? distraction आने पर क्या करेंगे? अटकने पर क्या? जितना ज़्यादा आप शुरुआत को ritualize करेंगे, उतनी कम मानसिक ऊर्जा शुरू करने में जाएगी — और उतनी ज़्यादा काम में।",
+      quote: '"Great creative minds think like artists but work like accountants." — Cal Newport'
+    },
+    {
+      title: "Embrace Boredom — Train Your Attention",
+      en: "If you seek distraction the moment you feel bored — reaching for your phone, opening social media — you are training your brain to be incapable of deep focus. Newport argues that the ability to concentrate is like a muscle: it must be trained. Embrace boredom. Resist the urge to reach for your phone in every idle moment. Let your mind wander. This is not wasted time — it is the training ground for Deep Work.",
+      hi: "जब भी बोरियत महसूस हो और आप तुरंत फोन उठाएं या social media खोलें — आप अपने दिमाग को deep focus के लिए अनुपयुक्त बना रहे हैं। Newport कहते हैं कि concentrate करने की क्षमता एक मांसपेशी की तरह है — इसे train करना होगा। बोरियत को गले लगाओ। हर खाली पल में फोन न उठाओ। दिमाग को भटकने दो। यह बर्बाद समय नहीं — Deep Work की training ground है।",
+      quote: '"Efforts to deepen your focus will struggle if you don\'t simultaneously wean your mind from a dependence on distraction." — Cal Newport'
+    },
+    {
+      title: "Quit Social Media — Or Be Ruthlessly Selective",
+      en: "Newport does not say social media is evil. He says you should only use a tool if its benefits substantially outweigh its harms. Most people adopt every new platform without question. Newport recommends the Craftsman Approach: identify your core goals, then only use tools that have a significant positive impact on those goals. For most professionals, quitting or severely limiting social media leads to more deep work and a better life.",
+      hi: "Newport यह नहीं कहते कि social media बुरा है। वो कहते हैं — किसी tool का उपयोग तभी करो जब उसके फायदे नुकसान से काफी ज़्यादा हों। ज़्यादातर लोग बिना सोचे हर नया platform अपना लेते हैं। Newport Craftsman Approach सुझाते हैं: अपने मुख्य लक्ष्य तय करो, फिर सिर्फ उन tools का उपयोग करो जो उन लक्ष्यों पर सकारात्मक प्रभाव डालते हों। ज़्यादातर professionals के लिए social media छोड़ना या सीमित करना — Deep Work और बेहतर जीवन की ओर पहला कदम है।",
+      quote: '"The ability to concentrate without distraction is becoming increasingly valuable — and increasingly rare." — Cal Newport'
+    },
+    {
+      title: "Drain the Shallows — Protect Your Deep Work Time",
+      en: "Newport recommends scheduling every minute of your workday in advance. This is not about rigidity — it is about intention. When you plan your day, you are forced to confront how much time you actually have and how much of it is being consumed by shallow tasks. The goal is not to eliminate shallow work entirely — it is necessary. The goal is to confine it to its proper place so that it does not crowd out the deep work that matters most.",
+      hi: "Newport सलाह देते हैं कि अपने पूरे कार्यदिवस को पहले से schedule करें। यह कठोरता नहीं — यह इरादा है। जब आप दिन plan करते हैं, तो आप देखते हैं कि आपके पास actually कितना समय है और उसमें से कितना shallow कामों में जा रहा है। लक्ष्य shallow work को पूरी तरह हटाना नहीं — वो ज़रूरी है। लक्ष्य है उसे उसकी सही जगह तक सीमित रखना ताकि वो deep work को दबा न सके।",
+      quote: '"Schedule every minute of your day. Without this, it\'s too easy to allow the shallow to crowd out the deep." — Cal Newport'
+    },
+    {
+      title: "The 4DX Framework — Execute on the Wildly Important",
+      en: "Newport adapts the 4 Disciplines of Execution for Deep Work. Focus on the wildly important — one or two deep goals, not twenty. Act on lead measures — track the hours of deep work you put in each week, not just the outcomes. Keep a compelling scoreboard — a physical tally of your deep work hours creates accountability and momentum. Create a cadence of accountability — a weekly review to see if you hit your deep work targets. These disciplines transform vague intentions into measurable habits.",
+      hi: "Newport 4 Disciplines of Execution को Deep Work के लिए adapt करते हैं। सबसे ज़रूरी एक-दो deep goals पर focus करो — बीस पर नहीं। Lead measures पर काम करो — हर हफ्ते के deep work के घंटे track करो, सिर्फ नतीजे नहीं। एक scoreboard रखो — deep work के घंटों का physical record accountability और momentum बनाता है। साप्ताहिक समीक्षा करो कि क्या आपने अपने deep work targets पूरे किए। ये disciplines अस्पष्ट इरादों को measurable आदतों में बदलती हैं।",
+      quote: '"A small amount of extra quality in your output can translate into a large amount of extra value." — Cal Newport'
+    },
+    {
+      title: "Shutdown Ritual — Rest Is Part of the Work",
+      en: "At the end of every workday, Newport performs a shutdown ritual — reviewing all incomplete tasks, planning the next day, and saying the words: 'Shutdown complete.' This signals to his brain that work is over. Without a clear shutdown, the unconscious mind keeps processing work problems during rest — degrading the quality of both rest and the next day's deep work. True rest is not laziness. It is the recovery that makes tomorrow's deep work possible.",
+      hi: "हर कार्यदिवस के अंत में Newport एक shutdown ritual करते हैं — सभी अधूरे कामों की समीक्षा, अगले दिन की planning, और फिर कहते हैं: 'Shutdown complete।' यह उनके दिमाग को संकेत देता है कि काम खत्म हुआ। बिना clear shutdown के, अवचेतन मन आराम के समय भी काम की समस्याओं को process करता रहता है — जिससे rest और अगले दिन का deep work दोनों कमज़ोर होते हैं। सच्चा आराम आलस्य नहीं — यह वो recovery है जो कल के deep work को संभव बनाती है।",
+      quote: '"Idleness is not just a vacation, an indulgence or a vice; it is as indispensable to the brain as vitamin D is to the body." — Cal Newport'
+    }
+  ]
+}
 
 };
