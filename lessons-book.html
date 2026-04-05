@@ -23,6 +23,30 @@
   <meta name="twitter:description" id="tw-desc"   content="Life-changing book lessons in Hindi and English"/>
   <meta name="twitter:image"       id="tw-image"  content=""/>
 
+  <!-- ── Static OG image fix (must run before page paint, no JS framework needed) ──
+       WhatsApp / Facebook crawlers read raw HTML — they don't execute JS.
+       So we populate og:image synchronously here in <head> using only
+       URL parsing, which browsers always support before DOM is ready.      ── -->
+  <script>
+    (function() {
+      var COVER_BASE = 'https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/covers/';
+      var COVERS = {
+        'think-and-grow-rich':              COVER_BASE + 'think-and-grow-rich.jpg',
+        'atomic-habits':                    COVER_BASE + 'atomic-habits.jpg',
+        'the-alchemist':                    COVER_BASE + 'the-alchemist.jpg',
+        'rich-dad-poor-dad':                COVER_BASE + 'rich-dad-poor-dad.jpg',
+        'how-to-win-friends':               COVER_BASE + 'how-to-win-friends.jpg',
+        '7-habits-of-highly-effective-people': 'https://covers.openlibrary.org/b/isbn/1982137134-L.jpg'
+      };
+      var slug = new URLSearchParams(window.location.search).get('book') || '';
+      var img  = COVERS[slug] || '';
+      if (img) {
+        document.getElementById('og-image').setAttribute('content', img);
+        document.getElementById('tw-image').setAttribute('content', img);
+      }
+    })();
+  </script>
+
   <!-- Hindi SEO keywords (filled per book) -->
   <meta name="keywords"  id="page-keywords" content=""/>
   <meta name="language"  content="Hindi"/>
@@ -268,16 +292,14 @@
     document.getElementById('page-desc').setAttribute('content', seo ? seo.description : `Top 10 life-changing lessons from ${book.title} by ${book.author} in Hindi and English.`);
     document.getElementById('page-keywords').setAttribute('content', seo ? seo.keywords : '');
 
-    // Open Graph
+    // Open Graph (og:image already set statically in <head> for crawler compatibility)
     document.getElementById('og-title').setAttribute('content',       seo ? seo.titleTag    : book.title);
     document.getElementById('og-desc').setAttribute('content',        seo ? seo.description : book.heroDesc);
-    document.getElementById('og-image').setAttribute('content',       book.cover);
     document.getElementById('og-url').setAttribute('content',         pageUrl);
 
-    // Twitter
+    // Twitter (tw:image already set statically in <head> for crawler compatibility)
     document.getElementById('tw-title').setAttribute('content',       seo ? seo.titleTag    : book.title);
     document.getElementById('tw-desc').setAttribute('content',        seo ? seo.description : book.heroDesc);
-    document.getElementById('tw-image').setAttribute('content',       book.cover);
   }
 
   // ── Share modal logic ─────────────────────────────────────
