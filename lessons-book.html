@@ -3,8 +3,31 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ── Dynamic SEO tags (filled by JS per book) ── -->
   <title id="page-title">Book Lessons | Books 'n' Much More</title>
   <meta name="description" id="page-desc" content="Life-changing book lessons in Hindi and English — Books 'n' Much More"/>
+
+  <!-- Open Graph (WhatsApp, Facebook previews) -->
+  <meta property="og:type"        content="article"/>
+  <meta property="og:site_name"   content="Books 'n' Much More"/>
+  <meta property="og:title"       id="og-title"       content="Book Lessons | Books 'n' Much More"/>
+  <meta property="og:description" id="og-desc"        content="Life-changing book lessons in Hindi and English"/>
+  <meta property="og:image"       id="og-image"       content=""/>
+  <meta property="og:url"         id="og-url"         content=""/>
+  <meta property="og:locale"      content="hi_IN"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:title"       id="tw-title"  content="Book Lessons | Books 'n' Much More"/>
+  <meta name="twitter:description" id="tw-desc"   content="Life-changing book lessons in Hindi and English"/>
+  <meta name="twitter:image"       id="tw-image"  content=""/>
+
+  <!-- Hindi SEO keywords (filled per book) -->
+  <meta name="keywords"  id="page-keywords" content=""/>
+  <meta name="language"  content="Hindi"/>
+  <meta name="robots"    content="index, follow"/>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,8 +60,13 @@
     .hero h1 em { color: var(--amber-l); font-style: italic; }
     .hero .author { font-size: 1rem; color: var(--amber-l); letter-spacing: 1px; margin-bottom: 1.5rem; }
     .hero-desc { max-width: 620px; margin: 0 auto 2rem; font-size: 1rem; color: #d9c9b0; line-height: 1.8; }
-    .hero-cta { display: inline-block; background: var(--amber); color: #fff; padding: .75rem 2rem; border-radius: 30px; text-decoration: none; font-size: .9rem; cursor: pointer; border: none; transition: background .2s, transform .2s; }
+
+    /* Hero action row: Buy + Share */
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-cta { display: inline-flex; align-items: center; gap: .45rem; background: var(--amber); color: #fff; padding: .75rem 1.8rem; border-radius: 30px; text-decoration: none; font-size: .9rem; cursor: pointer; border: none; transition: background .2s, transform .2s; font-family: 'Lora', serif; }
     .hero-cta:hover { background: #A06020; transform: translateY(-2px); }
+    .share-btn-hero { display: inline-flex; align-items: center; gap: .45rem; background: transparent; color: var(--amber-l); padding: .75rem 1.6rem; border-radius: 30px; font-size: .9rem; cursor: pointer; border: 2px solid var(--amber-l); transition: background .2s, color .2s, transform .2s; font-family: 'Lora', serif; }
+    .share-btn-hero:hover { background: var(--amber-l); color: var(--dark); transform: translateY(-2px); }
 
     /* ── Book strip ── */
     .book-strip-wrap { max-width: 860px; margin: -2.5rem auto 0; padding: 0 1.5rem; position: relative; z-index: 2; }
@@ -46,9 +74,29 @@
     .book-strip img { width: 80px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.2); flex-shrink: 0; }
     .book-strip-info h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--dark); }
     .book-strip-info p { font-size: .88rem; color: var(--mid); margin: .2rem 0 .6rem; }
-    .buy-btn { display: inline-block; background: var(--amber); color: #fff; padding: .4rem 1.2rem; border-radius: 20px; text-decoration: none; font-size: .82rem; transition: background .2s; border: none; cursor: pointer; }
+    .strip-actions { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; margin-top: .4rem; }
+    .buy-btn { display: inline-flex; align-items: center; gap: .3rem; background: var(--amber); color: #fff; padding: .4rem 1.2rem; border-radius: 20px; text-decoration: none; font-size: .82rem; transition: background .2s; border: none; cursor: pointer; font-family: 'Lora', serif; }
     .buy-btn:hover { background: #A06020; }
+    .share-btn-strip { display: inline-flex; align-items: center; gap: .3rem; background: transparent; color: var(--sienna); padding: .4rem 1.1rem; border-radius: 20px; font-size: .82rem; transition: background .2s, color .2s; border: 1.5px solid var(--amber-l); cursor: pointer; font-family: 'Lora', serif; }
+    .share-btn-strip:hover { background: var(--amber-xl); }
     .affiliate-note { font-size: .75rem; color: var(--lite); margin-top: .4rem; }
+
+    /* ── Share modal ── */
+    .share-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
+    .share-backdrop.open { display: flex; }
+    .share-modal { background: var(--cream); border-radius: 18px; padding: 2rem 1.8rem; max-width: 420px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.3); position: relative; }
+    .share-modal h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--dark); margin-bottom: .4rem; }
+    .share-modal p { font-size: .85rem; color: var(--mid); margin-bottom: 1.4rem; line-height: 1.6; }
+    .share-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--mid); line-height: 1; }
+    .share-close:hover { color: var(--dark); }
+    .share-options { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin-bottom: 1.2rem; }
+    .share-option { display: flex; align-items: center; gap: .6rem; padding: .75rem 1rem; border-radius: 12px; font-size: .88rem; cursor: pointer; border: none; font-family: 'Lora', serif; transition: transform .15s, filter .15s; text-decoration: none; justify-content: center; font-weight: 600; }
+    .share-option:hover { transform: translateY(-2px); filter: brightness(.93); }
+    .share-wa   { background: #25D366; color: #fff; }
+    .share-fb   { background: #1877F2; color: #fff; }
+    .share-tw   { background: #1DA1F2; color: #fff; }
+    .share-copy { background: var(--amber-xl); color: var(--sienna); border: 1.5px solid var(--amber-l); }
+    .copy-confirm { display: none; text-align: center; font-size: .8rem; color: #2a9d2a; margin-top: .3rem; font-style: italic; }
 
     /* ── Lessons ── */
     .lessons-wrap { max-width: 860px; margin: 3.5rem auto 4rem; padding: 0 1.5rem; }
@@ -63,10 +111,16 @@
     .lesson-hi { font-size: .93rem; color: var(--mid); line-height: 1.8; border-top: 1px dashed var(--amber-l); padding-top: .7rem; }
     .lesson-quote { display: block; font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--amber); margin-top: .8rem; font-style: italic; }
 
+    /* ── Inline share nudge (after lesson 3) ── */
+    .share-nudge { background: linear-gradient(135deg, #FFF3DC, #FDE8BC); border: 1.5px solid var(--amber-l); border-radius: 14px; padding: 1.2rem 1.6rem; margin-bottom: 1.6rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .share-nudge p { font-size: .9rem; color: var(--sienna); }
+    .share-nudge p span { display: block; font-size: .78rem; color: var(--lite); margin-top: .2rem; }
+
     /* ── Bottom CTA ── */
     .bottom-cta { background: linear-gradient(135deg, var(--dark), #6B3010); color: #fff; text-align: center; padding: 3rem 2rem; }
     .bottom-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: .8rem; }
     .bottom-cta p { color: #d9c9b0; font-size: .95rem; margin-bottom: 1.5rem; }
+    .bottom-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     /* ── More books ── */
     .more-books { max-width: 860px; margin: 3rem auto; padding: 0 1.5rem; text-align: center; }
@@ -78,6 +132,7 @@
     /* ── Footer ── */
     footer { background: var(--dark); color: #aaa; text-align: center; padding: 1.5rem; font-size: .82rem; }
     footer a { color: var(--amber-l); text-decoration: none; }
+    footer .footer-disclaimer { margin-top: .5rem; font-size: .76rem; color: #7a6a5a; }
 
     /* ── Error state ── */
     .error-state { text-align: center; padding: 6rem 2rem; }
@@ -88,6 +143,8 @@
     @media (max-width: 600px) {
       .book-strip { flex-direction: column; text-align: center; }
       nav ul { gap: 1rem; }
+      .share-options { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -105,6 +162,34 @@
 
 <!-- Content injected by JS -->
 <div id="app"></div>
+
+<!-- ── Share Modal ── -->
+<div class="share-backdrop" id="share-backdrop" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+  <div class="share-modal">
+    <button class="share-close" id="share-close" aria-label="Close">✕</button>
+    <h3 id="share-modal-title">📤 इस Page को Share करें</h3>
+    <p id="share-modal-desc">ये lessons आपके किसी दोस्त या family member के काम आ सकते हैं — बिल्कुल मुफ़्त!</p>
+    <div class="share-options">
+      <button class="share-option share-wa" id="share-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.85L.057 23.743a.5.5 0 0 0 .612.612l5.94-1.476A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 0 1-5.082-1.387l-.364-.216-3.527.877.892-3.459-.236-.373A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp
+      </button>
+      <button class="share-option share-fb" id="share-fb">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.883v2.26h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button class="share-option share-tw" id="share-tw">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.622 5.905-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter / X
+      </button>
+      <button class="share-option share-copy" id="share-copy">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Link Copy करें
+      </button>
+    </div>
+    <p class="copy-confirm" id="copy-confirm">✓ Link copy हो गया!</p>
+  </div>
+</div>
 
 <!-- Load data then render -->
 <script src="lessons-data.js"></script>
@@ -132,8 +217,119 @@
     return params.get('book') || '';
   }
 
-  // ── Pad lesson number ─────────────────────────────────────
   function pad(n) { return String(n).padStart(2, '0'); }
+
+  // ── Hindi SEO keywords per book ───────────────────────────
+  const BOOK_SEO = {
+    "think-and-grow-rich": {
+      titleTag:    "Think and Grow Rich के 10 सबसे ज़रूरी Lessons हिंदी में | Books 'n' Much More",
+      description: "Napoleon Hill की Think and Grow Rich के 10 life-changing lessons हिंदी और English में — बिल्कुल मुफ़्त। सफलता, desire, faith और persistence के बारे में गहरी सीख।",
+      keywords:    "Think and Grow Rich Hindi, थिंक एंड ग्रो रिच हिंदी, Napoleon Hill lessons Hindi, safalta ke sutra, success book Hindi summary, motivational book lessons Hindi, desire faith persistence Hindi",
+      shareText:   "Napoleon Hill की Think and Grow Rich के 10 ज़बरदस्त lessons हिंदी में — बिल्कुल मुफ़्त पढ़ें! 📚"
+    },
+    "atomic-habits": {
+      titleTag:    "Atomic Habits के 10 ज़बरदस्त Lessons हिंदी में | Books 'n' Much More",
+      description: "James Clear की Atomic Habits के 10 powerful lessons हिंदी और English में। आदतें कैसे बनाएं और कैसे तोड़ें — practical tips के साथ, बिल्कुल मुफ़्त।",
+      keywords:    "Atomic Habits Hindi, एटॉमिक हैबिट्स हिंदी, James Clear lessons Hindi, aadat kaise banaye, habit building tips Hindi, 1 percent better Hindi, book summary Hindi, productivity book Hindi",
+      shareText:   "James Clear की Atomic Habits के 10 ज़बरदस्त lessons हिंदी में — aadat badlo, zindagi badlo! 🔥"
+    },
+    "the-alchemist": {
+      titleTag:    "The Alchemist के 10 गहरे Lessons हिंदी में | Books 'n' Much More",
+      description: "Paulo Coelho की The Alchemist के 10 inspiring lessons हिंदी और English में। अपनी Personal Legend को कैसे पहचानें और follow करें — Hindi में, बिल्कुल मुफ़्त।",
+      keywords:    "The Alchemist Hindi, द अल्केमिस्ट हिंदी, Paulo Coelho lessons Hindi, personal legend Hindi, motivational story Hindi, zindagi ka maqsad, apna sapna pura karo, book summary Hindi",
+      shareText:   "Paulo Coelho की The Alchemist के 10 दिल को छू लेने वाले lessons हिंदी में — ज़रूर पढ़ें! ✨"
+    },
+    "rich-dad-poor-dad": {
+      titleTag:    "Rich Dad Poor Dad के 10 ज़रूरी Lessons हिंदी में | Books 'n' Much More",
+      description: "Robert Kiyosaki की Rich Dad Poor Dad के 10 financial lessons हिंदी और English में। पैसा कैसे काम करवाएं, assets क्या होते हैं — Hindi में सीखें, बिल्कुल मुफ़्त।",
+      keywords:    "Rich Dad Poor Dad Hindi, रिच डैड पुअर डैड हिंदी, Robert Kiyosaki Hindi, paisa kaise kamaye, financial freedom Hindi, asset liability Hindi, personal finance Hindi, book summary Hindi",
+      shareText:   "Robert Kiyosaki की Rich Dad Poor Dad के 10 ज़बरदस्त financial lessons हिंदी में — पैसे की सच्चाई जानें! 💰"
+    },
+    "how-to-win-friends": {
+      titleTag:    "How to Win Friends के 10 ज़बरदस्त Lessons हिंदी में | Books 'n' Much More",
+      description: "Dale Carnegie की How to Win Friends and Influence People के 10 lessons हिंदी और English में। लोगों से कैसे जुड़ें, कैसे प्रभावित करें — Hindi में, बिल्कुल मुफ़्त।",
+      keywords:    "How to Win Friends Hindi, डेल कार्नेगी हिंदी, Dale Carnegie lessons Hindi, log ko kaise prabhavit kare, communication skills Hindi, dost kaise banaye, leadership Hindi, book summary Hindi",
+      shareText:   "Dale Carnegie की How to Win Friends के 10 lessons हिंदी में — relationships बदल जाएंगे! 🤝"
+    },
+    "7-habits-of-highly-effective-people": {
+      titleTag:    "7 Habits of Highly Effective People के 10 Lessons हिंदी में | Books 'n' Much More",
+      description: "Stephen Covey की 7 Habits of Highly Effective People के 10 lessons हिंदी और English में। proactive कैसे बनें, life को purpose के साथ जिएं — Hindi में, बिल्कुल मुफ़्त।",
+      keywords:    "7 Habits Hindi, सात आदतें हिंदी, Stephen Covey Hindi, highly effective people Hindi, proactive kaise bane, time management Hindi, leadership habits Hindi, book summary Hindi, self development Hindi",
+      shareText:   "Stephen Covey की 7 Habits के 10 lessons हिंदी में — ज़िंदगी बदलने वाली आदतें सीखें! 🌟"
+    }
+  };
+
+  // ── Set dynamic SEO meta tags ─────────────────────────────
+  function setSEO(slug, book) {
+    const seo = BOOK_SEO[slug];
+    const pageUrl = window.location.href.split('?')[0] + '?book=' + slug;
+
+    document.getElementById('page-title').textContent     = seo ? seo.titleTag    : `${book.title} — Top 10 Lessons | Books 'n' Much More`;
+    document.getElementById('page-desc').setAttribute('content', seo ? seo.description : `Top 10 life-changing lessons from ${book.title} by ${book.author} in Hindi and English.`);
+    document.getElementById('page-keywords').setAttribute('content', seo ? seo.keywords : '');
+
+    // Open Graph
+    document.getElementById('og-title').setAttribute('content',       seo ? seo.titleTag    : book.title);
+    document.getElementById('og-desc').setAttribute('content',        seo ? seo.description : book.heroDesc);
+    document.getElementById('og-image').setAttribute('content',       book.cover);
+    document.getElementById('og-url').setAttribute('content',         pageUrl);
+
+    // Twitter
+    document.getElementById('tw-title').setAttribute('content',       seo ? seo.titleTag    : book.title);
+    document.getElementById('tw-desc').setAttribute('content',        seo ? seo.description : book.heroDesc);
+    document.getElementById('tw-image').setAttribute('content',       book.cover);
+  }
+
+  // ── Share modal logic ─────────────────────────────────────
+  function openShareModal() {
+    document.getElementById('share-backdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeShareModal() {
+    document.getElementById('share-backdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function initShare(slug, book) {
+    const seo      = BOOK_SEO[slug];
+    const shareUrl = window.location.href.split('?')[0] + '?book=' + slug;
+    const text     = seo ? seo.shareText : `${book.title} के 10 ज़बरदस्त lessons हिंदी में पढ़ें — बिल्कुल मुफ़्त! 📚`;
+    const fullText = text + '\n\n' + shareUrl;
+
+    document.getElementById('share-modal-desc').textContent =
+      `"${book.title}" के lessons आपके किसी दोस्त या family member के भी काम आ सकते हैं — बिल्कुल मुफ़्त!`;
+
+    // WhatsApp
+    document.getElementById('share-wa').onclick = () => {
+      window.open('https://wa.me/?text=' + encodeURIComponent(fullText), '_blank');
+    };
+    // Facebook
+    document.getElementById('share-fb').onclick = () => {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+    };
+    // Twitter
+    document.getElementById('share-tw').onclick = () => {
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(shareUrl), '_blank');
+    };
+    // Copy link
+    document.getElementById('share-copy').onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        const confirm = document.getElementById('copy-confirm');
+        confirm.style.display = 'block';
+        setTimeout(() => { confirm.style.display = 'none'; }, 2500);
+      } catch(e) {
+        prompt('इस link को copy करें:', shareUrl);
+      }
+    };
+
+    // Close triggers
+    document.getElementById('share-close').onclick    = closeShareModal;
+    document.getElementById('share-backdrop').onclick = (e) => {
+      if (e.target === document.getElementById('share-backdrop')) closeShareModal();
+    };
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeShareModal(); });
+  }
 
   // ── Render ─────────────────────────────────────────────────
   function render() {
@@ -151,23 +347,35 @@
       return;
     }
 
-    // Update <title> and meta
-    document.getElementById('page-title').textContent = `${book.title} — Top 10 Lessons | Books 'n' Much More`;
-    document.getElementById('page-desc').setAttribute('content', `Top 10 life-changing lessons from ${book.title} by ${book.author} — in Hindi and English.`);
+    // Set SEO tags
+    setSEO(slug, book);
 
-    // Build lessons HTML
-    const lessonsHtml = book.lessons.map((l, i) => `
-      <div class="lesson">
-        <div class="lesson-header">
-          <span class="lesson-number">${pad(i + 1)}</span>
-          <h3 class="lesson-title">${l.title}</h3>
-        </div>
-        <p class="lesson-en">${l.en}</p>
-        <p class="lesson-hi">${l.hi}</p>
-        <em class="lesson-quote">${l.quote}</em>
-      </div>`).join('');
+    // Build lessons HTML — insert share nudge after lesson 3
+    const lessonsHtml = book.lessons.map((l, i) => {
+      const lessonCard = `
+        <div class="lesson">
+          <div class="lesson-header">
+            <span class="lesson-number">${pad(i + 1)}</span>
+            <h3 class="lesson-title">${l.title}</h3>
+          </div>
+          <p class="lesson-en">${l.en}</p>
+          <p class="lesson-hi">${l.hi}</p>
+          <em class="lesson-quote">${l.quote}</em>
+        </div>`;
+      // Insert share nudge after 3rd lesson (index 2)
+      if (i === 2) {
+        return lessonCard + `
+        <div class="share-nudge">
+          <p>💡 क्या ये lessons आपके काम के लग रहे हैं?
+            <span>इन्हें किसी दोस्त या family member के साथ share करें — यह page बिल्कुल मुफ़्त है!</span>
+          </p>
+          <button class="share-btn-strip share-nudge-btn">📤 Share करें</button>
+        </div>`;
+      }
+      return lessonCard;
+    }).join('');
 
-    // Build "more books" links
+    // More books
     const moreBooksHtml = Object.values(BOOKS_DATA)
       .filter(b => b.slug !== slug)
       .map(b => b.live
@@ -181,7 +389,10 @@
         <h1>${book.titleHtml}</h1>
         <p class="author">— ${book.author}</p>
         <p class="hero-desc">${book.heroDesc}</p>
-        <button class="hero-cta" id="hero-buy-btn">📦 Get the Book on Amazon</button>
+        <div class="hero-actions">
+          <button class="hero-cta" id="hero-buy-btn">📦 Get the Book on Amazon</button>
+          <button class="share-btn-hero" id="hero-share-btn">📤 Share करें</button>
+        </div>
       </div>
 
       <div class="book-strip-wrap">
@@ -190,7 +401,10 @@
           <div class="book-strip-info">
             <h3>${book.title}</h3>
             <p>${book.author} &nbsp;·&nbsp; ${book.genre} &nbsp;·&nbsp; ${book.rating}</p>
-            <button class="buy-btn" id="strip-buy-btn">🛒 Buy on Amazon →</button>
+            <div class="strip-actions">
+              <button class="buy-btn" id="strip-buy-btn">🛒 Buy on Amazon →</button>
+              <button class="share-btn-strip" id="strip-share-btn">📤 Share करें</button>
+            </div>
             <p class="affiliate-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* Affiliate link — आपकी कोई extra cost नहीं 🙏</p>
           </div>
         </div>
@@ -204,7 +418,10 @@
       <div class="bottom-cta">
         <h3>Ready to Read the Full Book?</h3>
         <p>These 10 lessons are just the surface. The real transformation happens when you read every page yourself.</p>
-        <button class="buy-btn" id="bottom-buy-btn" style="font-size:1rem;padding:.75rem 2.2rem;">📦 Buy on Amazon →</button>
+        <div class="bottom-actions">
+          <button class="buy-btn" id="bottom-buy-btn" style="font-size:1rem;padding:.75rem 2.2rem;">📦 Buy on Amazon →</button>
+          <button class="share-btn-hero" id="bottom-share-btn" style="font-size:.9rem;">📤 Share करें</button>
+        </div>
         <p style="margin-top:.8rem;font-size:.78rem;color:#a0907a;">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* Affiliate link — no extra cost to you. Your purchase supports this channel. 🙏</p>
       </div>
 
@@ -217,12 +434,25 @@
       <footer>
         <p>© 2026 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a></p>
         <p style="margin-top:.4rem;">Affiliate Disclosure: This page contains Amazon affiliate links.</p>
+        <p class="footer-disclaimer">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
       </footer>`;
 
-    // Wire up buy buttons after DOM is ready
-    document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
-    document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
+    // Wire buy buttons
+    document.getElementById('hero-buy-btn').addEventListener('click',   () => openAmazon(book.amazon));
+    document.getElementById('strip-buy-btn').addEventListener('click',  () => openAmazon(book.amazon));
     document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
+
+    // Wire share buttons (hero, strip, bottom)
+    ['hero-share-btn','strip-share-btn','bottom-share-btn'].forEach(id => {
+      document.getElementById(id).addEventListener('click', openShareModal);
+    });
+    // Wire mid-page nudge share button
+    document.querySelectorAll('.share-nudge-btn').forEach(btn => {
+      btn.addEventListener('click', openShareModal);
+    });
+
+    // Init share modal with book-specific content
+    initShare(slug, book);
   }
 
   detectCountry().then(render);
