@@ -490,7 +490,7 @@ const BOOKS_DATA = {
   cover: "https://covers.openlibrary.org/b/isbn/9780349411903-L.jpg",
   heroDesc: "In a world of constant distraction, Cal Newport's Deep Work is a manifesto for focus. These 10 lessons will help you reclaim your attention, do your best work, and build a life that truly matters.",
   amazon: {
-    IN: "https://www.amazon.in/dp/B00N5YJKIS",
+    IN: "https://www.amazon.in/DEEP-WORK-FOCUSED-SUCCESS-DISTRACTED/dp/0349413681",
     US: "https://www.amazon.com/dp/1455586692",
     CA: "https://www.amazon.ca/dp/1455586692"
   },
