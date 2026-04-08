@@ -16,11 +16,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg",
     heroDesc: "First published in 1937, this timeless classic has transformed millions of lives worldwide. Here are the 10 most powerful lessons that can change the way you think, act, and succeed.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/1585424331",
-      US: "https://www.amazon.com/dp/1585424331",
-      CA: "https://www.amazon.ca/dp/1585424331"
-    },
+    //amazon: {
+    //  IN: "https://www.amazon.in/dp/1585424331",
+    //  US: "https://www.amazon.com/dp/1585424331",
+    //  CA: "https://www.amazon.ca/dp/1585424331"
+   // },
     lessons: [
       {
         title: "The Power of Desire",
@@ -95,11 +95,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg",
     heroDesc: "James Clear's Atomic Habits is the definitive guide to building good habits and breaking bad ones. Rooted in science and packed with practical strategies, here are the 10 lessons that will rewire the way you think about change.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/1847941834",
-      US: "https://www.amazon.com/dp/0735211299",
-      CA: "https://www.amazon.ca/dp/0735211299"
-    },
+    //amazon: {
+    //  IN: "https://www.amazon.in/dp/1847941834",
+    // US: "https://www.amazon.com/dp/0735211299",
+    // CA: "https://www.amazon.ca/dp/0735211299"
+  //  },
     lessons: [
       {
         title: "1% Better Every Day — The Power of Tiny Gains",
@@ -174,11 +174,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg",
     heroDesc: "Paulo Coelho's masterpiece has sold over 65 million copies worldwide. A short novel with a timeless soul — here are the 10 lessons from The Alchemist that will make you look at your own journey differently.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/0062315005",
-      US: "https://www.amazon.com/dp/0062315005",
-      CA: "https://www.amazon.ca/dp/0062315005"
-    },
+   // amazon: {
+   //   IN: "https://www.amazon.in/dp/0062315005",
+   //   US: "https://www.amazon.com/dp/0062315005",
+   //   CA: "https://www.amazon.ca/dp/0062315005"
+   // },
     lessons: [
       {
         title: "Follow Your Personal Legend",
@@ -253,11 +253,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/81BE7eeKzAL._SY466_.jpg",
     heroDesc: "First published in 1997, Rich Dad Poor Dad has sold over 32 million copies and remains the #1 personal finance book of all time. Through the story of two fathers, Kiyosaki shatters the myths about money that keep most people trapped — and shows a different path entirely.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/1612680194",
-      US: "https://www.amazon.com/dp/1612680194",
-      CA: "https://www.amazon.ca/dp/1612680194"
-    },
+    //amazon: {
+     // IN: "https://www.amazon.in/dp/1612680194",
+      //US: "https://www.amazon.com/dp/1612680194",
+     // CA: "https://www.amazon.ca/dp/1612680194"
+    //},
     lessons: [
       {
         title: "The Rich Don't Work for Money — Money Works for Them",
@@ -332,11 +332,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg",
     heroDesc: "First published in 1936, this all-time bestseller has helped millions become better communicators, leaders, and human beings. These 10 lessons distil Carnegie's timeless wisdom on building genuine relationships and inspiring others — without manipulation, without force.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/0671027034",
-      US: "https://www.amazon.com/dp/0671027034",
-      CA: "https://www.amazon.ca/dp/0671027034"
-    },
+    //amazon: {
+   //   IN: "https://www.amazon.in/dp/0671027034",
+   //   US: "https://www.amazon.com/dp/0671027034",
+   //   CA: "https://www.amazon.ca/dp/0671027034"
+   // },
     lessons: [
       {
         title: "Don't Criticise, Condemn or Complain",
@@ -411,11 +411,11 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9781982137137-L.jpg",
     heroDesc: "First published in 1989, Stephen Covey's masterwork has sold over 40 million copies and been called the most influential business book of the 20th century. These 10 lessons are not quick fixes — they are a complete framework for living with integrity, purpose, and lasting effectiveness.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/1982137134",
-      US: "https://www.amazon.com/dp/1982137134",
-      CA: "https://www.amazon.ca/dp/1982137134"
-    },
+    //amazon: {
+    //  IN: "https://www.amazon.in/dp/1982137134",
+    //  US: "https://www.amazon.com/dp/1982137134",
+     // CA: "https://www.amazon.ca/dp/1982137134"
+    //},
     lessons: [
       {
         title: "Habit 1 — Be Proactive: You Are the Author, Not the Actor",
@@ -489,11 +489,11 @@ const BOOKS_DATA = {
   rating: "★★★★★",
   cover: "https://covers.openlibrary.org/b/isbn/9780349411903-L.jpg",
   heroDesc: "In a world of constant distraction, Cal Newport's Deep Work is a manifesto for focus. These 10 lessons will help you reclaim your attention, do your best work, and build a life that truly matters.",
-  amazon: {
-    IN: "https://www.amazon.in/DEEP-WORK-FOCUSED-SUCCESS-DISTRACTED/dp/0349413681",
-    US: "https://www.amazon.com/dp/1455586692",
-    CA: "https://www.amazon.ca/dp/1455586692"
-  },
+  //amazon: {
+  //  IN: "https://www.amazon.in/DEEP-WORK-FOCUSED-SUCCESS-DISTRACTED/dp/0349413681",
+  //  US: "https://www.amazon.com/dp/1455586692",
+  //  CA: "https://www.amazon.ca/dp/1455586692"
+ // },
   lessons: [
     {
       title: "Deep Work vs. Shallow Work — Know the Difference",
