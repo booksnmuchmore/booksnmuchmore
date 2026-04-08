@@ -197,11 +197,12 @@
 <!-- Content injected by JS -->
 <div id="app"></div>
 
-<!-- Load data then render -->
+<!-- Load affiliate links (single source of truth) then data -->
+<script src="affiliate-links.js"></script>
 <script src="lessons-data.js"></script>
 <script>
-  // ── Affiliate config ──────────────────────────────────────
-  const TAGS = { IN: 'booksnmuchm02-21', US: 'booksnmuchmor-20', CA: 'booksnmuchm08-20' };
+  // ── Affiliate config — loaded from affiliate-links.js ─────
+  // AFFILIATE_TAGS and BOOK_LINKS are defined in affiliate-links.js
   let userCountry = null;
 
   async function detectCountry() {
@@ -209,13 +210,19 @@
     catch(e) { userCountry = 'US'; }
   }
 
-  function geoUrl(amazon) {
-    const tag = userCountry === 'IN' ? TAGS.IN : userCountry === 'CA' ? TAGS.CA : TAGS.US;
-    const base = userCountry === 'IN' ? amazon.IN : userCountry === 'CA' ? amazon.CA : amazon.US;
+  function geoUrl(slug) {
+    const links = BOOK_LINKS[slug];
+    if (!links) return '#';
+    const tag  = userCountry === 'IN' ? AFFILIATE_TAGS.IN
+               : userCountry === 'CA' ? AFFILIATE_TAGS.CA
+               : AFFILIATE_TAGS.US;
+    const base = userCountry === 'IN' ? links.IN
+               : userCountry === 'CA' ? links.CA
+               : links.US;
     return base + '?tag=' + tag;
   }
 
-  function openAmazon(amazon) { window.open(geoUrl(amazon), '_blank'); }
+  function openAmazon(slug) { window.open(geoUrl(slug), '_blank'); }
 
   // ── Read slug from URL ?book=slug ─────────────────────────
   function getSlug() {
@@ -330,9 +337,9 @@
       </footer>`;
 
     // Wire up buy buttons after DOM is ready
-    document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
-    document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
-    document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(book.amazon));
+    document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(slug));
+    document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(slug));
+    document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(slug));
   }
 
   detectCountry().then(render);
