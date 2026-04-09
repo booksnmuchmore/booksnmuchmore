@@ -569,11 +569,6 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg",
     heroDesc: "Tim Ferriss spent years interviewing world-class performers — billionaires, athletes, artists, and scientists — and distilled their habits, routines, and tactics into one book. Here are the 10 most powerful lessons that separate the extraordinary from the ordinary.",
-    amazon: {
-      IN: "https://www.amazon.in/Tools-Titans-Billionaires-World-Class-Performers/dp/1785041274/ref=sr_1_2?crid=U3WXM54PWN2S&dib=eyJ2IjoiMSJ9.aKOdnKV6Lo0HNhsXKzFTiid6C_PC3pA2zOaP80L3HUEOWfqNWyTymaIK2f2CR03wsdhmr1DWe_fKlPuyyN7JJSUHKYH2s_H5BOMAcEkypUvBJdUVShkxuCk8HdNvsSc2y5gVNXHKb-sv5S_hlMhDTsT6bvNT3mso5ATpL8FVckpCYiAtxhA7_R52GHwmyolhUncx-hR9CHPFWp4JsPIZClmg3og4PJkXm5lQQ58elIebTiKFOyJ6uXbLGmozIJXX9r71BY70ggtXmOwLjBtI1xN_J3I5HjjPBvsJdws0F2E.CdljZ3ZDDUPUG3LEYL2sp3Sii-6YNr45vFhMQqGHX74&dib_tag=se&keywords=tools+of+titans&qid=1775654928&sprefix=tools+of+tit%2Caps%2C733&sr=8-2",
-      US: "https://www.amazon.com/dp/1328683788",
-      CA: "https://www.amazon.ca/dp/1328683788"
-    },
     lessons: [
       {
         title: "Morning Routines Are Non-Negotiable",
