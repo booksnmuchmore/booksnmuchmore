@@ -6,7 +6,7 @@
   <title>किताबें | Books 'n' Much More</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --parchment: #f5f0e8;
@@ -35,45 +35,56 @@
 
     /* ── NAV ── */
     nav {
-      background: var(--ink);
-      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 500;
+      padding: 1.3rem 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 2px solid var(--gold);
+      background: rgba(251,246,236,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(200,129,58,0.18);
+      box-shadow: 0 4px 32px rgba(200,129,58,0.08);
+      transition: padding 0.3s;
     }
+    nav.scrolled { padding: 0.9rem 6%; }
 
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
+    .nav-logo { text-decoration: none; }
+    .nav-logo img { height: 44px; width: auto; display: block; }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.4rem;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
-      color: var(--parchment);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-family: 'Lora', serif;
-      letter-spacing: 0.08em;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      opacity: 0.8;
-      transition: opacity 0.2s, color 0.2s;
+      color: var(--ink);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.2s;
     }
-
-    .nav-links a:hover,
-    .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--amber);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--amber); }
+    .nav-links a.active::after { width: 100%; }
 
     /* ── HERO ── */
     .hero {
@@ -553,13 +564,15 @@
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">Books 'n' Much More</a>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp" alt="Books n Much More" />
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">होम</a></li>
     <li><a href="stories.html">कहानियाँ</a></li>
     <li><a href="books.html" class="active">किताबें</a></li>
-    <li><a href="lessons.html">📖 Lessons</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
   </ul>
 </nav>
 
@@ -1216,6 +1229,11 @@
     document.addEventListener('click', e => {
       if (!e.target.closest('.search-wrap')) { closePanel(); restoreCards(); }
     });
+  });
+</script>
+<script>
+  window.addEventListener("scroll", () => {
+    document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 40);
   });
 </script>
 

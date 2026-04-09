@@ -558,4 +558,84 @@ const BOOKS_DATA = {
   ]
 }
 
+  ,
+  "tools-of-titans": {
+    live: true,
+    slug: "tools-of-titans",
+    title: "Tools of Titans",
+    titleHtml: "Tools of <em>Titans</em>",
+    author: "Tim Ferriss",
+    genre: "Productivity · Success",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg",
+    heroDesc: "Tim Ferriss spent years interviewing world-class performers — billionaires, athletes, artists, and scientists — and distilled their habits, routines, and tactics into one book. Here are the 10 most powerful lessons that separate the extraordinary from the ordinary.",
+    amazon: {
+      IN: "https://www.amazon.in/Tools-Titans-Billionaires-World-Class-Performers/dp/1785041274/ref=sr_1_2?crid=U3WXM54PWN2S&dib=eyJ2IjoiMSJ9.aKOdnKV6Lo0HNhsXKzFTiid6C_PC3pA2zOaP80L3HUEOWfqNWyTymaIK2f2CR03wsdhmr1DWe_fKlPuyyN7JJSUHKYH2s_H5BOMAcEkypUvBJdUVShkxuCk8HdNvsSc2y5gVNXHKb-sv5S_hlMhDTsT6bvNT3mso5ATpL8FVckpCYiAtxhA7_R52GHwmyolhUncx-hR9CHPFWp4JsPIZClmg3og4PJkXm5lQQ58elIebTiKFOyJ6uXbLGmozIJXX9r71BY70ggtXmOwLjBtI1xN_J3I5HjjPBvsJdws0F2E.CdljZ3ZDDUPUG3LEYL2sp3Sii-6YNr45vFhMQqGHX74&dib_tag=se&keywords=tools+of+titans&qid=1775654928&sprefix=tools+of+tit%2Caps%2C733&sr=8-2",
+      US: "https://www.amazon.com/dp/1328683788",
+      CA: "https://www.amazon.ca/dp/1328683788"
+    },
+    lessons: [
+      {
+        title: "Morning Routines Are Non-Negotiable",
+        en: "Nearly every world-class performer Ferriss interviewed had a consistent morning routine — not inherited by accident, but designed with intention. Whether it was meditation, journaling, exercise, or cold exposure, the first hour of the day was protected fiercely. The morning routine is not a luxury. It is armour. It sets the tone for every decision, every interaction, and every creative output that follows. Win the morning, win the day.",
+        hi: "Ferriss ने जितने भी world-class performers का interview लिया, उन लगभग सभी की एक consistent morning routine थी — जो आकस्मिक नहीं, बल्कि जानबूझकर design की गई थी। चाहे meditation हो, journaling, exercise या cold exposure — दिन का पहला घंटा हर हाल में सुरक्षित रखा जाता था। Morning routine कोई विलासिता नहीं — यह एक कवच है। यह दिन के हर निर्णय, हर बातचीत और हर रचनात्मक काम की नींव रखती है। सुबह जीती, तो दिन जीता।",
+        quote: '"The first 60 minutes of each day are often 'sacred time' for the most successful people.' — Tim Ferriss'
+      },
+      {
+        title: "Fear-Setting: Define the Worst Case",
+        en: "Most people are paralysed not by real danger but by imagined catastrophe. Ferriss, inspired by Stoicism, practises Fear-Setting: write down the worst-case scenario of an action you are afraid to take, then ask — how likely is it? How bad would it really be? How would you recover? Almost always, the worst case is survivable. And the cost of inaction — of staying stuck — is almost always far greater than the cost of trying and failing.",
+        hi: "ज़्यादातर लोग असली खतरे से नहीं, बल्कि कल्पना में बनाई गई तबाही से लकवाग्रस्त होते हैं। Ferriss, Stoicism से प्रेरित होकर, Fear-Setting का अभ्यास करते हैं: जो काम करने से डर लग रहा है उसका worst-case scenario लिखो — फिर पूछो: यह कितना संभव है? असल में कितना बुरा होगा? आप कैसे उबरेंगे? लगभग हमेशा, worst case से उबरा जा सकता है। और कुछ न करने की कीमत — फंसे रहने की — हमेशा try करके fail होने की कीमत से कहीं ज़्यादा होती है।",
+        quote: '"Define your nightmare, the absolute worst that could happen if you did what you are considering.' — Tim Ferriss'
+      },
+      {
+        title: "The 80/20 of Everything — Find the Vital Few",
+        en: "Many titans apply the Pareto Principle obsessively: 20% of inputs drive 80% of outputs. This applies to clients, habits, relationships, and skills. The question is not 'What can I add?' — it is 'What can I eliminate?' The most successful people Ferriss interviewed were ruthless about cutting everything that did not move the needle on their highest priorities. Subtraction is often more powerful than addition.",
+        hi: "कई titans Pareto Principle को जुनून की हद तक apply करते हैं: 20% कारण 80% परिणाम देते हैं। यह clients, आदतों, रिश्तों और skills — सब पर लागू होता है। सवाल यह नहीं कि 'मैं क्या जोड़ूं?' — सवाल यह है: 'मैं क्या हटाऊं?' Ferriss ने जिन सबसे सफल लोगों का interview किया, वो सब उन चीज़ों को काटने में निर्दयी थे जो उनकी सबसे बड़ी प्राथमिकताओं को आगे नहीं बढ़ाती थीं। घटाना अक्सर जोड़ने से ज़्यादा शक्तिशाली होता है।",
+        quote: '"Being busy is a form of laziness — lazy thinking and indiscriminate action.' — Tim Ferriss'
+      },
+      {
+        title: "Meditation Is the Meta-Skill",
+        en: "Over 80% of the world-class performers Ferriss interviewed had some form of daily meditation or mindfulness practice. Not because they are spiritual — but because it works. Meditation trains the ability to observe your own thoughts without being controlled by them. It improves focus, reduces anxiety, accelerates decision-making, and builds emotional resilience. It is the one practice that makes every other practice more effective.",
+        hi: "Ferriss ने जिन 80% से ज़्यादा world-class performers का interview किया, उन सभी की कोई न कोई दैनिक meditation या mindfulness practice थी। इसलिए नहीं कि वो आध्यात्मिक हैं — बल्कि इसलिए कि यह काम करती है। Meditation अपने विचारों को बिना उनके नियंत्रण में आए देखने की क्षमता train करती है। यह focus सुधारती है, चिंता कम करती है, निर्णय लेने की गति बढ़ाती है और भावनात्मक लचीलापन बनाती है। यह एक ऐसी practice है जो बाकी हर practice को और प्रभावशाली बनाती है।",
+        quote: '"If you don't have 10 minutes for meditation, you don't have a life.' — Tim Ferriss'
+      },
+      {
+        title: "Saying No Is a Superpower",
+        en: "Every titan Ferriss profiles guards their time and attention with ferocity. The default answer to almost every request is no — not because they are rude, but because they understand that every yes is a no to something else. Warren Buffett says the difference between successful people and very successful people is that very successful people say no to almost everything. Your time is finite. Your attention is finite. Protect them both as if your life depends on it — because your best work does.",
+        hi: "Ferriss के हर titan अपने समय और ध्यान की रक्षा जुनून के साथ करते हैं। लगभग हर अनुरोध का डिफ़ॉल्ट जवाब 'नहीं' होता है — इसलिए नहीं कि वो असभ्य हैं, बल्कि इसलिए कि वो समझते हैं कि हर 'हां' किसी और चीज़ को 'नहीं' है। Warren Buffett कहते हैं: सफल और बहुत सफल लोगों में फ़र्क यह है कि बहुत सफल लोग लगभग हर चीज़ को 'नहीं' कहते हैं। आपका समय सीमित है। आपका ध्यान सीमित है। दोनों की रक्षा करें जैसे आपकी ज़िंदगी इस पर निर्भर हो — क्योंकि आपका सर्वश्रेष्ठ काम इस पर निर्भर है।",
+        quote: '"You are the average of the five people you most associate with.' — Tim Ferriss'
+      },
+      {
+        title: "Failure Is Data, Not Verdict",
+        en: "Every world-class performer Ferriss interviewed had failed — spectacularly, publicly, or repeatedly. What distinguished them was not the absence of failure but the relationship with it. They treated failure as feedback, not as final judgement. They asked: what did this teach me? What would I do differently? The most dangerous thing is not failure — it is the interpretation of failure as identity. You are not your failures. They are just data points on the way to mastery.",
+        hi: "Ferriss ने जिस भी world-class performer का interview लिया, वो fail हुए थे — शानदार तरीके से, सार्वजनिक रूप से, या बार-बार। उन्हें बाकियों से जो अलग करता था वो failure की अनुपस्थिति नहीं, बल्कि failure के साथ उनका रिश्ता था। वो failure को feedback मानते थे, अंतिम फैसला नहीं। वो पूछते थे: इसने मुझे क्या सिखाया? मैं क्या अलग करता? सबसे खतरनाक बात failure नहीं है — बल्कि failure को अपनी पहचान मान लेना है। आप अपनी failures नहीं हैं। वो सिर्फ महारत की राह पर data points हैं।",
+        quote: '"What we fear doing most is usually what we most need to do.' — Tim Ferriss'
+      },
+      {
+        title: "The Importance of Mentors and Asking",
+        en: "Most people do not ask for help, advice, or access because they assume the answer will be no. The titans Ferriss profiles think differently. They understand that the worst answer is 'no' — and 'no' is where they already are. A bold, specific, well-researched ask to the right person can compress years of learning into a single conversation. The people at the top are often more accessible than you think — and they remember those who ask great questions.",
+        hi: "ज़्यादातर लोग मदद, सलाह या अवसर नहीं माँगते क्योंकि उन्हें लगता है जवाब 'नहीं' होगा। Ferriss के titans अलग तरह से सोचते हैं। वो समझते हैं कि सबसे बुरा जवाब 'नहीं' है — और वो already 'नहीं' की जगह पर खड़े हैं। सही व्यक्ति से एक साहसी, specific और अच्छी तरह से शोध किया गया सवाल सीखने के वर्षों को एक ही बातचीत में समेट सकता है। शीर्ष पर बैठे लोग अक्सर उतने दुर्गम नहीं होते जितना आप सोचते हैं — और वो उन लोगों को याद रखते हैं जो अच्छे सवाल पूछते हैं।",
+        quote: '"A person's success in life can usually be measured by the number of uncomfortable conversations he or she is willing to have.' — Tim Ferriss'
+      },
+      {
+        title: "Strength Training Is the Foundation",
+        en: "An overwhelming number of Ferriss's interviewees — regardless of profession — maintained a serious physical fitness practice. Not for vanity, but for cognitive performance, emotional regulation, and longevity. The body is not separate from the mind. Physical discipline creates mental discipline. The habits of showing up, pushing through discomfort, and recovering well in the gym transfer directly to creative and professional life. Your body is the vehicle for everything else you want to do.",
+        hi: "Ferriss के साक्षात्कारकर्ताओं में से भारी बहुमत — चाहे किसी भी पेशे से हों — एक गंभीर शारीरिक fitness practice बनाए रखते थे। दिखावे के लिए नहीं, बल्कि cognitive performance, भावनात्मक संतुलन और दीर्घायु के लिए। शरीर और मन अलग नहीं हैं। शारीरिक अनुशासन मानसिक अनुशासन बनाता है। gym में उपस्थित रहने, असुविधा से गुज़रने और ठीक से recover करने की आदतें सीधे रचनात्मक और professional जीवन में transfer होती हैं। आपका शरीर वो वाहन है जिससे आप बाकी सब कुछ करना चाहते हैं।",
+        quote: '"Focus on being productive instead of busy.' — Tim Ferriss'
+      },
+      {
+        title: "Journaling: The Clarity Tool",
+        en: "Many of the most successful people Ferriss profiles — including Tony Robbins, Tim Ferriss himself, and numerous CEOs — journal daily. Not to record events, but to process them. Journaling externalises your thinking, helping you see patterns, fears, and opportunities that stay invisible when they remain only in your head. A regular journaling practice is one of the cheapest and most powerful therapies available — it is thinking on paper, and thinking clearly is the rarest of skills.",
+        hi: "Ferriss के कई सबसे सफल लोग — जिनमें Tony Robbins, Tim Ferriss खुद, और अनेक CEOs शामिल हैं — रोज़ journal लिखते हैं। घटनाओं को record करने के लिए नहीं, बल्कि उन्हें process करने के लिए। Journaling आपकी सोच को बाहर लाती है, आपको उन patterns, डर और अवसरों को देखने में मदद करती है जो केवल आपके दिमाग में रहने पर अदृश्य रहते हैं। नियमित journaling practice सबसे सस्ती और सबसे शक्तिशाली therapies में से एक है — यह कागज़ पर सोचना है, और स्पष्ट रूप से सोचना सबसे दुर्लभ कौशल है।",
+        quote: '"Keeping a journal will absolutely change your life in ways you've never imagined.' — Tim Ferriss'
+      },
+      {
+        title: "Optimise for Interesting, Not Optimal",
+        en: "A recurring theme across Ferriss's interviews is that the most fulfilled performers did not optimise purely for money, status, or conventional success. They optimised for what was interesting to them — for problems that made them want to get out of bed. Purpose and curiosity are more sustainable fuels than money alone. When work feels like a mission rather than a job, performance compounds. Find the intersection of what you are good at, what the world needs, and what genuinely fascinates you — and then go all in.",
+        hi: "Ferriss के interviews में एक बार-बार आने वाला विषय यह है कि सबसे संतुष्ट performers ने केवल पैसे, status या परंपरागत सफलता के लिए optimize नहीं किया। उन्होंने उसके लिए optimize किया जो उन्हें interesting लगता था — उन समस्याओं के लिए जो उन्हें सुबह बिस्तर से उठने पर मजबूर करती थीं। Purpose और जिज्ञासा अकेले पैसे से ज़्यादा टिकाऊ ईंधन हैं। जब काम नौकरी की तरह नहीं, mission की तरह लगे — तो performance compounding होती है। वो intersection खोजें जहाँ आप अच्छे हों, दुनिया को ज़रूरत हो, और जो आपको genuinely आकर्षित करे — फिर पूरी तरह से जुट जाएं।",
+        quote: '"The goal is not to simply eliminate the bad, but to pursue and experience the best in the world.' — Tim Ferriss'
+      }
+    ]
+  }
+
 };
