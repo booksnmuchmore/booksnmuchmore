@@ -44,9 +44,9 @@ const BOOK_LINKS = {
   },
 
   "mind-management": {
-    IN: "https://www.amazon.in/dp/0525538585",
-    US: "https://www.amazon.com/dp/0525538585",
-    CA: "https://www.amazon.ca/dp/0525538585"
+    IN: "https://www.amazon.in/Mind-Management-Not-Time-Productivity/dp/8119623835",
+    US: "https://www.amazon.com/Mind-Management-Not-Time-Productivity/dp/8119623835",
+    CA: "https://www.amazon.ca/Mind-Management-Not-Time-Productivity/dp/8119623835"
   },
 
   "ikigai": {
