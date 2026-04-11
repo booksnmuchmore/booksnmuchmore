@@ -604,5 +604,557 @@ const BOOKS_DATA = {
       }
     ]
   }
-
+,
+   "ikigai": {
+    live: true,
+    slug: "ikigai",
+    title: "Ikigai",
+    titleHtml: "<em>Ikigai</em>",
+    author: "Héctor García & Francesc Miralles",
+    genre: "Philosophy · Wellbeing",
+    rating: "★★★★★",
+    cover: "https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg",
+    heroDesc: "From the Japanese island of Okinawa — home to the world's longest-living people — comes a timeless philosophy of purpose, simplicity, and daily joy. Here are 10 lessons from Ikigai that will help you find your reason for being.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/178633089X",
+      US: "https://www.amazon.com/dp/0143130722",
+      CA: "https://www.amazon.ca/dp/0143130722"
+    },
+    lessons: [
+      {
+        title: "Find Your Ikigai — Your Reason for Getting Up",
+        en: "Ikigai is the Japanese concept for 'reason for being' — the sweet spot where what you love, what you are good at, what the world needs, and what you can be paid for all intersect. The Okinawans don't retire because they never stop doing what gives their life meaning. Finding your ikigai is not a luxury — it is a necessity for a long and fulfilled life.",
+        hi: "Ikigai एक जापानी अवधारणा है — 'जीने का कारण।' वो जगह जहाँ आपकी पसंद, आपकी प्रतिभा, दुनिया की ज़रूरत और आपकी आजीविका आपस में मिलती हैं। Okinawa के लोग कभी retire नहीं करते क्योंकि वो कभी रुकते नहीं। अपना Ikigai खोजना एक विलासिता नहीं — एक लंबे और संतुष्ट जीवन की ज़रूरत है।",
+        quote: '"Only staying active will make you want to live a hundred years." — Japanese proverb'
+      },
+      {
+        title: "Stay Active — Never Fully Retire",
+        en: "The longest-living people in the world never fully stop working — not because they have to, but because their work gives them purpose. Complete retirement, as the West defines it, is linked to cognitive decline and shorter life spans. Keep moving, keep creating, keep contributing. Purposeful busyness is medicine.",
+        hi: "दुनिया में सबसे लंबे जीने वाले लोग कभी पूरी तरह काम बंद नहीं करते — मजबूरी से नहीं, बल्कि इसलिए कि उनका काम उन्हें उद्देश्य देता है। पश्चिम की तरह का पूर्ण retirement मानसिक गिरावट और छोटी उम्र से जुड़ा है। चलते रहो, बनाते रहो, योगदान देते रहो। अर्थपूर्ण व्यस्तता ही दवा है।",
+        quote: '"He who has a why to live for can bear almost any how." — Viktor Frankl'
+      },
+      {
+        title: "Hara Hachi Bu — Stop at 80%",
+        en: "Okinawans practice Hara Hachi Bu — eating until they are 80% full. This ancient teaching prevents overeating and reduces inflammation. The lesson extends beyond food: in every area of life, leaving a little space rather than pushing to the maximum allows the body and mind to breathe, recover, and sustain. Less is often more.",
+        hi: "Okinawa के लोग Hara Hachi Bu का पालन करते हैं — 80% पेट भरने पर खाना बंद करना। यह प्राचीन शिक्षा अधिक खाने से बचाती है और सूजन कम करती है। यह सबक खाने से आगे जाता है: जीवन के हर क्षेत्र में थोड़ी जगह छोड़ना — maximum तक न जाना — शरीर और मन को recover करने देता है। कम अक्सर ज़्यादा होता है।",
+        quote: '"Eat less, move more, and find your purpose." — Okinawan wisdom'
+      },
+      {
+        title: "Moai — Surround Yourself With the Right People",
+        en: "Okinawans form moai — close-knit social groups that meet regularly, support each other financially and emotionally, and hold each other accountable throughout life. Research shows that loneliness is as deadly as smoking 15 cigarettes a day. Your tribe is your longevity. Choose your moai carefully.",
+        hi: "Okinawa के लोग moai बनाते हैं — करीबी सामाजिक समूह जो नियमित मिलते हैं, एक-दूसरे को भावनात्मक और आर्थिक सहारा देते हैं, और जीवनभर साथ रहते हैं। शोध बताता है कि अकेलापन रोज़ाना 15 सिगरेट पीने जितना खतरनाक है। आपकी टोली ही आपकी दीर्घायु है। अपना moai सोच-समझकर चुनें।",
+        quote: '"In Okinawa, they say that your ikigai is also your moai." — Héctor García'
+      },
+      {
+        title: "Flow — The Secret of Happiness at Work",
+        en: "Psychologist Mihaly Csikszentmihalyi's concept of flow — complete absorption in a challenging task — is central to ikigai. When you are in flow, time disappears, self-consciousness fades, and you are at your most alive. Those with a clear ikigai experience flow regularly, and this is the foundation of lasting happiness.",
+        hi: "मनोवैज्ञानिक Mihaly Csikszentmihalyi का flow का concept — किसी चुनौतीपूर्ण काम में पूरी तरह डूब जाना — ikigai का केंद्र है। जब आप flow में होते हैं, समय गायब हो जाता है, आत्म-चेतना मिट जाती है, और आप सबसे ज़्यादा जीवित होते हैं। जिन्हें अपना ikigai पता है, वो नियमित रूप से flow अनुभव करते हैं — और यही lasting खुशी की नींव है।",
+        quote: '"Flow is the state in which people are so involved in an activity that nothing else seems to matter." — Mihaly Csikszentmihalyi'
+      },
+      {
+        title: "Embrace Wabi-Sabi — Find Beauty in Imperfection",
+        en: "Wabi-sabi is the Japanese art of finding beauty in imperfection and impermanence. A cracked tea bowl repaired with gold. A weathered face full of stories. Perfectionism is the enemy of action, creativity, and peace. Accepting imperfection — in your work, in your relationships, in yourself — is essential to inner calm and long life.",
+        hi: "Wabi-sabi जापानी कला है — अपूर्णता और क्षणभंगुरता में सुंदरता खोजना। सोने से जोड़ा हुआ टूटा हुआ कप। झुर्रियों से भरा चेहरा जो कहानियाँ सुनाता है। Perfectionism action, रचनात्मकता और शांति का दुश्मन है। अपूर्णता को स्वीकार करना — अपने काम में, रिश्तों में, खुद में — आंतरिक शांति की चाबी है।",
+        quote: '"Wabi-sabi teaches us to embrace the beauty of impermanence." — Héctor García'
+      },
+      {
+        title: "Move Every Day — The Okinawan Way",
+        en: "Okinawans don't go to gyms — they move naturally all day. They garden, walk, do Radio Taiso, and sit on the floor. Research shows that light, frequent movement throughout the day is more beneficial than one intense gym session. The body was designed to move — honour that design daily.",
+        hi: "Okinawa के लोग gym नहीं जाते — वो पूरे दिन स्वाभाविक रूप से हिलते-डुलते रहते हैं। बागवानी करते हैं, चलते हैं, Radio Taiso करते हैं और ज़मीन पर बैठते हैं। शोध बताता है कि पूरे दिन हल्की, नियमित गतिविधि एक intensive gym session से ज़्यादा फायदेमंद है। शरीर हिलने के लिए बना है — रोज़ उस डिज़ाइन का सम्मान करें।",
+        quote: '"Movement is the best medicine — and the Okinawans have always known this." — Héctor García'
+      },
+      {
+        title: "Live With Purpose — Logotherapy and Meaning",
+        en: "Drawing on Viktor Frankl's logotherapy, the authors show that the search for meaning — not pleasure, not power — is the deepest human motivation. People with a clear sense of purpose recover faster from illness, cope better with adversity, and live longer. Don't chase happiness directly — find meaning, and happiness follows as a byproduct.",
+        hi: "Viktor Frankl की logotherapy पर आधारित, लेखक दिखाते हैं कि अर्थ की खोज — सुख की नहीं, शक्ति की नहीं — इंसान की सबसे गहरी प्रेरणा है। जिन लोगों को अपने उद्देश्य का स्पष्ट बोध है, वो बीमारी से जल्दी उबरते हैं और लंबे जीते हैं। सीधे खुशी मत खोजो — अर्थ खोजो, खुशी खुद-ब-खुद पीछे आएगी।",
+        quote: '"Those who have a why to live can bear almost any how." — Viktor Frankl'
+      },
+      {
+        title: "Simplicity — A Stress-Free Life Is a Long Life",
+        en: "The Okinawan lifestyle is one of radical simplicity — small homes, few possessions, simple food, deep relationships. Most modern stress comes from complexity: too many choices, too much stuff, too many obligations. Simplifying your life is not giving up — it is making room for what actually matters. Stress is the silent killer; simplicity is the antidote.",
+        hi: "Okinawa की जीवनशैली पूरी तरह सादगी पर आधारित है — छोटे घर, कम सामान, सरल खाना, गहरे रिश्ते। अधिकांश आधुनिक तनाव जटिलता से आता है: बहुत सारे विकल्प, बहुत सारी चीज़ें, बहुत सारी ज़िम्मेदारियाँ। जीवन को सरल बनाना छोड़ना नहीं — असली मायने रखने वाली चीज़ों के लिए जगह बनाना है। तनाव मौन हत्यारा है; सादगी उसका इलाज है।",
+        quote: '"The secret to a happy life is simple: do what matters, with the people who matter." — Ikigai'
+      },
+      {
+        title: "Your Ikigai Is Already Inside You — Start Now",
+        en: "The final lesson: you don't need a grand, world-changing purpose. Your ikigai may be as simple as tending your garden, making music, cooking for family, or teaching a child. The search itself is often the purpose. Stop waiting for perfect clarity. Start small, stay curious, and let your ikigai reveal itself through living.",
+        hi: "अंतिम सबक: आपको कोई विश्व-बदलने वाला महान उद्देश्य खोजने की ज़रूरत नहीं। आपका ikigai उतना सरल हो सकता है जितना बागवानी करना, संगीत बनाना, परिवार के लिए खाना पकाना, या किसी बच्चे को पढ़ाना। खोज ही अक्सर उद्देश्य होती है। सही स्पष्टता का इंतज़ार मत करो — छोटे से शुरू करो, जिज्ञासु रहो।",
+        quote: '"Your ikigai is at the intersection of what you are good at and what you love doing." — Héctor García'
+      }
+    ]
+  },
+ 
+  "mind-management": {
+    live: true,
+    slug: "mind-management",
+    title: "Mind Management, Not Time Management",
+    titleHtml: "Mind Management, Not <em>Time Management</em>",
+    author: "David Kadavy",
+    genre: "Productivity · Creativity",
+    rating: "★★★★☆",
+    cover: "https://covers.openlibrary.org/b/isbn/9780525538585-L.jpg",
+    heroDesc: "Productivity advice has always focused on managing time — but time is not your scarcest resource. Your mind is. David Kadavy reveals how to work with your mental energy, not against it, and create more in less time.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/0525538585",
+      US: "https://www.amazon.com/dp/0525538585",
+      CA: "https://www.amazon.ca/dp/0525538585"
+    },
+    lessons: [
+      {
+        title: "Manage Your Mind, Not Your Clock",
+        en: "Time management assumes all hours are equal — but they are not. Your mental energy fluctuates throughout the day. Trying to do creative, demanding work when your mind is depleted is like driving a car with no fuel. The most productive people don't manage their schedule — they manage their mental state and match their work to their energy.",
+        hi: "Time management यह मानता है कि सभी घंटे समान हैं — लेकिन ऐसा नहीं है। आपकी मानसिक ऊर्जा पूरे दिन बदलती रहती है। जब दिमाग थका हो तब रचनात्मक काम करने की कोशिश ऐसी है जैसे बिना ईंधन के गाड़ी चलाना। सबसे productive लोग अपना schedule नहीं — अपनी mental state manage करते हैं और काम को ऊर्जा के हिसाब से जोड़ते हैं।",
+        quote: '"The most valuable resource you have is not time — it\'s mental energy." — David Kadavy'
+      },
+      {
+        title: "Creative Work First — Protect Your Peak Hours",
+        en: "Most people do their most important creative work last, after emails and meetings have depleted their mental reserves. Kadavy argues the opposite: identify your peak mental hours — usually morning — and protect them fiercely for your most demanding creative work. Everything else can wait.",
+        hi: "ज़्यादातर लोग अपना सबसे ज़रूरी रचनात्मक काम सबसे आखिर में करते हैं, जब emails और meetings ने उनकी मानसिक ऊर्जा खत्म कर दी होती है। Kadavy इसका उल्टा कहते हैं: अपने peak mental hours पहचानें — अधिकतर लोगों के लिए सुबह — और उन्हें अपने सबसे demanding काम के लिए बचाकर रखें। बाकी सब इंतज़ार कर सकता है।",
+        quote: '"Do your most important work when your mind is at its best." — David Kadavy'
+      },
+      {
+        title: "The Four Stages of Creativity",
+        en: "Kadavy maps the creative process into four stages: Prepare (gather raw material), Incubate (let ideas simmer unconsciously), Illuminate (the breakthrough moment), and Implement (execute). Most people skip Prepare and Incubate and wonder why breakthroughs never come. Great ideas are not summoned on demand — they are the result of a patient, staged process.",
+        hi: "Kadavy रचनात्मक प्रक्रिया को चार चरणों में बाँटते हैं: Prepare (कच्ची सामग्री इकट्ठा करना), Incubate (विचारों को अवचेतन में पकने देना), Illuminate (breakthrough का पल), और Implement (क्रियान्वयन)। ज़्यादातर लोग Prepare और Incubate छोड़ देते हैं। महान विचार माँगने पर नहीं आते — वो एक धैर्यपूर्ण, staged प्रक्रिया का नतीजा हैं।",
+        quote: '"You can\'t force a creative breakthrough. You can only prepare the ground for it." — David Kadavy'
+      },
+      {
+        title: "Make Creative Leaps — Connect Distant Ideas",
+        en: "The most valuable creative insights come from connecting ideas that seem unrelated. Kadavy calls this the creative leap — seeing a pattern across two distant domains that no one else has noticed. Reading widely, exploring outside your field, and allowing your mind to wander are not wastes of time. They are the raw material of creative breakthroughs.",
+        hi: "सबसे मूल्यवान रचनात्मक अंतर्दृष्टि असंबंधित लगने वाले विचारों को जोड़ने से आती है। Kadavy इसे creative leap कहते हैं — दो दूर के क्षेत्रों में एक pattern देखना जो किसी और ने नहीं देखा। व्यापक पढ़ना, अपने क्षेत्र से बाहर जाना और मन को भटकने देना समय की बर्बादी नहीं — ये creative breakthroughs का कच्चा माल हैं।",
+        quote: '"Creativity is connecting things that others haven\'t connected yet." — David Kadavy'
+      },
+      {
+        title: "Motivation Is a Myth — Build Systems Instead",
+        en: "Waiting for motivation before starting work is a trap. Motivation follows action — it does not precede it. Kadavy recommends building systems and rituals that automatically put you in a productive state, regardless of how you feel. A consistent start ritual — same time, same place, same first action — bypasses the need for motivation entirely.",
+        hi: "काम शुरू करने से पहले motivation का इंतज़ार करना एक जाल है। Motivation action के बाद आती है — पहले नहीं। Kadavy systems और rituals बनाने की सलाह देते हैं जो आपको automatically एक productive state में डाल दें, चाहे आप कैसा भी महसूस करें। एक consistent start ritual — एक ही समय, एक ही जगह, एक ही पहला कदम — motivation की ज़रूरत को खत्म कर देता है।",
+        quote: '"Don\'t wait for motivation. Build the ritual that creates it." — David Kadavy'
+      },
+      {
+        title: "Energy Cycles — Work With Your Biology",
+        en: "Your mental energy follows biological rhythms — ultradian cycles of roughly 90 minutes of high focus followed by a natural dip. Fighting these dips with caffeine and willpower leads to burnout. Working with them — taking genuine rest during low-energy periods — leads to sustainable, high-quality output. Your biology is not the enemy; ignoring it is.",
+        hi: "आपकी मानसिक ऊर्जा जैविक लय का पालन करती है — लगभग 90 मिनट की उच्च-focus cycle जिसके बाद एक प्राकृतिक गिरावट आती है। इन गिरावटों को caffeine और willpower से लड़ना burnout की ओर ले जाता है। इनके साथ काम करना — कम-ऊर्जा के पलों में असली आराम लेना — टिकाऊ, उच्च-गुणवत्ता वाले output की ओर ले जाता है।",
+        quote: '"Work with your energy cycles, not against them." — David Kadavy'
+      },
+      {
+        title: "The Power of Constraints — Less Opens More",
+        en: "Unlimited time and resources do not produce better creative work — they often produce paralysis. Constraints force prioritisation, trigger creative thinking, and give your work a clear shape. Kadavy recommends deliberately imposing limits: a two-hour work window, a single output goal, a limited set of tools. Constraints are not obstacles to creativity — they are the conditions that make it possible.",
+        hi: "असीमित समय और संसाधन बेहतर रचनात्मक काम नहीं पैदा करते — वो अक्सर paralysis पैदा करते हैं। Constraints प्राथमिकता तय करने पर मजबूर करते हैं, रचनात्मक सोच को trigger करते हैं, और आपके काम को स्पष्ट आकार देते हैं। Constraints रचनात्मकता में बाधा नहीं — वो उसे संभव बनाने की शर्तें हैं।",
+        quote: '"Constraints are the mother of creativity." — David Kadavy'
+      },
+      {
+        title: "Incubation — Do Nothing to Do Everything",
+        en: "Some of the most powerful thinking happens when you are not actively thinking. Walking, showering, sleeping — these are not unproductive. They are when your unconscious mind processes the problems you have been consciously working on and delivers unexpected solutions. Scheduling true downtime is not laziness — it is a strategic part of the creative process.",
+        hi: "कुछ सबसे शक्तिशाली सोच तब होती है जब आप सक्रिय रूप से सोच नहीं रहे होते। चलना, नहाना, सोना — ये अनुत्पादक नहीं हैं। यही वो समय है जब आपका अवचेतन मन उन समस्याओं को process करता है जिन पर आप consciously काम कर रहे थे और अप्रत्याशित समाधान देता है। असली downtime schedule करना आलस नहीं — creative process का एक strategic हिस्सा है।",
+        quote: '"The unconscious mind is always working. Give it the right material and then get out of the way." — David Kadavy'
+      },
+      {
+        title: "Ship Before You Are Ready",
+        en: "Perfectionism is the final boss of the creative process. The fear of imperfection keeps most people from ever finishing — let alone sharing — their work. The only way to improve is to ship, get feedback, and iterate. Done and imperfect beats perfect and never-finished every single time. Progress, not perfection, is the goal.",
+        hi: "Perfectionism रचनात्मक प्रक्रिया का अंतिम दुश्मन है। अपूर्णता का डर ज़्यादातर लोगों को अपना काम कभी खत्म नहीं करने देता। बेहतर बनने का एकमात्र तरीका है — ship करो, feedback लो, और iterate करो। अधूरा-perfect काम कभी-भी-सही से हमेशा बेहतर है। Progress, perfection नहीं, लक्ष्य है।",
+        quote: '"The enemy of done is perfect." — David Kadavy'
+      },
+      {
+        title: "Design Your Day Around Your Creative Self",
+        en: "The ultimate lesson of mind management: your best work comes from understanding yourself — when you think best, how you recharge, what environments unlock your creativity, what drains you. There is no universal productivity system. The most effective system is the one built specifically around your mind. Self-knowledge is the foundation of all creative output.",
+        hi: "Mind management का अंतिम सबक: आपका सबसे अच्छा काम खुद को समझने से आता है — आप कब सबसे अच्छा सोचते हैं, कैसे recharge होते हैं, कौन सा माहौल आपकी रचनात्मकता को unlock करता है। कोई universal productivity system नहीं होता। सबसे effective system वो है जो आपके मन के हिसाब से बना हो। आत्म-ज्ञान ही सभी creative output की नींव है।",
+        quote: '"Know yourself. Design your life around that knowledge." — David Kadavy'
+      }
+    ]
+  },
+ 
+  "psychology-of-money": {
+    live: true,
+    slug: "psychology-of-money",
+    title: "The Psychology of Money",
+    titleHtml: "The Psychology of <em>Money</em>",
+    author: "Morgan Housel",
+    genre: "Finance · Mindset",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9780857197689-L.jpg",
+    heroDesc: "Doing well with money has little to do with how smart you are and a lot to do with how you behave. Morgan Housel's modern classic reveals the hidden psychological forces that drive our financial decisions — and how to master them.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/9390166268",
+      US: "https://www.amazon.com/dp/0857197681",
+      CA: "https://www.amazon.ca/dp/0857197681"
+    },
+    lessons: [
+      {
+        title: "No One Is Crazy — Your Financial Choices Make Sense to You",
+        en: "Every financial decision a person makes is shaped by their unique experiences — what they grew up with, what they survived, what they fear. Someone who lived through a depression will hoard cash; someone who grew up wealthy will invest fearlessly. Neither is objectively right or wrong. Understanding this teaches humility: judge less, understand more.",
+        hi: "हर व्यक्ति का वित्तीय फैसला उनके पैसे के साथ अनूठे अनुभवों से आकार लेता है — वे किसके साथ बड़े हुए, क्या झेला, किससे डरते हैं। जो मंदी से गुज़रा है वो cash जमा करेगा; जो अमीरी में पला है वो बेझिझक invest करेगा। कोई भी objectively गलत या सही नहीं है। यह समझ विनम्रता सिखाती है: कम judge करो, ज़्यादा समझो।",
+        quote: '"No one is crazy. We all make decisions based on our own unique experiences." — Morgan Housel'
+      },
+      {
+        title: "Luck and Risk — Both Are More Powerful Than Skill",
+        en: "Bill Gates went to one of the only high schools in the world with a computer in 1968. His equally talented friend died in a mountaineering accident before he could show the world what he was capable of. Luck and risk are siblings — both are real, powerful, and largely invisible. Be humble about your successes and compassionate about others' failures.",
+        hi: "Bill Gates 1968 में दुनिया के उन चुनिंदा स्कूलों में से एक में गए जहाँ computer था। उनके उतने ही प्रतिभाशाली दोस्त एक पर्वतारोहण दुर्घटना में चले गए। Luck और Risk सगे भाई हैं — दोनों असली हैं, शक्तिशाली हैं, और अक्सर अदृश्य हैं। अपनी सफलता पर विनम्र रहो और दूसरों की विफलता पर दयालु।",
+        quote: '"Luck and risk are siblings — both the reality that every outcome is guided by forces beyond individual effort." — Morgan Housel'
+      },
+      {
+        title: "Enough — The Hardest Financial Skill",
+        en: "The hardest financial skill is getting the goalposts to stop moving. More money brings desire for more money — an endless treadmill. Knowing when you have 'enough' — and actually stopping there — is one of the rarest and most important financial skills. The insatiable pursuit of more has destroyed more wealth than any market crash.",
+        hi: "सबसे कठिन वित्तीय कौशल है — लक्ष्य की रेखा को हिलने से रोकना। ज़्यादा पैसा ज़्यादा पैसे की चाहत लाता है — एक अंतहीन treadmill। यह जानना कि आपके पास 'enough' है — और वास्तव में वहीं रुकना — सबसे दुर्लभ और महत्वपूर्ण वित्तीय कौशलों में से एक है। अधिक की अतृप्त खोज ने किसी भी market crash से ज़्यादा दौलत बर्बाद की है।",
+        quote: '"There is no reason to risk what you have and need for what you don\'t have and don\'t need." — Morgan Housel'
+      },
+      {
+        title: "Compounding — The Eighth Wonder of the World",
+        en: "Warren Buffett's net worth is around $80 billion — but $75 billion of that was accumulated after his 65th birthday. His secret is not just returns — it is time. Compounding is counterintuitive: results feel negligible for years, then suddenly overwhelming. The enemy of compounding is interrupting it. Start early, stay consistent, don't stop.",
+        hi: "Warren Buffett की net worth लगभग $80 billion है — लेकिन उसमें से $75 billion उनके 65वें जन्मदिन के बाद जमा हुई। उनका रहस्य सिर्फ returns नहीं — समय है। Compounding counter-intuitive है: सालों तक नतीजे नगण्य लगते हैं, फिर अचानक overwhelming हो जाते हैं। Compounding का दुश्मन है इसे बीच में रोकना। जल्दी शुरू करो, consistent रहो।",
+        quote: '"Good investing is not about earning the highest returns. It\'s about earning returns you can stick with." — Morgan Housel'
+      },
+      {
+        title: "Getting Wealthy vs. Staying Wealthy",
+        en: "Getting money and keeping money are two entirely different skills. Getting money requires optimism, risk-taking, and putting yourself out there. Keeping money requires the opposite — humility, frugality, and paranoia about what could go wrong. Many people who got rich lost it all because they applied the skills of getting wealthy to the problem of staying wealthy.",
+        hi: "पैसा कमाना और पैसा रखना दो बिल्कुल अलग कौशल हैं। पैसा कमाने के लिए optimism, risk लेना ज़रूरी है। पैसा रखने के लिए इसका उल्टा — विनम्रता, मितव्ययिता, और क्या गलत हो सकता है इस बारे में सावधानी। जो अमीर बने और सब खो बैठे, उन्होंने अमीर होने के कौशल को अमीर रहने की समस्या पर लागू किया। ये एक ही game नहीं हैं।",
+        quote: '"The ability to stick around is the most important financial skill." — Morgan Housel'
+      },
+      {
+        title: "You'll Change — Plan for It",
+        en: "We are poor forecasters of our future selves. What you want at 25 is not what you will want at 45. Housel calls this the End of History Illusion — we know we have changed in the past but assume we are done changing. Financial plans built on who you are today will fail the person you will become. Build in flexibility.",
+        hi: "हम अपने भविष्य के self के बारे में घटिया अनुमान लगाते हैं। 25 साल में जो चाहते हैं, 45 में वो नहीं चाहेंगे। Housel इसे End of History Illusion कहते हैं — हम जानते हैं कि हम बदले हैं लेकिन मानते हैं कि अब नहीं बदलेंगे। आज के आप के हिसाब से बनाई गई financial plan उस इंसान के लिए fail होगी जो आप कल बनेंगे। लचीलापन बनाए रखें।",
+        quote: '"Things that have never happened before happen all the time." — Morgan Housel'
+      },
+      {
+        title: "Save — Without a Specific Reason",
+        en: "Most financial advice says: save for a house, save for retirement, save for a goal. Housel argues for saving without a specific goal — because the most valuable thing savings buys is options and flexibility in an uncertain world. You don't know what will happen next year. Savings means you won't be forced into bad decisions when it does. Savings is about control.",
+        hi: "ज़्यादातर वित्तीय सलाह कहती है: घर के लिए बचाओ, retirement के लिए बचाओ। Housel बिना किसी specific लक्ष्य के बचाने की बात करते हैं — क्योंकि savings जो सबसे मूल्यवान चीज़ खरीदती है वो है अनिश्चित दुनिया में विकल्प और लचीलापन। Savings दौलत के बारे में नहीं — नियंत्रण के बारे में है।",
+        quote: '"Savings without a specific goal gives you options and flexibility." — Morgan Housel'
+      },
+      {
+        title: "Reasonable Over Rational",
+        en: "Cold rationality in investing — always doing the mathematically optimal thing — sounds wise but is nearly impossible to sustain. Being reasonable rather than perfectly rational is a better goal. A strategy you can stick with through fear and greed is worth more than the theoretically optimal strategy you will abandon at the first crisis.",
+        hi: "Investing में ठंडी तर्कसंगतता — हमेशा mathematically optimal काम करना — बुद्धिमान लगता है लेकिन टिकाना लगभग असंभव है। Perfectly rational से ज़्यादा reasonable होना बेहतर लक्ष्य है। एक strategy जिसे आप डर और लालच के बीच भी जारी रख सकते हैं, उस theoretically optimal strategy से ज़्यादा कीमती है जिसे आप पहले crisis पर छोड़ देंगे।",
+        quote: '"Aiming to be mostly reasonable works better than trying to be coldly rational." — Morgan Housel'
+      },
+      {
+        title: "Room for Error — The Most Important Part of Any Plan",
+        en: "The most important part of any financial plan is planning for the plan not going according to plan. Housel calls this a margin of safety — a buffer wide enough that random bad luck cannot destroy you. Optimism about the future is fine; overconfidence about specifics is dangerous. The goal is not just to survive when things go right, but to still be in the game when they go wrong.",
+        hi: "किसी भी financial plan का सबसे ज़रूरी हिस्सा यह plan करना है कि plan अनुसार नहीं चलेगा। Housel इसे margin of safety कहते हैं — एक buffer जो इतना चौड़ा हो कि अचानक की बदकिस्मती आपको तबाह न कर सके। भविष्य के बारे में optimism ठीक है; specifics के बारे में overconfidence खतरनाक है।",
+        quote: '"The most important part of every plan is planning on your plan not going according to plan." — Morgan Housel'
+      },
+      {
+        title: "Wealth Is What You Don't See",
+        en: "We judge wealth by what we can see — the car, the house, the clothes. But real wealth is invisible: it is the money not spent, the investments quietly compounding, the options quietly building. The person driving the expensive car may be broke; the person in modest clothes may be a millionaire. Stop performing wealth. Start building it.",
+        hi: "हम दौलत को उससे आँकते हैं जो दिखती है — गाड़ी, घर, कपड़े। लेकिन असली दौलत अदृश्य है: वो पैसा जो खर्च नहीं हुआ, वो investments जो चुपचाप compound हो रहे हैं। महंगी गाड़ी चलाने वाला दिवालिया हो सकता है; साधारण कपड़ों में इंसान करोड़पति हो सकता है। दौलत का प्रदर्शन बंद करो। दौलत बनाना शुरू करो।",
+        quote: '"Wealth is what you don\'t see. Spending money to show people how much money you have is the fastest way to have less." — Morgan Housel'
+      }
+    ]
+  },
+ 
+  "monk-who-sold-ferrari": {
+    live: true,
+    slug: "monk-who-sold-ferrari",
+    title: "The Monk Who Sold His Ferrari",
+    titleHtml: "The Monk Who Sold <em>His Ferrari</em>",
+    author: "Robin Sharma",
+    genre: "Philosophy · Personal Development",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9780062515674-L.jpg",
+    heroDesc: "A fable about a high-powered lawyer who collapses in a courtroom, sells everything, travels to India, and returns with the secrets of a joyful and purposeful life. Here are the 10 most powerful lessons from Robin Sharma's beloved classic.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/8172234104",
+      US: "https://www.amazon.com/dp/0062515675",
+      CA: "https://www.amazon.ca/dp/0062515675"
+    },
+    lessons: [
+      {
+        title: "Master Your Mind — The Garden Within",
+        en: "The Sages of Sivana teach Julian that the mind is like a garden. Left unattended, weeds — negative thoughts, fears, and doubts — grow wild and choke out everything good. Tended carefully with positive thoughts, the garden blooms. You cannot control what happens to you, but you can always control what happens within you. Master your mind, and you master your life.",
+        hi: "Sivana के साधु Julian को सिखाते हैं कि मन एक बगीचे की तरह है। अनदेखा छोड़ दो तो खरपतवार — नकारात्मक विचार, डर और संदेह — उग आते हैं और सब कुछ दबा देते हैं। ध्यान से सींचो तो बगीचा खिलता है। आप यह नियंत्रित नहीं कर सकते कि आपके साथ क्या होता है, लेकिन यह हमेशा नियंत्रित कर सकते हैं कि आपके भीतर क्या होता है।",
+        quote: '"The secret of happiness is simple: find out what you truly love to do and direct all your energy towards doing it." — Robin Sharma'
+      },
+      {
+        title: "Follow Your Purpose — The Lighthouse of Life",
+        en: "A lighthouse stands firm in any storm because it is anchored to the rock below. Your purpose is that anchor. A life without a clear, written personal purpose is a life of drift — reactive, exhausted, and ultimately empty. Spend time discovering what you are here for. Write it down. Return to it daily. Let it be the compass that guides every decision.",
+        hi: "एक lighthouse किसी भी तूफान में मज़बूती से खड़ा रहता है क्योंकि वो नीचे की चट्टान से जुड़ा है। आपका उद्देश्य वही लंगर है। बिना स्पष्ट, लिखित personal purpose के जीवन भटकाव है — reactive, थका हुआ, और अंततः खालीपन। जानने में समय लगाएं कि आप यहाँ किसलिए हैं। इसे लिखें। रोज़ इस पर वापस आएं।",
+        quote: '"Your I can is more important than your IQ." — Robin Sharma'
+      },
+      {
+        title: "Practice Kaizen — Small Daily Improvements",
+        en: "The Japanese philosophy of Kaizen — continuous improvement — is at the heart of the Sages' teachings. You don't need a dramatic transformation overnight. Improve by just 1% each day in the areas that matter most: your mind, your body, your relationships, your craft. These tiny, daily improvements are invisible in the short term and unstoppable in the long term.",
+        hi: "Kaizen का जापानी दर्शन — निरंतर सुधार — साधुओं की शिक्षाओं के केंद्र में है। आपको रातों-रात dramatic बदलाव की ज़रूरत नहीं। जो क्षेत्र सबसे ज़रूरी हैं उनमें हर दिन सिर्फ 1% बेहतर हों: मन, शरीर, रिश्ते, अपना काम। ये छोटे, रोज़ाना के सुधार कम समय में दिखाई नहीं देते और लंबे समय में अपराजेय होते हैं।",
+        quote: '"Kaizen is the Japanese word for continuous, never-ending improvement." — Robin Sharma'
+      },
+      {
+        title: "Live With Discipline — The Foundation of All Achievement",
+        en: "Sharma teaches that self-discipline is the foundation of all achievement. The Sages wake before dawn, meditate, exercise, and eat mindfully — every day, without exception. Discipline is not punishment; it is the highest form of self-respect. Every time you keep a promise to yourself, you strengthen the most important relationship in your life — the one with yourself.",
+        hi: "Sharma सिखाते हैं कि self-discipline सभी उपलब्धियों की नींव है। साधु भोर से पहले जागते हैं, ध्यान करते हैं, व्यायाम करते हैं — हर दिन, बिना अपवाद। अनुशासन दंड नहीं — यह आत्म-सम्मान का सर्वोच्च रूप है। जब भी आप खुद से किया वादा निभाते हैं, आप अपनी ज़िंदगी का सबसे ज़रूरी रिश्ता मज़बूत करते हैं — खुद के साथ।",
+        quote: '"Happiness comes through the consistent application of discipline." — Robin Sharma'
+      },
+      {
+        title: "Respect Your Time — It Is Your Life",
+        en: "Time is the great equaliser — every person has 24 hours a day. But most people treat their time as if it were infinite, wasting it on low-value activities while their deepest dreams gather dust. Sharma teaches that time mastery is life mastery. Ruthlessly eliminate what does not matter. Your calendar is a mirror of your priorities.",
+        hi: "समय महान समानकर्ता है — हर इंसान के पास दिन में 24 घंटे हैं। लेकिन ज़्यादातर लोग अपने समय को ऐसे treat करते हैं जैसे वो अनंत हो, कम-मूल्य वाली गतिविधियों में बर्बाद करते हैं जबकि उनके सबसे गहरे सपने धूल जमा करते रहते हैं। Sharma सिखाते हैं कि समय mastery ही जीवन mastery है। आपका calendar आपकी प्राथमिकताओं का आईना है।",
+        quote: '"Time mastery is life mastery." — Robin Sharma'
+      },
+      {
+        title: "Selflessly Serve Others — Give Without Expectation",
+        en: "One of the Sages' central teachings is that a truly meaningful life is one of service to others. When you focus on lifting others, your own problems shrink. When you give without expecting return, you receive more than you could have imagined. Service is not sacrifice — it is the highest form of self-expression.",
+        hi: "साधुओं की केंद्रीय शिक्षाओं में से एक यह है कि सच में अर्थपूर्ण जीवन दूसरों की सेवा का जीवन है। जब आप दूसरों को उठाने पर ध्यान देते हैं, आपकी अपनी समस्याएं सिकुड़ जाती हैं। जब आप बिना वापसी की उम्मीद के देते हैं, आप उससे ज़्यादा पाते हैं जितना आप सोच सकते थे। सेवा बलिदान नहीं — यह आत्म-अभिव्यक्ति का सर्वोच्च रूप है।",
+        quote: '"The secret of happiness is simple: give more than you take." — Robin Sharma'
+      },
+      {
+        title: "Embrace the Present — Live Fully Now",
+        en: "Julian arrives in Sivana carrying the weight of regret and anxiety — always in the past or the future, never in the present. The Sages teach him that the present moment is the only place where life actually happens. Stop rehearsing disasters. Stop replaying failures. The person standing in front of you, the sky above you — these are the gifts of a life fully lived.",
+        hi: "Julian Sivana में पछतावे और चिंता का बोझ लेकर पहुँचता है — हमेशा अतीत या भविष्य में, कभी वर्तमान में नहीं। साधु उसे सिखाते हैं कि वर्तमान पल ही वो एकमात्र जगह है जहाँ जीवन वास्तव में होता है। आपदाओं का पूर्वाभ्यास बंद करो। विफलताओं को दोबारा मत जियो। आपके सामने खड़ा इंसान, ऊपर आसमान — ये एक पूरी तरह जीए हुए जीवन के तोहफे हैं।",
+        quote: '"The past is a grave. Do not bury yourself in it." — Robin Sharma'
+      },
+      {
+        title: "Nurture Your Relationships — People Are Everything",
+        en: "Success without meaningful relationships is hollow — a fact Julian learns the hard way before his transformation. The quality of your life is the quality of your relationships. Invest in the people around you consistently. Small acts of kindness, presence, and genuine interest compound into bonds that sustain you through every storm.",
+        hi: "सार्थक रिश्तों के बिना सफलता खोखली है — एक तथ्य जो Julian अपने transformation से पहले कठिन तरीके से सीखता है। आपके जीवन की गुणवत्ता आपके रिश्तों की गुणवत्ता है। अपने आस-पास के लोगों में लगातार निवेश करें।親切ता, उपस्थिति और सच्ची रुचि के छोटे-छोटे कार्य ऐसे बंधन बनाते हैं जो हर तूफान में सहारा देते हैं।",
+        quote: '"The quality of your life is the quality of your relationships." — Robin Sharma'
+      },
+      {
+        title: "Care for Your Body — The Temple of the Mind",
+        en: "A brilliant mind in a neglected body is like a race car with no fuel. The Sages treat their bodies as sacred: they eat clean food, sleep deeply, and move daily. Physical vitality is the foundation of mental clarity and emotional resilience. You cannot do your best thinking when you are exhausted and physically depleted.",
+        hi: "एक उपेक्षित शरीर में प्रतिभाशाली मन ऐसा है जैसे बिना ईंधन की race car। साधु अपने शरीर को पवित्र मानते हैं: साफ खाना खाते हैं, गहरी नींद लेते हैं, रोज़ हिलते-डुलते हैं। Physical vitality मानसिक स्पष्टता और भावनात्मक लचीलेपन की नींव है। जब आप थके हुए और शारीरिक रूप से depleted होते हैं, तो आप अपनी सबसे अच्छी सोच नहीं सोच सकते।",
+        quote: '"Take care of your body. It\'s the only place you have to live." — Robin Sharma'
+      },
+      {
+        title: "Live Your Legacy — Begin It Today",
+        en: "The final lesson of the Sages: don't wait until the end of your life to think about what you will leave behind. Your legacy is built one day at a time, one choice at a time. Ask yourself every morning: 'If today were the last day of my life, would I be proud of how I am spending it?' Live the answer to that question — and you will never have regrets.",
+        hi: "साधुओं का अंतिम सबक: अपनी ज़िंदगी के अंत तक इंतज़ार मत करो यह सोचने के लिए कि आप क्या छोड़ जाएंगे। आपकी विरासत एक दिन में एक दिन, एक चुनाव में एक चुनाव से बनती है। हर सुबह खुद से पूछें: 'अगर यह मेरी ज़िंदगी का आखिरी दिन होता, तो क्या मुझे गर्व होता?' उस सवाल का जवाब जीओ — और आपको कभी पछतावा नहीं होगा।",
+        quote: '"The purpose of life is a life of purpose." — Robin Sharma'
+      }
+    ]
+  },
+ 
+  "practicing-mind": {
+    live: true,
+    slug: "practicing-mind",
+    title: "The Practicing Mind",
+    titleHtml: "The <em>Practicing Mind</em>",
+    author: "Thomas M. Sterner",
+    genre: "Mindset · Mastery",
+    rating: "★★★★☆",
+    cover: "https://covers.openlibrary.org/b/isbn/9781608680900-L.jpg",
+    heroDesc: "In a world obsessed with results, Thomas Sterner makes a radical argument: the process is the point. Here are 10 lessons on how to develop patience, focus, and the joy of deliberate practice.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/1608680908",
+      US: "https://www.amazon.com/dp/1608680908",
+      CA: "https://www.amazon.ca/dp/1608680908"
+    },
+    lessons: [
+      {
+        title: "Process Over Outcome — The Present Is the Goal",
+        en: "Society has conditioned us to focus obsessively on outcomes — the finished product, the result, the destination. But mastery is built in the process. Sterner's central teaching is radical: the practice itself is the goal. When you are fully absorbed in the process of doing, you are already at the destination. The product is just a byproduct of a well-practiced process.",
+        hi: "समाज ने हमें outcomes पर जुनूनी रूप से ध्यान देने के लिए conditioned किया है — finished product, नतीजा, मंज़िल। लेकिन mastery process में बनती है। Sterner की केंद्रीय शिक्षा radical है: practice ही लक्ष्य है। जब आप करने की प्रक्रिया में पूरी तरह लीन होते हैं, तो आप पहले से ही मंज़िल पर हैं। उत्पाद सिर्फ एक अच्छी तरह से practice की गई process का byproduct है।",
+        quote: '"The process is the goal. When you work at something, you are already there." — Thomas M. Sterner'
+      },
+      {
+        title: "Do, Observe, Correct — The Learning Loop",
+        en: "Sterner teaches a three-part approach to deliberate practice: Do, Observe, and Correct. Do the action. Observe the result without judgment — was it what you intended? Correct calmly and try again. Self-criticism derails the learning cycle. Neutral observation accelerates it.",
+        hi: "Sterner जानबूझकर practice के लिए तीन-भाग वाला दृष्टिकोण सिखाते हैं: Do, Observe, और Correct। काम करो। बिना judgment के नतीजा देखो — क्या यह वो था जो आप चाहते थे? शांति से सुधारो और फिर कोशिश करो। आत्म-आलोचना सीखने के चक्र को पटरी से उतार देती है। तटस्थ अवलोकन इसे तेज़ करता है।",
+        quote: '"Remove judgment from the learning loop and watch how fast you improve." — Thomas M. Sterner'
+      },
+      {
+        title: "Patience Is a Skill — Train It Like Any Other",
+        en: "We treat patience as a personality trait — either you have it or you don't. Sterner argues that patience is a skill that can be deliberately trained through practice. Every time you choose to stay with a difficult task rather than jumping to something easier, you are building your patience muscle. And like all muscles, the more you train it, the stronger it becomes.",
+        hi: "हम patience को एक personality trait की तरह treat करते हैं — या तो आपके पास है या नहीं। Sterner का तर्क है कि patience एक ऐसा कौशल है जिसे जानबूझकर practice से train किया जा सकता है। जब भी आप किसी कठिन काम में लगे रहते हैं बजाय किसी आसान चीज़ पर कूदने के, आप अपनी patience train कर रहे हैं। और सभी muscles की तरह, जितना train करोगे, उतना मज़बूत होगा।",
+        quote: '"Patience is not something we have or don\'t have. It is something we train." — Thomas M. Sterner'
+      },
+      {
+        title: "Simplify — Reduce to the Essential",
+        en: "When learning any complex skill, break it into the smallest possible components and master each one individually before combining them. Trying to work on everything at once creates overwhelm and slow progress. Deliberate practice is the art of reducing complexity to its essence and working there with full focus.",
+        hi: "किसी भी complex skill को सीखते समय, उसे सबसे छोटे possible components में तोड़ें और उन्हें जोड़ने से पहले एक-एक को अलग-अलग master करें। एक साथ सब पर काम करने की कोशिश overwhelm और धीमी प्रगति पैदा करती है। Deliberate practice जटिलता को उसके सार तक कम करने और वहाँ पूरे focus के साथ काम करने की कला है।",
+        quote: '"Reduce the target area of your attention until you are working on the smallest possible component." — Thomas M. Sterner'
+      },
+      {
+        title: "Discipline Equals Freedom",
+        en: "Discipline creates freedom, not restriction. The musician who practices scales every day has the freedom to improvise beautifully. The writer who shows up daily has the freedom to produce great work. The person who never practices is always a prisoner of their current limitations. Discipline is the price of freedom.",
+        hi: "अनुशासन प्रतिबंध नहीं — स्वतंत्रता पैदा करता है। वो musician जो रोज़ scales practice करता है, उसे खूबसूरती से improvise करने की स्वतंत्रता है। वो writer जो रोज़ बैठता है, उसे महान काम करने की स्वतंत्रता है। जो कभी practice नहीं करता वो हमेशा अपनी मौजूदा सीमाओं का कैदी है। अनुशासन स्वतंत्रता की कीमत है।",
+        quote: '"Discipline is not a restriction. It is the path to freedom." — Thomas M. Sterner'
+      },
+      {
+        title: "Stay in the Moment — One Stroke at a Time",
+        en: "When you are practicing, focus only on the note, the stroke, the word, the movement in front of you right now. Not the next measure. Not the whole symphony. Just this. The ability to stay present during repetitive, difficult practice is the skill that separates masters from amateurs.",
+        hi: "Practice करते समय सिर्फ उस note, उस stroke, उस word, उस movement पर ध्यान दो जो अभी आपके सामने है। अगले measure पर नहीं। पूरी symphony पर नहीं। बस यह। दोहराव वाली, कठिन practice के दौरान present रहने की क्षमता वो कौशल है जो masters को amateurs से अलग करता है।",
+        quote: '"Stay in the present. Just this note, just this stroke, just this moment." — Thomas M. Sterner'
+      },
+      {
+        title: "Equanimity — The Unshakeable Practitioner",
+        en: "Equanimity — a calm, even-minded response to both success and failure — is the hallmark of the master practitioner. When a practice session goes badly, the master does not spiral into frustration. When it goes well, they do not become complacent. Both outcomes are simply information. Emotional flatness in practice is the fertile ground in which mastery grows.",
+        hi: "Equanimity — सफलता और विफलता दोनों के प्रति शांत, संतुलित प्रतिक्रिया — master practitioner की पहचान है। जब practice session बुरा जाता है, master निराशा में नहीं डूबता। जब अच्छा जाता है, तो complacent नहीं होता। दोनों नतीजे सिर्फ जानकारी हैं। Practice में भावनात्मक स्थिरता वो उपजाऊ ज़मीन है जिसमें mastery उगती है।",
+        quote: '"Equanimity is the foundation of mastery." — Thomas M. Sterner'
+      },
+      {
+        title: "Embrace Boredom — Where Growth Actually Lives",
+        en: "The most important repetitions in any practice are the boring ones — the ones you don't feel like doing. The ability to embrace boredom, to find meaning in repetition, is what separates those who achieve mastery from those who plateau. Boredom is not a signal to stop. It is a signal that deep work is happening.",
+        hi: "किसी भी practice में सबसे ज़रूरी repetitions वो boring वाले हैं — जो करने का मन नहीं करता। बोरियत को embrace करने की क्षमता, दोहराव में अर्थ खोजना, वो है जो mastery पाने वालों को plateau पर रुकने वालों से अलग करती है। बोरियत रुकने का संकेत नहीं — यह संकेत है कि गहरा काम हो रहा है।",
+        quote: '"Boredom is not the enemy of practice. It is the doorway to mastery." — Thomas M. Sterner'
+      },
+      {
+        title: "The Four S Words — Simplify, Small, Short, Slow",
+        en: "When learning overwhelms you, Sterner prescribes four remedies: make it Simpler, make the target Smaller, shorten the Session, and slow Down the movement. Most learners do the opposite — they try harder, go longer, move faster — and burn out. When in doubt, do less. The tortoise always wins the long race.",
+        hi: "जब सीखना आपको overwhelm करे, Sterner चार उपाय बताते हैं: इसे Simpler बनाओ, target को Smaller करो, Session छोटा करो, और movement को Slow करो। ज़्यादातर learners इसका उल्टा करते हैं — ज़्यादा कोशिश करते हैं, लंबे समय तक करते हैं — और burn out हो जाते हैं। संदेह होने पर कम करो। लंबी दौड़ में कछुआ हमेशा जीतता है।",
+        quote: '"When in doubt, do less. Slow down. Simplify. The mastery will come." — Thomas M. Sterner'
+      },
+      {
+        title: "You Are Always Practicing — Choose What",
+        en: "The most unsettling insight: you are always practicing something. Every habit, every reaction, every thought pattern is a form of practice — and you are getting better at it every day, whether you intend to or not. Impatience, anxiety, avoidance — these are skills too. Choose your practice deliberately.",
+        hi: "सबसे unsettling insight: आप हमेशा कुछ न कुछ practice कर रहे हैं। हर आदत, हर प्रतिक्रिया, हर विचार pattern एक प्रकार की practice है — और आप हर दिन उसमें बेहतर हो रहे हैं, चाहे आपका इरादा हो या न हो। अधीरता, चिंता, टालमटोल — ये भी कौशल हैं। अपनी practice जानबूझकर चुनें।",
+        quote: '"You are always practicing something. The only question is: what?" — Thomas M. Sterner'
+      }
+    ]
+  },
+ 
+  "linchpin": {
+    live: true,
+    slug: "linchpin",
+    title: "Linchpin",
+    titleHtml: "<em>Linchpin</em>",
+    author: "Seth Godin",
+    genre: "Career · Creativity",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9781591843160-L.jpg",
+    heroDesc: "The old social contract — follow the rules, show up, and get a safe job — is broken. Seth Godin makes the case for becoming indispensable: an artist, a giver, a linchpin. Here are 10 lessons that will change how you think about your work.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/0749953357",
+      US: "https://www.amazon.com/dp/1591843162",
+      CA: "https://www.amazon.ca/dp/1591843162"
+    },
+    lessons: [
+      {
+        title: "Be a Linchpin — The Indispensable Human",
+        en: "A linchpin is the pin that holds the wheel to the axle — remove it and everything falls apart. In the modern economy, the only truly secure position is being indispensable — not by following instructions better than anyone else, but by bringing something unique, creative, and human to your work that cannot be automated, outsourced, or replaced. Anyone can be a linchpin. Few choose to be.",
+        hi: "Linchpin वो कील है जो पहिये को धुरी से जोड़ती है — इसे हटाओ और सब कुछ बिखर जाता है। आधुनिक अर्थव्यवस्था में, एकमात्र सच में सुरक्षित स्थान अपरिहार्य होना है — दूसरों से बेहतर निर्देशों का पालन करने से नहीं, बल्कि अपने काम में कुछ अनूठा, रचनात्मक और मानवीय लाने से जिसे automate, outsource या replace नहीं किया जा सकता।",
+        quote: '"The only way to get what you\'re worth is to stand out, to exert emotional labor, to be seen as indispensable." — Seth Godin'
+      },
+      {
+        title: "The Resistance — Your Brain's Safety Mechanism",
+        en: "The biggest enemy of creative work is what Godin calls The Resistance — the lizard brain's attempt to keep you safe by keeping you small. It whispers: who are you to try this? What if you fail? The Resistance is not a sign that you are wrong. It is a sign that you are on the right track. Ship the work anyway.",
+        hi: "रचनात्मक काम का सबसे बड़ा दुश्मन वो है जिसे Godin The Resistance कहते हैं — आपके lizard brain की आपको छोटा रखकर सुरक्षित रखने की कोशिश। यह फुसफुसाता है: तुम यह करने वाले कौन हो? अगर fail हो गए तो? Resistance इस बात का संकेत नहीं कि आप गलत हैं — यह संकेत है कि आप सही रास्ते पर हैं। फिर भी काम deliver करो।",
+        quote: '"The Resistance is the voice in the back of our head telling us to back off, be careful, go slow, compromise." — Seth Godin'
+      },
+      {
+        title: "Give Art — Emotional Labor Is the New Work",
+        en: "Godin redefines art: it is not painting or music. Art is any act of genuine human creativity and connection — the waitress who makes you feel seen, the manager who resolves a conflict beautifully, the teacher who changes how a student sees the world. This kind of work — done with soul — is what Godin calls emotional labor. It cannot be outsourced.",
+        hi: "Godin art को फिर से परिभाषित करते हैं: यह painting या music नहीं है। Art वास्तविक मानवीय रचनात्मकता और connection का कोई भी कार्य है — वो waitress जो आपको देखा हुआ महसूस कराती है, वो manager जो किसी conflict को खूबसूरती से सुलझाता है, वो teacher जो किसी student का दुनिया देखने का तरीका बदल देता है। यह emotional labor है। इसे outsource नहीं किया जा सकता।",
+        quote: '"Art is the act of a human being doing something that might not work, and doing it anyway." — Seth Godin'
+      },
+      {
+        title: "Maps vs. Compass — Lead Yourself",
+        en: "Industrial workers need maps — clear instructions, defined steps, predictable outcomes. Linchpins need a compass — a sense of direction, a set of values, the ability to navigate uncertainty without being told what to do next. The economy no longer needs more map-followers. It desperately needs people who can lead themselves through ambiguity.",
+        hi: "Industrial workers को maps चाहिए — स्पष्ट निर्देश, defined steps। Linchpins को compass चाहिए — दिशा का बोध, मूल्यों का समूह, यह बताए बिना कि आगे क्या करना है, अनिश्चितता में navigate करने की क्षमता। अर्थव्यवस्था को अब ज़्यादा map-followers की ज़रूरत नहीं। उसे उन लोगों की बेतहाशा ज़रूरत है जो खुद को अस्पष्टता के बीच lead कर सकें।",
+        quote: '"The factory wants map readers. The new economy needs compass carriers." — Seth Godin'
+      },
+      {
+        title: "Ship — Done Is the Engine of More",
+        en: "The most important word in Godin's vocabulary is ship. Not plan. Not perfect. Ship. Get the work done, get it out into the world, and let it be judged. The Resistance will always find a reason to delay. The linchpin ships anyway — on time, with soul, even when it is not perfect. Shipping is what turns creative people into professionals.",
+        hi: "Godin की शब्दावली में सबसे ज़रूरी शब्द है ship। Plan नहीं। Perfect नहीं। Ship। काम खत्म करो, दुनिया में बाहर निकालो, और उसे judge होने दो। Resistance हमेशा देरी का एक कारण खोज लेगा। Linchpin फिर भी ship करता है — समय पर, आत्मा के साथ, चाहे perfect न हो। Shipping वो प्रतिबद्धता है जो रचनात्मक लोगों को professionals में बदलती है।",
+        quote: '"The only purpose of starting is to finish, and while the projects we do are never really finished, they must be shipped." — Seth Godin'
+      },
+      {
+        title: "Give Gifts — Generosity as Strategy",
+        en: "The most powerful thing a linchpin can do is give — ideas, help, credit, attention — without keeping score and without expectation of return. This is not naivety. It is a strategy. Generous people create obligation, trust, and connection that no amount of money can buy. The most successful people in every field are voracious givers.",
+        hi: "एक linchpin जो सबसे शक्तिशाली काम कर सकता है वो है देना — ideas देना, मदद देना, credit देना — बिना हिसाब रखे और वापसी की उम्मीद के बिना। यह भोलापन नहीं। यह एक strategy है। उदार लोग obligation, भरोसा और connection बनाते हैं जो कोई भी पैसा नहीं खरीद सकता। हर क्षेत्र के सबसे सफल लोग voracious givers हैं।",
+        quote: '"The linchpin gives gifts. Not to get something back, but because giving is what humans do." — Seth Godin'
+      },
+      {
+        title: "You Are Not Your Job Title",
+        en: "Factories taught us to identify ourselves by our job title. Godin challenges this. You are not your title. You are your work, your relationships, your ideas, your gifts. When you define yourself by what you do for people — not what you are called — you become free to be remarkable regardless of what the organisation chart says.",
+        hi: "Factories ने हमें अपनी job title से खुद को पहचानना सिखाया। Godin इसे challenge करते हैं। आप अपनी title नहीं हैं। आप अपना काम हैं, अपने रिश्ते, अपने विचार, अपने gifts। जब आप खुद को इससे define करते हैं कि आप लोगों के लिए क्या करते हैं — न कि आपको क्या कहते हैं — तो आप remarkable होने के लिए स्वतंत्र हो जाते हैं।",
+        quote: '"You don\'t need a job title to do great work. You just need to decide to." — Seth Godin'
+      },
+      {
+        title: "Tribes Need Leaders — Be One",
+        en: "Human beings are wired to form tribes — groups connected by shared ideas, values, and goals. Every tribe needs a leader who steps up, articulates the vision, and moves the group forward. Leadership is not a position — it is a choice available to anyone with the courage to make it. The world needs more leaders of followers.",
+        hi: "इंसान tribes बनाने के लिए wired हैं — साझा ideas, मूल्यों और लक्ष्यों से जुड़े समूह। हर tribe को एक leader चाहिए जो आगे आए, vision को articulate करे। Leadership एक पद नहीं — यह एक विकल्प है जो उस साहस वाले किसी के लिए भी उपलब्ध है जो इसे बनाए। दुनिया को followers के ज़्यादा leaders चाहिए।",
+        quote: '"Leaders lead when they choose to, not when they are told to." — Seth Godin'
+      },
+      {
+        title: "The Gift of Not Fitting In",
+        en: "School, corporations, and society reward conformity. But the linchpin does not entirely fit the mold — they bring a perspective, an approach, or a talent that is distinctly their own. What felt like a liability in school — being different, seeing things others don't — becomes the greatest asset in the real world. Your quirks are your competitive advantage.",
+        hi: "स्कूल, corporations, और समाज conformity को पुरस्कृत करते हैं। लेकिन linchpin पूरी तरह साँचे में फिट नहीं होता — जो एक ऐसा perspective, approach, या talent लाता है जो distinctly उनका अपना है। जो स्कूल में liability लगता था — अलग होना, वो देखना जो दूसरे नहीं देखते — असली दुनिया में सबसे बड़ी asset बन जाता है।",
+        quote: '"Being different is not a bug. It\'s a feature." — Seth Godin'
+      },
+      {
+        title: "Choose Yourself — Stop Waiting for Permission",
+        en: "The old model said: get the right credentials, impress the gatekeepers, and they will choose you. That model is dead. The internet and the connected economy have made it possible for anyone to choose themselves — to start, to publish, to lead, to create — without waiting for permission from anyone. The only question left is: will you?",
+        hi: "पुराना model कहता था: सही credentials पाओ, gatekeepers को impress करो, और वो तुम्हें चुनेंगे। वो model मर चुका है। Internet और connected economy ने किसी के लिए भी खुद को चुनना संभव बना दिया है — शुरू करना, publish करना, lead करना, create करना — किसी से भी permission का इंतज़ार किए बिना। बचा सिर्फ एक सवाल है: क्या आप करेंगे?",
+        quote: '"The only thing standing between you and your goal is the story you keep telling yourself." — Seth Godin'
+      }
+    ]
+  },
+ 
+  "subtle-art": {
+    live: true,
+    slug: "subtle-art",
+    title: "The Subtle Art of Not Giving a F*ck",
+    titleHtml: "The Subtle Art of <em>Not Giving a F*ck</em>",
+    author: "Mark Manson",
+    genre: "Philosophy · Self-Help",
+    rating: "★★★★☆",
+    cover: "https://covers.openlibrary.org/b/isbn/9780062457714-L.jpg",
+    heroDesc: "A counterintuitive approach to living a good life. Mark Manson argues that the key to happiness is not positivity — it is choosing what to care about carefully and embracing life's inevitable struggles. Here are 10 lessons that cut through the noise.",
+    amazon: {
+      IN: "https://www.amazon.in/dp/0062457713",
+      US: "https://www.amazon.com/dp/0062457713",
+      CA: "https://www.amazon.ca/dp/0062457713"
+    },
+    lessons: [
+      {
+        title: "Not Giving a F*ck Does Not Mean Indifference",
+        en: "Manson's title is deliberately provocative, but his point is precise: not giving a f*ck doesn't mean caring about nothing. It means choosing very carefully what you give a f*ck about. The problem is not that people care too little — it is that they care too much about things that don't matter: other people's opinions, social media metrics, minor slights. The art is in the selection.",
+        hi: "Manson का title जानबूझकर provocative है, लेकिन उनका point precise है: परवाह न करना मतलब किसी चीज़ की परवाह न करना नहीं। इसका मतलब है यह बहुत सावधानी से चुनना कि आप किसकी परवाह करते हैं। समस्या यह नहीं कि लोग बहुत कम परवाह करते हैं — यह है कि वो बहुत सारी ऐसी चीज़ों की बहुत ज़्यादा परवाह करते हैं जो मायने नहीं रखतीं। कला चुनाव में है।",
+        quote: '"The key to a good life is not giving a f*ck about more; it\'s giving a f*ck about less." — Mark Manson'
+      },
+      {
+        title: "The Feedback Loop From Hell",
+        en: "Modern culture tells us we should feel good all the time. So when we feel bad, we feel bad about feeling bad — which makes us feel worse. Manson calls this the Feedback Loop From Hell. The path out is counterintuitive: stop trying to feel good. Accept that negative emotions — anxiety, sadness, anger — are a natural and necessary part of a meaningful life.",
+        hi: "आधुनिक संस्कृति हमें बताती है कि हमें हर समय अच्छा महसूस करना चाहिए। इसलिए जब हम बुरा महसूस करते हैं, तो हम बुरा महसूस करने के बारे में बुरा महसूस करते हैं। Manson इसे Feedback Loop From Hell कहते हैं। बाहर का रास्ता counter-intuitive है: अच्छा महसूस करने की कोशिश बंद करो। स्वीकार करो कि नकारात्मक भावनाएं एक meaningful जीवन का स्वाभाविक हिस्सा हैं।",
+        quote: '"Don\'t hope for a life without problems. Hope for a life with good problems." — Mark Manson'
+      },
+      {
+        title: "You Are Not Special — And That Is Liberating",
+        en: "An entire generation was raised on the idea that they were special and destined for greatness. Manson argues this has backfired spectacularly. The belief that you are exceptional — without evidence — creates entitlement, fragility, and chronic dissatisfaction. The liberation comes from accepting that ordinariness — done with love, consistency, and craft — is more than enough.",
+        hi: "एक पूरी पीढ़ी इस विचार पर पली है कि वे special और महानता के लिए destined हैं। Manson का तर्क है कि यह बुरी तरह backfire हुआ है। बिना सबूत के exceptional होने का विश्वास entitlement, fragility और chronic dissatisfaction पैदा करता है। मुक्ति इस स्वीकृति से आती है कि प्रेम, consistency और craft के साथ की गई साधारणता काफी से ज़्यादा है।",
+        quote: '"The desire for more positive experience is itself a negative experience." — Mark Manson'
+      },
+      {
+        title: "The Value of Suffering — Choose Your Problems",
+        en: "Happiness is not about having no problems. It is about having good problems — problems that are meaningful, that align with your values, that you are willing to struggle for. Manson asks: what pain are you willing to sustain? Your answer to that question determines more about your life than any goal you might set.",
+        hi: "खुशी कोई समस्या न होने के बारे में नहीं है। यह अच्छी समस्याएं होने के बारे में है — ऐसी समस्याएं जो meaningful हैं, जो आपके मूल्यों के अनुरूप हैं, जिनके लिए आप संघर्ष करने को तैयार हैं। Manson पूछते हैं: आप किस दर्द को झेलने के लिए तैयार हैं? उस सवाल का आपका जवाब आपकी ज़िंदगी के बारे में किसी भी लक्ष्य से ज़्यादा कुछ तय करता है।",
+        quote: '"What determines your success isn\'t what you want to enjoy — it\'s what pain you are willing to sustain." — Mark Manson'
+      },
+      {
+        title: "You Are Always Choosing — Radical Responsibility",
+        en: "You are always responsible for your own experience, even when you didn't choose the circumstances. You didn't choose your childhood or your trauma — but you always choose how you interpret and respond to them. Blame feels comfortable because it transfers responsibility. But it also transfers your power. Taking radical ownership is the only path to freedom.",
+        hi: "आप हमेशा अपने अनुभव के लिए ज़िम्मेदार हैं, तब भी जब आपने परिस्थितियाँ नहीं चुनी थीं। आपने अपना बचपन, अपना trauma नहीं चुना — लेकिन आप हमेशा यह चुनते हैं कि उन्हें कैसे interpret और respond करते हैं। दोष देना comfortable लगता है क्योंकि यह ज़िम्मेदारी transfer करता है। लेकिन यह आपकी शक्ति भी transfer करता है। Radical ownership ही स्वतंत्रता का एकमात्र रास्ता है।",
+        quote: '"We don\'t always control what happens to us. But we always control how we interpret it and what we do next." — Mark Manson'
+      },
+      {
+        title: "Be Wrong Often — It Means You Are Growing",
+        en: "Certainty is the enemy of growth. The more certain you are about your beliefs, the less open you are to learning and improving. Intellectual humility is a core life skill: assume you are wrong about many things, seek out evidence that challenges your views, and update your beliefs when the evidence demands it. Being wrong often is how the wise become wiser.",
+        hi: "निश्चितता विकास की दुश्मन है। आप अपनी beliefs के बारे में जितने निश्चित हैं, सीखने और बेहतर होने के लिए उतने कम खुले हैं। Intellectual humility एक core जीवन कौशल है: मान लो कि आप बहुत सी चीज़ों के बारे में गलत हो, ऐसे सबूत ढूंढो जो आपके views को challenge करें, और जब सबूत माँगे तो अपनी beliefs update करो।",
+        quote: '"The more something threatens your identity, the more you will avoid it." — Mark Manson'
+      },
+      {
+        title: "Failure Is Forward",
+        en: "Most people avoid failure at all costs — and as a result, they avoid growth. Failure is not the opposite of success; it is part of success. Every meaningful achievement is built on a foundation of failed attempts and humbling setbacks. The only way to avoid failure is to never try anything worth doing. And that is the greatest failure of all.",
+        hi: "ज़्यादातर लोग हर कीमत पर failure से बचते हैं — और नतीजतन, विकास से बचते हैं। Failure सफलता का विपरीत नहीं — यह सफलता का हिस्सा है। हर meaningful उपलब्धि failed प्रयासों की नींव पर बनी है। Failure से बचने का एकमात्र तरीका है — कभी कुछ ऐसा try न करो जो करने लायक हो। और वही सबसे बड़ी failure है।",
+        quote: '"Don\'t just sit there. Do something. The answers will follow." — Mark Manson'
+      },
+      {
+        title: "The Importance of Saying No",
+        en: "Depth of relationship, skill, and meaning — all require saying no to the many so you can say yes to the few. Without rejection — of opportunities, people, possible paths — you cannot build anything of lasting value. Every yes costs a no. Choose your yeses carefully.",
+        hi: "रिश्ते की गहराई, कौशल की गहराई, अर्थ की गहराई — सब के लिए कई चीज़ों को ना कहना ज़रूरी है ताकि आप कुछ को हाँ कह सकें। Rejection के बिना — अवसरों के, लोगों के, possible paths के — आप कोई भी lasting मूल्य की चीज़ नहीं बना सकते। हर हाँ एक ना की कीमत पर आती है। अपनी हाँ सावधानी से चुनें।",
+        quote: '"Pursuing things that make us feel good is at odds with pursuing things that are actually good for us." — Mark Manson'
+      },
+      {
+        title: "Death Is the Answer — Use It as a Compass",
+        en: "Our awareness of mortality — if we face it honestly rather than avoiding it — is the most clarifying force in a human life. When you know you will die, trivial concerns fall away. The question becomes: what is worth my finite time and energy? Death is not the enemy of a good life. Ignoring it is.",
+        hi: "मृत्यु की हमारी जागरूकता — अगर हम इसे avoid करने की बजाय honestly face करें — एक human जीवन में सबसे clarifying शक्ति है। जब आप जानते हैं कि आप मरेंगे, तुच्छ चिंताएं गायब हो जाती हैं। सवाल बनता है: मेरे सीमित समय और ऊर्जा के लायक क्या है? मृत्यु एक अच्छे जीवन की दुश्मन नहीं। उसे ignore करना है।",
+        quote: '"The only way to be comfortable with death is to understand yourself as something bigger than yourself." — Mark Manson'
+      },
+      {
+        title: "Commitment Is Freedom",
+        en: "The pursuit of endless options — always keeping choices open, never fully committing — feels like freedom but creates anxiety, shallowness, and regret. Commitment is what creates freedom: committing to a partner deepens love in ways casual relationships never can; committing to a craft creates mastery; committing to values creates peace. The fear of missing out is the guarantee of missing everything.",
+        hi: "अनंत विकल्पों की खोज — हमेशा choices खुले रखना, कभी पूरी तरह commit न करना — स्वतंत्रता जैसी लगती है लेकिन चिंता, उथलापन, और अफ़सोस पैदा करती है। Commitment ही स्वतंत्रता पैदा करती है: किसी partner के प्रति commitment प्रेम को गहरा करती है; एक craft के प्रति commitment mastery बनाती है। FOMO का डर सब कुछ miss करने की गारंटी है।",
+        quote: '"Commitment gives you freedom because you\'re no longer distracted by the unimportant." — Mark Manson'
+      }
+    ]
+  }
 };
