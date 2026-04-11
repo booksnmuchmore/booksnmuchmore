@@ -615,12 +615,7 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg",
     heroDesc: "From the Japanese island of Okinawa — home to the world's longest-living people — comes a timeless philosophy of purpose, simplicity, and daily joy. Here are 10 lessons from Ikigai that will help you find your reason for being.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/178633089X",
-      US: "https://www.amazon.com/dp/0143130722",
-      CA: "https://www.amazon.ca/dp/0143130722"
-    },
-    lessons: [
+        lessons: [
       {
         title: "Find Your Ikigai — Your Reason for Getting Up",
         en: "Ikigai is the Japanese concept for 'reason for being' — the sweet spot where what you love, what you are good at, what the world needs, and what you can be paid for all intersect. The Okinawans don't retire because they never stop doing what gives their life meaning. Finding your ikigai is not a luxury — it is a necessity for a long and fulfilled life.",
@@ -694,11 +689,7 @@ const BOOKS_DATA = {
     rating: "★★★★☆",
     cover: "https://covers.openlibrary.org/b/isbn/9780525538585-L.jpg",
     heroDesc: "Productivity advice has always focused on managing time — but time is not your scarcest resource. Your mind is. David Kadavy reveals how to work with your mental energy, not against it, and create more in less time.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/0525538585",
-      US: "https://www.amazon.com/dp/0525538585",
-      CA: "https://www.amazon.ca/dp/0525538585"
-    },
+   
     lessons: [
       {
         title: "Manage Your Mind, Not Your Clock",
@@ -773,11 +764,7 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9780857197689-L.jpg",
     heroDesc: "Doing well with money has little to do with how smart you are and a lot to do with how you behave. Morgan Housel's modern classic reveals the hidden psychological forces that drive our financial decisions — and how to master them.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/9390166268",
-      US: "https://www.amazon.com/dp/0857197681",
-      CA: "https://www.amazon.ca/dp/0857197681"
-    },
+    
     lessons: [
       {
         title: "No One Is Crazy — Your Financial Choices Make Sense to You",
@@ -852,11 +839,7 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9780062515674-L.jpg",
     heroDesc: "A fable about a high-powered lawyer who collapses in a courtroom, sells everything, travels to India, and returns with the secrets of a joyful and purposeful life. Here are the 10 most powerful lessons from Robin Sharma's beloved classic.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/8172234104",
-      US: "https://www.amazon.com/dp/0062515675",
-      CA: "https://www.amazon.ca/dp/0062515675"
-    },
+    
     lessons: [
       {
         title: "Master Your Mind — The Garden Within",
@@ -931,11 +914,7 @@ const BOOKS_DATA = {
     rating: "★★★★☆",
     cover: "https://covers.openlibrary.org/b/isbn/9781608680900-L.jpg",
     heroDesc: "In a world obsessed with results, Thomas Sterner makes a radical argument: the process is the point. Here are 10 lessons on how to develop patience, focus, and the joy of deliberate practice.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/1608680908",
-      US: "https://www.amazon.com/dp/1608680908",
-      CA: "https://www.amazon.ca/dp/1608680908"
-    },
+    
     lessons: [
       {
         title: "Process Over Outcome — The Present Is the Goal",
@@ -1010,11 +989,7 @@ const BOOKS_DATA = {
     rating: "★★★★★",
     cover: "https://covers.openlibrary.org/b/isbn/9781591843160-L.jpg",
     heroDesc: "The old social contract — follow the rules, show up, and get a safe job — is broken. Seth Godin makes the case for becoming indispensable: an artist, a giver, a linchpin. Here are 10 lessons that will change how you think about your work.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/0749953357",
-      US: "https://www.amazon.com/dp/1591843162",
-      CA: "https://www.amazon.ca/dp/1591843162"
-    },
+    
     lessons: [
       {
         title: "Be a Linchpin — The Indispensable Human",
@@ -1089,11 +1064,7 @@ const BOOKS_DATA = {
     rating: "★★★★☆",
     cover: "https://covers.openlibrary.org/b/isbn/9780062457714-L.jpg",
     heroDesc: "A counterintuitive approach to living a good life. Mark Manson argues that the key to happiness is not positivity — it is choosing what to care about carefully and embracing life's inevitable struggles. Here are 10 lessons that cut through the noise.",
-    amazon: {
-      IN: "https://www.amazon.in/dp/0062457713",
-      US: "https://www.amazon.com/dp/0062457713",
-      CA: "https://www.amazon.ca/dp/0062457713"
-    },
+    
     lessons: [
       {
         title: "Not Giving a F*ck Does Not Mean Indifference",
