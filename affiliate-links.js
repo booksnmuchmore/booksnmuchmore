@@ -26,7 +26,7 @@ const BOOK_LINKS = {
   },
 
   "rich-dad-poor-dad": {
-    IN: "https://www.amazon.in/dp/1612680194",
+    IN: "https://www.amazon.in/Rich-Dad-Poor-Middle-Anniversary/dp/1612681131",
     US: "https://www.amazon.com/dp/1612680194",
     CA: "https://www.amazon.ca/dp/1612680194"
   },
