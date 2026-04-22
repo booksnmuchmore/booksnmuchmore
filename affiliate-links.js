@@ -16,8 +16,8 @@ const AFFILIATE_TAGS = {
   IN: "booksnmuchm02-21",
   US: "booksnmuchmor-20",
   CA: "booksnmuchm08-20",
-  GB: "YOUR-UK-TAG-HERE",   // ← replace after Amazon UK Associates approval
-  DE: "YOUR-DE-TAG-HERE"    // ← replace after Amazon DE Associates approval
+  GB: "booksnmuchm08-21",
+  DE: "booksnmuchm0f-21"
 };
 
 // Base dp/ URLs per marketplace — no trailing slash
