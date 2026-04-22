@@ -196,11 +196,11 @@ const BOOK_LINKS = {
   },
 
   "lifes-amazing-secrets": {
-    IN: "https://www.amazon.in/dp/0143441779",
-    US: "https://www.amazon.com/dp/0143441779",
-    CA: "https://www.amazon.ca/dp/0143441779",
-    GB: "0143441779",
-    DE: "0143441779"
+    IN: "https://www.amazon.in/dp/0143442295",
+    US: "https://www.amazon.com/dp/0143442295",
+    CA: "https://www.amazon.ca/dp/0143442295",
+    GB: "0143442295",
+    DE: "0143442295"
   }
 
 };

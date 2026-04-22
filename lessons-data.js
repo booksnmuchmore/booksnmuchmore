@@ -1138,7 +1138,7 @@ const BOOKS_DATA = {
     author: "Gaur Gopal Das",
     genre: "Spirituality · Self-Help",
     rating: "★★★★★",
-    cover: "https://covers.openlibrary.org/b/isbn/9780143441779-L.jpg",
+    cover: "https://covers.openlibrary.org/b/isbn/9780143442295-L.jpg",
     heroDesc: "A monk, a billionaire, and a conversation that changes everything. Gaur Gopal Das blends ancient wisdom with modern storytelling to reveal the secrets to a balanced, purposeful, and joyful life. Here are 10 lessons that will make you pause and reflect.",
 
     lessons: [
