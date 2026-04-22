@@ -1128,4 +1128,80 @@ const BOOKS_DATA = {
       }
     ]
   }
+,
+
+  "lifes-amazing-secrets": {
+    live: true,
+    slug: "lifes-amazing-secrets",
+    title: "Life's Amazing Secrets",
+    titleHtml: "Life's <em>Amazing Secrets</em>",
+    author: "Gaur Gopal Das",
+    genre: "Spirituality · Self-Help",
+    rating: "★★★★★",
+    cover: "https://covers.openlibrary.org/b/isbn/9780143441779-L.jpg",
+    heroDesc: "A monk, a billionaire, and a conversation that changes everything. Gaur Gopal Das blends ancient wisdom with modern storytelling to reveal the secrets to a balanced, purposeful, and joyful life. Here are 10 lessons that will make you pause and reflect.",
+
+    lessons: [
+      {
+        title: "Life Is a Wheel — Balance All Four Dimensions",
+        en: "Gaur Gopal Das uses the metaphor of a car wheel to explain life. Just as a car cannot run smoothly on a flat tyre, life cannot be truly fulfilling if any of its four dimensions — personal life, relationships, work, and social contribution — is neglected. True success is not about excelling in one area; it is about maintaining a conscious, ongoing balance across all four.",
+        hi: "Gaur Gopal Das ज़िंदगी को एक कार के पहिये से compare करते हैं। जैसे flat tyre पर कार ठीक से नहीं चलती, वैसे ही अगर ज़िंदगी के चार dimensions — personal life, relationships, work और social contribution — में से कोई एक भी नज़रअंदाज़ हो जाए, तो जीवन पूरा नहीं होता। असली सफलता एक क्षेत्र में चमकना नहीं — चारों में संतुलन बनाए रखना है।",
+        quote: `"A car with one flat tyre will not take you far, no matter how powerful the engine." — Gaur Gopal Das`
+      },
+      {
+        title: "Your Environment Shapes You — Choose It Wisely",
+        en: "We often underestimate how deeply our surroundings influence who we become. The people we spend time with, the content we consume, and the spaces we inhabit all quietly sculpt our thoughts, habits, and identity. Das teaches that just as a seed needs the right soil to grow, a human being needs the right environment to flourish. Be intentional about your associations.",
+        hi: "हम अक्सर यह नहीं समझ पाते कि हमारा माहौल हमें कितना गहराई से आकार देता है। जिन लोगों के साथ हम समय बिताते हैं, जो content हम consume करते हैं, जिन जगहों पर हम रहते हैं — ये सब मिलकर हमारी सोच, आदतें और पहचान बनाते हैं। Das सिखाते हैं कि जैसे एक बीज को अच्छी मिट्टी चाहिए, वैसे ही इंसान को सही माहौल। अपनी संगत को सोच-समझकर चुनें।",
+        quote: `"Show me your friends and I will show you your future." — Gaur Gopal Das`
+      },
+      {
+        title: "Gratitude Is the Gateway to Happiness",
+        en: "Most of us spend our lives chasing what we do not have, completely blind to the abundance already around us. Das argues that gratitude is not a passive emotion — it is an active practice that rewires the mind. When you train yourself to look for what is good, you find that life was always richer than you thought. Gratitude does not deny problems; it refuses to be consumed by them.",
+        hi: "हम में से ज़्यादातर लोग वो पाने में लगे रहते हैं जो नहीं है — और जो है उसे देखते ही नहीं। Das कहते हैं कि gratitude कोई passive भावना नहीं — यह एक active अभ्यास है जो मन को नए सिरे से train करता है। जब आप अच्छा देखने की आदत डालते हैं, तो पाते हैं कि ज़िंदगी हमेशा से आपके सोचने से ज़्यादा समृद्ध थी। Gratitude समस्याओं को नकारती नहीं — बस उनमें डूबने से इनकार करती है।",
+        quote: `"Gratitude turns what we have into enough." — Gaur Gopal Das`
+      },
+      {
+        title: "Relationships Need Investment, Not Just Intention",
+        en: "Wanting to be a good spouse, parent, or friend is not enough. Das emphasises that relationships are like bank accounts — they require consistent deposits of time, attention, and care. We often give our best energy to our careers and hand the leftovers to the people we love most. The relationships that matter most deserve to be treated as a priority, not an afterthought.",
+        hi: "एक अच्छा जीवनसाथी, माता-पिता या मित्र बनने की चाहत काफी नहीं होती। Das इस बात पर ज़ोर देते हैं कि रिश्ते bank accounts की तरह होते हैं — उनमें समय, ध्यान और प्रेम की regular जमापूंजी चाहिए। हम अक्सर अपनी सबसे अच्छी ऊर्जा career को देते हैं और जो बचता है वो अपने प्रियजनों को। जो रिश्ते सबसे ज़्यादा मायने रखते हैं, उन्हें priority दें — afterthought नहीं।",
+        quote: `"Time is the greatest gift you can give someone. It cannot be bought or returned." — Gaur Gopal Das`
+      },
+      {
+        title: "The Meaning of Work — Serve, Don't Just Earn",
+        en: "Das challenges the conventional view of work as merely a means to earn money. Work, he says, becomes deeply fulfilling when it is seen as an act of service — to your team, your customers, your community. When you shift from 'what can I get' to 'what can I give', the very nature of your work transforms. Purpose and pay are not opposites; purpose makes the pay feel worth something.",
+        hi: "Das काम को सिर्फ पैसे कमाने का ज़रिया मानने की सोच को चुनौती देते हैं। काम तब गहरी तृप्ति देता है जब उसे सेवा के रूप में देखा जाए — अपनी team के लिए, customers के लिए, समाज के लिए। जब आप 'मुझे क्या मिलेगा' से 'मैं क्या दे सकता हूँ' की तरफ shift करते हैं, तो काम की प्रकृति ही बदल जाती है। Purpose और paycheque विरोधी नहीं हैं — purpose उसे मायने देता है।",
+        quote: `"The purpose of life is not to be happy. It is to be useful, to be honourable, to be compassionate." — Gaur Gopal Das`
+      },
+      {
+        title: "Respond, Don't React — The Space Between Stimulus and Action",
+        en: "Between every event and our response to it, there is a tiny gap — and in that gap lies our freedom. Most of us react automatically, driven by emotion, ego, and habit. Das teaches that the practice of pausing — even for a breath — before responding is one of the most powerful things a human being can cultivate. Reaction is impulse; response is wisdom.",
+        hi: "हर घटना और उस पर हमारी प्रतिक्रिया के बीच एक छोटा-सा अंतर होता है — और उसी अंतर में हमारी स्वतंत्रता छुपी है। हम में से ज़्यादातर लोग emotion, ego और आदत से driven होकर automatically react करते हैं। Das सिखाते हैं कि जवाब देने से पहले एक पल रुकना — एक साँस लेना भी — सबसे शक्तिशाली आदतों में से एक है। React करना impulse है; respond करना wisdom है।",
+        quote: `"Between stimulus and response there is a space. In that space is our power to choose our response." — Gaur Gopal Das`
+      },
+      {
+        title: "Ego Is the Enemy of Growth",
+        en: "Das speaks extensively about the ego — not in the psychological sense, but as the false sense of superiority that blinds us to our own flaws and closes our minds to learning. The ego tells us we already know enough, that we are above criticism, that others' success diminishes ours. True growth begins only when the ego is set aside and we approach life with the humility of a student.",
+        hi: "Das ego के बारे में गहराई से बात करते हैं — psychological नहीं, बल्कि उस झूठी श्रेष्ठता की भावना के रूप में जो हमें अपनी कमियाँ देखने से अंधा करती है और सीखने से रोकती है। Ego हमें बताता है कि हम पहले से काफी जानते हैं, कि हम आलोचना से ऊपर हैं, कि दूसरे की सफलता हमारी कमी है। असली विकास तब शुरू होता है जब ego को एक तरफ रखकर हम एक छात्र की तरह겸손ता से जीते हैं।",
+        quote: `"Humility is not thinking less of yourself; it is thinking of yourself less." — Gaur Gopal Das`
+      },
+      {
+        title: "Forgiveness Is a Gift You Give Yourself",
+        en: "Holding onto anger and resentment is like drinking poison and expecting the other person to suffer. Das teaches that forgiveness is not about excusing wrongdoing — it is about freeing yourself from the burden of carrying pain. Unforgiveness keeps you chained to a past that is already gone. Letting go is not weakness; it is one of the greatest acts of self-respect and strength.",
+        hi: "क्रोध और रंजिश को थामे रखना ऐसा है जैसे खुद ज़हर पियें और उम्मीद रखें कि दूसरे को तकलीफ हो। Das सिखाते हैं कि माफी गलती को सही ठहराना नहीं है — यह खुद को उस दर्द के बोझ से मुक्त करना है। माफ न करना आपको एक बीते हुए अतीत से बाँधे रखता है। छोड़ देना कमज़ोरी नहीं है — यह आत्म-सम्मान और शक्ति का सबसे बड़ा कार्य है।",
+        quote: `"Forgiveness is the fragrance the violet sheds on the heel that has crushed it." — Gaur Gopal Das`
+      },
+      {
+        title: "Social Contribution — Your Life Is Not Just About You",
+        en: "The fourth dimension of the wheel of life — social contribution — is the one most people neglect entirely. Das argues that a life lived only for personal gain is ultimately hollow, no matter how much is accumulated. When we contribute to something larger than ourselves — a community, a cause, the wellbeing of others — we tap into a source of meaning that personal achievement alone can never provide.",
+        hi: "ज़िंदगी के पहिये का चौथा dimension — social contribution — वो है जिसे ज़्यादातर लोग पूरी तरह नज़रअंदाज़ करते हैं। Das का तर्क है कि सिर्फ खुद के लिए जीया गया जीवन अंततः खोखला होता है, चाहे कितना भी जमा कर लो। जब हम अपने से बड़ी किसी चीज़ में योगदान देते हैं — एक community, एक cause, दूसरों की भलाई — तो हम अर्थ के उस स्रोत को छूते हैं जो personal achievement अकेले कभी नहीं दे सकती।",
+        quote: `"We make a living by what we get, but we make a life by what we give." — Gaur Gopal Das`
+      },
+      {
+        title: "Spirituality Is Not Escapism — It Is the Deepest Engagement With Life",
+        en: "Many people associate spirituality with withdrawal from the world — monasteries, silence, and renunciation. Das, himself a monk who operates fully in the modern world, dismantles this idea completely. Spirituality, he teaches, is not about escaping life; it is about engaging with it more fully, more consciously, and with greater love. You do not need to leave the world to find inner peace — you need to bring inner peace into the world.",
+        hi: "बहुत से लोग spirituality को दुनिया से भागने से जोड़ते हैं — monasteries, मौन और त्याग। Das, जो खुद एक monk हैं और आधुनिक दुनिया में पूरी तरह engaged हैं, इस विचार को पूरी तरह तोड़ते हैं। Spirituality जीवन से भागना नहीं है — यह उससे और ज़्यादा पूर्णता, चेतनता और प्रेम के साथ जुड़ना है। आपको भीतर की शांति ढूँढने के लिए दुनिया छोड़ने की ज़रूरत नहीं — आपको उस शांति को दुनिया में लाना है।",
+        quote: `"You don't have to be in a temple to find God. You can find the divine in every moment of sincere service." — Gaur Gopal Das`
+      }
+    ]
+  }
 };

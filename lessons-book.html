@@ -46,7 +46,8 @@
       "how-to-win-friends":               "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg",
       "7-habits-of-highly-effective-people": "https://covers.openlibrary.org/b/isbn/9781982137137-L.jpg",
       "deep-work":                        "https://m.media-amazon.com/images/I/71QKQ9mwV7L._SY466_.jpg",
-      "tools-of-titans":                  "https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg"
+      "tools-of-titans":                  "https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg",
+      "lifes-amazing-secrets":            "https://covers.openlibrary.org/b/isbn/9780143441779-L.jpg"
     };
 
     const OG_TITLES = {
@@ -57,7 +58,8 @@
       "how-to-win-friends":               "How to Win Friends — Top 10 Lessons",
       "7-habits-of-highly-effective-people": "7 Habits of Highly Effective People — Top 10 Lessons",
       "deep-work":                        "Deep Work — Top 10 Lessons",
-      "tools-of-titans":                  "Tools of Titans — Top 10 Lessons"
+      "tools-of-titans":                  "Tools of Titans — Top 10 Lessons",
+      "lifes-amazing-secrets":            "Life's Amazing Secrets — Top 10 Lessons"
     };
 
     const OG_DESCS = {
@@ -68,7 +70,8 @@
       "how-to-win-friends":               "Dale Carnegie की इस classic के 10 timeless lessons — Hindi & English में | Books 'n' Much More",
       "7-habits-of-highly-effective-people": "Stephen Covey की 7 Habits के 10 powerful lessons — Hindi & English में | Books 'n' Much More",
       "deep-work":                        "Cal Newport की Deep Work के 10 focus-changing lessons — Hindi & English में | Books 'n' Much More",
-      "tools-of-titans":                  "Tim Ferriss की Tools of Titans के 10 powerful lessons — Billionaires और World-Class Performers के रहस्य | Books 'n' Much More"
+      "tools-of-titans":                  "Tim Ferriss की Tools of Titans के 10 powerful lessons — Billionaires और World-Class Performers के रहस्य | Books 'n' Much More",
+      "lifes-amazing-secrets":            "Gaur Gopal Das की Life's Amazing Secrets के 10 जीवन-बदलने वाले lessons — संतुलन, रिश्ते और आत्मिक शांति | Books 'n' Much More"
     };
 
     (function() {
@@ -222,15 +225,9 @@
   }
 
   function geoUrl(slug) {
-    const links = BOOK_LINKS[slug];
-    if (!links) return '#';
-    const tag  = userCountry === 'IN' ? AFFILIATE_TAGS.IN
-               : userCountry === 'CA' ? AFFILIATE_TAGS.CA
-               : AFFILIATE_TAGS.US;
-    const base = userCountry === 'IN' ? links.IN
-               : userCountry === 'CA' ? links.CA
-               : links.US;
-    return base + '?tag=' + tag;
+    if (!BOOK_LINKS[slug]) return '#';
+    // buildAffiliateLink is defined in affiliate-links.js (single source of truth)
+    return buildAffiliateLink(slug, userCountry || 'US');
   }
 
   function openAmazon(slug) { window.open(geoUrl(slug), '_blank'); }
@@ -318,7 +315,7 @@
             <h3>${book.title}</h3>
             <p>${book.author} &nbsp;·&nbsp; ${book.genre} &nbsp;·&nbsp; ${book.rating}</p>
             <button class="buy-btn" id="strip-buy-btn">🛒 Buy on Amazon →</button>
-            <p class="affiliate-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* Affiliate link — आपकी कोई extra cost नहीं 🙏</p>
+            <p class="affiliate-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🇬🇧 UK · 🇩🇪 Germany · 🌍 Others → Amazon.com<br/>* Affiliate link — आपकी कोई extra cost नहीं 🙏</p>
           </div>
         </div>
       </div>
@@ -332,7 +329,7 @@
         <h3>Ready to Read the Full Book?</h3>
         <p>These 10 lessons are just the surface. The real transformation happens when you read every page yourself.</p>
         <button class="buy-btn" id="bottom-buy-btn" style="font-size:1rem;padding:.75rem 2.2rem;">📦 Buy on Amazon →</button>
-        <p style="margin-top:.8rem;font-size:.78rem;color:#a0907a;">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com<br/>* Affiliate link — no extra cost to you. Your purchase supports this channel. 🙏</p>
+        <p style="margin-top:.8rem;font-size:.78rem;color:#a0907a;">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🇬🇧 UK · 🇩🇪 Germany · 🌍 Others → Amazon.com<br/>* Affiliate link — no extra cost to you. Your purchase supports this channel. 🙏</p>
       </div>
 
       <div class="more-books">
