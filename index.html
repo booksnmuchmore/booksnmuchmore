@@ -142,11 +142,28 @@
     .reveal-delay-1{transition-delay:0.15s;}
     .reveal-delay-2{transition-delay:0.3s;}
     .reveal-delay-3{transition-delay:0.45s;}
+    .ebook-banner{position:fixed;top:0;left:0;right:0;z-index:600;background:linear-gradient(90deg,var(--sienna) 0%,var(--amber) 50%,var(--sienna) 100%);padding:0.45rem 6%;display:flex;align-items:center;justify-content:center;gap:1.2rem;box-shadow:0 2px 12px rgba(44,26,14,0.25);}
+    .ebook-banner-text{font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0.92;}
+    .ebook-banner-text strong{font-weight:700;opacity:1;}
+    .ebook-banner-cta{font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);background:#fff;padding:0.28rem 0.9rem;border-radius:2px;text-decoration:none;white-space:nowrap;transition:background 0.2s,color 0.2s;flex-shrink:0;}
+    .ebook-banner-cta:hover{background:var(--gold);color:var(--ink);}
+    .ebook-banner-close{margin-left:0.4rem;background:none;border:none;color:rgba(255,255,255,0.55);font-size:1rem;cursor:pointer;line-height:1;padding:0 0.2rem;transition:color 0.2s;flex-shrink:0;}
+    .ebook-banner-close:hover{color:#fff;}
+    body.banner-active nav{top:32px;}
+    body.banner-active #home{padding-top:9.5rem;}
+    @media(max-width:600px){.ebook-banner{padding:0.4rem 4%;gap:0.6rem;}.ebook-banner-text{font-size:0.62rem;letter-spacing:0.06em;}.ebook-banner-cta{font-size:0.62rem;padding:0.22rem 0.65rem;}body.banner-active nav{top:30px;}body.banner-active #home{padding-top:11rem;}}
     @media(max-width:900px){.hero-inner{grid-template-columns:1fr;}.hero-visual{display:none;}.about-inner{grid-template-columns:1fr;}.stories-grid{grid-template-columns:1fr 1fr;}.story-card.featured{grid-column:span 2;}.books-promo-grid{grid-template-columns:repeat(3,1fr);}.lessons-grid{grid-template-columns:1fr 1fr;}.lsn-card.lsn-featured{grid-column:span 2;}}
     @media(max-width:600px){nav{padding:1rem 4%;}.nav-links{display:none;}section{padding:4rem 4%;}.stories-grid{grid-template-columns:1fr;}.story-card.featured{grid-column:auto;}.subscribe-form{flex-direction:column;}.books-promo-grid{grid-template-columns:repeat(2,1fr);}.books-cta-strip{flex-direction:column;text-align:center;}.lessons-grid{grid-template-columns:1fr;}.lsn-card.lsn-featured{grid-column:auto;}.lessons-cta-strip{flex-direction:column;text-align:center;}}
   </style>
 </head>
 <body>
+
+  <!-- eBook Banner -->
+  <div class="ebook-banner" id="ebookBanner">
+    <span class="ebook-banner-text">📖 <strong>Free eBook:</strong> 5 Books That Changed How I Think &amp; Live</span>
+    <a href="ebook.html" class="ebook-banner-cta">Get It Free →</a>
+    <button class="ebook-banner-close" onclick="closeBanner()" aria-label="Close">&times;</button>
+  </div>
 
   <nav id="navbar"></nav>
 
@@ -417,6 +434,20 @@
       document.getElementById('successMsg').style.display='block';
       document.querySelector('.subscribe-form').style.display='none';
       setTimeout(()=>{window.open(SITE.googleFormUrl,'_blank');},800);
+    }
+
+    // eBook banner
+    (function(){
+      if(!sessionStorage.getItem('ebookBannerClosed')){
+        document.body.classList.add('banner-active');
+      } else {
+        document.getElementById('ebookBanner').style.display='none';
+      }
+    })();
+    function closeBanner(){
+      document.getElementById('ebookBanner').style.display='none';
+      document.body.classList.remove('banner-active');
+      sessionStorage.setItem('ebookBannerClosed','1');
     }
 
     // Detect country then render books with affiliate links

@@ -858,34 +858,56 @@
 </footer>
 
 <script>
-  function handleDownload(inputId, successId) {
-    const email = document.getElementById(inputId).value.trim();
-    const successEl = document.getElementById(successId);
+  // ── Replace with your Google Apps Script Web App URL after deploying ──
+  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
-    if (!email || !email.includes('@')) {
-      document.getElementById(inputId).style.borderColor = 'rgba(139,58,42,0.7)';
-      document.getElementById(inputId).placeholder = 'Please enter a valid email';
+  async function handleDownload(inputId, successId) {
+    const emailEl  = document.getElementById(inputId);
+    const successEl = document.getElementById(successId);
+    const email = emailEl.value.trim();
+    const btn = emailEl.nextElementSibling;
+
+    // Validate
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      emailEl.style.borderColor = 'rgba(139,58,42,0.8)';
+      emailEl.placeholder = 'Please enter a valid email';
       setTimeout(() => {
-        document.getElementById(inputId).style.borderColor = '';
-        document.getElementById(inputId).placeholder = 'your@email.com';
+        emailEl.style.borderColor = '';
+        emailEl.placeholder = 'your@email.com';
       }, 2000);
       return;
     }
 
-    // Show success + trigger download
-    successEl.style.display = 'block';
-    document.getElementById(inputId).parentElement.style.display = 'none';
+    // Loading state
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
 
-    // Auto-trigger download
+    try {
+      // Send to Apps Script (which securely calls Brevo)
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+        mode: "no-cors"   // Apps Script requires no-cors
+      });
+    } catch (err) {
+      // no-cors means we won't get a readable response — that's fine
+      // fetch itself won't throw unless there's a network failure
+      console.warn("Fetch note:", err);
+    }
+
+    // Show success message regardless (download should always work)
+    emailEl.parentElement.style.display = 'none';
+    successEl.style.display = 'block';
+
+    // Auto-trigger PDF download
     const link = document.createElement('a');
     link.href = 'my-reading-journey-booksnmuchmore.pdf';
     link.download = 'My-Reading-Journey-BooksNMuchMore.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    // In production: send email to your backend / Mailchimp here
-    console.log('Email captured:', email);
   }
 
   // Enter key support
