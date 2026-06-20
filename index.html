@@ -222,6 +222,38 @@ nav.scrolled{padding:0.75rem 6%;}
 .lsn-cta:hover{color:var(--amber);}
 .lsn-cta.disabled{color:var(--muted);pointer-events:none;}
 
+/* ── SUBSCRIPTION PROMO ───────────────────────────────────── */
+#subscription-promo{padding:4rem 6%;background:linear-gradient(135deg,var(--ink) 0%,var(--sienna) 100%);}
+.sub-promo-inner{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:center;
+}
+.sub-promo-title{
+  font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:800;color:var(--parchment);line-height:1.25;margin-bottom:0.9rem;
+}
+.sub-promo-title em{color:var(--gold);font-style:italic;}
+.sub-promo-desc{font-size:0.92rem;line-height:1.85;color:rgba(245,236,215,0.75);}
+.sub-promo-card{
+  background:var(--cream);border-radius:var(--card-radius);padding:1.8rem;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;
+}
+.sub-promo-price{
+  font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:var(--sienna);margin-bottom:0.8rem;
+}
+.sub-promo-price span{font-size:1rem;font-weight:500;color:var(--muted);}
+.sub-promo-list{list-style:none;text-align:left;margin-bottom:1.3rem;}
+.sub-promo-list li{font-size:0.85rem;color:var(--ink);padding:0.4rem 0;border-bottom:1px solid rgba(200,129,58,0.15);}
+.sub-promo-list li:last-child{border-bottom:none;}
+.sub-promo-btn{width:100%;justify-content:center;font-size:0.78rem;padding:0.75rem 1rem;}
+
+@media(max-width:900px){
+  .sub-promo-inner{grid-template-columns:1fr;}
+}
+@media(max-width:720px){
+  #subscription-promo{padding:3rem 4%;}
+}
+
 /* ── STORIES — compact strip ───────────────────────────── */
 #stories{padding:4.5rem 6%;background:var(--cream);}
 
@@ -438,6 +470,26 @@ footer{
   </div>
 </section>
 
+<!-- ── SUBSCRIPTION CTA — placed after Lessons, highest-intent moment ── -->
+<section id="subscription-promo">
+  <div class="sub-promo-inner">
+    <div class="sub-promo-text">
+      <div class="section-label" style="color:var(--gold);">💎 Unlimited Access</div>
+      <h2 class="sub-promo-title">सारी Lessons, <em>सारी Books</em> — एक ही Subscription में</h2>
+      <p class="sub-promo-desc">हर lesson के पहले 2 हिस्से हमेशा free हैं। बाकी unlock करें ₹1/lesson या ₹7/book में — या फिर सिर्फ ₹99/month में पूरी library access करें, बिना कुछ अलग से खरीदे।</p>
+    </div>
+    <div class="sub-promo-card">
+      <div class="sub-promo-price">₹99<span>/month</span></div>
+      <ul class="sub-promo-list">
+        <li>✓ सभी 16 books के सभी lessons</li>
+        <li>✓ नई books जुड़ते ही access</li>
+        <li>✓ कभी भी cancel करें</li>
+      </ul>
+      <button class="btn-primary sub-promo-btn" onclick="BNMPayments.subscribeMonthly()">Subscribe Now — ₹99/month</button>
+    </div>
+  </div>
+</section>
+
 <!-- ── STORIES ───────────────────────────────────────── -->
 <section id="stories">
   <div class="section-header">
@@ -512,6 +564,10 @@ footer{
 
 <footer id="footer"></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="auth.js"></script>
+<script src="payments.js"></script>
 <script src="site-data.js"></script>
 <script>
 const RAW = SITE.rawBase + '/episodes/';

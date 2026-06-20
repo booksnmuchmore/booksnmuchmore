@@ -8,7 +8,9 @@
 
   <!-- ══════════════════════════════════════════════════════════
        Open Graph / WhatsApp / Twitter Preview Tags
-       Static defaults here; per-book values injected below
+       Static defaults here; per-book values injected via JS
+       once Supabase data loads (no more hardcoded OG_* maps —
+       those lived in lessons-data.js, now retired)
        ══════════════════════════════════════════════════════════ -->
   <meta property="og:type"        content="website"/>
   <meta property="og:site_name"   content="Books 'n' Much More"/>
@@ -30,87 +32,22 @@
   <meta name="twitter:image"      id="tw-image"
         content="https://booksnmuchmore.com/og-default.jpg"/>
 
-  <!-- ══════════════════════════════════════════════════════════
-       EARLY OG INJECTOR
-       Reads ?book= from the URL and immediately overwrites the
-       OG tags above with per-book values — before the page
-       finishes loading. WhatsApp's crawler sees these values.
-       ══════════════════════════════════════════════════════════ -->
-  <script>
-    // Book cover map — must mirror lessons-data.js covers
-    const OG_COVERS = {
-      "think-and-grow-rich":              "https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg",
-      "atomic-habits":                    "https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg",
-      "the-alchemist":                    "https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg",
-      "rich-dad-poor-dad":                "https://m.media-amazon.com/images/I/81BE7eeKzAL._SY466_.jpg",
-      "how-to-win-friends":               "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg",
-      "7-habits-of-highly-effective-people": "https://covers.openlibrary.org/b/isbn/9781982137137-L.jpg",
-      "deep-work":                        "https://m.media-amazon.com/images/I/71QKQ9mwV7L._SY466_.jpg",
-      "tools-of-titans":                  "https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg",
-      "lifes-amazing-secrets":            "https://covers.openlibrary.org/b/isbn/9780143442295-L.jpg"
-    };
-
-    const OG_TITLES = {
-      "think-and-grow-rich":              "Think and Grow Rich — Top 10 Lessons",
-      "atomic-habits":                    "Atomic Habits — Top 10 Lessons",
-      "the-alchemist":                    "The Alchemist — Top 10 Lessons",
-      "rich-dad-poor-dad":                "Rich Dad Poor Dad — Top 10 Lessons",
-      "how-to-win-friends":               "How to Win Friends — Top 10 Lessons",
-      "7-habits-of-highly-effective-people": "7 Habits of Highly Effective People — Top 10 Lessons",
-      "deep-work":                        "Deep Work — Top 10 Lessons",
-      "tools-of-titans":                  "Tools of Titans — Top 10 Lessons",
-      "lifes-amazing-secrets":            "Life's Amazing Secrets — Top 10 Lessons"
-    };
-
-    const OG_DESCS = {
-      "think-and-grow-rich":              "Napoleon Hill की इस किताब के 10 सबसे शक्तिशाली lessons — Hindi & English में | Books 'n' Much More",
-      "atomic-habits":                    "James Clear की Atomic Habits के 10 life-changing lessons — Hindi & English में | Books 'n' Much More",
-      "the-alchemist":                    "Paulo Coelho की The Alchemist के 10 गहरे lessons — Hindi & English में | Books 'n' Much More",
-      "rich-dad-poor-dad":                "Robert Kiyosaki की Rich Dad Poor Dad के 10 financial lessons — Hindi & English में | Books 'n' Much More",
-      "how-to-win-friends":               "Dale Carnegie की इस classic के 10 timeless lessons — Hindi & English में | Books 'n' Much More",
-      "7-habits-of-highly-effective-people": "Stephen Covey की 7 Habits के 10 powerful lessons — Hindi & English में | Books 'n' Much More",
-      "deep-work":                        "Cal Newport की Deep Work के 10 focus-changing lessons — Hindi & English में | Books 'n' Much More",
-      "tools-of-titans":                  "Tim Ferriss की Tools of Titans के 10 powerful lessons — Billionaires और World-Class Performers के रहस्य | Books 'n' Much More",
-      "lifes-amazing-secrets":            "Gaur Gopal Das की Life's Amazing Secrets के 10 जीवन-बदलने वाले lessons — संतुलन, रिश्ते और आत्मिक शांति | Books 'n' Much More"
-    };
-
-    (function() {
-      var slug = new URLSearchParams(window.location.search).get('book') || '';
-
-      function setMeta(id, val) {
-        var el = document.getElementById(id);
-        if (el && val) el.setAttribute('content', val);
-      }
-
-      if (slug && OG_COVERS[slug]) {
-        var title = (OG_TITLES[slug] || 'Book Lessons') + ' | Books \'n\' Much More';
-        var desc  = OG_DESCS[slug]  || 'Life-changing book lessons in Hindi and English';
-        var img   = OG_COVERS[slug];
-        var url   = 'https://booksnmuchmore.com/lessons-book.html?book=' + slug;
-
-        setMeta('og-title',  title);
-        setMeta('og-desc',   desc);
-        setMeta('og-image',  img);
-        setMeta('og-url',    url);
-        setMeta('tw-title',  title);
-        setMeta('tw-desc',   desc);
-        setMeta('tw-image',  img);
-
-        // Also update <title> early
-        document.getElementById('page-title').textContent = title;
-      }
-    })();
-  </script>
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TYDPW03BMW');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TYDPW03BMW');
+  </script>
+
+  <!-- Supabase + Razorpay + our auth/payments modules -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="auth.js"></script>
+  <script src="payments.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -130,9 +67,12 @@
     /* ── Nav ── */
     nav { background: var(--dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
     nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; }
-    nav ul { list-style: none; display: flex; gap: 1.8rem; }
+    nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; }
     nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; transition: color .2s; }
     nav ul a:hover, nav ul a.active { color: var(--amber-l); }
+    #nav-account-slot { font-size: .85rem; }
+    #nav-account-slot button { background: var(--amber); color: #fff; border: none; padding: .35rem .9rem; border-radius: 16px; font-size: .8rem; cursor: pointer; }
+    #nav-account-slot button:hover { background: #A06020; }
 
     /* ── Hero ── */
     .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 4rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
@@ -155,6 +95,21 @@
     .buy-btn:hover { background: #A06020; }
     .affiliate-note { font-size: .75rem; color: var(--lite); margin-top: .4rem; }
 
+    /* ── Pricing banner (new) ── */
+    .pricing-banner { max-width: 860px; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+    .pricing-banner-inner {
+      background: var(--dark); color: var(--parchment); border-radius: 14px;
+      padding: 1.1rem 1.6rem; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+    }
+    .pricing-banner-inner p { font-size: .88rem; color: #d9c9b0; }
+    .pricing-banner-inner p strong { color: var(--amber-l); }
+    .unlock-book-btn {
+      background: var(--amber-l); color: var(--dark); border: none; padding: .55rem 1.3rem;
+      border-radius: 20px; font-size: .85rem; font-weight: 600; cursor: pointer; transition: background .2s; white-space: nowrap;
+    }
+    .unlock-book-btn:hover { background: #fff; }
+
     /* ── Lessons ── */
     .lessons-wrap { max-width: 860px; margin: 3.5rem auto 4rem; padding: 0 1.5rem; }
     .lessons-wrap h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--dark); text-align: center; margin-bottom: 2.5rem; }
@@ -164,9 +119,18 @@
     .lesson-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: .8rem; }
     .lesson-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--amber-l); line-height: 1; flex-shrink: 0; }
     .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--dark); }
-    .lesson-en { font-size: .95rem; color: var(--brown); line-height: 1.8; margin-bottom: .8rem; }
-    .lesson-hi { font-size: .93rem; color: var(--mid); line-height: 1.8; border-top: 1px dashed var(--amber-l); padding-top: .7rem; }
+    .lesson-content { font-size: .95rem; color: var(--brown); line-height: 1.8; margin-bottom: .8rem; white-space: pre-line; }
     .lesson-quote { display: block; font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--amber); margin-top: .8rem; font-style: italic; }
+
+    /* ── Locked lesson state (new) ── */
+    .lesson.locked { border-left-color: var(--lite); background: #FBF3E7; }
+    .lesson.locked .lesson-number { color: var(--amber-xl); }
+    .lesson-teaser { font-size: .92rem; color: var(--mid); font-style: italic; margin-bottom: 1rem; }
+    .unlock-lesson-btn {
+      background: var(--amber); color: #fff; border: none; padding: .5rem 1.2rem;
+      border-radius: 18px; font-size: .82rem; cursor: pointer; transition: background .2s;
+    }
+    .unlock-lesson-btn:hover { background: #A06020; }
 
     /* ── Bottom CTA ── */
     .bottom-cta { background: linear-gradient(135deg, var(--dark), #6B3010); color: #fff; text-align: center; padding: 3rem 2rem; }
@@ -184,15 +148,16 @@
     footer { background: var(--dark); color: #aaa; text-align: center; padding: 1.5rem; font-size: .82rem; }
     footer a { color: var(--amber-l); text-decoration: none; }
 
-    /* ── Error state ── */
-    .error-state { text-align: center; padding: 6rem 2rem; }
-    .error-state h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 1rem; }
-    .error-state p { color: var(--mid); margin-bottom: 1.5rem; }
+    /* ── Error / loading state ── */
+    .error-state, .loading-state { text-align: center; padding: 6rem 2rem; }
+    .error-state h2, .loading-state h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 1rem; }
+    .error-state p, .loading-state p { color: var(--mid); margin-bottom: 1.5rem; }
     .error-state a { color: var(--amber); }
 
     @media (max-width: 600px) {
       .book-strip { flex-direction: column; text-align: center; }
       nav ul { gap: 1rem; }
+      .pricing-banner-inner { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -205,18 +170,18 @@
     <li><a href="stories.html">कहानियाँ</a></li>
     <li><a href="books.html">किताबें</a></li>
     <li><a href="lessons.html" class="active">📖 Lessons</a></li>
+    <li id="nav-account-slot"></li>
   </ul>
 </nav>
 
 <!-- Content injected by JS -->
-<div id="app"></div>
+<div id="app"><div class="loading-state"><h2>Loading…</h2></div></div>
 
-<!-- Load affiliate links (single source of truth) then data -->
+<!-- Single source of truth for affiliate links (unchanged) -->
 <script src="affiliate-links.js"></script>
-<script src="lessons-data.js"></script>
+
 <script>
   // ── Affiliate config — loaded from affiliate-links.js ─────
-  // AFFILIATE_TAGS and BOOK_LINKS are defined in affiliate-links.js
   let userCountry = null;
 
   async function detectCountry() {
@@ -225,43 +190,106 @@
   }
 
   function geoUrl(slug) {
-    if (!BOOK_LINKS[slug]) return '#';
-    // buildAffiliateLink is defined in affiliate-links.js (single source of truth)
     return buildAffiliateLink(slug, userCountry || 'US');
   }
 
   function openAmazon(slug) { window.open(geoUrl(slug), '_blank'); }
 
-  // ── Read slug from URL ?book=slug ─────────────────────────
   function getSlug() {
     const params = new URLSearchParams(window.location.search);
     return params.get('book') || '';
   }
 
-  // ── Pad lesson number ─────────────────────────────────────
   function pad(n) { return String(n).padStart(2, '0'); }
 
-  // ── Helper: set a meta tag's content by element id ────────
   function setMeta(id, val) {
     const el = document.getElementById(id);
     if (el && val) el.setAttribute('content', val);
   }
 
-  // ── Render ─────────────────────────────────────────────────
-  function render() {
+  // ── Nav account slot: shows "Login" or "Hi, <email>" + logout ──
+  async function renderNavAccount() {
+    const user = await BNMAuth.getUser();
+    const slot = document.getElementById('nav-account-slot');
+    if (user) {
+      slot.innerHTML = `<button onclick="BNMAuth.logout()">Logout</button>`;
+    } else {
+      slot.innerHTML = `<button onclick="BNMAuth.openModal()">Login</button>`;
+    }
+  }
+
+  // ── Render lessons (locked/unlocked) ──────────────────────
+  function renderLessonsHtml(lessons, book) {
+    return lessons.map(l => {
+      if (l.out_unlocked) {
+        return `
+          <div class="lesson">
+            <div class="lesson-header">
+              <span class="lesson-number">${pad(l.out_order_num)}</span>
+              <h3 class="lesson-title">${l.out_title}</h3>
+            </div>
+            <p class="lesson-content">${l.out_content}</p>
+          </div>`;
+      } else {
+        const safeTitle = l.out_title.replace(/'/g, "\\'");
+        return `
+          <div class="lesson locked">
+            <div class="lesson-header">
+              <span class="lesson-number">${pad(l.out_order_num)}</span>
+              <h3 class="lesson-title">${l.out_title}</h3>
+            </div>
+            <p class="lesson-teaser">${l.out_teaser || 'इस lesson को unlock करें पूरा content पढ़ने के लिए।'}</p>
+            <button class="unlock-lesson-btn"
+              onclick="BNMPayments.unlockLesson('${l.out_id}', ${l.out_price_rs}, '${book.title.replace(/'/g, "\\'")}', '${safeTitle}')">
+              🔒 Unlock for ₹${l.out_price_rs}
+            </button>
+          </div>`;
+      }
+    }).join('');
+  }
+
+  // ── Main render ────────────────────────────────────────────
+  async function render() {
     const slug = getSlug();
-    const book = BOOKS_DATA[slug];
     const app  = document.getElementById('app');
 
-    if (!book) {
+    if (!slug) {
       app.innerHTML = `
         <div class="error-state">
           <h2>Book Not Found</h2>
-          <p>We couldn't find lessons for "<strong>${slug || 'this book'}</strong>".</p>
+          <p>No book was specified.</p>
           <a href="lessons.html">← Back to All Lessons</a>
         </div>`;
       return;
     }
+
+    // Fetch book metadata
+    const { data: bookRows, error: bookError } = await BNMAuth.supabase
+      .rpc('get_book_by_slug', { p_slug: slug });
+
+    if (bookError || !bookRows || bookRows.length === 0) {
+      app.innerHTML = `
+        <div class="error-state">
+          <h2>Book Not Found</h2>
+          <p>We couldn't find lessons for "<strong>${slug}</strong>".</p>
+          <a href="lessons.html">← Back to All Lessons</a>
+        </div>`;
+      return;
+    }
+    const book = bookRows[0];
+
+    // Fetch lessons (paywall-aware)
+    const { data: lessons, error: lessonsError } = await BNMAuth.supabase
+      .rpc('get_lessons_for_book', { p_book_slug: slug });
+
+    if (lessonsError) {
+      console.error(lessonsError);
+      app.innerHTML = `<div class="error-state"><h2>Something went wrong</h2><p>Please try again shortly.</p></div>`;
+      return;
+    }
+
+    // Fetch list of other books for "more books" section
+    const { data: allBooks } = await BNMAuth.supabase.rpc('get_all_live_books');
 
     // ── Update <title>, description, and OG tags ───────────
     const pageTitle = `${book.title} — Top 10 Lessons | Books 'n' Much More`;
@@ -270,55 +298,60 @@
 
     document.getElementById('page-title').textContent = pageTitle;
     document.getElementById('page-desc').setAttribute('content', pageDesc);
-
     setMeta('og-title',  pageTitle);
     setMeta('og-desc',   pageDesc);
-    setMeta('og-image',  book.cover);
+    setMeta('og-image',  book.cover_url);
     setMeta('og-url',    pageUrl);
     setMeta('tw-title',  pageTitle);
     setMeta('tw-desc',   pageDesc);
-    setMeta('tw-image',  book.cover);
+    setMeta('tw-image',  book.cover_url);
 
-    // Build lessons HTML
-    const lessonsHtml = book.lessons.map((l, i) => `
-      <div class="lesson">
-        <div class="lesson-header">
-          <span class="lesson-number">${pad(i + 1)}</span>
-          <h3 class="lesson-title">${l.title}</h3>
-        </div>
-        <p class="lesson-en">${l.en}</p>
-        <p class="lesson-hi">${l.hi}</p>
-        <em class="lesson-quote">${l.quote}</em>
-      </div>`).join('');
+    const titleHtml = book.title; // plain title; swap for styled <em> wrap if you want italic sub-part
 
-    // Build "more books" links
-    const moreBooksHtml = Object.values(BOOKS_DATA)
+    const lessonsHtml = renderLessonsHtml(lessons, book);
+
+    const moreBooksHtml = (allBooks || [])
       .filter(b => b.slug !== slug)
       .map(b => b.live
         ? `<a href="lessons-book.html?book=${b.slug}">📚 ${b.title}</a>`
         : `<span>📚 ${b.title} <small style="color:#aaa">— Coming Soon</small></span>`)
       .join('\n');
 
+    // Does the user already own the whole book or an active subscription?
+    // (lessons array's "unlocked" flags already reflect this — if every
+    // lesson is unlocked, hide the "unlock book" banner entirely)
+    const allUnlocked = lessons.every(l => l.out_unlocked);
+
     app.innerHTML = `
       <div class="hero">
         <span class="hero-tag">📖 Book Lessons</span>
-        <h1>${book.titleHtml}</h1>
+        <h1>${titleHtml}</h1>
         <p class="author">— ${book.author}</p>
-        <p class="hero-desc">${book.heroDesc}</p>
+        <p class="hero-desc">${book.description || ''}</p>
         <button class="hero-cta" id="hero-buy-btn">📦 Get the Book on Amazon</button>
       </div>
 
       <div class="book-strip-wrap">
         <div class="book-strip">
-          <img src="${book.cover}" alt="${book.title}"/>
+          <img src="${book.cover_url}" alt="${book.title}"/>
           <div class="book-strip-info">
             <h3>${book.title}</h3>
-            <p>${book.author} &nbsp;·&nbsp; ${book.genre} &nbsp;·&nbsp; ${book.rating}</p>
+            <p>${book.author} &nbsp;·&nbsp; ${book.genre || ''}</p>
             <button class="buy-btn" id="strip-buy-btn">🛒 Buy on Amazon →</button>
             <p class="affiliate-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🇬🇧 UK · 🇩🇪 Germany · 🌍 Others → Amazon.com<br/>* Affiliate link — आपकी कोई extra cost नहीं 🙏</p>
           </div>
         </div>
       </div>
+
+      ${allUnlocked ? '' : `
+      <div class="pricing-banner">
+        <div class="pricing-banner-inner">
+          <p>लेसन 1-2 हमेशा free हैं। बाकी ₹1/lesson या <strong>पूरी किताब सिर्फ ₹${book.price_rs}</strong> में unlock करें।</p>
+          <button class="unlock-book-btn" onclick="BNMPayments.unlockBook('${book.id}', ${book.price_rs}, '${book.title.replace(/'/g, "\\'")}')">
+            🔓 Unlock Full Book — ₹${book.price_rs}
+          </button>
+        </div>
+      </div>`}
 
       <div class="lessons-wrap">
         <h2>10 Life-Changing Lessons</h2>
@@ -344,13 +377,14 @@
         <p style="margin-top:.4rem;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
       </footer>`;
 
-    // Wire up buy buttons after DOM is ready
     document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(slug));
   }
 
-  detectCountry().then(render);
+  detectCountry();
+  renderNavAccount();
+  render();
 </script>
 
 </body>
