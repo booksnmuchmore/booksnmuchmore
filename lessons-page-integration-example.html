@@ -1,0 +1,64 @@
+<!--
+  EXAMPLE — how to wire auth.js into lessons-book.html
+  This is a reference snippet, not a full page. Copy the relevant
+  parts into your real lessons-book.html.
+-->
+
+<!-- 1. Include Supabase + auth.js (before your page's own script) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+
+<script>
+  // 2. Fetch lessons for a book — paywall is enforced server-side
+  async function loadBookLessons(bookSlug) {
+    const { data, error } = await BNMAuth.supabase
+      .rpc('get_lessons_for_book', { p_book_slug: bookSlug });
+
+    if (error) {
+      console.error('Failed to load lessons:', error);
+      return;
+    }
+
+    // data = array of lessons, each with: id, order_num, title, teaser,
+    // content (null if locked), is_free, price_rs, unlocked (boolean)
+    renderLessons(data);
+  }
+
+  function renderLessons(lessons) {
+    const container = document.getElementById('lessons-container');
+    container.innerHTML = lessons.map(l => {
+      if (l.unlocked) {
+        return `
+          <div class="lesson-card unlocked">
+            <h3>Lesson ${l.order_num}: ${l.title}</h3>
+            <p>${l.content}</p>
+          </div>`;
+      } else {
+        return `
+          <div class="lesson-card locked">
+            <h3>Lesson ${l.order_num}: ${l.title}</h3>
+            <p class="teaser">${l.teaser}</p>
+            <button onclick="handleUnlockLesson('${l.id}', ${l.price_rs})">
+              🔒 Unlock for ₹${l.price_rs}
+            </button>
+          </div>`;
+      }
+    }).join('');
+  }
+
+  // 3. Gate the unlock action behind login
+  function handleUnlockLesson(lessonId, priceRs) {
+    BNMAuth.requireLogin(() => {
+      // User is now guaranteed logged in.
+      // Next phase (Razorpay) will replace this alert with a real checkout call.
+      alert(`Proceed to pay ₹${priceRs} for lesson ${lessonId} (Razorpay integration comes next)`);
+    });
+  }
+
+  // 4. Kick off on page load — pull book slug from URL, e.g. lessons-book.html?book=atomic-habits
+  const params = new URLSearchParams(window.location.search);
+  const bookSlug = params.get('book');
+  if (bookSlug) loadBookLessons(bookSlug);
+</script>
+
+<div id="lessons-container"></div>
