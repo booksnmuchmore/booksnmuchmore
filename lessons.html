@@ -7,13 +7,18 @@
   <meta name="description" content="Life-changing lessons from the world's most beloved books — in Hindi and English. Think and Grow Rich, Atomic Habits, The Alchemist and more."/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TYDPW03BMW');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TYDPW03BMW');
+  </script>
+
+  <!-- Supabase (for fetching the live book catalog) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -123,6 +128,8 @@
       pointer-events: none; cursor: default;
     }
 
+    .loading-row { text-align: center; padding: 3rem; color: var(--mid); grid-column: 1 / -1; }
+
     /* ── Newsletter strip ── */
     .newsletter {
       background: linear-gradient(135deg, var(--dark), #6B3010);
@@ -173,297 +180,11 @@
   <p>हर किताब से हम चुनते हैं वो 10 सबक जो आपकी ज़िंदगी बदल सकते हैं — सरल हिंदी में, गहरे अर्थ के साथ।</p>
 </div>
 
-<!-- Cards -->
-<div class="cards-grid">
-
-  <!-- Think and Grow Rich — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=think-and-grow-rich">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" alt="Think and Grow Rich"/>
-      <div class="card-meta">
-        <p class="label">Mindset · Finance</p>
-        <h3 class="title">Think and Grow Rich</h3>
-        <p class="author">Napoleon Hill</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">इच्छाशक्ति, विश्वास और दृढ़ संकल्प से धन और सफलता कैसे पाएं — 1937 का यह क्लासिक आज भी उतना ही प्रासंगिक है।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- Atomic Habits — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=atomic-habits">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" alt="Atomic Habits"/>
-      <div class="card-meta">
-        <p class="label">Habits · Productivity</p>
-        <h3 class="title">Atomic Habits</h3>
-        <p class="author">James Clear</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">छोटी-छोटी आदतें कैसे बड़े बदलाव लाती हैं — 1% बेहतर बनने की कला।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <a class="book-card" href="lessons-book.html?book=the-alchemist">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" alt="The Alchemist"/>
-      <div class="card-meta">
-        <p class="label">Philosophy · Inspiration</p>
-        <h3 class="title">The Alchemist</h3>
-        <p class="author">Paulo Coelho</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">अपनी Personal Legend को खोजने की यात्रा — एक ऐसी कहानी जो हर सपने देखने वाले के दिल को छूती है।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- Rich Dad Poor Dad — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=rich-dad-poor-dad">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/81BE7eeKzAL._SY466_.jpg" alt="Rich Dad Poor Dad"/>
-      <div class="card-meta">
-        <p class="label">Finance · Mindset</p>
-        <h3 class="title">Rich Dad Poor Dad</h3>
-        <p class="author">Robert Kiyosaki</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">पैसा कमाना और पैसा काम करवाना — दो अलग-अलग सोच। अमीर लोग बच्चों को जो सिखाते हैं, वो school नहीं सिखाता।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- How to Win Friends and Influence People — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=how-to-win-friends">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg" alt="How to Win Friends and Influence People"/>
-      <div class="card-meta">
-        <p class="label">Communication · Leadership</p>
-        <h3 class="title">How to Win Friends and Influence People</h3>
-        <p class="author">Dale Carnegie</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">लोगों को जीतने की कला — बिना किसी हेरफेर के। असली रिश्ते बनाने और दूसरों को प्रेरित करने के कालजयी सिद्धांत।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- The 7 Habits of Highly Effective People — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=7-habits-of-highly-effective-people">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781982137137-L.jpg" alt="The 7 Habits of Highly Effective People"/>
-      <div class="card-meta">
-        <p class="label">Leadership · Personal Development</p>
-        <h3 class="title">The 7 Habits of Highly Effective People</h3>
-        <p class="author">Stephen R. Covey</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">सिर्फ सफलता के तरीके नहीं — एक पूरा जीवन-दर्शन। चरित्र, उद्देश्य और प्रभावशीलता की 7 आदतें जो ज़िंदगी बदल देती हैं।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- Deep Work — LIVE -->
-<a class="book-card" href="lessons-book.html?book=deep-work">
-  <div class="card-top">
-    <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780349411903-L.jpg" alt="Deep Work"/>
-    <div class="card-meta">
-      <p class="label">Productivity · Focus</p>
-      <h3 class="title">Deep Work</h3>
-      <p class="author">Cal Newport</p>
-    </div>
-  </div>
-  <div class="card-body">
-    <p class="tagline">बिजी रहना और productive होना एक नहीं है। Deep Work वो कला है जो आपको भीड़ से अलग करती है।</p>
-    <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-    <span class="card-cta">Lessons पढ़ें →</span>
-  </div>
-</a>
-
-  <!-- Tools of Titans — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=tools-of-titans">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781785041273-L.jpg" alt="Tools of Titans"/>
-      <div class="card-meta">
-        <p class="label">Productivity · Success</p>
-        <h3 class="title">Tools of Titans</h3>
-        <p class="author">Tim Ferriss</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">दुनिया के सबसे सफल लोगों की आदतें, routines और रणनीतियाँ — एक किताब में। Billionaires से लेकर Olympic athletes तक के रहस्य।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-<!-- Ikigai — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=ikigai">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" alt="Ikigai"/>
-      <div class="card-meta">
-        <p class="label">Philosophy · Wellbeing</p>
-        <h3 class="title">Ikigai</h3>
-        <p class="author">Héctor García & Francesc Miralles</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">Okinawa के शतायु लोगों का रहस्य — अपना 'जीने का कारण' खोजें और हर सुबह उठने की वजह पाएं।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- Mind Management, Not Time Management — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=mind-management">
-    <div class="card-top">
-      <img class="book-img" src="https://m.media-amazon.com/images/I/71igbMITpvL._SL1500_.jpg" alt="Mind Management, Not Time Management"/>
-      <div class="card-meta">
-        <p class="label">Productivity · Creativity</p>
-        <h3 class="title">Mind Management, Not Time Management</h3>
-        <p class="author">David Kadavy</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">समय नहीं — मन ही आपका सबसे दुर्लभ संसाधन है। अपनी mental energy को manage करें और कम समय में ज़्यादा बनाएं।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- The Psychology of Money — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=psychology-of-money">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780857197689-L.jpg" alt="The Psychology of Money"/>
-      <div class="card-meta">
-        <p class="label">Finance · Mindset</p>
-        <h3 class="title">The Psychology of Money</h3>
-        <p class="author">Morgan Housel</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">पैसे के साथ अच्छा करना IQ से नहीं — behaviour से तय होता है। वो छुपी psychological forces जो हमारे financial decisions चलाती हैं।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- The Monk Who Sold His Ferrari — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=monk-who-sold-ferrari">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780062515674-L.jpg" alt="The Monk Who Sold His Ferrari"/>
-      <div class="card-meta">
-        <p class="label">Philosophy · Personal Development</p>
-        <h3 class="title">The Monk Who Sold His Ferrari</h3>
-        <p class="author">Robin Sharma</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">एक सफल वकील जिसने सब कुछ बेच दिया — और बदले में ज़िंदगी की असली दौलत पाई। उद्देश्य, अनुशासन और आनंद के कालजयी सबक।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- The Practicing Mind — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=practicing-mind">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781608680900-L.jpg" alt="The Practicing Mind"/>
-      <div class="card-meta">
-        <p class="label">Mindset · Mastery</p>
-        <h3 class="title">The Practicing Mind</h3>
-        <p class="author">Thomas M. Sterner</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">नतीजे नहीं — process ही असली लक्ष्य है। Patience, focus और deliberate practice के ज़रिए mastery पाने की कला।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- Linchpin — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=linchpin">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781591843160-L.jpg" alt="Linchpin"/>
-      <div class="card-meta">
-        <p class="label">Career · Creativity</p>
-        <h3 class="title">Linchpin</h3>
-        <p class="author">Seth Godin</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">पुराना social contract टूट चुका है। अपरिहार्य बनो — एक artist, एक giver, एक linchpin। अपने काम को जीने का तरीका बदल दें।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
- 
-  <!-- The Subtle Art of Not Giving a F*ck — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=subtle-art">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780062457714-L.jpg" alt="The Subtle Art of Not Giving a F*ck"/>
-      <div class="card-meta">
-        <p class="label">Philosophy · Self-Help</p>
-        <h3 class="title">The Subtle Art of Not Giving a F*ck</h3>
-        <p class="author">Mark Manson</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">खुशी का रास्ता positivity नहीं — यह चुनना है कि किसकी परवाह करें। ज़िंदगी के inevitable struggles को embrace करने का counterintuitive दर्शन।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-  
-  <!-- Life's Amazing Secrets — LIVE -->
-  <a class="book-card" href="lessons-book.html?book=lifes-amazing-secrets">
-    <div class="card-top">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9780143442295-L.jpg" alt="Life's Amazing Secrets"/>
-      <div class="card-meta">
-        <p class="label">Spirituality · Self-Help</p>
-        <h3 class="title">Life's Amazing Secrets</h3>
-        <p class="author">Gaur Gopal Das</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">एक monk और एक अरबपति की बातचीत जो ज़िंदगी बदल देती है — संतुलन, रिश्ते, काम और आत्मिक शांति के गहरे रहस्य।</p>
-      <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
-      <span class="card-cta">Lessons पढ़ें →</span>
-    </div>
-  </a>
-
-  <!-- Rich Dad Poor Dad — India Perspective (special card) -->
-  <a class="book-card" href="rdpd-india-perspective.html" style="border: 1px solid #C47A7A; background: #FFF8F8;">
-   <div class="card-top" style="background: linear-gradient(135deg, #3D1010 0%, #7A2A1A 100%);">
-      <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg" alt="Rich Dad Poor Dad"/>
-      <div class="card-meta">
-        <p class="label" style="color: #F5C5A5;">India Perspective · Analysis</p>
-        <h3 class="title">Rich Dad Poor Dad</h3>
-        <p class="author">India में क्या सच है?</p>
-      </div>
-    </div>
-    <div class="card-body">
-      <p class="tagline">यह किताब 1997 के America में लिखी गई थी। 2026 के India में क्या apply होता है, क्या नहीं — एक honest analysis।</p>
-      <p class="lesson-count">✦ Ankur Warikoo के video पर आधारित</p>
-      <span class="card-cta">Analysis पढ़ें →</span>
-    </div>
-  </a>
+<!-- Cards — populated dynamically from Supabase -->
+<div class="cards-grid" id="cards-grid">
+  <p class="loading-row">Loading books…</p>
 </div>
-  
+
 <!-- CTA strip -->
 <div class="newsletter">
   <h3>हर हफ़्ते एक नई कहानी, हर रोज़ एक नया विचार</h3>
@@ -472,10 +193,87 @@
 </div>
 
 <footer>
-  <p>© 2025 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="books.html">किताबें</a></p>
+  <p>© 2026 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="books.html">किताबें</a></p>
   <p style="margin-top:.4rem;">Affiliate Disclosure: Some links on this site are Amazon affiliate links.</p>
   <p style="margin-top:.4rem;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
 </footer>
+
+<script>
+  // ── Special non-Supabase card: Rich Dad Poor Dad India Perspective ──
+  // This is a standalone analysis page, not a Supabase-backed book,
+  // so it stays hardcoded — pinned to render first in the grid.
+  const SPECIAL_CARD_HTML = `
+    <a class="book-card" href="rdpd-india-perspective.html" style="border: 1px solid #C47A7A; background: #FFF8F8;">
+      <div class="card-top" style="background: linear-gradient(135deg, #3D1010 0%, #7A2A1A 100%);">
+        <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg" alt="Rich Dad Poor Dad"/>
+        <div class="card-meta">
+          <p class="label" style="color: #F5C5A5;">India Perspective · Analysis</p>
+          <h3 class="title">Rich Dad Poor Dad</h3>
+          <p class="author">India में क्या सच है?</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="tagline">यह किताब 1997 के America में लिखी गई थी। 2026 के India में क्या apply होता है, क्या नहीं — एक honest analysis।</p>
+        <p class="lesson-count">✦ Ankur Warikoo के video पर आधारित</p>
+        <span class="card-cta">Analysis पढ़ें →</span>
+      </div>
+    </a>`;
+
+  function buildBookCardHtml(book) {
+    if (!book.live) {
+      return `
+        <div class="book-card" style="cursor:default;">
+          <div class="card-top">
+            <span class="coming-badge">Coming Soon</span>
+            <img class="book-img" src="${book.cover_url}" alt="${book.title}"/>
+            <div class="card-meta">
+              <p class="label">${book.genre || ''}</p>
+              <h3 class="title">${book.title}</h3>
+              <p class="author">${book.author}</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="tagline">${book.description || ''}</p>
+            <p class="lesson-count">✦ जल्द आ रहा है</p>
+            <span class="card-cta disabled">Coming Soon</span>
+          </div>
+        </div>`;
+    }
+    return `
+      <a class="book-card" href="lessons-book.html?book=${book.slug}">
+        <div class="card-top">
+          <img class="book-img" src="${book.cover_url}" alt="${book.title}"/>
+          <div class="card-meta">
+            <p class="label">${book.genre || ''}</p>
+            <h3 class="title">${book.title}</h3>
+            <p class="author">${book.author}</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="tagline">${book.description || ''}</p>
+          <p class="lesson-count">✦ 10 Lessons · Hindi + English</p>
+          <span class="card-cta">Lessons पढ़ें →</span>
+        </div>
+      </a>`;
+  }
+
+  async function loadBooks() {
+    const grid = document.getElementById('cards-grid');
+    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+
+    if (error) {
+      console.error('Failed to load books:', error);
+      grid.innerHTML = '<p class="loading-row">Could not load books. Please refresh.</p>';
+      return;
+    }
+
+    const bookCardsHtml = books.map(buildBookCardHtml).join('\n');
+    // Special card pinned at the end, exactly as it was in the original static page
+    grid.innerHTML = bookCardsHtml + SPECIAL_CARD_HTML;
+  }
+
+  loadBooks();
+</script>
 
 </body>
 </html>
