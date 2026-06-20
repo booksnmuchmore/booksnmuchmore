@@ -1326,129 +1326,88 @@ module.exports = [
         "teaser": "\"You don't have to be in a temple to find God. You can find the divine in every moment of sincere service.\" — Gaur Gopal Das",
         "content": "Spirituality जीवन से भागना नहीं है — यह उससे और ज़्यादा पूर्णता और प्रेम के साथ जुड़ना है। आपको भीतर की शांति ढूँढने के लिए दुनिया छोड़ने की ज़रूरत नहीं — आपको उस शांति को दुनिया में लाना है।\n\n---\n\nSpirituality is not about escaping life; it is about engaging with it more fully, more consciously, and with greater love. You do not need to leave the world to find inner peace — you need to bring inner peace into the world.",
         "price_rs": 1
+      }
+    ]
+  },
+  {
+    "slug": "cant-hurt-me",
+    "title": "Can't Hurt Me",
+    "author": "David Goggins",
+    "genre": "Mindset · Mental Toughness",
+    "cover": "https://covers.openlibrary.org/b/isbn/9781544512280-L.jpg",
+    "desc": "David Goggins की कहानी — एक मोटे, डरे हुए बच्चे से Navy SEAL और Ultra-endurance athlete बनने तक। यह किताब बताती है कि इंसान का दिमाग शरीर से बहुत पहले हार मान लेता है — और कैसे उस सीमा को तोड़ा जाए।",
+    "featured": false,
+    "live": true,
+    "price_rs": 7,
+    "lessons": [
+      {
+        "order_num": 1,
+        "title": "The 40% Rule",
+        "teaser": "\"Most people stop when they're tired. The Navy SEALs only stop when the job is done.\" — David Goggins",
+        "content": "जब आपका दिमाग कहता है कि आप पूरी तरह थक चुके हैं, असल में आप अपनी सच्ची क्षमता का सिर्फ 40% इस्तेमाल कर रहे होते हैं। Goggins कहते हैं कि दिमाग शरीर से बहुत पहले हार मान लेता है — असली सीमा कभी नहीं आती, बस दिमाग की वो सीमा आती है जो वो खुद बना लेता है। हर बार जब आपको लगे कि अब और नहीं हो सकता, वहीं से असली potential शुरू होता है।\n\n---\n\nWhen your mind tells you that you're completely exhausted, you're actually only using about 40% of your true capacity. Goggins argues that the mind gives up long before the body actually has to. The real limit almost never arrives — only the mental limit your brain invents to protect you from discomfort. Every time you feel like you can't go on, that's exactly where your real potential begins."
       },
-
-      // ============================================================
-// New book to add: Can't Hurt Me by David Goggins
-// Append this object into your existing source-data.js array
-// (or merge into books-data-raw.js + re-run convert.js, whichever
-// workflow you've been using).
-// ============================================================
-
-{
-  slug: "cant-hurt-me",
-  title: "Can't Hurt Me",
-  author: "David Goggins",
-  genre: "Mindset · Mental Toughness",
-  cover: "https://covers.openlibrary.org/b/isbn/9781544512280-L.jpg",
-  desc: "David Goggins की कहानी — एक मोटे, डरे हुए बच्चे से Navy SEAL और Ultra-endurance athlete बनने तक। यह किताब बताती है कि इंसान का दिमाग शरीर से बहुत पहले हार मान लेता है — और कैसे उस सीमा को तोड़ा जाए।",
-  featured: false,
-  live: true,
-  price_rs: 7,
-  lessons: [
-    {
-      order_num: 1,
-      title: "The 40% Rule",
-      teaser: `"Most people stop when they're tired. The Navy SEALs only stop when the job is done." — David Goggins`,
-      content: `जब आपका दिमाग कहता है कि आप पूरी तरह थक चुके हैं, असल में आप अपनी सच्ची क्षमता का सिर्फ 40% इस्तेमाल कर रहे होते हैं। Goggins कहते हैं कि दिमाग शरीर से बहुत पहले हार मान लेता है — असली सीमा कभी नहीं आती, बस दिमाग की वो सीमा आती है जो वो खुद बना लेता है। हर बार जब आपको लगे कि अब और नहीं हो सकता, वहीं से असली potential शुरू होता है।
-
----
-
-When your mind tells you that you're completely exhausted, you're actually only using about 40% of your true capacity. Goggins argues that the mind gives up long before the body actually has to. The real limit almost never arrives — only the mental limit your brain invents to protect you from discomfort. Every time you feel like you can't go on, that's exactly where your real potential begins.`
-    },
-    {
-      order_num: 2,
-      title: "Callus Your Mind",
-      teaser: `"You have to callus your mind, just like how you callus your hands." — David Goggins`,
-      content: `जैसे शरीर पर मेहनत करने से हाथों पर callus (सख्त त्वचा) बन जाती है, वैसे ही दिमाग पर भी जानबूझकर मुश्किल हालात डालकर एक मानसिक callus बनाया जा सकता है। Goggins रोज़ खुद को असहज स्थितियों में डालते थे — ठंडा पानी, भूख, अधूरी नींद — सिर्फ इसलिए कि उनका दिमाग कठिनाई का आदी हो जाए। आराम की आदत कमज़ोर बनाती है; जानबूझकर ली गई कठिनाई मज़बूत बनाती है।
-
----
-
-Just as physical labor calluses your hands, deliberately exposing your mind to difficulty builds a mental callus. Goggins regularly put himself through cold water, hunger, and sleep deprivation — not for punishment, but to train his mind to become familiar with suffering. Comfort makes you fragile; deliberately chosen hardship makes you resilient.`
-    },
-    {
-      order_num: 3,
-      title: "The Cookie Jar",
-      teaser: `"Go to your Cookie Jar. Pull a cookie out and remember." — David Goggins`,
-      content: `जब हालात असहनीय लगें, Goggins एक मानसिक तरकीब इस्तेमाल करते हैं जिसे वो "Cookie Jar" कहते हैं — अपने पुराने संघर्षों और उन्हें पार करने की यादों का एक भंडार। जब वो टूटने के करीब होते, वो मन में उन पलों को याद करते जब उन्होंने पहले भी नामुमकिन को मुमकिन बनाया था। हर इंसान के पास अपनी ज़िंदगी में ऐसे "cookies" होते हैं — सिर्फ उन्हें याद रखना और सही समय पर इस्तेमाल करना सीखना होता है।
-
----
-
-When things feel unbearable, Goggins uses a mental trick he calls the "Cookie Jar" — a mental reserve of past struggles he has already overcome. When he's close to breaking, he reaches back into memory for the moments he proved the impossible was possible. Everyone has their own "cookies" stored in their life — the skill is learning to recall them exactly when you need them most.`
-    },
-    {
-      order_num: 4,
-      title: "Take Souls",
-      teaser: `"When you take someone's soul, you don't just beat them. You break their will." — David Goggins`,
-      content: `Goggins की भाषा में "soul लेना" मतलब है किसी प्रतियोगिता में सिर्फ जीतना नहीं, बल्कि इतनी पूरी कोशिश करना कि सामने वाला मानसिक रूप से टूट जाए। लेकिन गहरी बात यह है — यह तकनीक सिर्फ दूसरों के लिए नहीं, खुद के लिए भी इस्तेमाल होती है। जब आप खुद की पुरानी सीमाओं, अपने ही डर, अपनी आलस्य को हरा देते हैं — आप अपने भीतर के सबसे बड़े दुश्मन की "soul" लेते हैं।
-
----
-
-In Goggins' language, "taking souls" means not just winning a competition but pushing so completely that the other person breaks mentally. But the deeper application is internal: this same intensity is meant to be turned inward. When you defeat your old limitations, your own fears, your own laziness — you take the soul of the biggest opponent you'll ever face: yourself.`
-    },
-    {
-      order_num: 5,
-      title: "Accountability Mirror",
-      teaser: `"The only way you're going to get to where you want to go is by challenging yourself." — David Goggins`,
-      content: `Goggins रोज़ सुबह शीशे के सामने खड़े होकर खुद से ईमानदार सवाल पूछते थे — क्या मैं वो इंसान बन रहा हूँ जो मैं बनना चाहता हूँ? उन्होंने इसे "Accountability Mirror" नाम दिया। शीशे पर अपने लक्ष्य लिख कर चिपकाना, हर दिन उन्हें देखना, और खुद को झूठी तसल्ली न देना — यह आदत आपको अपने आप के सबसे कठोर जज बना देती है, जो किसी और से ज़्यादा ज़रूरी है।
-
----
-
-Every morning, Goggins stood in front of a mirror and asked himself uncomfortable, honest questions — am I becoming the person I want to be? He called this the "Accountability Mirror." Writing your goals on the mirror, looking at them daily, and refusing to lie to yourself turns you into your own harshest judge — which matters more than any external judge ever could.`
-    },
-    {
-      order_num: 6,
-      title: "Embrace Suffering — It Builds Armor",
-      en_marker: true,
-      teaser: `"Suffering is the true test of life." — David Goggins`,
-      content: `ज़्यादातर लोग दर्द और तकलीफ से बचने की कोशिश करते हैं। Goggins इसका उल्टा करते हैं — वो जानबूझकर मुश्किल हालात की तलाश करते हैं, क्योंकि वही उन्हें मज़बूत बनाते हैं। यह मसोकिज़्म नहीं है — यह समझ है कि असली विकास सिर्फ असुविधा के दायरे में होता है। जो आदमी कष्ट से भागता है, वो कमज़ोर रहता है; जो उसे गले लगाता है, वो हर बार थोड़ा और मज़बूत निकलता है।
-
----
-
-Most people try to avoid pain and discomfort. Goggins does the opposite — he deliberately seeks out hard situations because that's exactly what makes him stronger. This isn't masochism; it's the understanding that real growth only happens at the edge of discomfort. The person who runs from suffering stays weak; the person who embraces it comes out a little stronger every single time.`
-    },
-    {
-      order_num: 7,
-      title: "Visualization Isn't Enough — You Need Action",
-      teaser: `"You don't have to be a genius to figure that out. Just be willing to do the work." — David Goggins`,
-      content: `Goggins आम मोटिवेशनल सलाह को चुनौती देते हैं — सिर्फ सपने देखना और positive सोचना काफी नहीं। उन्होंने अपनी ज़िंदगी पूरी तरह actual, कठोर, बार-बार किए गए काम से बदली — सिर्फ visualization से नहीं। Vision ज़रूरी है, लेकिन असली बदलाव तब आता है जब आप रोज़ वो काम करते हैं जो ज़्यादातर लोग नहीं करना चाहते।
-
----
-
-Goggins pushes back on common motivational advice — simply visualizing success and thinking positively isn't enough. He transformed his entire life through actual, repeated, grinding work — not visualization alone. Vision matters, but real change only comes from doing, every single day, the work that most people are unwilling to do.`
-    },
-    {
-      order_num: 8,
-      title: "Stay Hard — Discipline Over Motivation",
-      teaser: `"Motivation is crap. Motivation comes and goes." — David Goggins`,
-      content: `Goggins का सबसे प्रसिद्ध सिद्धांत — motivation पर भरोसा मत करो, यह आता-जाता रहता है। असली बदलाव अनुशासन से आता है — वो काम करना जो ज़रूरी है, चाहे मन हो या न हो। "Stay Hard" उनका mantra है: हर मुश्किल पल में खुद को याद दिलाना कि आसान रास्ता हमेशा मौजूद है, लेकिन वो रास्ता आपको कभी वो इंसान नहीं बनाएगा जो आप बनना चाहते हैं।
-
----
-
-Goggins' most famous principle: don't rely on motivation, because it comes and goes. Real change comes from discipline — doing what's necessary whether you feel like it or not. "Stay Hard" is his mantra: a constant reminder, in every difficult moment, that the easy path is always available, but it will never make you into the person you're capable of becoming.`
-    },
-    {
-      order_num: 9,
-      title: "Your Mind Is Your Limit, Not Your Body",
-      teaser: `"We are all capable of more than we know." — David Goggins`,
-      content: `Goggins की पूरी कहानी इस एक सच्चाई पर टिकी है — शरीर वो कर सकता है जो दिमाग उसे करने की इजाज़त दे। उन्होंने अस्थमा, सीने में जन्मजात गड़बड़ी, मोटापे जैसी कठिनाइयों के बावजूद Navy SEAL ट्रेनिंग पास की, अल्ट्रा-मैराथन दौड़े, और रिकॉर्ड तोड़े — सिर्फ इसलिए कि उन्होंने अपने दिमाग की बनाई हुई सीमाओं को नकार दिया। आपकी सबसे बड़ी सीमा शरीर में नहीं, धारणा में है।
-
----
-
-Goggins' entire story rests on one truth: the body can do what the mind allows it to do. Despite asthma, a congenital heart defect, and obesity, he passed Navy SEAL training, ran ultra-marathons, and broke records — simply by refusing the limits his own mind tried to impose. Your biggest limitation isn't in your body — it's in your belief about what your body can do.`
-    },
-    {
-      order_num: 10,
-      title: "Find Your Why — Then Refuse to Quit",
-      teaser: `"If you want to be the best, you have to do things that other people aren't willing to do." — David Goggins`,
-      content: `Goggins की किताब का सबसे गहरा संदेश यह है: आपको एक ऐसा कारण ढूंढना होगा जो दर्द से भी बड़ा हो। एक बार जब वो "why" मिल जाए, तो हार मानने का कोई रास्ता नहीं बचता। ज़्यादातर लोग आधे रास्ते में रुक जाते हैं क्योंकि उनका कारण उनकी तकलीफ से छोटा होता है। जो लोग असाधारण बनते हैं, वो वही हैं जो अपने "why" को इतना बड़ा बना लेते हैं कि क्विट करना नामुमकिन हो जाता है।
-
----
-
-The deepest message of Goggins' book: you must find a reason bigger than the pain itself. Once that "why" is locked in, there's no room left to quit. Most people stop halfway because their reason is smaller than their discomfort. The people who become extraordinary are the ones who make their "why" so large that quitting simply stops being an option.`
-    }
-  ]
-}
+      {
+        "order_num": 2,
+        "title": "Callus Your Mind",
+        "teaser": "\"You have to callus your mind, just like how you callus your hands.\" — David Goggins",
+        "content": "जैसे शरीर पर मेहनत करने से हाथों पर callus (सख्त त्वचा) बन जाती है, वैसे ही दिमाग पर भी जानबूझकर मुश्किल हालात डालकर एक मानसिक callus बनाया जा सकता है। Goggins रोज़ खुद को असहज स्थितियों में डालते थे — ठंडा पानी, भूख, अधूरी नींद — सिर्फ इसलिए कि उनका दिमाग कठिनाई का आदी हो जाए। आराम की आदत कमज़ोर बनाती है; जानबूझकर ली गई कठिनाई मज़बूत बनाती है।\n\n---\n\nJust as physical labor calluses your hands, deliberately exposing your mind to difficulty builds a mental callus. Goggins regularly put himself through cold water, hunger, and sleep deprivation — not for punishment, but to train his mind to become familiar with suffering. Comfort makes you fragile; deliberately chosen hardship makes you resilient."
+      },
+      {
+        "order_num": 3,
+        "title": "The Cookie Jar",
+        "teaser": "\"Go to your Cookie Jar. Pull a cookie out and remember.\" — David Goggins",
+        "content": "जब हालात असहनीय लगें, Goggins एक मानसिक तरकीब इस्तेमाल करते हैं जिसे वो \"Cookie Jar\" कहते हैं — अपने पुराने संघर्षों और उन्हें पार करने की यादों का एक भंडार। जब वो टूटने के करीब होते, वो मन में उन पलों को याद करते जब उन्होंने पहले भी नामुमकिन को मुमकिन बनाया था। हर इंसान के पास अपनी ज़िंदगी में ऐसे \"cookies\" होते हैं — सिर्फ उन्हें याद रखना और सही समय पर इस्तेमाल करना सीखना होता है।\n\n---\n\nWhen things feel unbearable, Goggins uses a mental trick he calls the \"Cookie Jar\" — a mental reserve of past struggles he has already overcome. When he's close to breaking, he reaches back into memory for the moments he proved the impossible was possible. Everyone has their own \"cookies\" stored in their life — the skill is learning to recall them exactly when you need them most.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 4,
+        "title": "Take Souls",
+        "teaser": "\"When you take someone's soul, you don't just beat them. You break their will.\" — David Goggins",
+        "content": "Goggins की भाषा में \"soul लेना\" मतलब है किसी प्रतियोगिता में सिर्फ जीतना नहीं, बल्कि इतनी पूरी कोशिश करना कि सामने वाला मानसिक रूप से टूट जाए। लेकिन गहरी बात यह है — यह तकनीक सिर्फ दूसरों के लिए नहीं, खुद के लिए भी इस्तेमाल होती है। जब आप खुद की पुरानी सीमाओं, अपने ही डर, अपनी आलस्य को हरा देते हैं — आप अपने भीतर के सबसे बड़े दुश्मन की \"soul\" लेते हैं।\n\n---\n\nIn Goggins' language, \"taking souls\" means not just winning a competition but pushing so completely that the other person breaks mentally. But the deeper application is internal: this same intensity is meant to be turned inward. When you defeat your old limitations, your own fears, your own laziness — you take the soul of the biggest opponent you'll ever face: yourself.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 5,
+        "title": "Accountability Mirror",
+        "teaser": "\"The only way you're going to get to where you want to go is by challenging yourself.\" — David Goggins",
+        "content": "Goggins रोज़ सुबह शीशे के सामने खड़े होकर खुद से ईमानदार सवाल पूछते थे — क्या मैं वो इंसान बन रहा हूँ जो मैं बनना चाहता हूँ? उन्होंने इसे \"Accountability Mirror\" नाम दिया। शीशे पर अपने लक्ष्य लिख कर चिपकाना, हर दिन उन्हें देखना, और खुद को झूठी तसल्ली न देना — यह आदत आपको अपने आप के सबसे कठोर जज बना देती है, जो किसी और से ज़्यादा ज़रूरी है।\n\n---\n\nEvery morning, Goggins stood in front of a mirror and asked himself uncomfortable, honest questions — am I becoming the person I want to be? He called this the \"Accountability Mirror.\" Writing your goals on the mirror, looking at them daily, and refusing to lie to yourself turns you into your own harshest judge — which matters more than any external judge ever could.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 6,
+        "title": "Embrace Suffering — It Builds Armor",
+        "teaser": "\"Suffering is the true test of life.\" — David Goggins",
+        "content": "ज़्यादातर लोग दर्द और तकलीफ से बचने की कोशिश करते हैं। Goggins इसका उल्टा करते हैं — वो जानबूझकर मुश्किल हालात की तलाश करते हैं, क्योंकि वही उन्हें मज़बूत बनाते हैं। यह मसोकिज़्म नहीं है — यह समझ है कि असली विकास सिर्फ असुविधा के दायरे में होता है। जो आदमी कष्ट से भागता है, वो कमज़ोर रहता है; जो उसे गले लगाता है, वो हर बार थोड़ा और मज़बूत निकलता है।\n\n---\n\nMost people try to avoid pain and discomfort. Goggins does the opposite — he deliberately seeks out hard situations because that's exactly what makes him stronger. This isn't masochism; it's the understanding that real growth only happens at the edge of discomfort. The person who runs from suffering stays weak; the person who embraces it comes out a little stronger every single time.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 7,
+        "title": "Visualization Isn't Enough — You Need Action",
+        "teaser": "\"You don't have to be a genius to figure that out. Just be willing to do the work.\" — David Goggins",
+        "content": "Goggins आम मोटिवेशनल सलाह को चुनौती देते हैं — सिर्फ सपने देखना और positive सोचना काफी नहीं। उन्होंने अपनी ज़िंदगी पूरी तरह actual, कठोर, बार-बार किए गए काम से बदली — सिर्फ visualization से नहीं। Vision ज़रूरी है, लेकिन असली बदलाव तब आता है जब आप रोज़ वो काम करते हैं जो ज़्यादातर लोग नहीं करना चाहते।\n\n---\n\nGoggins pushes back on common motivational advice — simply visualizing success and thinking positively isn't enough. He transformed his entire life through actual, repeated, grinding work — not visualization alone. Vision matters, but real change only comes from doing, every single day, the work that most people are unwilling to do.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 8,
+        "title": "Stay Hard — Discipline Over Motivation",
+        "teaser": "\"Motivation is crap. Motivation comes and goes.\" — David Goggins",
+        "content": "Goggins का सबसे प्रसिद्ध सिद्धांत — motivation पर भरोसा मत करो, यह आता-जाता रहता है। असली बदलाव अनुशासन से आता है — वो काम करना जो ज़रूरी है, चाहे मन हो या न हो। \"Stay Hard\" उनका mantra है: हर मुश्किल पल में खुद को याद दिलाना कि आसान रास्ता हमेशा मौजूद है, लेकिन वो रास्ता आपको कभी वो इंसान नहीं बनाएगा जो आप बनना चाहते हैं।\n\n---\n\nGoggins' most famous principle: don't rely on motivation, because it comes and goes. Real change comes from discipline — doing what's necessary whether you feel like it or not. \"Stay Hard\" is his mantra: a constant reminder, in every difficult moment, that the easy path is always available, but it will never make you into the person you're capable of becoming.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 9,
+        "title": "Your Mind Is Your Limit, Not Your Body",
+        "teaser": "\"We are all capable of more than we know.\" — David Goggins",
+        "content": "Goggins की पूरी कहानी इस एक सच्चाई पर टिकी है — शरीर वो कर सकता है जो दिमाग उसे करने की इजाज़त दे। उन्होंने अस्थमा, सीने में जन्मजात गड़बड़ी, मोटापे जैसी कठिनाइयों के बावजूद Navy SEAL ट्रेनिंग पास की, अल्ट्रा-मैराथन दौड़े, और रिकॉर्ड तोड़े — सिर्फ इसलिए कि उन्होंने अपने दिमाग की बनाई हुई सीमाओं को नकार दिया। आपकी सबसे बड़ी सीमा शरीर में नहीं, धारणा में है।\n\n---\n\nGoggins' entire story rests on one truth: the body can do what the mind allows it to do. Despite asthma, a congenital heart defect, and obesity, he passed Navy SEAL training, ran ultra-marathons, and broke records — simply by refusing the limits his own mind tried to impose. Your biggest limitation isn't in your body — it's in your belief about what your body can do.",
+        "price_rs": 1
+      },
+      {
+        "order_num": 10,
+        "title": "Find Your Why — Then Refuse to Quit",
+        "teaser": "\"If you want to be the best, you have to do things that other people aren't willing to do.\" — David Goggins",
+        "content": "Goggins की किताब का सबसे गहरा संदेश यह है: आपको एक ऐसा कारण ढूंढना होगा जो दर्द से भी बड़ा हो। एक बार जब वो \"why\" मिल जाए, तो हार मानने का कोई रास्ता नहीं बचता। ज़्यादातर लोग आधे रास्ते में रुक जाते हैं क्योंकि उनका कारण उनकी तकलीफ से छोटा होता है। जो लोग असाधारण बनते हैं, वो वही हैं जो अपने \"why\" को इतना बड़ा बना लेते हैं कि क्विट करना नामुमकिन हो जाता है।\n\n---\n\nThe deepest message of Goggins' book: you must find a reason bigger than the pain itself. Once that \"why\" is locked in, there's no room left to quit. Most people stop halfway because their reason is smaller than their discomfort. The people who become extraordinary are the ones who make their \"why\" so large that quitting simply stops being an option.",
+        "price_rs": 1
+      }
     ]
   }
 ];
