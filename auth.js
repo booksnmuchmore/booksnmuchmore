@@ -17,8 +17,8 @@
 (function () {
   // ---- EDIT THESE: your Supabase project URL + PUBLISHABLE key ----
   // NEVER put the service_role/secret key here — this runs in the browser.
-  const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publish_xxxxxxxxxxxxx'; // publishable key
+  const SUPABASE_URL = 'https://dcewvfkszrpknxdwyual.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_P6kjf7686KpEmyJLuEtbXw_QV2kRJll'; // publishable key
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
