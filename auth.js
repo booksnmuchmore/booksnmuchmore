@@ -84,8 +84,8 @@
         </div>
         <div id="bnm-auth-step-otp" style="display:none;">
           <h3>Enter the Code</h3>
-          <p>हमने एक 6-digit code भेजा है <span id="bnm-auth-email-display"></span> पर।</p>
-          <input type="text" id="bnm-auth-otp" placeholder="123456" inputmode="numeric" maxlength="6">
+          <p>हमने एक 8-digit code भेजा है <span id="bnm-auth-email-display"></span> पर।</p>
+          <input type="text" id="bnm-auth-otp" placeholder="12345678" inputmode="numeric" maxlength="8">
           <button id="bnm-auth-verify-otp">Verify &amp; Continue</button>
           <div id="bnm-auth-status2"></div>
         </div>
@@ -131,8 +131,8 @@
       const token = document.getElementById('bnm-auth-otp').value.trim();
       const statusEl = document.getElementById('bnm-auth-status2');
 
-      if (token.length !== 6) {
-        statusEl.textContent = 'Enter the 6-digit code.';
+      if (token.length !== 8) {
+        statusEl.textContent = 'Enter the 8-digit code.';
         statusEl.className = 'error';
         return;
       }
