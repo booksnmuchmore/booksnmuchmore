@@ -20,38 +20,68 @@
 
 (function () {
   // ---- EDIT THIS: your Razorpay Key ID (safe for frontend) ----
-  const RAZORPAY_KEY_ID = 'rzp_test_T3r1AJ73F1d6sI';
+  const RAZORPAY_KEY_ID = 'rzp_live_T4LAxwgkat6d6L';
 
   const SITE_NAME = "Books 'n' Much More";
   const SITE_LOGO = 'https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp';
 
-  // ---- Core: open Razorpay checkout for a given amount + metadata ----
-  function openCheckout({ amountRs, description, onSuccess }) {
+  const SUPABASE_FUNCTIONS_URL = 'https://dcewvfkszrpknxdwyual.supabase.co/functions/v1';
+
+  // ---- Core: create a server-verified order, then open Razorpay checkout against it ----
+  // amountRs/description/notes describe what's being purchased; onSuccess
+  // fires after checkout closes successfully, purely to refresh the UI —
+  // the actual unlock is written by the razorpay-webhook Edge Function
+  // once Razorpay confirms the payment server-side, NOT by this callback.
+  function openCheckout({ description, notes, onSuccess }) {
     BNMAuth.requireLogin(async () => {
       const user = await BNMAuth.getUser();
 
+      // Ask our own server (Edge Function) to create the Razorpay Order.
+      // The server looks up the REAL price itself from the books/lessons
+      // tables (or the subscription tier map) based on notes.purchase_type
+      // + notes.lesson_id/book_id/tier — it does not trust any amount sent
+      // from here. This means price changes in Supabase take effect
+      // immediately, and a tampered frontend can't request a lower price.
+      let orderRes;
+      try {
+        const { data: session } = await BNMAuth.supabase.auth.getSession();
+        const resp = await fetch(`${SUPABASE_FUNCTIONS_URL}/create-razorpay-order`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session?.session?.access_token || ''}`,
+          },
+          body: JSON.stringify({ notes: { ...notes, user_id: user.id } }),
+        });
+        orderRes = await resp.json();
+        if (!resp.ok) throw new Error(orderRes.error || 'Order creation failed');
+      } catch (err) {
+        console.error('Failed to create order:', err);
+        alert('Could not start checkout. Please try again in a moment.');
+        return;
+      }
+
       const options = {
         key: RAZORPAY_KEY_ID,
-        amount: amountRs * 100, // Razorpay expects paise
-        currency: 'INR',
+        amount: orderRes.amount,
+        currency: orderRes.currency,
+        order_id: orderRes.order_id, // ties this checkout to the server-created order
         name: SITE_NAME,
         description: description,
         image: SITE_LOGO,
         prefill: {
           email: user.email || '',
         },
-        notes: {
-          user_id: user.id,
-        },
+        notes: { ...notes, user_id: user.id },
         theme: {
           color: '#C8813A', // matches site's amber accent
         },
         handler: function (response) {
-          // response.razorpay_payment_id is available here.
-          // In TEST MODE we trust this client-side and record it directly.
-          // In PRODUCTION, do NOT trust this alone — verify server-side
-          // (see note at bottom of file) before marking anything "paid".
-          onSuccess(response.razorpay_payment_id);
+          // The actual unlock row is written server-side by
+          // razorpay-webhook once Razorpay confirms payment — this
+          // handler ONLY refreshes the UI. It does not, and must not,
+          // write to purchases/subscriptions itself.
+          onSuccess();
         },
         modal: {
           ondismiss: function () {
@@ -65,85 +95,49 @@
     });
   }
 
-  // ---- Tier 1: Unlock a single lesson (₹1) ----
+  // ---- Tier 1: Unlock a single lesson ----
   async function unlockLesson(lessonId, priceRs, bookTitle, lessonTitle) {
     openCheckout({
-      amountRs: priceRs,
       description: `${bookTitle} — ${lessonTitle}`,
-      onSuccess: async (paymentId) => {
-        const user = await BNMAuth.getUser();
-        const { error } = await BNMAuth.supabase.from('purchases').insert({
-          user_id: user.id,
-          type: 'lesson',
-          lesson_id: lessonId,
-          amount_rs: priceRs,
-          razorpay_payment_id: paymentId,
-          status: 'paid',
-        });
-        if (error) {
-          alert('Payment succeeded but recording it failed. Please contact support with this Payment ID: ' + paymentId);
-          console.error(error);
-          return;
-        }
-        alert('Lesson unlocked! ✓');
-        location.reload(); // re-fetch lessons, now unlocked
+      notes: { purchase_type: 'lesson', lesson_id: lessonId },
+      onSuccess: async () => {
+        await waitForUnlockThenReload();
       },
     });
   }
 
-  // ---- Tier 2: Unlock entire book (₹7) ----
+  // ---- Tier 2: Unlock entire book ----
   async function unlockBook(bookId, priceRs, bookTitle) {
     openCheckout({
-      amountRs: priceRs,
       description: `Full book: ${bookTitle}`,
-      onSuccess: async (paymentId) => {
-        const user = await BNMAuth.getUser();
-        const { error } = await BNMAuth.supabase.from('purchases').insert({
-          user_id: user.id,
-          type: 'book',
-          book_id: bookId,
-          amount_rs: priceRs,
-          razorpay_payment_id: paymentId,
-          status: 'paid',
-        });
-        if (error) {
-          alert('Payment succeeded but recording it failed. Please contact support with this Payment ID: ' + paymentId);
-          console.error(error);
-          return;
-        }
-        alert('Book unlocked! All 10 lessons are now available. ✓');
-        location.reload();
+      notes: { purchase_type: 'book', book_id: bookId },
+      onSuccess: async () => {
+        await waitForUnlockThenReload();
       },
     });
   }
 
-  // ---- Tier 3: Monthly subscription (₹99) ----
-  async function subscribeMonthly() {
+  // ---- Tier 3: Subscription (pass tier: 'seeker' ₹99 or 'scholar' ₹299) ----
+  async function subscribeMonthly(tier = 'seeker') {
     openCheckout({
-      amountRs: 99,
-      description: 'Monthly Subscription — All Books, All Lessons',
-      onSuccess: async (paymentId) => {
-        const user = await BNMAuth.getUser();
-        const startedAt = new Date();
-        const expiresAt = new Date(startedAt);
-        expiresAt.setDate(expiresAt.getDate() + 30); // 30-day access
-
-        const { error } = await BNMAuth.supabase.from('subscriptions').insert({
-          user_id: user.id,
-          razorpay_subscription_id: paymentId, // using payment id as reference in this simple flow
-          status: 'active',
-          started_at: startedAt.toISOString(),
-          expires_at: expiresAt.toISOString(),
-        });
-        if (error) {
-          alert('Payment succeeded but recording it failed. Please contact support with this Payment ID: ' + paymentId);
-          console.error(error);
-          return;
-        }
-        alert('Subscribed! You now have access to every book and lesson for 30 days. ✓');
-        location.reload();
+      description: `Monthly Subscription — ${tier === 'scholar' ? 'Scholar' : 'Seeker'} plan`,
+      notes: { purchase_type: 'subscription', tier },
+      onSuccess: async () => {
+        await waitForUnlockThenReload();
       },
     });
+  }
+
+  // ---- Helper: give the webhook a moment to land, then reload ----
+  // Razorpay's handler fires the instant checkout closes, but the
+  // webhook (which actually writes the purchases/subscriptions row)
+  // arrives separately and slightly later. A short wait avoids reloading
+  // into a page that hasn't been unlocked yet. If it's still not visible
+  // after this, a manual refresh a few seconds later will pick it up.
+  async function waitForUnlockThenReload() {
+    alert('Payment received! Unlocking your content…');
+    await new Promise((resolve) => setTimeout(resolve, 2500));
+    location.reload();
   }
 
   window.BNMPayments = {
@@ -154,26 +148,25 @@
 })();
 
 // ============================================================
-// PRODUCTION NOTE (read before accepting real money):
+// PRODUCTION FLOW — now implemented, read before going live:
 //
-// The flow above trusts the client-side `handler` callback to
-// confirm payment success. This is fine for TEST MODE, but for
-// real transactions it is NOT secure — a malicious user could
-// fake a frontend success call without actually paying.
-//
-// For production, the correct flow is:
-//   1. Frontend calls a Supabase Edge Function ("create-order")
-//      which calls Razorpay's Orders API server-side using your
-//      Key Secret, and returns an order_id.
+//   1. Frontend calls the create-razorpay-order Edge Function,
+//      which creates a Razorpay Order server-side using the Key
+//      Secret (never exposed to the browser) and returns order_id.
 //   2. Frontend opens Razorpay Checkout using that order_id.
-//   3. Razorpay sends a webhook to another Edge Function
-//      ("razorpay-webhook") on successful payment.
-//   4. That webhook verifies the payment signature using your
-//      Key Secret, THEN inserts the `purchases`/`subscriptions`
-//      row — never trusting the frontend alone.
+//   3. Razorpay sends a webhook to the razorpay-webhook Edge
+//      Function on payment.captured.
+//   4. That function verifies the webhook signature using
+//      RAZORPAY_WEBHOOK_SECRET, then inserts the purchases/
+//      subscriptions row using the service_role key — the
+//      frontend itself can no longer write these rows directly
+//      (see RLS policy changes applied alongside this).
 //
-// This requires Supabase Edge Functions (Deno-based serverless
-// functions, still on the free tier). This is the next concrete
-// step before going live with real payments — flag this to
-// Claude when ready to build it.
+// Required setup still needed in the Razorpay dashboard:
+//   - Create a webhook pointing to:
+//     https://dcewvfkszrpknxdwyual.supabase.co/functions/v1/razorpay-webhook
+//   - Subscribe it to the "payment.captured" event
+//   - Copy the Webhook Secret it gives you into Supabase's
+//     Edge Function secrets as RAZORPAY_WEBHOOK_SECRET
+//   - Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET as secrets too
 // ============================================================
