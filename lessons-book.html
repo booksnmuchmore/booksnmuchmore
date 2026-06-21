@@ -208,11 +208,13 @@
   }
 
   // ── Nav account slot: shows "Login" or "Hi, <email>" + logout ──
+  // Called on page load AND on every login/logout via BNMAuth.onAuthChange,
+  // so it always reflects the real, current session state.
   async function renderNavAccount() {
     const user = await BNMAuth.getUser();
     const slot = document.getElementById('nav-account-slot');
     if (user) {
-      slot.innerHTML = `<button onclick="BNMAuth.logout()">Logout</button>`;
+      slot.innerHTML = `<span style="color:#d9c9b0;margin-right:.6rem;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
     } else {
       slot.innerHTML = `<button onclick="BNMAuth.openModal()">Login</button>`;
     }
@@ -383,8 +385,17 @@
   }
 
   detectCountry();
-  renderNavAccount();
-  render();
+
+  // ── Keep nav account slot AND lesson lock state in sync with login ──
+  // renderNavAccount() used to run once at page load and never again,
+  // which is why the "Login" button never updated after a successful OTP.
+  // BNMAuth.onAuthChange fires immediately with the restored session (if
+  // any) and again on every future login/logout, so both the nav and the
+  // lesson list (locked/unlocked) now stay correct automatically.
+  BNMAuth.onAuthChange(() => {
+    renderNavAccount();
+    render(); // re-fetch get_lessons_for_book so unlocked lessons show live
+  });
 </script>
 
 </body>

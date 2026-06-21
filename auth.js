@@ -23,6 +23,47 @@
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   let pendingCallback = null;
+  let currentUser = null;
+  const uiTargets = []; // { loginBtnId, accountElId } pairs registered via initAuthUI
+  const authChangeListeners = []; // callbacks registered via onAuthChange
+
+  // ---- Render logged-in / logged-out state into registered UI targets ----
+  function renderAuthUI() {
+    uiTargets.forEach(({ loginBtnId, accountElId }) => {
+      const loginBtn = loginBtnId ? document.getElementById(loginBtnId) : null;
+      const accountEl = accountElId ? document.getElementById(accountElId) : null;
+
+      if (currentUser) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (accountEl) {
+          accountEl.style.display = 'inline-flex';
+          accountEl.innerHTML = `
+            <span class="bnm-account-email">${currentUser.email}</span>
+            <button class="bnm-logout-btn" type="button">Logout</button>
+          `;
+          const logoutBtn = accountEl.querySelector('.bnm-logout-btn');
+          if (logoutBtn) logoutBtn.onclick = () => logout();
+        }
+      } else {
+        if (loginBtn) loginBtn.style.display = '';
+        if (accountEl) {
+          accountEl.style.display = 'none';
+          accountEl.innerHTML = '';
+        }
+      }
+    });
+  }
+
+  // ---- Keep currentUser in sync with Supabase session, on load AND on change ----
+  // This fires immediately on page load with the existing session (if any),
+  // and again automatically after sign-in / sign-out / token refresh.
+  supabase.auth.onAuthStateChange((_event, session) => {
+    currentUser = session?.user || null;
+    renderAuthUI();
+    authChangeListeners.forEach((fn) => {
+      try { fn(currentUser); } catch (e) { console.error('BNMAuth onAuthChange listener error:', e); }
+    });
+  });
 
   // ---- Inject modal HTML + styles once ----
   function injectModal() {
@@ -178,8 +219,12 @@
 
   // ---- Public API ----
   async function getUser() {
+    // currentUser is kept in sync by onAuthStateChange (fires on load too),
+    // but fall back to a direct check if it hasn't fired yet.
+    if (currentUser) return currentUser;
     const { data } = await supabase.auth.getUser();
-    return data?.user || null;
+    currentUser = data?.user || null;
+    return currentUser;
   }
 
   async function requireLogin(callback) {
@@ -197,6 +242,26 @@
     window.location.reload();
   }
 
+  // Register a login button + account-display element so they auto-update
+  // on login/logout/page-load. Call once per page, after the elements exist.
+  //   BNMAuth.initAuthUI({ loginBtnId: 'login-btn', accountElId: 'account-area' });
+  function initAuthUI({ loginBtnId, accountElId } = {}) {
+    uiTargets.push({ loginBtnId, accountElId });
+    renderAuthUI(); // apply immediately in case session is already known
+  }
+
+  // Register a callback to run on every login/logout/page-load auth check.
+  // Useful for re-rendering custom nav UI or re-fetching gated content.
+  //   const unsubscribe = BNMAuth.onAuthChange((user) => { ... });
+  function onAuthChange(callback) {
+    authChangeListeners.push(callback);
+    // Returns an unsubscribe function in case the caller needs it.
+    return () => {
+      const idx = authChangeListeners.indexOf(callback);
+      if (idx !== -1) authChangeListeners.splice(idx, 1);
+    };
+  }
+
   window.BNMAuth = {
     supabase,      // exposed so other scripts (e.g. payments.js) can reuse the same client
     getUser,
@@ -204,5 +269,7 @@
     logout,
     openModal,
     closeModal,
+    initAuthUI,
+    onAuthChange,
   };
 })();
