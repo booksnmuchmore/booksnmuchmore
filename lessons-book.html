@@ -211,8 +211,9 @@
   // Called on page load AND on every login/logout via BNMAuth.onAuthChange,
   // so it always reflects the real, current session state.
   async function renderNavAccount() {
-    const user = await BNMAuth.getUser();
     const slot = document.getElementById('nav-account-slot');
+    if (!slot) return; // DOM not ready yet on the very first auth-state fire; safe to skip
+    const user = await BNMAuth.getUser();
     if (user) {
       slot.innerHTML = `<span style="color:#d9c9b0;margin-right:.6rem;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
     } else {
@@ -392,9 +393,13 @@
   // BNMAuth.onAuthChange fires immediately with the restored session (if
   // any) and again on every future login/logout, so both the nav and the
   // lesson list (locked/unlocked) now stay correct automatically.
+  // NOTE: the two calls are intentionally separate statements (not
+  // chained) so that if one throws for any reason, the other still runs.
   BNMAuth.onAuthChange(() => {
     renderNavAccount();
-    render(); // re-fetch get_lessons_for_book so unlocked lessons show live
+  });
+  BNMAuth.onAuthChange(() => {
+    if (document.getElementById('app')) render(); // re-fetch get_lessons_for_book so unlocked lessons show live
   });
 </script>
 
