@@ -24,6 +24,7 @@
 
   let pendingCallback = null;
   let currentUser = null;
+  let authReady = false; // becomes true once the first onAuthStateChange fires (session restored or confirmed absent)
   const uiTargets = []; // { loginBtnId, accountElId } pairs registered via initAuthUI
   const authChangeListeners = []; // callbacks registered via onAuthChange
 
@@ -59,6 +60,7 @@
   // and again automatically after sign-in / sign-out / token refresh.
   supabase.auth.onAuthStateChange((_event, session) => {
     currentUser = session?.user || null;
+    authReady = true;
     renderAuthUI();
     authChangeListeners.forEach((fn) => {
       try { fn(currentUser); } catch (e) { console.error('BNMAuth onAuthChange listener error:', e); }
@@ -253,8 +255,23 @@
   // Register a callback to run on every login/logout/page-load auth check.
   // Useful for re-rendering custom nav UI or re-fetching gated content.
   //   const unsubscribe = BNMAuth.onAuthChange((user) => { ... });
+  //
+  // IMPORTANT: Supabase's onAuthStateChange fires its initial event only
+  // ONCE, asynchronously, right after the client restores any existing
+  // session — and it can fire before a page's own <script> blocks have
+  // even run (since auth.js loads and executes before them). If this
+  // function only pushed to a listener array, any listener registered
+  // AFTER that first event already fired would simply miss it forever —
+  // meaning render()-style callbacks registered this way would never run
+  // on a normal page load. So: if the initial check has already resolved
+  // by the time someone calls onAuthChange, fire the callback right away
+  // with the current known state, in addition to listening for future
+  // changes.
   function onAuthChange(callback) {
     authChangeListeners.push(callback);
+    if (authReady) {
+      try { callback(currentUser); } catch (e) { console.error('BNMAuth onAuthChange listener error:', e); }
+    }
     // Returns an unsubscribe function in case the caller needs it.
     return () => {
       const idx = authChangeListeners.indexOf(callback);
