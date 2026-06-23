@@ -481,7 +481,7 @@ footer{
     <div class="sub-promo-card">
       <div class="sub-promo-price">₹99<span>/month</span></div>
       <ul class="sub-promo-list">
-        <li>✓ सभी 16 books के सभी lessons</li>
+        <li>✓ <span id="sub-promo-book-count">सभी</span> books के सभी lessons</li>
         <li>✓ नई books जुड़ते ही access</li>
         <li>✓ कभी भी cancel करें</li>
       </ul>
@@ -658,6 +658,23 @@ document.getElementById('lessons-grid').innerHTML = HOMEPAGE_LESSONS.map((b, i) 
     ? `<a class="lsn-card${featured} reveal${delay}" href="lessons-book.html?book=${b.slug}">${inner}</a>`
     : `<div class="lsn-card lsn-coming${featured} reveal${delay}">${inner}</div>`;
 }).join('');
+
+// ── SUBSCRIPTION CARD: live book count ──────────────────
+// Pulls the real count from Supabase (same RPC lessons.html uses)
+// instead of a hardcoded number, so it never drifts as books are added.
+async function updateSubPromoBookCount(){
+  const el = document.getElementById('sub-promo-book-count');
+  if (!el) return;
+  try {
+    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+    if (error || !Array.isArray(books)) throw error || new Error('no data');
+    el.textContent = `सभी ${books.length}`;
+  } catch (e) {
+    console.error('Failed to fetch live book count:', e);
+    el.textContent = 'सभी'; // graceful fallback — generic copy, no broken number
+  }
+}
+updateSubPromoBookCount();
 
 // ── STORIES ────────────────────────────────────────────
 document.getElementById('stories-grid').innerHTML = EPISODES.slice(0,3).map((ep, i) => {
