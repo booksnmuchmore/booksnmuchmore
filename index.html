@@ -585,8 +585,8 @@ document.getElementById('navbar').innerHTML = `
     <li><a href="lessons.html">📖 Lessons</a></li>
     <li><a href="#subscribe">Subscribe</a></li>
   </ul>
-  <a href="${SITE.latestYoutubeUrl}" target="_blank" class="btn-primary">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Latest
+  <a href="lessons.html" class="btn-primary">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 6.04C10.07 4.6 7.3 4 5 4 3.4 4 1.8 4.3.5 5v14.5C1.8 18.8 3.4 18.5 5 18.5c2.3 0 5.07.6 7 2 1.93-1.4 4.7-2 7-2 1.6 0 3.2.3 4.5 1V5C22.2 4.3 20.6 4 19 4c-2.3 0-5.07.6-7 2zM12 6.04v13.46"/></svg>Read Lessons
   </a>`;
 
 // ── HERO ───────────────────────────────────────────────
@@ -608,18 +608,24 @@ document.getElementById('hero-content').innerHTML = `
     <div><span class="stat-num">हिंदी</span><span class="stat-label">Language</span></div>
   </div>`;
 
-// ── HERO LATEST CARD ───────────────────────────────────
+// ── HERO FEATURED LESSON CARD ───────────────────────────
+// Was: latest YouTube episode. Now: a featured book lesson,
+// since Lessons is the actively-maintained content going forward.
+const featuredLesson = HOMEPAGE_LESSONS.find(b => b.live) || HOMEPAGE_LESSONS[0];
 const latestCard = document.getElementById('hero-latest-card');
-latestCard.href = SITE.latestYoutubeUrl;
-latestCard.innerHTML = `
-  <div class="hero-latest-thumb">
-    <img src="${RAW}${latest.thumb}" alt="${latest.titleHindi}">
-  </div>
-  <div class="hero-latest-body">
-    <span class="hero-latest-badge">▶ Latest Episode · Ep ${pad(latest.num)}</span>
-    <div class="hero-latest-title">${latest.titleHindi}</div>
-    <span class="hero-latest-cta">Watch Now →</span>
-  </div>`;
+if (featuredLesson) {
+  latestCard.href = featuredLesson.live ? `lessons-book.html?book=${featuredLesson.slug}` : 'lessons.html';
+  latestCard.removeAttribute('target'); // internal link now, not opening a new tab to YouTube
+  latestCard.innerHTML = `
+    <div class="hero-latest-thumb">
+      <img src="${featuredLesson.cover}" alt="${featuredLesson.title}">
+    </div>
+    <div class="hero-latest-body">
+      <span class="hero-latest-badge">📖 ${featuredLesson.genre || 'Featured Lesson'}</span>
+      <div class="hero-latest-title">${featuredLesson.title}</div>
+      <span class="hero-latest-cta">Lessons पढ़ें →</span>
+    </div>`;
+}
 
 // ── LESSONS ────────────────────────────────────────────
 document.getElementById('lessons-grid').innerHTML = HOMEPAGE_LESSONS.map((b, i) => {
