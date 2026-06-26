@@ -201,6 +201,205 @@ const BOOK_LINKS = {
     CA: "https://www.amazon.ca/dp/0143442295",
     GB: "0143442295",
     DE: "0143442295"
+  },
+
+  // ── Added [date: see commit] — these 23 books had no entry at all,
+  // which is why their "Buy on Amazon" links were broken (empty ASIN).
+  // ASINs derived from each book's verified ISBN-13 (the same ISBN-13
+  // already used for the cover image URL in Supabase), converted to
+  // ISBN-10 via the standard checksum algorithm. This conversion method
+  // was cross-checked against 9 books already in this file with known-
+  // correct ASINs — all 9 matched exactly, confirming the method.
+  //
+  // IN defaults to the same ASIN as US for now. Some books (like
+  // monk-who-sold-ferrari, psychology-of-money above) have a genuinely
+  // different India-specific edition with its own ISBN — if any of
+  // these 23 do too, swap in the India-specific ASIN later for better
+  // pricing/availability/commission. Not done here since it requires
+  // a per-book lookup rather than the ISBN-13 conversion shortcut.
+
+  "cant-hurt-me": {
+    IN: "https://www.amazon.in/dp/1544512287",
+    US: "https://www.amazon.com/dp/1544512287",
+    CA: "https://www.amazon.ca/dp/1544512287",
+    GB: "1544512287",
+    DE: "1544512287"
+  },
+
+  "the-kite-runner": {
+    IN: "https://www.amazon.in/dp/1594480001",
+    US: "https://www.amazon.com/dp/1594480001",
+    CA: "https://www.amazon.ca/dp/1594480001",
+    GB: "1594480001",
+    DE: "1594480001"
+  },
+
+  "old-man-and-the-sea": {
+    IN: "https://www.amazon.in/dp/0684801221",
+    US: "https://www.amazon.com/dp/0684801221",
+    CA: "https://www.amazon.ca/dp/0684801221",
+    GB: "0684801221",
+    DE: "0684801221"
+  },
+
+  "harry-potter-sorcerers-stone": {
+    IN: "https://www.amazon.in/dp/059035342X",
+    US: "https://www.amazon.com/dp/059035342X",
+    CA: "https://www.amazon.ca/dp/059035342X",
+    GB: "059035342X",
+    DE: "059035342X"
+  },
+
+  "why-we-sleep": {
+    IN: "https://www.amazon.in/dp/1501144316",
+    US: "https://www.amazon.com/dp/1501144316",
+    CA: "https://www.amazon.ca/dp/1501144316",
+    GB: "1501144316",
+    DE: "1501144316"
+  },
+
+  "make-it-stick": {
+    IN: "https://www.amazon.in/dp/0674729013",
+    US: "https://www.amazon.com/dp/0674729013",
+    CA: "https://www.amazon.ca/dp/0674729013",
+    GB: "0674729013",
+    DE: "0674729013"
+  },
+
+  "freakonomics": {
+    IN: "https://www.amazon.in/dp/006073132X",
+    US: "https://www.amazon.com/dp/006073132X",
+    CA: "https://www.amazon.ca/dp/006073132X",
+    GB: "006073132X",
+    DE: "006073132X"
+  },
+
+  "long-walk-to-freedom": {
+    IN: "https://www.amazon.in/dp/0316548189",
+    US: "https://www.amazon.com/dp/0316548189",
+    CA: "https://www.amazon.ca/dp/0316548189",
+    GB: "0316548189",
+    DE: "0316548189"
+  },
+
+  "bhagavad-gita": {
+    IN: "https://www.amazon.in/dp/0553213652",
+    US: "https://www.amazon.com/dp/0553213652",
+    CA: "https://www.amazon.ca/dp/0553213652",
+    GB: "0553213652",
+    DE: "0553213652"
+  },
+
+  "mans-search-for-meaning": {
+    IN: "https://www.amazon.in/dp/0807014273",
+    US: "https://www.amazon.com/dp/0807014273",
+    CA: "https://www.amazon.ca/dp/0807014273",
+    GB: "0807014273",
+    DE: "0807014273"
+  },
+
+  "zero-to-one": {
+    IN: "https://www.amazon.in/dp/0804139296",
+    US: "https://www.amazon.com/dp/0804139296",
+    CA: "https://www.amazon.ca/dp/0804139296",
+    GB: "0804139296",
+    DE: "0804139296"
+  },
+
+  "daring-greatly": {
+    IN: "https://www.amazon.in/dp/1592408419",
+    US: "https://www.amazon.com/dp/1592408419",
+    CA: "https://www.amazon.ca/dp/1592408419",
+    GB: "1592408419",
+    DE: "1592408419"
+  },
+
+  "4-hour-workweek": {
+    IN: "https://www.amazon.in/dp/0307465357",
+    US: "https://www.amazon.com/dp/0307465357",
+    CA: "https://www.amazon.ca/dp/0307465357",
+    GB: "0307465357",
+    DE: "0307465357"
+  },
+
+  "almanack-naval-ravikant": {
+    IN: "https://www.amazon.in/dp/1544514212",
+    US: "https://www.amazon.com/dp/1544514212",
+    CA: "https://www.amazon.ca/dp/1544514212",
+    GB: "1544514212",
+    DE: "1544514212"
+  },
+
+  "educated": {
+    IN: "https://www.amazon.in/dp/0399590501",
+    US: "https://www.amazon.com/dp/0399590501",
+    CA: "https://www.amazon.ca/dp/0399590501",
+    GB: "0399590501",
+    DE: "0399590501"
+  },
+
+  "midnight-library": {
+    IN: "https://www.amazon.in/dp/0525559477",
+    US: "https://www.amazon.com/dp/0525559477",
+    CA: "https://www.amazon.ca/dp/0525559477",
+    GB: "0525559477",
+    DE: "0525559477"
+  },
+
+  "steve-jobs": {
+    IN: "https://www.amazon.in/dp/1451648537",
+    US: "https://www.amazon.com/dp/1451648537",
+    CA: "https://www.amazon.ca/dp/1451648537",
+    GB: "1451648537",
+    DE: "1451648537"
+  },
+
+  "fiber-fueled": {
+    IN: "https://www.amazon.in/dp/059308456X",
+    US: "https://www.amazon.com/dp/059308456X",
+    CA: "https://www.amazon.ca/dp/059308456X",
+    GB: "059308456X",
+    DE: "059308456X"
+  },
+
+  "outliers": {
+    IN: "https://www.amazon.in/dp/0316017930",
+    US: "https://www.amazon.com/dp/0316017930",
+    CA: "https://www.amazon.ca/dp/0316017930",
+    GB: "0316017930",
+    DE: "0316017930"
+  },
+
+  "power-of-now": {
+    IN: "https://www.amazon.in/dp/1577314808",
+    US: "https://www.amazon.com/dp/1577314808",
+    CA: "https://www.amazon.ca/dp/1577314808",
+    GB: "1577314808",
+    DE: "1577314808"
+  },
+
+  "blue-zones": {
+    IN: "https://www.amazon.in/dp/1426202741",
+    US: "https://www.amazon.com/dp/1426202741",
+    CA: "https://www.amazon.ca/dp/1426202741",
+    GB: "1426202741",
+    DE: "1426202741"
+  },
+
+  "intelligent-investor": {
+    IN: "https://www.amazon.in/dp/0060555661",
+    US: "https://www.amazon.com/dp/0060555661",
+    CA: "https://www.amazon.ca/dp/0060555661",
+    GB: "0060555661",
+    DE: "0060555661"
+  },
+
+  "sapiens": {
+    IN: "https://www.amazon.in/dp/0062316095",
+    US: "https://www.amazon.com/dp/0062316095",
+    CA: "https://www.amazon.ca/dp/0062316095",
+    GB: "0062316095",
+    DE: "0062316095"
   }
 
 };
