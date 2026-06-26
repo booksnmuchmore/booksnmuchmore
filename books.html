@@ -3,10 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>किताबें | Books 'n' Much More</title>
+  <title>40+ Book Summaries in Hindi &amp; English | Books 'n' Much More</title>
+  <meta name="description" content="Browse our full collection of book summaries with 10 key lessons each, in Hindi and English. Atomic Habits, Rich Dad Poor Dad, Psychology of Money, and more."/>
+  <link rel="canonical" href="https://booksnmuchmore.com/books.html"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Books 'n' Much More"/>
+  <meta property="og:title" content="40+ Book Summaries in Hindi &amp; English | Books 'n' Much More"/>
+  <meta property="og:description" content="Browse our full collection of book summaries with 10 key lessons each, in Hindi and English."/>
+  <meta property="og:url" content="https://booksnmuchmore.com/books.html"/>
+  <meta name="twitter:card" content="summary"/>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- ItemList schema (JSON-LD) — populated via JS once the live
+       catalog loads from Supabase. Empty array here is intentional:
+       a crawler that doesn't execute JS just sees a no-op. -->
+  <script type="application/ld+json" id="catalog-schema">{}</script>
+
   <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
 <script>
@@ -605,13 +620,10 @@
 </div>
 
 <!-- FILTER BAR -->
-<div class="filter-bar">
+<div class="filter-bar" id="filterBar">
   <span class="filter-label">Filter:</span>
   <button class="filter-btn active" onclick="filterBooks('all', this)">सभी</button>
-  <button class="filter-btn" onclick="filterBooks('mindset', this)">Mindset</button>
-  <button class="filter-btn" onclick="filterBooks('finance', this)">Finance</button>
-  <button class="filter-btn" onclick="filterBooks('productivity', this)">Productivity</button>
-  <button class="filter-btn" onclick="filterBooks('habits', this)">Habits</button>
+  <!-- Remaining genre buttons generated dynamically once books load -->
 </div>
 
 <!-- AFFILIATE NOTICE -->
@@ -623,7 +635,7 @@
 
 <!-- BOOKS GRID -->
 <section class="books-section">
-  <div class="section-heading">15 Must-Read Books</div>
+  <div class="section-heading" id="sectionHeading">Loading Books…</div>
   <div class="books-grid" id="booksGrid">
 
     <div class="no-results" id="noResults">
@@ -631,314 +643,10 @@
       <small>Amazon पर पूरी search के लिए ऊपर का button दबाएं →</small>
     </div>
 
-    <!-- 1. Think and Grow Rich -->
-    <div class="book-card" data-cat="mindset finance" data-title="Think and Grow Rich" data-author="Napoleon Hill" data-keywords="wealth success desire mindset money richness धन सफलता">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/71UypkUjStL._SY466_.jpg" alt="Think and Grow Rich" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Think+%26+Grow+Rich'"/>
-        <span class="book-badge">Bestseller</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Finance</span>
-        <div class="book-title">Think and Grow Rich</div>
-        <div class="book-author">Napoleon Hill</div>
-        <div class="book-quote">जो आप सोच सकते हैं, वो आप पा सकते हैं।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('think-and-grow-rich')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
+    <div class="loading-placeholder" id="loadingPlaceholder" style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-muted);font-style:italic;">
+      किताबें load हो रही हैं…
     </div>
-    <!-- 2. Atomic Habits -->
-    <div class="book-card" data-cat="habits productivity" data-title="Atomic Habits" data-author="James Clear" data-keywords="habits routine system 1% change behaviour productivity आदत बदलाव">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/81wgcld4wxL._SY466_.jpg" alt="Atomic Habits" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Atomic+Habits'"/>
-        <span class="book-badge">Most Popular</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Habits · Productivity</span>
-        <div class="book-title">Atomic Habits</div>
-        <div class="book-author">James Clear</div>
-        <div class="book-quote">छोटी-छोटी आदतें मिलकर बड़े नतीजे देती हैं।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('atomic-habits')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 3. Rich Dad Poor Dad -->
-    <div class="book-card" data-cat="finance" data-title="Rich Dad Poor Dad" data-author="Robert T. Kiyosaki" data-keywords="money finance asset liability investment wealth पैसा निवेश अमीर">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL._SY466_.jpg" alt="Rich Dad Poor Dad" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Rich+Dad+Poor+Dad'"/>
-        <span class="book-badge">Classic</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Finance</span>
-        <div class="book-title">Rich Dad Poor Dad</div>
-        <div class="book-author">Robert T. Kiyosaki</div>
-        <div class="book-quote">पैसा आपके लिए काम करे, आप पैसे के लिए नहीं।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('rich-dad-poor-dad')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 4. The Alchemist -->
-    <div class="book-card" data-cat="mindset" data-title="The Alchemist" data-author="Paulo Coelho" data-keywords="dream journey purpose legend fiction philosophy सपना यात्रा उद्देश्य">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL._SY466_.jpg" alt="The Alchemist" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=The+Alchemist'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Fiction</span>
-        <div class="book-title">The Alchemist</div>
-        <div class="book-author">Paulo Coelho</div>
-        <div class="book-quote">जब तुम कुछ चाहते हो, तो पूरी कायनात उसे पाने में मदद करती है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('the-alchemist')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 5. Growth Mindset -->
-    <div class="book-card" data-cat="mindset" data-title="Mindset: The New Psychology of Success" data-author="Carol S. Dweck" data-keywords="growth fixed mindset psychology success learning विकास मनोविज्ञान">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/0345472322-L.jpg" alt="Mindset by Carol Dweck" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Mindset'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset</span>
-        <div class="book-title">Mindset: The New Psychology of Success</div>
-        <div class="book-author">Carol S. Dweck</div>
-        <div class="book-quote">Growth mindset वाले लोग हर challenge में opportunity देखते हैं।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('mindset')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 6. Mind Management Not Time Management -->
-    <div class="book-card" data-cat="productivity mindset" data-title="Mind Management, Not Time Management" data-author="David Kadavy" data-keywords="productivity creativity energy focus time management मन समय प्रबंधन">
-      <div class="book-cover-wrap">
-        <img src="https://books.google.com/books/content?id=xcK-zQEACAAJ&printsec=frontcover&img=1&zoom=1" alt="Mind Management Not Time Management" onerror="this.src='https://covers.openlibrary.org/b/isbn/0578733692-L.jpg'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Productivity · Mindset</span>
-        <div class="book-title">Mind Management, Not Time Management</div>
-        <div class="book-author">David Kadavy</div>
-        <div class="book-quote">सही समय पर सही काम करना ही असली productivity है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★☆</span>
-        <button class="buy-btn" onclick="geoRedirect('mind-management')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 7. Ikigai -->
-    <div class="book-card" data-cat="mindset" data-title="Ikigai" data-author="Héctor García &amp; Francesc Miralles" data-keywords="purpose happiness japan lifestyle longevity meaning जापान खुशी उद्देश्य">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL._SY466_.jpg" alt="Ikigai" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Ikigai'"/>
-        <span class="book-badge">Trending</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Lifestyle</span>
-        <div class="book-title">Ikigai</div>
-        <div class="book-author">Héctor García & Francesc Miralles</div>
-        <div class="book-quote">जीने का एक purpose ढूंढो — यही है ikigai।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('ikigai')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 8. Deep Work -->
-    <div class="book-card" data-cat="productivity" data-title="Deep Work" data-author="Cal Newport" data-keywords="focus concentration distraction productivity flow work एकाग्रता ध्यान">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/0349413681-L.jpg" alt="Deep Work" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Deep+Work'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Productivity</span>
-        <div class="book-title">Deep Work</div>
-        <div class="book-author">Cal Newport</div>
-        <div class="book-quote">Distraction-free concentration — यही आपकी superpower है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('deep-work')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 9. Linchpin -->
-    <div class="book-card" data-cat="mindset productivity" data-title="Linchpin" data-author="Seth Godin" data-keywords="career indispensable art work leadership creativity करियर नेतृत्व">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/0749953357-L.jpg" alt="Linchpin" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Linchpin'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Career</span>
-        <div class="book-title">Linchpin</div>
-        <div class="book-author">Seth Godin</div>
-        <div class="book-quote">Replace होने वाले मत बनो — indispensable बनो।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★☆</span>
-        <button class="buy-btn" onclick="geoRedirect('linchpin')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 10. 7 Habits -->
-    <div class="book-card" data-cat="habits mindset" data-title="7 Habits of Highly Effective People" data-author="Stephen R. Covey" data-keywords="habits effectiveness leadership proactive synergy character आदत नेतृत्व">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/1982137274-L.jpg" alt="7 Habits of Highly Effective People" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=7+Habits'"/>
-        <span class="book-badge">All-time Classic</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Habits · Leadership</span>
-        <div class="book-title">7 Habits of Highly Effective People</div>
-        <div class="book-author">Stephen R. Covey</div>
-        <div class="book-quote">Effective लोग react नहीं करते — वो choose करते हैं।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('7-habits-of-highly-effective-people')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 11. The Subtle Art of Not Giving a F*ck -->
-    <div class="book-card" data-cat="mindset" data-title="The Subtle Art of Not Giving a F*ck" data-author="Mark Manson" data-keywords="values priorities happiness acceptance counterintuitive mindset खुशी प्राथमिकता">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/71QKQ9mwV7L._SY466_.jpg" alt="The Subtle Art of Not Giving a F*ck" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Subtle+Art'"/>
-        <span class="book-badge">Bestseller</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Self-Help</span>
-        <div class="book-title">The Subtle Art of Not Giving a F*ck</div>
-        <div class="book-author">Mark Manson</div>
-        <div class="book-quote">हर चीज़ पर ध्यान मत दो — सिर्फ वो चुनो जो सच में मायने रखता है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('subtle-art')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 12. How to Win Friends and Influence People -->
-    <div class="book-card" data-cat="mindset" data-title="How to Win Friends and Influence People" data-author="Dale Carnegie" data-keywords="communication relationships influence people leadership social skills रिश्ते संचार">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/71vK0WVQ4rL._SY466_.jpg" alt="How to Win Friends and Influence People" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=How+to+Win+Friends'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Self-Help · Leadership</span>
-        <div class="book-title">How to Win Friends and Influence People</div>
-        <div class="book-author">Dale Carnegie</div>
-        <div class="book-quote">लोगों को समझना ही असली कला है — यही सफलता की नींव है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('how-to-win-friends')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 13. The Monk Who Sold His Ferrari -->
-    <div class="book-card" data-cat="mindset" data-title="The Monk Who Sold His Ferrari" data-author="Robin Sharma" data-keywords="purpose soul happiness simplicity spirituality life philosophy आत्मा खुशी सरलता">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/817992162X-L.jpg" alt="The Monk Who Sold His Ferrari" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Monk+Ferrari'"/>
-        <span class="book-badge">Bestseller</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Self-Help</span>
-        <div class="book-title">The Monk Who Sold His Ferrari</div>
-        <div class="book-author">Robin Sharma</div>
-        <div class="book-quote">जब तक हम अपनी आत्मा की आवाज़ नहीं सुनते, सच्ची ख़ुशी नहीं मिलती।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('monk-who-sold-ferrari')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 14. The Psychology of Money -->
-    <div class="book-card" data-cat="finance" data-title="The Psychology of Money" data-author="Morgan Housel" data-keywords="money wealth finance investing behaviour psychology savings पैसा मनोविज्ञान बचत">
-      <div class="book-cover-wrap">
-        <img src="https://m.media-amazon.com/images/I/71g2ednj0JL._SY466_.jpg" alt="The Psychology of Money" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Psychology+of+Money'"/>
-        <span class="book-badge">Trending</span>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Finance · Mindset</span>
-        <div class="book-title">The Psychology of Money</div>
-        <div class="book-author">Morgan Housel</div>
-        <div class="book-quote">पैसे का सही मनोविज्ञान समझो — तो ज़िंदगी बदल जाती है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('psychology-of-money')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
-    <!-- 15. The Practicing Mind -->
-    <div class="book-card" data-cat="mindset productivity" data-title="The Practicing Mind" data-author="Thomas M. Sterner" data-keywords="mastery process focus patience discipline practice skill अभ्यास धैर्य कौशल">
-      <div class="book-cover-wrap">
-        <img src="https://covers.openlibrary.org/b/isbn/9386867109-L.jpg" alt="The Practicing Mind" onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=Practicing+Mind'"/>
-      </div>
-      <div class="book-body">
-        <span class="book-category">Mindset · Productivity</span>
-        <div class="book-title">The Practicing Mind</div>
-        <div class="book-author">Thomas M. Sterner</div>
-        <div class="book-quote">Result पर नहीं, process पर ध्यान दो — तभी असली mastery मिलती है।</div>
-      </div>
-      <div class="book-footer">
-        <span class="book-stars">★★★★★</span>
-        <button class="buy-btn" onclick="geoRedirect('practicing-mind')">
-          <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-            🛒 Buy on Amazon
-        </button>
-        <div class="geo-note">🇮🇳 India · 🇺🇸 US · 🇨🇦 Canada · 🌍 Others → Amazon.com</div>
-      </div>
-    </div>
+
   </div><!-- /books-grid -->
 </section>
 
@@ -959,6 +667,11 @@
   <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">Affiliate Disclosure: इस page पर Amazon affiliate links हैं।</p>
 </footer>
 
+<!-- Supabase client (shared via auth.js, same pattern as lessons-book.html) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+
+<!-- Single source of truth for affiliate links -->
 <script src="affiliate-links.js"></script>
 <script>
   // ═══════════════════════════════════════════════════════
@@ -999,6 +712,139 @@
     const map = { CA: [links.CA, AFFILIATE_TAGS.CA], US: [links.US, AFFILIATE_TAGS.US] };
     const [base, tag] = map[userCountry] || [links.IN, AFFILIATE_TAGS.IN];
     window.open(base + '?tag=' + tag, '_blank');
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  LOAD BOOKS FROM SUPABASE — replaces the old 15 hardcoded
+  //  cards with the full live catalog (40 books and growing).
+  //  Card click target is the lessons page (real content +
+  //  monetization); Amazon stays as a small secondary link via
+  //  the existing geoRedirect()/affiliate-links.js system.
+  // ═══════════════════════════════════════════════════════
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function genreToSlug(genre) {
+    // "Mindset · Finance" -> "mindset finance" (matches old data-cat convention,
+    // lowercase space-separated tokens, so filterBooks()'s .includes(cat) keeps working)
+    return (genre || '')
+      .toLowerCase()
+      .replace(/[·,]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function renderBookCard(book) {
+    const catTokens = genreToSlug(book.genre);
+    const safeTitle = escapeHtml(book.title);
+    const safeAuthor = escapeHtml(book.author);
+    const lessonsUrl = `lessons-book.html?book=${encodeURIComponent(book.slug)}`;
+    const blurb = escapeHtml((book.description || '').slice(0, 140)) +
+      ((book.description || '').length > 140 ? '…' : '');
+
+    // Whole card is a single <a> (not display:contents nesting, for
+    // simpler markup and zero browser-compat questions). buy-btn below
+    // is a real button INSIDE the link — stopPropagation/preventDefault
+    // on its click keeps it from also triggering the card's own navigation.
+    return `
+      <a class="book-card" href="${lessonsUrl}" data-cat="${escapeHtml(catTokens)}" data-title="${safeTitle}" data-author="${safeAuthor}" data-keywords="${escapeHtml(catTokens)}" style="text-decoration:none;color:inherit;">
+        <div class="book-cover-wrap">
+          <img src="${escapeHtml(book.cover_url || '')}" alt="${safeTitle}"
+            onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=${encodeURIComponent(book.title || 'Book')}'"/>
+        </div>
+        <div class="book-body">
+          <span class="book-category">${escapeHtml(book.genre || '')}</span>
+          <div class="book-title">${safeTitle}</div>
+          <div class="book-author">${safeAuthor}</div>
+          ${blurb ? `<div class="book-quote">${blurb}</div>` : ''}
+        </div>
+        <div class="book-footer">
+          <span class="buy-btn" style="display:flex;align-items:center;justify-content:center;">
+            📖 10 Lessons पढ़ें
+          </span>
+          <button class="buy-btn" style="background:transparent;border:1px solid rgba(200,134,10,0.35);color:var(--amber);"
+            onclick="event.preventDefault(); event.stopPropagation(); geoRedirect('${escapeHtml(book.slug)}')">
+            🛒 Buy on Amazon
+          </button>
+        </div>
+      </a>`;
+  }
+
+  function renderGenreFilters(books) {
+    const bar = document.getElementById('filterBar');
+    // collect unique genre tokens across all books, in first-seen order
+    const seen = new Set();
+    const tokens = [];
+    books.forEach(b => {
+      genreToSlug(b.genre).split(' ').filter(Boolean).forEach(t => {
+        if (!seen.has(t)) { seen.add(t); tokens.push(t); }
+      });
+    });
+    // cap at a reasonable number of filter buttons so the bar doesn't overflow badly
+    tokens.slice(0, 10).forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+      btn.onclick = () => filterBooks(t, btn);
+      bar.appendChild(btn);
+    });
+  }
+
+  async function loadBooks() {
+    const grid = document.getElementById('booksGrid');
+    const heading = document.getElementById('sectionHeading');
+    const noResults = document.getElementById('noResults');
+
+    try {
+      const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+
+      if (error || !books) {
+        console.error('Failed to load books:', error);
+        document.getElementById('loadingPlaceholder').textContent =
+          'किताबें load नहीं हो पाईं — कृपया page reload करें।';
+        return;
+      }
+
+      const liveBooks = books.filter(b => b.live);
+
+      heading.textContent = `${liveBooks.length} Must-Read Books`;
+
+      const placeholder = document.getElementById('loadingPlaceholder');
+      if (placeholder) placeholder.remove();
+
+      const cardsHtml = liveBooks.map(renderBookCard).join('');
+      grid.insertAdjacentHTML('beforeend', cardsHtml);
+      // re-append no-results so it stays after the cards in DOM order
+      grid.appendChild(noResults);
+
+      renderGenreFilters(liveBooks);
+
+      // ItemList JSON-LD — helps Google understand this is a catalog
+      // page linking to individual Book pages, not just a generic list.
+      const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": liveBooks.map((b, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "url": `https://booksnmuchmore.com/lessons-book.html?book=${b.slug}`,
+          "name": b.title
+        }))
+      };
+      document.getElementById('catalog-schema').textContent = JSON.stringify(itemListSchema);
+
+      // Now that real cards exist in the DOM, build the search index
+      // and finish wiring up the page (was previously done directly
+      // inside DOMContentLoaded, before any cards existed).
+      bookIndex = buildIndex();
+    } catch (err) {
+      console.error('Unexpected error loading books:', err);
+      const placeholder = document.getElementById('loadingPlaceholder');
+      if (placeholder) placeholder.textContent = 'कुछ गड़बड़ हुई — कृपया page reload करें।';
+    }
   }
 
   // ═══════════════════════════════════════════════════════
@@ -1218,7 +1064,7 @@
   //  WIRE UP
   // ═══════════════════════════════════════════════════════
   document.addEventListener('DOMContentLoaded', () => {
-    bookIndex = buildIndex();
+    loadBooks();
 
     const input    = document.getElementById('bookSearch');
     const clearBtn = document.getElementById('searchClear');
