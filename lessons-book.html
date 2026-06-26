@@ -24,6 +24,8 @@
   <meta property="og:image:height" content="630"/>
   <meta property="og:url"         id="og-url"
         content="https://booksnmuchmore.com/lessons-book.html"/>
+  <link rel="canonical" id="canonical-url"
+        href="https://booksnmuchmore.com/lessons-book.html"/>
   <meta name="twitter:card"       content="summary_large_image"/>
   <meta name="twitter:title"      id="tw-title"
         content="Book Lessons | Books 'n' Much More"/>
@@ -31,6 +33,11 @@
         content="Life-changing book lessons in Hindi and English — पढ़ते रहिए, बढ़ते रहिए"/>
   <meta name="twitter:image"      id="tw-image"
         content="https://booksnmuchmore.com/og-default.jpg"/>
+
+  <!-- Book schema (JSON-LD) — populated via JS once Supabase
+       data loads. Empty object here is intentional: a crawler
+       that doesn't execute JS just sees a no-op, not an error. -->
+  <script type="application/ld+json" id="book-schema">{}</script>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <!-- Google Analytics -->
@@ -308,6 +315,34 @@
     setMeta('tw-title',  pageTitle);
     setMeta('tw-desc',   pageDesc);
     setMeta('tw-image',  book.cover_url);
+
+    // Canonical URL — self-referencing, includes the ?book= param
+    document.getElementById('canonical-url').setAttribute('href', pageUrl);
+
+    // ── JSON-LD Book schema ──────────────────────────────────
+    // Only includes fields we actually have data for (id, slug,
+    // title, author, genre, cover_url, description, price_rs) —
+    // no isbn/pageCount/datePublished since those columns don't
+    // exist on the books table. Add them here later if/when they do.
+    const bookSchema = {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": book.title,
+      "author": {
+        "@type": "Person",
+        "name": book.author
+      },
+      "image": book.cover_url,
+      "description": book.description || pageDesc,
+      "url": pageUrl,
+      ...(book.genre ? { "genre": book.genre } : {}),
+      "inLanguage": ["en", "hi"],
+      "workExample": {
+        "@type": "Book",
+        "bookFormat": "https://schema.org/EBook"
+      }
+    };
+    document.getElementById('book-schema').textContent = JSON.stringify(bookSchema);
 
     const titleHtml = book.title; // plain title; swap for styled <em> wrap if you want italic sub-part
 
