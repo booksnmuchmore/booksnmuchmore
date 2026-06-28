@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Books 'n' Much More — Hindi Motivational Stories</title>
+<title>Books 'n' Much More — Lessons from Best-Selling Books</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TYDPW03BMW');</script>
@@ -258,47 +258,6 @@ nav.scrolled{padding:0.75rem 6%;}
   #subscription-promo{padding:3rem 4%;}
 }
 
-/* ── STORIES — compact strip ───────────────────────────── */
-#stories{padding:4.5rem 6%;background:var(--cream);}
-
-.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
-
-.story-card{
-  background:#fff;border-radius:var(--card-radius);overflow:hidden;
-  box-shadow:0 4px 20px var(--warm-shadow);
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.story-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px var(--warm-shadow);}
-.card-thumb{height:200px;position:relative;overflow:hidden;}
-.card-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform 0.4s ease;}
-.story-card:hover .card-thumb img{transform:scale(1.04);}
-.card-ep-badge{
-  position:absolute;top:0.8rem;left:0.8rem;z-index:2;
-  font-family:'Raleway',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;
-  text-transform:uppercase;color:#fff;background:var(--amber);
-  padding:0.2rem 0.6rem;border-radius:2px;
-}
-.card-body{padding:1.3rem;}
-.card-meta{
-  display:flex;gap:0.8rem;flex-wrap:wrap;
-  font-family:'Raleway',sans-serif;font-size:0.62rem;font-weight:500;
-  letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;
-}
-.card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:0.5rem;}
-.card-lesson{
-  font-family:'Lora',serif;font-style:italic;font-size:0.82rem;color:var(--amber);
-  padding:0.55rem 0.85rem;border-left:2px solid var(--amber);
-  background:rgba(200,129,58,0.07);margin-bottom:0.9rem;line-height:1.6;
-}
-.card-links{display:flex;gap:0.8rem;flex-wrap:wrap;align-items:center;}
-.card-link{
-  font-family:'Raleway',sans-serif;font-size:0.65rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;color:var(--sienna);text-decoration:none;
-}
-.card-link:hover{color:var(--amber);}
-.card-link.yt{color:#D00;}
-.card-link.yt:hover{color:#a00;}
-
 /* ── BOOKS promo ───────────────────────────────────────── */
 #books{padding:4.5rem 6%;background:var(--parchment);}
 
@@ -419,9 +378,8 @@ footer{
   nav{padding:1rem 4%;}
   .nav-links{display:none;}
   #hero{padding:6rem 4% 3rem;}
-  #lessons,#stories,#books,#about,#subscribe{padding:3.5rem 4%;}
+  #lessons,#books,#about,#subscribe{padding:3.5rem 4%;}
   .section-header{flex-direction:column;align-items:flex-start;gap:0.8rem;}
-  .stories-grid{grid-template-columns:1fr;}
   .lessons-grid{grid-template-columns:1fr;}
   .lsn-card.lsn-featured{grid-column:auto;}
   .books-grid{grid-template-columns:repeat(2,1fr);}
@@ -494,18 +452,6 @@ footer{
   </div>
 </section>
 
-<!-- ── STORIES ───────────────────────────────────────── -->
-<section id="stories">
-  <div class="section-header">
-    <div>
-      <div class="section-label reveal">Latest Episodes</div>
-      <h2 class="section-title reveal reveal-delay-1">This week's <em>kahani</em></h2>
-    </div>
-    <a href="stories.html" class="view-all reveal">All Episodes →</a>
-  </div>
-  <div class="stories-grid" id="stories-grid"></div>
-</section>
-
 <!-- ── BOOKS ─────────────────────────────────────────── -->
 <section id="books">
   <div class="section-header">
@@ -529,15 +475,15 @@ footer{
       <img src="https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp" alt="Books n Much More — Prashant">
     </div>
     <div class="about-text">
-      <div class="section-label reveal">The Voice Behind the Stories</div>
-      <h2 class="reveal reveal-delay-1">Every story has a <em>storyteller</em></h2>
-      <p class="reveal reveal-delay-2">नमस्ते! I'm Prashant — and I believe that a single story, heard at the right moment, can change everything.</p>
-      <p class="reveal reveal-delay-2">Every weekend I bring you a short Hindi motivational story — drawn from life, philosophy, and the quiet wisdom we often overlook in our busy days.</p>
+      <div class="section-label reveal">The Voice Behind Books 'n' Much More</div>
+      <h2 class="reveal reveal-delay-1">Every great book has <em>10 lessons worth knowing</em></h2>
+      <p class="reveal reveal-delay-2">नमस्ते! I'm Prashant — and I believe the best ideas from the world's best-selling books shouldn't take a week to find.</p>
+      <p class="reveal reveal-delay-2">यह website दुनिया की बेहतरीन किताबों के सबसे ज़रूरी 10 lessons इकट्ठा करके आपकी fingertips पर लाती है — ताकि आप किताब खरीदने से पहले उसकी सीख जान सकें, और जल्दी inspire हो सकें।</p>
       <div class="about-tags reveal reveal-delay-3">
-        <span class="tag">Hindi Storytelling</span>
-        <span class="tag">Motivation</span>
+        <span class="tag">Bestseller Lessons</span>
+        <span class="tag">Hindi + English</span>
         <span class="tag">Self Growth</span>
-        <span class="tag">Weekly Stories</span>
+        <span class="tag">Quick Summaries</span>
         <span class="tag">Life Lessons</span>
       </div>
     </div>
@@ -547,14 +493,14 @@ footer{
 <!-- ── SUBSCRIBE ─────────────────────────────────────── -->
 <section id="subscribe">
   <div class="subscribe-inner">
-    <div class="section-label reveal">Never Miss a Story</div>
-    <h2 class="subscribe-title reveal reveal-delay-1">Get the story<br><em>before Sunday</em></h2>
-    <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community. A gentle reminder every weekend when a new story goes live — straight to your inbox.</p>
+    <div class="section-label reveal">Never Miss a New Book</div>
+    <h2 class="subscribe-title reveal reveal-delay-1">Get notified<br><em>when lessons drop</em></h2>
+    <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community. A quick note whenever a new book's lessons go live — straight to your inbox.</p>
     <div class="subscribe-form reveal reveal-delay-2">
       <input type="email" id="emailInput" placeholder="Your email address…"/>
       <button type="button" onclick="handleSubscribe()">Subscribe</button>
     </div>
-    <p class="subscribe-note reveal">No spam. Just one story, every weekend. Unsubscribe anytime.</p>
+    <p class="subscribe-note reveal">No spam. Just new book lessons, as they're added. Unsubscribe anytime.</p>
     <div id="successMsg">✓ Redirecting you to subscribe… 🎉</div>
     <div class="yt-subscribe-block reveal reveal-delay-3">
       <p>Or join us on YouTube</p>
@@ -574,17 +520,12 @@ footer{
 <script src="payments.js"></script>
 <script src="site-data.js"></script>
 <script>
-const RAW = SITE.rawBase + '/episodes/';
-const pad = n => String(n).padStart(2,'0');
-const latest = EPISODES[0];
-
 // ── NAV ────────────────────────────────────────────────
 document.getElementById('navbar').innerHTML = `
   <a href="index.html" class="nav-logo"><img src="${SITE.logoUrl}" alt="Books n Much More"></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="stories.html">Stories</a></li>
     <li><a href="books.html">Books</a></li>
     <li><a href="lessons.html">📖 Lessons</a></li>
     <li><a href="#subscribe">Subscribe</a></li>
@@ -596,21 +537,36 @@ document.getElementById('navbar').innerHTML = `
 // ── HERO ───────────────────────────────────────────────
 document.getElementById('hero-content').innerHTML = `
   <div class="hero-eyebrow">Books 'n' Much More</div>
-  <h1 class="hero-title">Kahaniyan jo<br><em>dil chhu jaaye</em></h1>
+  <h1 class="hero-title">Best-Selling किताबों के<br><em>ज़रूरी Lessons</em></h1>
   <p class="hero-sub">
-    Hindi motivational stories, book summaries, and life lessons —
-    every weekend, a new story that makes you pause and think.
+    दुनिया की बेहतरीन किताबों के सबसे ज़रूरी सबक — हिंदी और English दोनों में,
+    हर किताब के सिर्फ 10 lessons में।
   </p>
   <div class="hero-actions">
     <a href="lessons.html" class="btn-primary">Browse Book Summaries</a>
-    <a href="stories.html" class="btn-secondary">All Stories →</a>
   </div>
   <div class="hero-stats">
-    <div><span class="stat-num">${EPISODES.length}</span><span class="stat-label">Episodes</span></div>
-    <div><span class="stat-num">1</span><span class="stat-label">Story / Week</span></div>
-    <div><span class="stat-num">∞</span><span class="stat-label">Lessons</span></div>
-    <div><span class="stat-num">हिंदी</span><span class="stat-label">Language</span></div>
+    <div><span class="stat-num" id="hero-stat-books">40+</span><span class="stat-label">Books</span></div>
+    <div><span class="stat-num">10</span><span class="stat-label">Lessons / Book</span></div>
+    <div><span class="stat-num">हिंदी</span><span class="stat-label">+ English</span></div>
+    <div><span class="stat-num">₹7</span><span class="stat-label">Unlock / Book</span></div>
   </div>`;
+
+// Hero "Books" stat — live count from Supabase, same source as the
+// subscription-promo count below, so it never drifts as books are added.
+async function updateHeroBookCount(){
+  const el = document.getElementById('hero-stat-books');
+  if (!el) return;
+  try {
+    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+    if (error || !Array.isArray(books)) throw error || new Error('no data');
+    el.textContent = `${books.length}+`;
+  } catch (e) {
+    console.error('Failed to fetch live book count for hero:', e);
+    // leave the static "40+" fallback already in the markup above
+  }
+}
+updateHeroBookCount();
 
 // ── HERO ROTATING BOOK-COVER STACK ──────────────────────
 // Was: single latest-episode card. Now: a fanned stack of 3 book
@@ -731,29 +687,6 @@ async function updateSubPromoBookCount(){
 }
 updateSubPromoBookCount();
 
-// ── STORIES ────────────────────────────────────────────
-document.getElementById('stories-grid').innerHTML = EPISODES.slice(0,3).map((ep, i) => {
-  const delay = i === 1 ? ' reveal-delay-1' : i === 2 ? ' reveal-delay-2' : '';
-  const badgeLabel = i === 0 ? `Ep ${pad(ep.num)} · Latest` : `Ep ${pad(ep.num)}`;
-  const badgeStyle = i === 0 ? '' : 'style="background:var(--muted);"';
-  return `
-  <div class="story-card reveal${delay}">
-    <div class="card-thumb">
-      <span class="card-ep-badge" ${badgeStyle}>${badgeLabel}</span>
-      <img src="${RAW}${ep.thumb}" alt="${ep.titleHindi}">
-    </div>
-    <div class="card-body">
-      <div class="card-meta"><span>🗓 ${ep.week}</span><span>⏱ ${ep.duration}</span><span>🎙 Hindi</span></div>
-      <div class="card-title">${ep.title}</div>
-      ${ep.lesson ? `<div class="card-lesson">${ep.lesson}</div>` : ''}
-      <div class="card-links">
-        <a href="${SITE.rawBase}/stories/${ep.slug}.txt" target="_blank" class="card-link">📖 Read →</a>
-        ${ep.youtubeUrl ? `<a href="${ep.youtubeUrl}" target="_blank" class="card-link yt">▶ Watch →</a>` : ''}
-      </div>
-    </div>
-  </div>`;
-}).join('');
-
 // ── BOOKS ──────────────────────────────────────────────
 function renderBooks(){
   document.getElementById('books-grid').innerHTML = PROMO_BOOKS.map((b, i) => {
@@ -774,7 +707,7 @@ function renderBooks(){
 // ── FOOTER ─────────────────────────────────────────────
 document.getElementById('footer').innerHTML = `
   <a href="index.html" class="footer-logo">Books <em>'n'</em> Much More</a>
-  <p class="footer-copy">© 2026 Books 'n' Much More · One story, every weekend.</p>
+  <p class="footer-copy">© 2026 Books 'n' Much More · पढ़ते रहिए, बढ़ते रहिए।</p>
   <div class="footer-social"><a href="${SITE.youtubeChannel}" target="_blank">YouTube</a></div>`;
 document.getElementById('yt-sub-btn').href = SITE.youtubeChannel;
 
