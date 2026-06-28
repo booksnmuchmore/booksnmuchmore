@@ -404,10 +404,10 @@ const BOOK_LINKS = {
 
   "thinking-fast-and-slow": {
     IN: "https://www.amazon.in/dp/3443950698",
-    US: "https://www.amazon.com/dp/0374533555",
-    CA: "https://www.amazon.ca/dp/0374533555",
-    GB: "0141033576",
-    DE: "0374533555"
+    US: "https://www.amazon.com/dp/3443950698",
+    CA: "https://www.amazon.ca/dp/3443950698",
+    GB: "3443950698",
+    DE: "3443950698"
   }
 
 };
