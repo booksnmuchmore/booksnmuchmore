@@ -671,13 +671,41 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
 
-<!-- Single source of truth for affiliate links -->
-<script src="affiliate-links.js"></script>
 <script>
   // ═══════════════════════════════════════════════════════
-  //  CONFIG — affiliate tags & links loaded from affiliate-links.js
+  //  CONFIG — affiliate tags (kept here; per-book links now
+  //  come from book.affiliate_links, fetched with each book
+  //  from Supabase — no more separate affiliate-links.js file
+  //  to keep in sync when books are added)
   // ═══════════════════════════════════════════════════════
-  // AFFILIATE_TAGS and BOOK_LINKS are defined in affiliate-links.js
+  const AFFILIATE_TAGS = {
+    IN: "booksnmuchm02-21", US: "booksnmuchmor-20", CA: "booksnmuchm08-20",
+    GB: "booksnmuchm08-21", DE: "booksnmuchm0f-21"
+  };
+  const AMAZON_BASE_URLS = {
+    IN: "https://www.amazon.in/dp/", US: "https://www.amazon.com/dp/",
+    CA: "https://www.amazon.ca/dp/", GB: "https://www.amazon.co.uk/dp/", DE: "https://www.amazon.de/dp/"
+  };
+  function getMarketKey(countryCode) {
+    const map = { IN: 'IN', CA: 'CA', GB: 'GB', DE: 'DE', AT: 'DE', BE: 'DE', CH: 'DE' };
+    return map[countryCode] || 'US';
+  }
+  // book.affiliate_links values are a mix of full URLs (most entries)
+  // and bare ASINs (some GB/DE entries) — handle both, same logic
+  // the old affiliate-links.js used.
+  function buildAffiliateLinkFromBook(book, countryCode) {
+    const links = (book && book.affiliate_links) || {};
+    const market = getMarketKey(countryCode);
+    const value = links[market] || links.US || '';
+    const tag = AFFILIATE_TAGS[market] || AFFILIATE_TAGS.US;
+    if (!value) return '#';
+    if (value.startsWith('http')) {
+      return value + (value.includes('?') ? '&' : '?') + 'tag=' + tag;
+    }
+    const base = AMAZON_BASE_URLS[market] || AMAZON_BASE_URLS.US;
+    return base + value + '?tag=' + tag;
+  }
+
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwgetwnWjO_4d_xuuXitRtKD13Q-emm7IXgd0bqeWoTPe0z_190y-wiYONqi6UqInvpuA/exec';
 
   // ═══════════════════════════════════════════════════════
@@ -706,25 +734,23 @@
     return getAmazonSearchUrl(title);
   }
 
+  // Takes the full book object now (not just slug) since the link
+  // data lives on book.affiliate_links — looked up from bookSlugMap,
+  // populated as books load in loadBooks() below.
+  let bookSlugMap = {};
   function geoRedirect(slug) {
-    // Was: hand-rolled logic here that only handled CA/US explicitly,
-    // assumed every BOOK_LINKS value was a bare ASIN (most aren't —
-    // see the "legacy full URL" handling in buildAffiliateLink), and
-    // silently did nothing if the slug existed but the assumption broke.
-    // buildAffiliateLink() in affiliate-links.js already handles all of
-    // this correctly (full-URL vs bare-ASIN, market fallback to US,
-    // missing-tag fallback) and is the same function lessons-book.html
-    // already uses — so just call it instead of duplicating the logic.
-    const url = buildAffiliateLink(slug, userCountry);
+    const book = bookSlugMap[slug];
+    const url = buildAffiliateLinkFromBook(book, userCountry);
     window.open(url, '_blank');
   }
 
   // ═══════════════════════════════════════════════════════
   //  LOAD BOOKS FROM SUPABASE — replaces the old 15 hardcoded
-  //  cards with the full live catalog (40 books and growing).
+  //  cards with the full live catalog (41 books and growing).
   //  Card click target is the lessons page (real content +
   //  monetization); Amazon stays as a small secondary link via
-  //  the existing geoRedirect()/affiliate-links.js system.
+  //  geoRedirect(), reading book.affiliate_links straight from
+  //  the books table.
   // ═══════════════════════════════════════════════════════
   function escapeHtml(str) {
     return String(str || '')
@@ -814,6 +840,11 @@
       }
 
       const liveBooks = books.filter(b => b.live);
+
+      // Make book data (incl. affiliate_links) lookupable by slug
+      // for geoRedirect(), which is called with just a slug from
+      // each card's onclick.
+      liveBooks.forEach(b => { bookSlugMap[b.slug] = b; });
 
       heading.textContent = `${liveBooks.length} Must-Read Books`;
 

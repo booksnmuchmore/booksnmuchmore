@@ -184,11 +184,11 @@
 <!-- Content injected by JS -->
 <div id="app"><div class="loading-state"><h2>Loading…</h2></div></div>
 
-<!-- Single source of truth for affiliate links (unchanged) -->
-<script src="affiliate-links.js"></script>
-
 <script>
-  // ── Affiliate config — loaded from affiliate-links.js ─────
+  // ── Affiliate config — reads book.affiliate_links directly ────
+  // (single source of truth is now the `affiliate_links` jsonb
+  // column on the books table itself — populated alongside the
+  // book's other data, no separate file to keep in sync)
   let userCountry = null;
 
   async function detectCountry() {
@@ -196,8 +196,40 @@
     catch(e) { userCountry = 'US'; }
   }
 
+  // Maps a visitor's country code -> which key to look up in
+  // book.affiliate_links. Mirrors the old affiliate-links.js logic.
+  function getMarketKey(countryCode) {
+    const map = { IN: 'IN', CA: 'CA', GB: 'GB', DE: 'DE', AT: 'DE', BE: 'DE', CH: 'DE' };
+    return map[countryCode] || 'US';
+  }
+
+  // book.affiliate_links values are a mix of full URLs (legacy,
+  // most entries) and bare ASINs (some GB/DE entries) — handle both.
+  function buildAffiliateLinkFromBook(book, countryCode) {
+    const links = book.affiliate_links || {};
+    const market = getMarketKey(countryCode);
+    const value = links[market] || links.US || '';
+    const tag = AFFILIATE_TAGS[market] || AFFILIATE_TAGS.US;
+    if (!value) return '#'; // no link data — shouldn't happen now that all 41 books have it, but fail safe
+    if (value.startsWith('http')) {
+      return value + (value.includes('?') ? '&' : '?') + 'tag=' + tag;
+    }
+    const base = AMAZON_BASE_URLS[market] || AMAZON_BASE_URLS.US;
+    return base + value + '?tag=' + tag;
+  }
+
+  const AFFILIATE_TAGS = {
+    IN: "booksnmuchm02-21", US: "booksnmuchmor-20", CA: "booksnmuchm08-20",
+    GB: "booksnmuchm08-21", DE: "booksnmuchm0f-21"
+  };
+  const AMAZON_BASE_URLS = {
+    IN: "https://www.amazon.in/dp/", US: "https://www.amazon.com/dp/",
+    CA: "https://www.amazon.ca/dp/", GB: "https://www.amazon.co.uk/dp/", DE: "https://www.amazon.de/dp/"
+  };
+
   function geoUrl(slug) {
-    return buildAffiliateLink(slug, userCountry || 'US');
+    // book is already in scope from render() — see below
+    return buildAffiliateLinkFromBook(window.__currentBook || {}, userCountry || 'US');
   }
 
   function openAmazon(slug) { window.open(geoUrl(slug), '_blank'); }
@@ -287,6 +319,7 @@
       return;
     }
     const book = bookRows[0];
+    window.__currentBook = book; // so openAmazon()/geoUrl() can read book.affiliate_links
 
     // Fetch lessons (paywall-aware)
     const { data: lessons, error: lessonsError } = await BNMAuth.supabase
