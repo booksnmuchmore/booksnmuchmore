@@ -400,6 +400,14 @@ const BOOK_LINKS = {
     CA: "https://www.amazon.ca/dp/0062316095",
     GB: "0062316095",
     DE: "0062316095"
+  },
+
+  "thinking-fast-and-slow": {
+    IN: "https://www.amazon.in/dp/0374533555",
+    US: "https://www.amazon.com/dp/0374533555",
+    CA: "https://www.amazon.ca/dp/0374533555",
+    GB: "0141033576",
+    DE: "0374533555"
   }
 
 };
