@@ -24,18 +24,21 @@
 
   let pendingCallback = null;
   let currentUser = null;
+  let authMode = 'login'; // 'login' or 'signup' — set by openModal(), drives copy + OTP behavior
   let authReady = false; // becomes true once the first onAuthStateChange fires (session restored or confirmed absent)
   const uiTargets = []; // { loginBtnId, accountElId } pairs registered via initAuthUI
   const authChangeListeners = []; // callbacks registered via onAuthChange
 
   // ---- Render logged-in / logged-out state into registered UI targets ----
   function renderAuthUI() {
-    uiTargets.forEach(({ loginBtnId, accountElId }) => {
+    uiTargets.forEach(({ loginBtnId, signupBtnId, accountElId }) => {
       const loginBtn = loginBtnId ? document.getElementById(loginBtnId) : null;
+      const signupBtn = signupBtnId ? document.getElementById(signupBtnId) : null;
       const accountEl = accountElId ? document.getElementById(accountElId) : null;
 
       if (currentUser) {
         if (loginBtn) loginBtn.style.display = 'none';
+        if (signupBtn) signupBtn.style.display = 'none';
         if (accountEl) {
           accountEl.style.display = 'inline-flex';
           accountEl.innerHTML = `
@@ -47,6 +50,7 @@
         }
       } else {
         if (loginBtn) loginBtn.style.display = '';
+        if (signupBtn) signupBtn.style.display = '';
         if (accountEl) {
           accountEl.style.display = 'none';
           accountEl.innerHTML = '';
@@ -119,10 +123,10 @@
       <div id="bnm-auth-modal">
         <button id="bnm-auth-close" aria-label="Close">&times;</button>
         <div id="bnm-auth-step-email">
-          <h3>Login to Continue</h3>
-          <p>हम आपको एक OTP कोड भेजेंगे आपके ईमेल पर — पासवर्ड की ज़रूरत नहीं।</p>
+          <h3 id="bnm-auth-heading">Login to Continue</h3>
+          <p id="bnm-auth-subtext">हम आपको एक OTP कोड भेजेंगे आपके ईमेल पर — पासवर्ड की ज़रूरत नहीं।</p>
           <input type="email" id="bnm-auth-email" placeholder="you@example.com" autocomplete="email">
-          <button id="bnm-auth-send-otp">Send OTP</button>
+          <button id="bnm-auth-send-otp">Send Login Code</button>
           <div id="bnm-auth-status"></div>
         </div>
         <div id="bnm-auth-step-otp" style="display:none;">
@@ -132,6 +136,11 @@
           <button id="bnm-auth-verify-otp">Verify &amp; Continue</button>
           <div id="bnm-auth-status2"></div>
         </div>
+        <div id="bnm-auth-step-link-sent" style="display:none;">
+          <h3>Check Your Inbox</h3>
+          <p>हमने आपके ईमेल <span id="bnm-auth-email-display2"></span> पर एक confirmation link भेजा है। Signup पूरा करने और लॉगिन करने के लिए उस link पर क्लिक करें।</p>
+          <p style="font-size:0.75rem;">Didn't get it? Check your spam folder, or close this and try again in a minute.</p>
+        </div>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -140,7 +149,7 @@
     document.getElementById('bnm-auth-close').onclick = closeModal;
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 
-    // Send OTP
+    // Send OTP (login) or confirmation link (signup)
     document.getElementById('bnm-auth-send-otp').onclick = async () => {
       const email = document.getElementById('bnm-auth-email').value.trim();
       const statusEl = document.getElementById('bnm-auth-status');
@@ -153,19 +162,40 @@
       btn.disabled = true;
       btn.textContent = 'Sending...';
 
-      const { error } = await supabase.auth.signInWithOtp({ email });
+      const isSignup = authMode === 'signup';
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: isSignup,
+          emailRedirectTo: window.location.href,
+        },
+      });
 
       btn.disabled = false;
-      btn.textContent = 'Send OTP';
+      btn.textContent = isSignup ? 'Send Signup Link' : 'Send Login Code';
 
       if (error) {
-        statusEl.textContent = error.message;
+        // Existing user tried "Sign Up" again, or new user tried "Login" without an account yet
+        if (!isSignup && /not.*found|no.*user|invalid/i.test(error.message)) {
+          statusEl.textContent = "We couldn't find an account for that email. Try Sign Up instead.";
+        } else if (isSignup && /already.*registered|already exists/i.test(error.message)) {
+          statusEl.textContent = 'You already have an account — use Login instead.';
+        } else {
+          statusEl.textContent = error.message;
+        }
         statusEl.className = 'error';
         return;
       }
-      document.getElementById('bnm-auth-email-display').textContent = email;
-      document.getElementById('bnm-auth-step-email').style.display = 'none';
-      document.getElementById('bnm-auth-step-otp').style.display = 'block';
+
+      if (isSignup) {
+        document.getElementById('bnm-auth-email-display2').textContent = email;
+        document.getElementById('bnm-auth-step-email').style.display = 'none';
+        document.getElementById('bnm-auth-step-link-sent').style.display = 'block';
+      } else {
+        document.getElementById('bnm-auth-email-display').textContent = email;
+        document.getElementById('bnm-auth-step-email').style.display = 'none';
+        document.getElementById('bnm-auth-step-otp').style.display = 'block';
+      }
     };
 
     // Verify OTP
@@ -204,13 +234,30 @@
     };
   }
 
-  function openModal() {
+  function openModal(mode) {
+    authMode = mode === 'signup' ? 'signup' : 'login';
     injectModal();
     document.getElementById('bnm-auth-overlay').classList.add('active');
     // reset to step 1 each time
     document.getElementById('bnm-auth-step-email').style.display = 'block';
     document.getElementById('bnm-auth-step-otp').style.display = 'none';
+    document.getElementById('bnm-auth-step-link-sent').style.display = 'none';
     document.getElementById('bnm-auth-status').textContent = '';
+    document.getElementById('bnm-auth-email').value = '';
+
+    // Set copy to match the mode
+    const heading = document.getElementById('bnm-auth-heading');
+    const subtext = document.getElementById('bnm-auth-subtext');
+    const sendBtn = document.getElementById('bnm-auth-send-otp');
+    if (authMode === 'signup') {
+      heading.textContent = 'Create Your Account';
+      subtext.textContent = 'नया अकाउंट बनाने के लिए अपना ईमेल डालें — हम आपको एक confirmation link भेजेंगे, कोई पासवर्ड नहीं चाहिए।';
+      sendBtn.textContent = 'Send Signup Link';
+    } else {
+      heading.textContent = 'Login to Continue';
+      subtext.textContent = 'हम आपको एक 6-digit OTP कोड भेजेंगे आपके ईमेल पर — पासवर्ड की ज़रूरत नहीं।';
+      sendBtn.textContent = 'Send Login Code';
+    }
   }
 
   function closeModal() {
@@ -246,9 +293,9 @@
 
   // Register a login button + account-display element so they auto-update
   // on login/logout/page-load. Call once per page, after the elements exist.
-  //   BNMAuth.initAuthUI({ loginBtnId: 'login-btn', accountElId: 'account-area' });
-  function initAuthUI({ loginBtnId, accountElId } = {}) {
-    uiTargets.push({ loginBtnId, accountElId });
+  //   BNMAuth.initAuthUI({ loginBtnId: 'login-btn', signupBtnId: 'signup-btn', accountElId: 'account-area' });
+  function initAuthUI({ loginBtnId, signupBtnId, accountElId } = {}) {
+    uiTargets.push({ loginBtnId, signupBtnId, accountElId });
     renderAuthUI(); // apply immediately in case session is already known
   }
 

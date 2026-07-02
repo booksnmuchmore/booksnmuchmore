@@ -258,7 +258,7 @@
     if (user) {
       slot.innerHTML = `<span style="color:#d9c9b0;margin-right:.6rem;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
     } else {
-      slot.innerHTML = `<button onclick="BNMAuth.openModal()">Login</button>`;
+      slot.innerHTML = `<button onclick="BNMAuth.openModal('signup')" style="margin-right:.5rem;">Sign Up</button><button onclick="BNMAuth.openModal('login')">Login</button>`;
     }
   }
 
