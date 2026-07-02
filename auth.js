@@ -141,6 +141,11 @@
           <p>हमने आपके ईमेल <span id="bnm-auth-email-display2"></span> पर एक confirmation link भेजा है। Signup पूरा करने और लॉगिन करने के लिए उस link पर क्लिक करें।</p>
           <p style="font-size:0.75rem;">Didn't get it? Check your spam folder, or close this and try again in a minute.</p>
         </div>
+        <div id="bnm-auth-step-already-member" style="display:none;">
+          <h3>You're Already a Member</h3>
+          <p>यह ईमेल पहले से रजिस्टर्ड है। कृपया Sign Up की जगह Login का उपयोग करें।</p>
+          <button id="bnm-auth-goto-login">Go to Login</button>
+        </div>
       </div>
     `;
     document.body.appendChild(overlay);
@@ -148,6 +153,13 @@
     // Close handlers
     document.getElementById('bnm-auth-close').onclick = closeModal;
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+    // "Go to Login" from the already-a-member step
+    document.getElementById('bnm-auth-goto-login').onclick = () => {
+      const email = document.getElementById('bnm-auth-email').value.trim();
+      openModal('login');
+      if (email) document.getElementById('bnm-auth-email').value = email;
+    };
 
     // Send OTP (login) or confirmation link (signup)
     document.getElementById('bnm-auth-send-otp').onclick = async () => {
@@ -163,6 +175,25 @@
       btn.textContent = 'Sending...';
 
       const isSignup = authMode === 'signup';
+
+      // For signup, check registration status FIRST so we never send a
+      // confusing "signup link" email to someone who already has an
+      // account (Supabase sends them a login-style email in that case,
+      // but silently — it never returns an error, for security reasons).
+      if (isSignup) {
+        const { data: alreadyRegistered, error: checkError } = await supabase.rpc(
+          'email_is_registered',
+          { check_email: email }
+        );
+        if (!checkError && alreadyRegistered) {
+          btn.disabled = false;
+          btn.textContent = 'Send Signup Link';
+          document.getElementById('bnm-auth-step-email').style.display = 'none';
+          document.getElementById('bnm-auth-step-already-member').style.display = 'block';
+          return;
+        }
+      }
+
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
@@ -242,6 +273,7 @@
     document.getElementById('bnm-auth-step-email').style.display = 'block';
     document.getElementById('bnm-auth-step-otp').style.display = 'none';
     document.getElementById('bnm-auth-step-link-sent').style.display = 'none';
+    document.getElementById('bnm-auth-step-already-member').style.display = 'none';
     document.getElementById('bnm-auth-status').textContent = '';
     document.getElementById('bnm-auth-email').value = '';
 
