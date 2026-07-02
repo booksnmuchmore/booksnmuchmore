@@ -74,6 +74,19 @@
     .section-intro h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--amber); margin: .5rem auto 0; border-radius: 2px; }
     .section-intro p { color: var(--mid); font-size: .95rem; margin-top: 1rem; }
 
+    /* ── Filter ── */
+    .filter-wrap { max-width: 880px; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+    .filter-input {
+      width: 100%; padding: .65rem 1rem .65rem 2.8rem;
+      border: 2px solid var(--amber-l); border-radius: 30px;
+      font-family: 'Lora', Georgia, serif; font-size: .95rem;
+      color: var(--dark);
+      background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238B5A2B' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E") no-repeat .9rem center;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .filter-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(192,122,42,.15); }
+    .no-results { text-align: center; padding: 2rem; color: var(--mid); grid-column: 1 / -1; font-style: italic; }
+
     /* ── Cards grid ── */
     .cards-grid { max-width: 880px; margin: 2.5rem auto 5rem; padding: 0 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
 
@@ -180,6 +193,12 @@
   <p>हर किताब से हम चुनते हैं वो 10 सबक जो आपकी ज़िंदगी बदल सकते हैं — सरल हिंदी में, गहरे अर्थ के साथ।</p>
 </div>
 
+<!-- Real-time book filter -->
+<div class="filter-wrap">
+  <input class="filter-input" id="book-filter" type="text"
+         placeholder="किताब का नाम खोजें… e.g. Atomic Habits"/>
+</div>
+
 <!-- Cards — populated dynamically from Supabase -->
 <div class="cards-grid" id="cards-grid">
   <p class="loading-row">Loading books…</p>
@@ -200,8 +219,6 @@
 
 <script>
   // ── Special non-Supabase card: Rich Dad Poor Dad India Perspective ──
-  // This is a standalone analysis page, not a Supabase-backed book,
-  // so it stays hardcoded — pinned to render first in the grid.
   const SPECIAL_CARD_HTML = `
     <a class="book-card" href="rdpd-india-perspective.html" style="border: 1px solid #C47A7A; background: #FFF8F8;">
       <div class="card-top" style="background: linear-gradient(135deg, #3D1010 0%, #7A2A1A 100%);">
@@ -257,6 +274,34 @@
       </a>`;
   }
 
+  // ── All books stored after load — used by the filter ──
+  let allBooks = [];
+
+  function filterAndRender(query) {
+    const grid = document.getElementById('cards-grid');
+    const q = query.toLowerCase().trim();
+
+    const filtered = q
+      ? allBooks.filter(b =>
+          b.title.toLowerCase().includes(q) ||
+          (b.author && b.author.toLowerCase().includes(q)))
+      : allBooks;
+
+    // Show the special RDPD card when there's no query or when the
+    // query matches the card's relevant terms
+    const specialTerms = ['rich dad', 'poor dad', 'india perspective', 'kiyosaki'];
+    const showSpecial = !q || specialTerms.some(t => t.includes(q) || q.includes(t));
+
+    const cardsHtml = filtered.map(buildBookCardHtml).join('\n');
+    const specialHtml = showSpecial ? SPECIAL_CARD_HTML : '';
+
+    if (!filtered.length && !showSpecial) {
+      grid.innerHTML = `<p class="no-results">"<strong>${query}</strong>" से कोई किताब नहीं मिली — दूसरा नाम try करें।</p>`;
+    } else {
+      grid.innerHTML = cardsHtml + specialHtml;
+    }
+  }
+
   async function loadBooks() {
     const grid = document.getElementById('cards-grid');
     const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
@@ -267,9 +312,12 @@
       return;
     }
 
-    const bookCardsHtml = books.map(buildBookCardHtml).join('\n');
-    // Special card pinned at the end, exactly as it was in the original static page
-    grid.innerHTML = bookCardsHtml + SPECIAL_CARD_HTML;
+    allBooks = books;
+    filterAndRender('');
+
+    document.getElementById('book-filter').addEventListener('input', e => {
+      filterAndRender(e.target.value);
+    });
   }
 
   loadBooks();

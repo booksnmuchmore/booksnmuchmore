@@ -151,6 +151,19 @@
     .more-books a:hover { background: var(--amber-l); color: #fff; }
     .more-books span { opacity: .6; cursor: default; }
 
+    /* ── More books filter ── */
+    .more-books-filter {
+      display: block; width: 100%; max-width: 340px;
+      margin: 0 auto .9rem;
+      padding: .5rem 1.1rem .5rem 2.4rem;
+      border: 2px solid var(--amber-l); border-radius: 20px;
+      font-family: 'Lora', Georgia, serif; font-size: .88rem;
+      color: var(--dark);
+      background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%238B5A2B' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E") no-repeat .75rem center;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .more-books-filter:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(192,122,42,.12); }
+
     /* ── Footer ── */
     footer { background: var(--dark); color: #aaa; text-align: center; padding: 1.5rem; font-size: .82rem; }
     footer a { color: var(--amber-l); text-decoration: none; }
@@ -186,9 +199,6 @@
 
 <script>
   // ── Affiliate config — reads book.affiliate_links directly ────
-  // (single source of truth is now the `affiliate_links` jsonb
-  // column on the books table itself — populated alongside the
-  // book's other data, no separate file to keep in sync)
   let userCountry = null;
 
   async function detectCountry() {
@@ -196,21 +206,17 @@
     catch(e) { userCountry = 'US'; }
   }
 
-  // Maps a visitor's country code -> which key to look up in
-  // book.affiliate_links. Mirrors the old affiliate-links.js logic.
   function getMarketKey(countryCode) {
     const map = { IN: 'IN', CA: 'CA', GB: 'GB', DE: 'DE', AT: 'DE', BE: 'DE', CH: 'DE' };
     return map[countryCode] || 'US';
   }
 
-  // book.affiliate_links values are a mix of full URLs (legacy,
-  // most entries) and bare ASINs (some GB/DE entries) — handle both.
   function buildAffiliateLinkFromBook(book, countryCode) {
     const links = book.affiliate_links || {};
     const market = getMarketKey(countryCode);
     const value = links[market] || links.US || '';
     const tag = AFFILIATE_TAGS[market] || AFFILIATE_TAGS.US;
-    if (!value) return '#'; // no link data — shouldn't happen now that all 41 books have it, but fail safe
+    if (!value) return '#';
     if (value.startsWith('http')) {
       return value + (value.includes('?') ? '&' : '?') + 'tag=' + tag;
     }
@@ -228,7 +234,6 @@
   };
 
   function geoUrl(slug) {
-    // book is already in scope from render() — see below
     return buildAffiliateLinkFromBook(window.__currentBook || {}, userCountry || 'US');
   }
 
@@ -246,12 +251,9 @@
     if (el && val) el.setAttribute('content', val);
   }
 
-  // ── Nav account slot: shows "Login" or "Hi, <email>" + logout ──
-  // Called on page load AND on every login/logout via BNMAuth.onAuthChange,
-  // so it always reflects the real, current session state.
   async function renderNavAccount() {
     const slot = document.getElementById('nav-account-slot');
-    if (!slot) return; // DOM not ready yet on the very first auth-state fire; safe to skip
+    if (!slot) return;
     const user = await BNMAuth.getUser();
     if (user) {
       slot.innerHTML = `<span style="color:#d9c9b0;margin-right:.6rem;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
@@ -260,7 +262,6 @@
     }
   }
 
-  // ── Render lessons (locked/unlocked) ──────────────────────
   function renderLessonsHtml(lessons, book) {
     return lessons.map(l => {
       if (l.out_unlocked) {
@@ -305,7 +306,6 @@
       return;
     }
 
-    // Fetch book metadata
     const { data: bookRows, error: bookError } = await BNMAuth.supabase
       .rpc('get_book_by_slug', { p_slug: slug });
 
@@ -319,9 +319,8 @@
       return;
     }
     const book = bookRows[0];
-    window.__currentBook = book; // so openAmazon()/geoUrl() can read book.affiliate_links
+    window.__currentBook = book;
 
-    // Fetch lessons (paywall-aware)
     const { data: lessons, error: lessonsError } = await BNMAuth.supabase
       .rpc('get_lessons_for_book', { p_book_slug: slug });
 
@@ -331,10 +330,8 @@
       return;
     }
 
-    // Fetch list of other books for "more books" section
     const { data: allBooks } = await BNMAuth.supabase.rpc('get_all_live_books');
 
-    // ── Update <title>, description, and OG tags ───────────
     const pageTitle = `${book.title} — Top 10 Lessons | Books 'n' Much More`;
     const pageDesc  = `Top 10 life-changing lessons from ${book.title} by ${book.author} — Hindi & English में | Books 'n' Much More`;
     const pageUrl   = `https://booksnmuchmore.com/lessons-book.html?book=${book.slug}`;
@@ -349,48 +346,32 @@
     setMeta('tw-desc',   pageDesc);
     setMeta('tw-image',  book.cover_url);
 
-    // Canonical URL — self-referencing, includes the ?book= param
     document.getElementById('canonical-url').setAttribute('href', pageUrl);
 
-    // ── JSON-LD Book schema ──────────────────────────────────
-    // Only includes fields we actually have data for (id, slug,
-    // title, author, genre, cover_url, description, price_rs) —
-    // no isbn/pageCount/datePublished since those columns don't
-    // exist on the books table. Add them here later if/when they do.
     const bookSchema = {
       "@context": "https://schema.org",
       "@type": "Book",
       "name": book.title,
-      "author": {
-        "@type": "Person",
-        "name": book.author
-      },
+      "author": { "@type": "Person", "name": book.author },
       "image": book.cover_url,
       "description": book.description || pageDesc,
       "url": pageUrl,
       ...(book.genre ? { "genre": book.genre } : {}),
       "inLanguage": ["en", "hi"],
-      "workExample": {
-        "@type": "Book",
-        "bookFormat": "https://schema.org/EBook"
-      }
+      "workExample": { "@type": "Book", "bookFormat": "https://schema.org/EBook" }
     };
     document.getElementById('book-schema').textContent = JSON.stringify(bookSchema);
 
-    const titleHtml = book.title; // plain title; swap for styled <em> wrap if you want italic sub-part
-
+    const titleHtml = book.title;
     const lessonsHtml = renderLessonsHtml(lessons, book);
 
-    const moreBooksHtml = (allBooks || [])
-      .filter(b => b.slug !== slug)
+    const otherBooks = (allBooks || []).filter(b => b.slug !== slug);
+    const moreBooksHtml = otherBooks
       .map(b => b.live
         ? `<a href="lessons-book.html?book=${b.slug}">📚 ${b.title}</a>`
         : `<span>📚 ${b.title} <small style="color:#aaa">— Coming Soon</small></span>`)
       .join('\n');
 
-    // Does the user already own the whole book or an active subscription?
-    // (lessons array's "unlocked" flags already reflect this — if every
-    // lesson is unlocked, hide the "unlock book" banner entirely)
     const allUnlocked = lessons.every(l => l.out_unlocked);
 
     app.innerHTML = `
@@ -438,8 +419,12 @@
 
       <div class="more-books">
         <h3>Explore More Book Lessons</h3>
-        <a href="lessons.html">📖 All Lessons →</a>
-        ${moreBooksHtml}
+        <input type="text" id="more-books-filter" class="more-books-filter"
+               placeholder="किताब खोजें…"/>
+        <div id="more-books-list">
+          <a href="lessons.html">📖 All Lessons →</a>
+          ${moreBooksHtml}
+        </div>
       </div>
 
       <footer>
@@ -451,23 +436,32 @@
     document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(slug));
+
+    // ── More-books real-time filter ─────────────────────────────
+    function filterMoreBooks(q) {
+      const list = document.getElementById('more-books-list');
+      if (!list) return;
+      const filtered = q
+        ? otherBooks.filter(b => b.title.toLowerCase().includes(q.toLowerCase()))
+        : otherBooks;
+      const linksHtml = filtered
+        .map(b => b.live
+          ? `<a href="lessons-book.html?book=${b.slug}">📚 ${b.title}</a>`
+          : `<span>📚 ${b.title} <small style="color:#aaa">— Coming Soon</small></span>`)
+        .join('\n');
+      list.innerHTML = `<a href="lessons.html">📖 All Lessons →</a>\n`
+        + (linksHtml || `<span style="opacity:.7;cursor:default;">कोई किताब नहीं मिली</span>`);
+    }
+    document.getElementById('more-books-filter').addEventListener('input', e => filterMoreBooks(e.target.value));
   }
 
   detectCountry();
 
-  // ── Keep nav account slot AND lesson lock state in sync with login ──
-  // renderNavAccount() used to run once at page load and never again,
-  // which is why the "Login" button never updated after a successful OTP.
-  // BNMAuth.onAuthChange fires immediately with the restored session (if
-  // any) and again on every future login/logout, so both the nav and the
-  // lesson list (locked/unlocked) now stay correct automatically.
-  // NOTE: the two calls are intentionally separate statements (not
-  // chained) so that if one throws for any reason, the other still runs.
   BNMAuth.onAuthChange(() => {
     renderNavAccount();
   });
   BNMAuth.onAuthChange(() => {
-    if (document.getElementById('app')) render(); // re-fetch get_lessons_for_book so unlocked lessons show live
+    if (document.getElementById('app')) render();
   });
 </script>
 
