@@ -72,13 +72,13 @@
     body { font-family: 'Lora', Georgia, serif; background: var(--parchment); color: var(--dark); line-height: 1.7; }
 
     /* ── Nav ── */
-    nav { background: var(--dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; }
-    nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; }
-    nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; transition: color .2s; }
+    nav { background: var(--dark); padding: .8rem 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; row-gap: .6rem; min-height: 60px; position: sticky; top: 0; z-index: 100; }
+    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; white-space: nowrap; }
+    nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
+    nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; white-space: nowrap; transition: color .2s; }
     nav ul a:hover, nav ul a.active { color: var(--amber-l); }
-    #nav-account-slot { font-size: .85rem; }
-    #nav-account-slot button { background: var(--amber); color: #fff; border: none; padding: .35rem .9rem; border-radius: 16px; font-size: .8rem; cursor: pointer; }
+    #nav-account-slot { font-size: .85rem; display: flex; align-items: center; gap: .6rem; }
+    #nav-account-slot button { background: var(--amber); color: #fff; border: none; padding: .4rem 1rem; border-radius: 16px; font-size: .8rem; white-space: nowrap; cursor: pointer; }
     #nav-account-slot button:hover { background: #A06020; }
 
     /* ── Hero ── */
@@ -176,8 +176,16 @@
 
     @media (max-width: 600px) {
       .book-strip { flex-direction: column; text-align: center; }
-      nav ul { gap: 1rem; }
       .pricing-banner-inner { flex-direction: column; text-align: center; }
+
+      nav { padding: .7rem 1.2rem; }
+      nav .logo { font-size: .92rem; order: 1; }
+      #nav-account-slot { order: 2; }
+      nav ul {
+        order: 3; flex-basis: 100%; justify-content: center; gap: 1rem;
+        padding-top: .5rem; margin-top: .3rem;
+        border-top: 1px solid rgba(255,255,255,.08);
+      }
     }
   </style>
 </head>
@@ -190,8 +198,8 @@
     <li><a href="stories.html">कहानियाँ</a></li>
     <li><a href="books.html">किताबें</a></li>
     <li><a href="lessons.html" class="active">📖 Lessons</a></li>
-    <li id="nav-account-slot"></li>
   </ul>
+  <div id="nav-account-slot"></div>
 </nav>
 
 <!-- Content injected by JS -->
@@ -256,9 +264,9 @@
     if (!slot) return;
     const user = await BNMAuth.getUser();
     if (user) {
-      slot.innerHTML = `<span style="color:#d9c9b0;margin-right:.6rem;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
+      slot.innerHTML = `<span style="color:#d9c9b0;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
     } else {
-      slot.innerHTML = `<button onclick="BNMAuth.openModal('signup')" style="margin-right:.5rem;">Sign Up</button><button onclick="BNMAuth.openModal('login')">Login</button>`;
+      slot.innerHTML = `<button onclick="BNMAuth.openModal('signup')">Sign Up</button><button onclick="BNMAuth.openModal('login')">Login</button>`;
     }
   }
 
