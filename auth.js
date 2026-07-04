@@ -255,6 +255,14 @@
         return;
       }
 
+      // Safety net: create the profile row if it's missing for any reason
+      // (manual deletion, past edge cases). No-op if it already exists.
+      try {
+        await supabase.rpc('ensure_own_profile');
+      } catch (e) {
+        console.error('ensure_own_profile failed:', e);
+      }
+
       statusEl.textContent = 'Logged in! ✓';
       statusEl.className = 'success';
 
