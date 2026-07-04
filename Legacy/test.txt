@@ -1,0 +1,1 @@
+This folder contains all the legacy files not in use anymore
