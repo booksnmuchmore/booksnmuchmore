@@ -54,6 +54,7 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="auth.js"></script>
   <script src="payments.js"></script>
+  <script src="lesson-engagement.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -138,6 +139,17 @@
       border-radius: 18px; font-size: .82rem; cursor: pointer; transition: background .2s;
     }
     .unlock-lesson-btn:hover { background: #A06020; }
+
+    /* ── Bookmark button ── */
+    .bookmark-btn {
+      margin-left: auto;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.3rem; line-height: 1; padding: .2rem .4rem;
+      opacity: .4; transition: opacity .2s, transform .2s;
+      flex-shrink: 0;
+    }
+    .bookmark-btn:hover { opacity: .8; transform: scale(1.12); }
+    .bookmark-btn.bookmarked { opacity: 1; }
 
     /* ── Bottom CTA ── */
     .bottom-cta { background: linear-gradient(135deg, var(--dark), #6B3010); color: #fff; text-align: center; padding: 3rem 2rem; }
@@ -278,6 +290,7 @@
             <div class="lesson-header">
               <span class="lesson-number">${pad(l.out_order_num)}</span>
               <h3 class="lesson-title">${l.out_title}</h3>
+              <button class="bookmark-btn" data-lesson-id="${l.out_id}" title="Save this lesson" aria-label="Bookmark this lesson">🔖</button>
             </div>
             <p class="lesson-content">${l.out_content}</p>
           </div>`;
@@ -288,6 +301,7 @@
             <div class="lesson-header">
               <span class="lesson-number">${pad(l.out_order_num)}</span>
               <h3 class="lesson-title">${l.out_title}</h3>
+              <button class="bookmark-btn" data-lesson-id="${l.out_id}" title="Save this lesson" aria-label="Bookmark this lesson">🔖</button>
             </div>
             <p class="lesson-teaser">${l.out_teaser || 'इस lesson को unlock करें पूरा content पढ़ने के लिए।'}</p>
             <button class="unlock-lesson-btn"
@@ -444,6 +458,13 @@
     document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(slug));
+
+    // ── Bookmarks + read-tracking ────────────────────────────
+    // Wire up bookmark toggle buttons just rendered into the DOM.
+    initBookmarkButtons();
+    // Only unlocked lessons have visible content, so only those
+    // count as "read" — locked/teaser lessons are not tracked.
+    lessons.filter(l => l.out_unlocked).forEach(l => trackLessonOpen(l.out_id));
 
     // ── More-books real-time filter ─────────────────────────────
     function filterMoreBooks(q) {
