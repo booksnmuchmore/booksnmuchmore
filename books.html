@@ -648,6 +648,12 @@
     </div>
 
   </div><!-- /books-grid -->
+
+  <div id="loadMoreWrap" style="text-align:center;margin:1.5rem 0;display:none;">
+    <button id="loadMoreBtn" class="filter-btn" style="padding:0.7rem 1.6rem;font-size:0.95rem;" onclick="loadMoreBooks()">
+      और किताबें देखें (<span id="loadMoreCount"></span>)
+    </button>
+  </div>
 </section>
 
 <!-- GROWING LIST STRIP -->
@@ -804,78 +810,167 @@
       </a>`;
   }
 
+  // Tracks genre-filter buttons already rendered, since renderGenreFilters()
+  // now gets called again each time another page of books loads (pagination),
+  // not just once — without this set we'd render duplicate buttons.
+  const renderedFilterTokens = new Set();
+  let filterButtonCount = 0;
+
   function renderGenreFilters(books) {
     const bar = document.getElementById('filterBar');
-    // collect unique genre tokens across all books, in first-seen order
-    const seen = new Set();
-    const tokens = [];
     books.forEach(b => {
       genreToSlug(b.genre).split(' ').filter(Boolean).forEach(t => {
-        if (!seen.has(t)) { seen.add(t); tokens.push(t); }
+        if (!renderedFilterTokens.has(t) && filterButtonCount < 10) {
+          renderedFilterTokens.add(t);
+          filterButtonCount++;
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+          btn.onclick = () => filterBooks(t, btn);
+          bar.appendChild(btn);
+        }
       });
-    });
-    // cap at a reasonable number of filter buttons so the bar doesn't overflow badly
-    tokens.slice(0, 10).forEach(t => {
-      const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.textContent = t.charAt(0).toUpperCase() + t.slice(1);
-      btn.onclick = () => filterBooks(t, btn);
-      bar.appendChild(btn);
     });
   }
 
-  async function loadBooks() {
+  // ═══════════════════════════════════════════════════════
+  //  PAGINATION
+  //
+  //  Rationale: get_all_live_books() fetches every book's full record
+  //  (description, affiliate_links for 5 markets, etc.) on every single
+  //  page load, regardless of whether the visitor ever scrolls past the
+  //  first row. As the catalog grows past 100+ books that's a lot of
+  //  wasted Supabase egress for the common case of someone browsing a
+  //  handful of books and clicking one. We now fetch one page at a time
+  //  (PAGE_SIZE books) and load more only on demand — via the "Load
+  //  More" button, or automatically the first time the visitor searches
+  //  or applies a genre filter, since those need the full catalog to
+  //  behave correctly.
+  // ═══════════════════════════════════════════════════════
+  const PAGE_SIZE = 24;
+  let loadedCount  = 0;
+  let totalCount   = 0;
+  let allLoaded    = false;
+  let loadingPage  = false; // guards against double-fires (fast double-click, etc.)
+
+  function renderBooksBatch(liveBooks) {
     const grid = document.getElementById('booksGrid');
-    const heading = document.getElementById('sectionHeading');
     const noResults = document.getElementById('noResults');
 
+    liveBooks.forEach(b => { bookSlugMap[b.slug] = b; });
+
+    const cardsHtml = liveBooks.map(renderBookCard).join('');
+    grid.insertAdjacentHTML('beforeend', cardsHtml);
+    // re-append no-results so it stays after the cards in DOM order
+    grid.appendChild(noResults);
+
+    renderGenreFilters(liveBooks);
+
+    // Rebuild the search index from the DOM. Cheap even at a few hundred
+    // cards, and far simpler/safer than trying to append incrementally.
+    bookIndex = buildIndex();
+
+    updateCatalogSchema();
+  }
+
+  // ItemList JSON-LD — helps Google understand this is a catalog page
+  // linking to individual Book pages, not just a generic list. Rebuilt
+  // after every batch so it always reflects whatever's currently in the
+  // DOM (complete once "Load More" / search / a filter has run once).
+  function updateCatalogSchema() {
+    const itemListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": Object.values(bookSlugMap).map((b, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "url": `https://booksnmuchmore.com/lessons-book.html?book=${b.slug}`,
+        "name": b.title
+      }))
+    };
+    document.getElementById('catalog-schema').textContent = JSON.stringify(itemListSchema);
+  }
+
+  function updateLoadMoreUI() {
+    const wrap  = document.getElementById('loadMoreWrap');
+    const count = document.getElementById('loadMoreCount');
+    if (allLoaded || loadedCount >= totalCount) {
+      wrap.style.display = 'none';
+    } else {
+      wrap.style.display = '';
+      count.textContent = `${loadedCount} / ${totalCount}`;
+    }
+  }
+
+  async function loadMoreBooks() {
+    if (allLoaded || loadingPage) return;
+    loadingPage = true;
+    const btn = document.getElementById('loadMoreBtn');
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+
     try {
-      const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+      const { data: books, error } = await BNMAuth.supabase
+        .rpc('get_live_books_page', { p_offset: loadedCount, p_limit: PAGE_SIZE });
 
       if (error || !books) {
-        console.error('Failed to load books:', error);
+        console.error('Failed to load more books:', error);
+        return;
+      }
+
+      renderBooksBatch(books);
+      loadedCount += books.length;
+      if (books.length < PAGE_SIZE || loadedCount >= totalCount) allLoaded = true;
+      updateLoadMoreUI();
+    } catch (err) {
+      console.error('Unexpected error loading more books:', err);
+    } finally {
+      loadingPage = false;
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  // Used by search and genre-filter, which both need the *entire* catalog
+  // to give correct results — not just whatever page happens to be loaded.
+  // Loads any remaining pages in the background, once, then never again.
+  let ensureAllLoadedPromise = null;
+  function ensureAllLoaded() {
+    if (allLoaded) return Promise.resolve();
+    if (ensureAllLoadedPromise) return ensureAllLoadedPromise;
+
+    ensureAllLoadedPromise = (async () => {
+      while (!allLoaded) {
+        await loadMoreBooks();
+      }
+    })();
+    return ensureAllLoadedPromise;
+  }
+
+  async function loadBooks() {
+    const heading = document.getElementById('sectionHeading');
+
+    try {
+      const [{ data: count, error: countErr }, { data: firstPage, error: pageErr }] = await Promise.all([
+        BNMAuth.supabase.rpc('get_live_books_count'),
+        BNMAuth.supabase.rpc('get_live_books_page', { p_offset: 0, p_limit: PAGE_SIZE })
+      ]);
+
+      if (countErr || pageErr || !firstPage) {
+        console.error('Failed to load books:', countErr || pageErr);
         document.getElementById('loadingPlaceholder').textContent =
           'किताबें load नहीं हो पाईं — कृपया page reload करें।';
         return;
       }
 
-      const liveBooks = books.filter(b => b.live);
-
-      // Make book data (incl. affiliate_links) lookupable by slug
-      // for geoRedirect(), which is called with just a slug from
-      // each card's onclick.
-      liveBooks.forEach(b => { bookSlugMap[b.slug] = b; });
-
-      heading.textContent = `${liveBooks.length} Must-Read Books`;
+      totalCount = count || firstPage.length;
+      heading.textContent = `${totalCount} Must-Read Books`;
 
       const placeholder = document.getElementById('loadingPlaceholder');
       if (placeholder) placeholder.remove();
 
-      const cardsHtml = liveBooks.map(renderBookCard).join('');
-      grid.insertAdjacentHTML('beforeend', cardsHtml);
-      // re-append no-results so it stays after the cards in DOM order
-      grid.appendChild(noResults);
-
-      renderGenreFilters(liveBooks);
-
-      // ItemList JSON-LD — helps Google understand this is a catalog
-      // page linking to individual Book pages, not just a generic list.
-      const itemListSchema = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": liveBooks.map((b, i) => ({
-          "@type": "ListItem",
-          "position": i + 1,
-          "url": `https://booksnmuchmore.com/lessons-book.html?book=${b.slug}`,
-          "name": b.title
-        }))
-      };
-      document.getElementById('catalog-schema').textContent = JSON.stringify(itemListSchema);
-
-      // Now that real cards exist in the DOM, build the search index
-      // and finish wiring up the page (was previously done directly
-      // inside DOMContentLoaded, before any cards existed).
-      bookIndex = buildIndex();
+      renderBooksBatch(firstPage);
+      loadedCount = firstPage.length;
+      if (loadedCount >= totalCount) allLoaded = true;
+      updateLoadMoreUI();
     } catch (err) {
       console.error('Unexpected error loading books:', err);
       const placeholder = document.getElementById('loadingPlaceholder');
@@ -886,10 +981,17 @@
   // ═══════════════════════════════════════════════════════
   //  FILTER
   // ═══════════════════════════════════════════════════════
-  function filterBooks(cat, btn) {
+  async function filterBooks(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     clearSearch();
+
+    // A genre filter needs to see the whole catalog to be correct — a book
+    // matching "Habits" that hasn't loaded yet would otherwise just be
+    // silently missing. "all" doesn't need this since every loaded card
+    // already qualifies.
+    if (cat !== 'all') await ensureAllLoaded();
+
     document.querySelectorAll('.book-card').forEach(c => {
       c.style.display = (cat === 'all' || c.dataset.cat.includes(cat)) ? '' : 'none';
     });
@@ -1107,7 +1209,18 @@
 
     input.addEventListener('input', () => {
       clearBtn.style.display = input.value ? 'block' : 'none';
-      renderPanel(input.value);
+      const query = input.value;
+      renderPanel(query); // instant feedback from whatever's loaded so far
+
+      // Search needs the full catalog to be correct — a book that hasn't
+      // loaded yet would wrongly look like an "only on Open Library" result.
+      // Load the rest in the background, once, then re-render with the
+      // complete picture if the user hasn't changed the query meanwhile.
+      if (!allLoaded) {
+        ensureAllLoaded().then(() => {
+          if (input.value === query) renderPanel(query);
+        });
+      }
     });
 
     input.addEventListener('keydown', e => {

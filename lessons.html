@@ -87,6 +87,16 @@
     .filter-input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(192,122,42,.15); }
     .no-results { text-align: center; padding: 2rem; color: var(--mid); grid-column: 1 / -1; font-style: italic; }
 
+    /* ── Genre filter bar ── */
+    .genre-filter-bar { max-width: 880px; margin: 1rem auto 0; padding: 0 1.5rem; display: flex; flex-wrap: wrap; gap: .6rem; }
+    .filter-btn {
+      background: var(--cream); border: 1.5px solid var(--amber-xl); color: var(--mid);
+      padding: .4rem 1rem; border-radius: 20px; font-family: 'Lora', Georgia, serif;
+      font-size: .82rem; cursor: pointer; transition: all .2s;
+    }
+    .filter-btn:hover { border-color: var(--amber-l); color: var(--brown); }
+    .filter-btn.active { background: var(--amber); border-color: var(--amber); color: #fff; }
+
     /* ── Cards grid ── */
     .cards-grid { max-width: 880px; margin: 2.5rem auto 5rem; padding: 0 1.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
 
@@ -199,9 +209,20 @@
          placeholder="किताब का नाम खोजें… e.g. Atomic Habits"/>
 </div>
 
+<!-- Genre filter -->
+<div class="genre-filter-bar" id="genreFilterBar">
+  <button class="filter-btn active" onclick="filterByGenre('all', this)">सभी</button>
+</div>
+
 <!-- Cards — populated dynamically from Supabase -->
 <div class="cards-grid" id="cards-grid">
   <p class="loading-row">Loading books…</p>
+</div>
+
+<div id="loadMoreWrap" style="text-align:center;margin:0 0 3rem;display:none;">
+  <button id="loadMoreBtn" class="card-cta" style="border:none;cursor:pointer;font-family:inherit;" onclick="loadMoreBooks()">
+    और किताबें देखें (<span id="loadMoreCount"></span>)
+  </button>
 </div>
 
 <!-- CTA strip -->
@@ -218,9 +239,18 @@
 </footer>
 
 <script>
+  function genreToSlug(genre) {
+    return (genre || '')
+      .toLowerCase()
+      .replace(/[·,]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   // ── Special non-Supabase card: Rich Dad Poor Dad India Perspective ──
+  const SPECIAL_CARD_CAT = 'india perspective analysis kiyosaki finance';
   const SPECIAL_CARD_HTML = `
-    <a class="book-card" href="rdpd-india-perspective.html" style="border: 1px solid #C47A7A; background: #FFF8F8;">
+    <a class="book-card" href="rdpd-india-perspective.html" data-cat="${SPECIAL_CARD_CAT}" style="border: 1px solid #C47A7A; background: #FFF8F8;">
       <div class="card-top" style="background: linear-gradient(135deg, #3D1010 0%, #7A2A1A 100%);">
         <img class="book-img" src="https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg" alt="Rich Dad Poor Dad"/>
         <div class="card-meta">
@@ -237,9 +267,10 @@
     </a>`;
 
   function buildBookCardHtml(book) {
+    const catTokens = genreToSlug(book.genre);
     if (!book.live) {
       return `
-        <div class="book-card" style="cursor:default;">
+        <div class="book-card" data-cat="${catTokens}" style="cursor:default;">
           <div class="card-top">
             <span class="coming-badge">Coming Soon</span>
             <img class="book-img" src="${book.cover_url}" alt="${book.title}"/>
@@ -257,7 +288,7 @@
         </div>`;
     }
     return `
-      <a class="book-card" href="lessons-book.html?book=${book.slug}">
+      <a class="book-card" data-cat="${catTokens}" href="lessons-book.html?book=${book.slug}">
         <div class="card-top">
           <img class="book-img" src="${book.cover_url}" alt="${book.title}"/>
           <div class="card-meta">
@@ -274,6 +305,41 @@
       </a>`;
   }
 
+  // ── Genre filter buttons — appended as new genres appear across pages ──
+  const renderedFilterTokens = new Set();
+  let filterButtonCount = 1; // "सभी" already counts as one
+  let activeGenre = 'all';
+
+  function renderGenreFilters(books) {
+    const bar = document.getElementById('genreFilterBar');
+    books.forEach(b => {
+      genreToSlug(b.genre).split(' ').filter(Boolean).forEach(t => {
+        if (!renderedFilterTokens.has(t) && filterButtonCount < 11) {
+          renderedFilterTokens.add(t);
+          filterButtonCount++;
+          const btn = document.createElement('button');
+          btn.className = 'filter-btn';
+          btn.textContent = t.charAt(0).toUpperCase() + t.slice(1);
+          btn.onclick = () => filterByGenre(t, btn);
+          bar.appendChild(btn);
+        }
+      });
+    });
+  }
+
+  async function filterByGenre(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeGenre = cat;
+
+    // A genre filter needs to see the whole catalog to be correct —
+    // otherwise a book matching this genre that hasn't loaded yet would
+    // just be silently missing from the results.
+    if (cat !== 'all') await ensureAllLoaded();
+
+    filterAndRender(document.getElementById('book-filter').value);
+  }
+
   // ── All books stored after load — used by the filter ──
   let allBooks = [];
 
@@ -281,16 +347,22 @@
     const grid = document.getElementById('cards-grid');
     const q = query.toLowerCase().trim();
 
-    const filtered = q
+    let filtered = q
       ? allBooks.filter(b =>
           b.title.toLowerCase().includes(q) ||
           (b.author && b.author.toLowerCase().includes(q)))
       : allBooks;
 
-    // Show the special RDPD card when there's no query or when the
-    // query matches the card's relevant terms
+    if (activeGenre !== 'all') {
+      filtered = filtered.filter(b => genreToSlug(b.genre).includes(activeGenre));
+    }
+
+    // Show the special RDPD card when there's no query/filter, or when
+    // the query/genre matches the card's relevant terms
     const specialTerms = ['rich dad', 'poor dad', 'india perspective', 'kiyosaki'];
-    const showSpecial = !q || specialTerms.some(t => t.includes(q) || q.includes(t));
+    const matchesQuery = !q || specialTerms.some(t => t.includes(q) || q.includes(t));
+    const matchesGenre = activeGenre === 'all' || SPECIAL_CARD_CAT.includes(activeGenre);
+    const showSpecial = matchesQuery && matchesGenre;
 
     const cardsHtml = filtered.map(buildBookCardHtml).join('\n');
     const specialHtml = showSpecial ? SPECIAL_CARD_HTML : '';
@@ -302,22 +374,114 @@
     }
   }
 
+  // ═══════════════════════════════════════════════════════
+  //  PAGINATION
+  //
+  //  Same rationale as books.html: get_all_live_books() fetches every
+  //  book's full record on every load, which grows with catalog size
+  //  regardless of whether the visitor scrolls past the first row. We
+  //  now fetch one page at a time and load the rest only on demand —
+  //  via "Load More", or automatically the first time the visitor
+  //  types a search query, since search needs the whole catalog to
+  //  give correct results.
+  // ═══════════════════════════════════════════════════════
+  const PAGE_SIZE = 24;
+  let loadedCount = 0;
+  let totalCount  = 0;
+  let allLoaded   = false;
+  let loadingPage = false;
+
+  function updateLoadMoreUI() {
+    const wrap  = document.getElementById('loadMoreWrap');
+    const count = document.getElementById('loadMoreCount');
+    if (allLoaded || loadedCount >= totalCount) {
+      wrap.style.display = 'none';
+    } else {
+      wrap.style.display = '';
+      count.textContent = `${loadedCount} / ${totalCount}`;
+    }
+  }
+
+  async function loadMoreBooks() {
+    if (allLoaded || loadingPage) return;
+    loadingPage = true;
+    const btn = document.getElementById('loadMoreBtn');
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+
+    try {
+      const { data: books, error } = await BNMAuth.supabase
+        .rpc('get_live_books_page', { p_offset: loadedCount, p_limit: PAGE_SIZE });
+
+      if (error || !books) {
+        console.error('Failed to load more books:', error);
+        return;
+      }
+
+      allBooks = allBooks.concat(books);
+      loadedCount += books.length;
+      if (books.length < PAGE_SIZE || loadedCount >= totalCount) allLoaded = true;
+
+      renderGenreFilters(books);
+      filterAndRender(document.getElementById('book-filter').value);
+      updateLoadMoreUI();
+    } catch (err) {
+      console.error('Unexpected error loading more books:', err);
+    } finally {
+      loadingPage = false;
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  // Used by search, which needs the entire catalog to give correct
+  // results — not just whatever page happens to be loaded so far.
+  let ensureAllLoadedPromise = null;
+  function ensureAllLoaded() {
+    if (allLoaded) return Promise.resolve();
+    if (ensureAllLoadedPromise) return ensureAllLoadedPromise;
+    ensureAllLoadedPromise = (async () => {
+      while (!allLoaded) await loadMoreBooks();
+    })();
+    return ensureAllLoadedPromise;
+  }
+
   async function loadBooks() {
     const grid = document.getElementById('cards-grid');
-    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
 
-    if (error) {
-      console.error('Failed to load books:', error);
+    try {
+      const [{ data: count, error: countErr }, { data: firstPage, error: pageErr }] = await Promise.all([
+        BNMAuth.supabase.rpc('get_live_books_count'),
+        BNMAuth.supabase.rpc('get_live_books_page', { p_offset: 0, p_limit: PAGE_SIZE })
+      ]);
+
+      if (countErr || pageErr || !firstPage) {
+        console.error('Failed to load books:', countErr || pageErr);
+        grid.innerHTML = '<p class="loading-row">Could not load books. Please refresh.</p>';
+        return;
+      }
+
+      totalCount = count || firstPage.length;
+      allBooks = firstPage;
+      loadedCount = firstPage.length;
+      if (loadedCount >= totalCount) allLoaded = true;
+
+      renderGenreFilters(firstPage);
+      filterAndRender('');
+      updateLoadMoreUI();
+
+      document.getElementById('book-filter').addEventListener('input', e => {
+        const query = e.target.value;
+        filterAndRender(query); // instant feedback from whatever's loaded so far
+
+        if (!allLoaded && query.trim()) {
+          ensureAllLoaded().then(() => {
+            if (document.getElementById('book-filter').value === query) filterAndRender(query);
+          });
+        }
+      });
+    } catch (err) {
+      console.error('Unexpected error loading books:', err);
       grid.innerHTML = '<p class="loading-row">Could not load books. Please refresh.</p>';
-      return;
     }
-
-    allBooks = books;
-    filterAndRender('');
-
-    document.getElementById('book-filter').addEventListener('input', e => {
-      filterAndRender(e.target.value);
-    });
   }
 
   loadBooks();
