@@ -88,6 +88,12 @@
     }
     .bookmark-btn.bookmarked svg { fill: var(--amber); }
 
+    .inline-bookmark-icon {
+      width: 15px; height: 15px; vertical-align: -2px;
+      fill: none; stroke: var(--amber); stroke-width: 2.2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
     /* ── Empty / login-required / loading states ── */
     .empty-state, .login-state, .loading-state { text-align: center; padding: 4rem 2rem; }
     .empty-state h2, .login-state h2, .loading-state h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--dark); margin-bottom: .8rem; }
@@ -116,13 +122,13 @@
     <li><a href="stories.html">कहानियाँ</a></li>
     <li><a href="books.html">किताबें</a></li>
     <li><a href="lessons.html">📖 Lessons</a></li>
-    <li><a href="my-library.html" class="active">🔖 My Library</a></li>
+    <li><a href="my-library.html" class="active"><svg class="inline-bookmark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> My Library</a></li>
   </ul>
   <div id="nav-account-slot"></div>
 </nav>
 
 <div class="hero">
-  <span class="hero-tag">🔖 आपकी Library</span>
+  <span class="hero-tag"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:-2px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> आपकी Library</span>
   <h1>My Saved Lessons</h1>
   <p class="hero-desc">आपके द्वारा save किए गए lessons — एक जगह पर, पढ़ने के लिए तैयार।</p>
 </div>
@@ -162,7 +168,7 @@
             <span class="lesson-number">${pad(row.lesson_order_num)}</span>
             <h3 class="lesson-title">${row.lesson_title}</h3>
             <button class="bookmark-btn bookmarked" data-lesson-id="${row.lesson_id}" title="Remove from library" aria-label="Remove bookmark">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 3h12a2 2 0 0 1 2 2v16l-8-4.5L4 21V5a2 2 0 0 1 2-2z"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             </button>
           </div>
           <p class="lesson-content">${row.lesson_content}</p>
@@ -178,7 +184,7 @@
             <span class="lesson-number">${pad(row.lesson_order_num)}</span>
             <h3 class="lesson-title">${row.lesson_title}</h3>
             <button class="bookmark-btn bookmarked" data-lesson-id="${row.lesson_id}" title="Remove from library" aria-label="Remove bookmark">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 3h12a2 2 0 0 1 2 2v16l-8-4.5L4 21V5a2 2 0 0 1 2-2z"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             </button>
           </div>
           <p class="lesson-teaser">${row.lesson_teaser || 'इस lesson को unlock करें पूरा content पढ़ने के लिए।'}</p>
@@ -208,7 +214,7 @@
     document.getElementById('app').innerHTML = `
       <div class="empty-state">
         <h2>अभी तक कोई lesson save नहीं किया</h2>
-        <p>किसी भी lesson पर 🔖 icon दबाकर उसे अपनी library में save करें।</p>
+        <p>किसी भी lesson पर <svg class="inline-bookmark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> icon दबाकर उसे अपनी library में save करें।</p>
         <a href="lessons.html">Lessons देखें →</a>
       </div>`;
   }
