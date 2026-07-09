@@ -31,7 +31,7 @@ const path = require("path");
 const SUPABASE_URL = "https://dcewvfkszrpknxdwyual.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SITE = "https://booksnmuchmore.com";
-const OUT_DIR = path.join(__dirname, "..", "books");
+const OUT_DIR = path.join(__dirname, "books");
 
 if (!SUPABASE_ANON_KEY) {
   console.error("Missing SUPABASE_ANON_KEY env var.");
