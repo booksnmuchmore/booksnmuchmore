@@ -1,0 +1,33 @@
+name: Generate OG landing pages
+
+on:
+  schedule:
+    - cron: '17 3 * * *'   # daily, ~08:47 IST — picks up any new/edited books
+  workflow_dispatch: {}     # manual trigger from the Actions tab
+  push:
+    branches: [main]
+    paths:
+      - 'generate-og-pages.js'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate /books/*.html
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: node generate-og-pages.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "bnm-og-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add books/
+          git diff --cached --quiet || git commit -m "chore: regenerate OG landing pages"
+          git push
