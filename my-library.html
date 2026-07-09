@@ -162,7 +162,7 @@
         <div class="lesson" data-bookmark-id="${row.bookmark_id}">
           <div class="lesson-book-tag">
             <img src="${row.book_cover_url}" alt="${row.book_title}"/>
-            <a href="lessons-book.html?book=${row.book_slug}">${row.book_title} — ${row.book_author}</a>
+            <a href="books/${row.book_slug}.html">${row.book_title} — ${row.book_author}</a>
           </div>
           <div class="lesson-header">
             <span class="lesson-number">${pad(row.lesson_order_num)}</span>
@@ -178,7 +178,7 @@
         <div class="lesson locked" data-bookmark-id="${row.bookmark_id}">
           <div class="lesson-book-tag">
             <img src="${row.book_cover_url}" alt="${row.book_title}"/>
-            <a href="lessons-book.html?book=${row.book_slug}">${row.book_title} — ${row.book_author}</a>
+            <a href="books/${row.book_slug}.html">${row.book_title} — ${row.book_author}</a>
           </div>
           <div class="lesson-header">
             <span class="lesson-number">${pad(row.lesson_order_num)}</span>
@@ -188,7 +188,7 @@
             </button>
           </div>
           <p class="lesson-teaser">${row.lesson_teaser || 'इस lesson को unlock करें पूरा content पढ़ने के लिए।'}</p>
-          <a href="lessons-book.html?book=${row.book_slug}" style="font-size:.82rem;color:var(--amber);text-decoration:none;">🔒 Unlock this lesson →</a>
+          <a href="books/${row.book_slug}.html" style="font-size:.82rem;color:var(--amber);text-decoration:none;">🔒 Unlock this lesson →</a>
         </div>`;
     }
   }

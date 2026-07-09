@@ -588,7 +588,7 @@ function renderHeroStackTrio(books) {
   // doesn't matter — just pair each book with its position, front-most first.
   const positions = ['pos-front', 'pos-mid', 'pos-back'];
   heroStackWrap.innerHTML = trio.map((b, i) => {
-    const href = b.live ? `lessons-book.html?book=${b.slug}` : 'lessons.html';
+    const href = b.live ? `books/${b.slug}.html` : 'lessons.html';
     return `
       <a class="hero-stack-card ${positions[i]}" href="${href}">
         <div class="hero-stack-card-bg"></div>
@@ -667,7 +667,7 @@ document.getElementById('lessons-grid').innerHTML = HOMEPAGE_LESSONS.map((b, i) 
        </div>`;
 
   return b.live
-    ? `<a class="lsn-card${featured} reveal${delay}" href="lessons-book.html?book=${b.slug}">${inner}</a>`
+    ? `<a class="lsn-card${featured} reveal${delay}" href="books/${b.slug}.html">${inner}</a>`
     : `<div class="lsn-card lsn-coming${featured} reveal${delay}">${inner}</div>`;
 }).join('');
 

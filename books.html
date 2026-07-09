@@ -779,7 +779,7 @@
     const catTokens = genreToSlug(book.genre);
     const safeTitle = escapeHtml(book.title);
     const safeAuthor = escapeHtml(book.author);
-    const lessonsUrl = `lessons-book.html?book=${encodeURIComponent(book.slug)}`;
+    const lessonsUrl = `books/${encodeURIComponent(book.slug)}.html`;
     const blurb = escapeHtml((book.description || '').slice(0, 140)) +
       ((book.description || '').length > 140 ? '…' : '');
 
@@ -885,7 +885,7 @@
       "itemListElement": Object.values(bookSlugMap).map((b, i) => ({
         "@type": "ListItem",
         "position": i + 1,
-        "url": `https://booksnmuchmore.com/lessons-book.html?book=${b.slug}`,
+        "url": `https://booksnmuchmore.com/books/${b.slug}.html`,
         "name": b.title
       }))
     };

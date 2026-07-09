@@ -382,7 +382,7 @@
 
     const pageTitle = `${book.title} — Top 10 Lessons | Books 'n' Much More`;
     const pageDesc  = `Top 10 life-changing lessons from ${book.title} by ${book.author} — Hindi & English में | Books 'n' Much More`;
-    const pageUrl   = `https://booksnmuchmore.com/lessons-book.html?book=${book.slug}`;
+    const pageUrl   = `https://booksnmuchmore.com/books/${book.slug}.html`;
 
     document.getElementById('page-title').textContent = pageTitle;
     document.getElementById('page-desc').setAttribute('content', pageDesc);
@@ -416,7 +416,7 @@
     const otherBooks = (allBooks || []).filter(b => b.slug !== slug);
     const moreBooksHtml = otherBooks
       .map(b => b.live
-        ? `<a href="lessons-book.html?book=${b.slug}">📚 ${b.title}</a>`
+        ? `<a href="books/${b.slug}.html">📚 ${b.title}</a>`
         : `<span>📚 ${b.title} <small style="color:#aaa">— Coming Soon</small></span>`)
       .join('\n');
 
@@ -501,7 +501,7 @@
         : otherBooks;
       const linksHtml = filtered
         .map(b => b.live
-          ? `<a href="lessons-book.html?book=${b.slug}">📚 ${b.title}</a>`
+          ? `<a href="books/${b.slug}.html">📚 ${b.title}</a>`
           : `<span>📚 ${b.title} <small style="color:#aaa">— Coming Soon</small></span>`)
         .join('\n');
       list.innerHTML = `<a href="lessons.html">📖 All Lessons →</a>\n`
