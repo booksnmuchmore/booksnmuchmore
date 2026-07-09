@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Books 'n' Much More — Lessons from Best-Selling Books</title>
+<title>Books 'n' Much More — किताबों के Lessons, Real जिंदगी में Apply करें (Hindi + English)</title>
+<meta name="description" content="दुनिया की बेस्ट-सेलिंग किताबों के सबसे ज़रूरी lessons — हिंदी और English में, हर किताब सिर्फ 10 lessons में। पढ़ें, समझें, अपनी ज़िंदगी में उतारें। पहले 2 lessons हर किताब में मुफ़्त।">
+<meta property="og:title" content="Books 'n' Much More — Lessons from Best-Selling Books, Hindi + English">
+<meta property="og:description" content="Bite-sized, bilingual lessons from 40+ bestselling books — built to actually apply, not just read.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-TYDPW03BMW');</script>
@@ -537,20 +540,20 @@ document.getElementById('navbar').innerHTML = `
 
 // ── HERO ───────────────────────────────────────────────
 document.getElementById('hero-content').innerHTML = `
-  <div class="hero-eyebrow">Books 'n' Much More</div>
-  <h1 class="hero-title">Best-Selling किताबों के<br><em>ज़रूरी Lessons</em></h1>
+  <div class="hero-eyebrow">Books 'n' Much More · पढ़ते रहिए, बढ़ते रहिए</div>
+  <h1 class="hero-title">बेस्ट किताबों के Lessons,<br><em>असली ज़िंदगी में Apply करें</em></h1>
   <p class="hero-sub">
-    दुनिया की बेहतरीन किताबों के सबसे ज़रूरी सबक — हिंदी और English दोनों में,
-    हर किताब के सिर्फ 10 lessons में।
+    सिर्फ summary नहीं। हर किताब के 10 सबसे ज़रूरी lessons — हिंदी और English दोनों में —
+    जिन्हें आप आज से अपनी ज़िंदगी में उतार सकें।
   </p>
   <div class="hero-actions">
-    <a href="lessons.html" class="btn-primary">Browse Book Summaries</a>
+    <a href="lessons.html" class="btn-primary">पहले 2 Lessons मुफ़्त पढ़ें →</a>
   </div>
   <div class="hero-stats">
     <div><span class="stat-num" id="hero-stat-books">40+</span><span class="stat-label">Books</span></div>
     <div><span class="stat-num">10</span><span class="stat-label">Lessons / Book</span></div>
     <div><span class="stat-num">हिंदी</span><span class="stat-label">+ English</span></div>
-    <div><span class="stat-num">₹7</span><span class="stat-label">Unlock / Book</span></div>
+    <div><span class="stat-num">2 Free</span><span class="stat-label">हर Lesson में</span></div>
   </div>`;
 
 // Hero "Books" stat — live count from Supabase, same source as the
@@ -709,6 +712,7 @@ function renderBooks(){
 document.getElementById('footer').innerHTML = `
   <a href="index.html" class="footer-logo">Books <em>'n'</em> Much More</a>
   <p class="footer-copy">© 2026 Books 'n' Much More · पढ़ते रहिए, बढ़ते रहिए।</p>
+  <p class="footer-disclaimer" style="font-size:0.7rem;color:var(--muted);margin-top:0.4rem;max-width:520px;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
   <div class="footer-social"><a href="${SITE.youtubeChannel}" target="_blank">YouTube</a></div>`;
 document.getElementById('yt-sub-btn').href = SITE.youtubeChannel;
 
