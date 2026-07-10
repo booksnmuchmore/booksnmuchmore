@@ -55,6 +55,7 @@
   <script src="auth.js"></script>
   <script src="payments.js"></script>
   <script src="lesson-engagement.js"></script>
+  <script src="site-data.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,7 +75,8 @@
 
     /* ── Nav ── */
     nav { background: var(--dark); padding: .8rem 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; row-gap: .6rem; min-height: 60px; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; white-space: nowrap; }
+    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; white-space: nowrap; display: flex; align-items: center; gap: 0.6rem; }
+    nav .logo img { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; display: block; }
     nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
     nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; white-space: nowrap; transition: color .2s; }
     nav ul a:hover, nav ul a.active { color: var(--amber-l); }
@@ -213,6 +215,7 @@
 
       nav { padding: .7rem 1.2rem; }
       nav .logo { font-size: .92rem; order: 1; }
+      nav .logo img { height: 32px; width: 32px; }
       #nav-account-slot { order: 2; }
       nav ul {
         order: 3; flex-basis: 100%; justify-content: center; gap: 1rem;
@@ -225,11 +228,10 @@
 <body>
 
 <nav>
-  <a class="logo" href="index.html">📚 Books 'n' Much More</a>
+  <a class="logo" href="index.html"><img data-site-logo src="https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp" alt="Books n Much More"></a>
   <ul>
-    <li><a href="index.html">होम</a></li>
-    <li><a href="stories.html">कहानियाँ</a></li>
-    <li><a href="books.html">किताबें</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="books.html">Books</a></li>
     <li><a href="lessons.html" class="active">📖 Lessons</a></li>
   </ul>
   <div id="nav-account-slot"></div>
@@ -520,5 +522,6 @@
   });
 </script>
 
+<script>document.querySelectorAll('img[data-site-logo]').forEach(img => img.src = SITE.logoUrl);</script>
 </body>
 </html>

@@ -18,6 +18,7 @@
   <!-- Supabase (for fetching the live book catalog) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth.js"></script>
+  <script src="site-data.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,7 +39,8 @@
 
     /* ── Nav ── */
     nav { background: var(--dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; }
+    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+    nav .logo img { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; display: block; }
     nav ul { list-style: none; display: flex; gap: 1.8rem; }
     nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; transition: color .2s; }
     nav ul a:hover, nav ul a.active { color: var(--amber-l); }
@@ -181,11 +183,10 @@
 <body>
 
 <nav>
-  <a class="logo" href="index.html">📚 Books 'n' Much More</a>
+  <a class="logo" href="index.html"><img data-site-logo src="https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp" alt="Books n Much More"></a>
   <ul>
-    <li><a href="index.html">होम</a></li>
-    <li><a href="stories.html">कहानियाँ</a></li>
-    <li><a href="books.html">किताबें</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="books.html">Books</a></li>
     <li><a href="lessons.html" class="active" style="color:var(--amber-l);font-weight:600;">📖 Lessons</a></li>
     <li><a href="my-library.html"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:-2px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> My Library</a></li>
   </ul>
@@ -234,7 +235,7 @@
 </div>
 
 <footer>
-  <p>© 2026 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="books.html">किताबें</a></p>
+  <p>© 2026 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="books.html">Books</a></p>
   <p style="margin-top:.4rem;">Affiliate Disclosure: Some links on this site are Amazon affiliate links.</p>
   <p style="margin-top:.4rem;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
 </footer>
@@ -488,5 +489,6 @@
   loadBooks();
 </script>
 
+<script>document.querySelectorAll('img[data-site-logo]').forEach(img => img.src = SITE.logoUrl);</script>
 </body>
 </html>
