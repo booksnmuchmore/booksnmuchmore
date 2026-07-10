@@ -601,7 +601,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">Prashant की पसंदीदा किताबें</div>
+  <div class="hero-tag">हर किताब में छुपा है एक सबक — पूरी list ज़रूर देखें</div>
   <h1>वो किताबें जो <em>ज़िंदगी बदल दें</em></h1>
   <p>हर किताब एक नई सोच का दरवाज़ा है। ये मेरी personally recommended books हैं — जिन्होंने मुझे inspire किया।</p>
   <div class="hero-divider"></div>
@@ -667,10 +667,30 @@
   </div>
 </div>
 
+<!-- AMAZON SEARCH — for books not in our catalog -->
+<div style="max-width:1100px;margin:0 auto 4rem;padding:0 1.5rem;">
+  <div style="background:var(--cream);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:2.2rem 2.5rem;text-align:center;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--ink);margin-bottom:0.5rem;">🔍 अपनी पसंद की किताब यहाँ नहीं मिली?</div>
+    <p style="font-family:'Lora',serif;font-size:0.88rem;color:var(--ink-muted);margin:0 auto 1.3rem;max-width:520px;line-height:1.7;">
+      हमारी catalog में सिर्फ curated किताबें हैं — लेकिन आप कोई भी किताब सीधे Amazon पर search करके देख सकते हैं, जो अभी हमारी list में नहीं है।
+    </p>
+    <div style="max-width:520px;margin:0 auto;display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
+      <input type="text" id="amazonSearchInput"
+        placeholder="किताब का नाम लिखें…" autocomplete="off" spellcheck="false"
+        style="flex:1;min-width:220px;padding:0.7rem 1rem;border:1px solid rgba(200,134,10,0.3);border-radius:4px;font-family:'Lora',serif;font-size:0.9rem;background:#fff;color:var(--ink);outline:none;"/>
+      <button id="amazonSearchBtn" class="buy-btn" style="width:auto;white-space:nowrap;padding:0.7rem 1.4rem;">
+        🛒 Amazon पर Search करें
+      </button>
+    </div>
+    <div style="font-size:0.68rem;color:var(--ink-muted);margin-top:0.8rem;font-style:italic;">आपकी location के अनुसार सही Amazon store खुलेगा</div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>© 2025 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a></p>
   <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">Affiliate Disclosure: इस page पर Amazon affiliate links हैं।</p>
+  <p style="margin-top:0.4rem;font-size:0.7rem;opacity:0.55">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
 </footer>
 
 <!-- Supabase client (shared via auth.js, same pattern as lessons-book.html) -->
@@ -1231,6 +1251,20 @@
 
     document.addEventListener('click', e => {
       if (!e.target.closest('.search-wrap')) { closePanel(); restoreCards(); }
+    });
+
+    // ── Bottom Amazon search box (books not in our catalog) ──
+    const amazonInput = document.getElementById('amazonSearchInput');
+    const amazonBtn   = document.getElementById('amazonSearchBtn');
+    function doAmazonSearch() {
+      const q = amazonInput.value.trim();
+      if (!q) return;
+      logToSheet(q);
+      window.open(getAmazonSearchUrl(q), '_blank');
+    }
+    if (amazonBtn) amazonBtn.addEventListener('click', doAmazonSearch);
+    if (amazonInput) amazonInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') doAmazonSearch();
     });
   });
 </script>
