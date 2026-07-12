@@ -412,6 +412,108 @@
       text-align: center;
     }
 
+    /* ── VIEW TOGGLE (Grid / Compact list) ── */
+    .view-toggle {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0 0 1rem;
+    }
+
+    /* ── COMPACT GRID VIEW: cover + title + author only, many per row ── */
+    .books-grid.compact-view {
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 0.9rem;
+    }
+    .books-grid.compact-view .book-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .books-grid.compact-view .book-cover-wrap {
+      height: auto;
+      aspect-ratio: 2 / 3;
+    }
+    .books-grid.compact-view .book-category,
+    .books-grid.compact-view .book-quote,
+    .books-grid.compact-view .book-footer {
+      display: none;
+    }
+    .books-grid.compact-view .book-body {
+      padding: 0.5rem 0.5rem 0.7rem;
+      gap: 0.15rem;
+    }
+    .books-grid.compact-view .book-title {
+      font-size: 0.8rem;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .books-grid.compact-view .book-author {
+      font-size: 0.68rem;
+    }
+
+    /* ── LIST VIEW: single column, small thumbnail rows ── */
+    .books-grid.list-view {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid rgba(200,134,10,0.18);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .books-grid.list-view .book-card {
+      flex-direction: row;
+      align-items: center;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-radius: 0;
+      border-bottom: 1px solid rgba(200,134,10,0.12);
+      animation: none;
+    }
+    .books-grid.list-view .book-card:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .books-grid.list-view .book-card:last-child {
+      border-bottom: none;
+    }
+    .books-grid.list-view .book-cover-wrap {
+      width: 36px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+    .books-grid.list-view .book-body {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.6rem 0.8rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .books-grid.list-view .book-title {
+      font-size: 0.88rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .books-grid.list-view .book-author {
+      font-size: 0.76rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .books-grid.list-view .book-category,
+    .books-grid.list-view .book-quote,
+    .books-grid.list-view .book-footer {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .books-grid.compact-view { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 0.6rem; }
+      .books-grid.list-view .book-author { display: none; }
+    }
+
     /* ── AFFILIATE NOTICE ── */
     .affiliate-notice {
       max-width: 1100px;
@@ -636,6 +738,13 @@
 <!-- BOOKS GRID -->
 <section class="books-section">
   <div class="section-heading" id="sectionHeading">Loading Books…</div>
+
+  <div class="view-toggle">
+    <button id="viewCompactBtn" class="filter-btn active" onclick="setBooksView('compact')">▦ Compact grid</button>
+    <button id="viewListBtn" class="filter-btn" onclick="setBooksView('list')">☰ List view</button>
+    <button id="viewGridBtn" class="filter-btn" onclick="setBooksView('grid')">🔲 Grid view</button>
+  </div>
+
   <div class="books-grid" id="booksGrid">
 
     <div class="no-results" id="noResults">
@@ -793,6 +902,31 @@
       .replace(/\s+/g, ' ')
       .trim();
   }
+
+  // ═══════════════════════════════════════════════════════
+  //  VIEW TOGGLE (Grid / Compact grid / List)
+  //  Pure CSS-class swap on #booksGrid — reuses the same
+  //  .book-card markup, so search/filter/pagination are
+  //  unaffected regardless of which view is active.
+  // ═══════════════════════════════════════════════════════
+  function setBooksView(mode) {
+    const grid = document.getElementById('booksGrid');
+    grid.classList.remove('compact-view', 'list-view');
+    if (mode === 'compact') grid.classList.add('compact-view');
+    if (mode === 'list') grid.classList.add('list-view');
+
+    document.getElementById('viewGridBtn').classList.toggle('active', mode === 'grid');
+    document.getElementById('viewCompactBtn').classList.toggle('active', mode === 'compact');
+    document.getElementById('viewListBtn').classList.toggle('active', mode === 'list');
+
+    try { localStorage.setItem('bnm_books_view', mode); } catch (e) {}
+  }
+
+  (function initBooksView() {
+    let saved = 'compact';
+    try { saved = localStorage.getItem('bnm_books_view') || 'compact'; } catch (e) {}
+    setBooksView(saved);
+  })();
 
   function renderBookCard(book) {
     const catTokens = genreToSlug(book.genre);
