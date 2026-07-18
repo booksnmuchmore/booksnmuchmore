@@ -945,6 +945,7 @@
         <div class="book-cover-wrap">
           <img src="${escapeHtml(book.cover_url || '')}" alt="${safeTitle}"
             onerror="this.src='https://placehold.co/230x200/ede6d6/8b3a1a?text=${encodeURIComponent(book.title || 'Book')}'"/>
+          ${book.free_forever ? `<span class="free-forever-badge" style="position:absolute;top:.5rem;left:.5rem;background:var(--amber);color:#fff;font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;">✓ पूरी तरह Free</span>` : ''}
         </div>
         <div class="book-body">
           <span class="book-category">${escapeHtml(book.genre || '')}</span>

@@ -1,9 +1,10 @@
 // ============================================================
 // payments.js — Books 'n' Much More
-// Razorpay Checkout integration for 3 tiers:
-//   ₹1  — single lesson
-//   ₹7  — full book
-//   ₹99 — monthly subscription
+// Razorpay Checkout integration for:
+//   ₹1/lesson or ₹7/book — one-off micro-purchases
+//   Seeker  — ₹49/month or ₹199/year (all lessons + action challenges)
+//   Scholar — ₹99/month or ₹399/year (Seeker + immediate new-book access,
+//             downloadable notes — see 4Ps Marketing Plan, Price section)
 //
 // Requires: auth.js loaded first (uses BNMAuth.supabase + BNMAuth.requireLogin)
 // Requires: Razorpay Checkout script loaded:
@@ -117,15 +118,29 @@
     });
   }
 
-  // ---- Tier 3: Subscription (pass tier: 'seeker' ₹99 or 'scholar' ₹299) ----
-  async function subscribeMonthly(tier = 'seeker') {
+  // ---- Subscriptions: tier is 'seeker' or 'scholar', billingCycle is 'monthly' or 'yearly' ----
+  // The server (create-razorpay-order) is the source of truth for the actual
+  // amount charged — this map is only used for the on-screen description text.
+  const TIER_LABELS = {
+    seeker: { name: 'Seeker', monthly: '₹49/month', yearly: '₹199/year' },
+    scholar: { name: 'Scholar', monthly: '₹99/month', yearly: '₹399/year' },
+  };
+
+  async function subscribe(tier = 'seeker', billingCycle = 'monthly') {
+    const info = TIER_LABELS[tier] || TIER_LABELS.seeker;
+    const cycle = billingCycle === 'yearly' ? 'yearly' : 'monthly';
     openCheckout({
-      description: `Monthly Subscription — ${tier === 'scholar' ? 'Scholar' : 'Seeker'} plan`,
-      notes: { purchase_type: 'subscription', tier },
+      description: `${info.name} Subscription — ${info[cycle]}`,
+      notes: { purchase_type: 'subscription', tier, billing_cycle: cycle },
       onSuccess: async () => {
         await waitForUnlockThenReload();
       },
     });
+  }
+
+  // Back-compat alias for any old call sites still using the previous name.
+  async function subscribeMonthly(tier = 'seeker') {
+    await subscribe(tier, 'monthly');
   }
 
   // ---- Helper: give the webhook a moment to land, then reload ----
@@ -143,6 +158,7 @@
   window.BNMPayments = {
     unlockLesson,
     unlockBook,
+    subscribe,
     subscribeMonthly,
   };
 })();
@@ -157,10 +173,11 @@
 //   3. Razorpay sends a webhook to the razorpay-webhook Edge
 //      Function on payment.captured.
 //   4. That function verifies the webhook signature using
-//      RAZORPAY_WEBHOOK_SECRET, then inserts the purchases/
-//      subscriptions row using the service_role key — the
-//      frontend itself can no longer write these rows directly
-//      (see RLS policy changes applied alongside this).
+//      RAZORPAY_WEBHOOK_SECRET, then inserts the purchases row or
+//      upserts the subscribers row (plan + period) using the
+//      service_role key — the frontend itself can no longer write
+//      these rows directly (see RLS policy changes applied alongside
+//      this).
 //
 // Required setup still needed in the Razorpay dashboard:
 //   - Create a webhook pointing to:

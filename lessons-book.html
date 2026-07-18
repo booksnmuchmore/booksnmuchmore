@@ -136,6 +136,14 @@
     .lesson.locked { border-left-color: var(--lite); background: #FBF3E7; }
     .lesson.locked .lesson-number { color: var(--amber-xl); }
     .lesson-teaser { font-size: .92rem; color: var(--mid); font-style: italic; margin-bottom: 1rem; }
+    .tier-lock-note { font-size: .8rem; color: var(--amber); margin-bottom: .7rem; }
+    .tier-lock-note strong { color: var(--dark); }
+    .tier-lock-actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+    .tier-lock-actions a.tier-cta {
+      background: var(--dark); color: var(--parchment); border-radius: 20px; padding: .55rem 1.1rem;
+      font-size: .82rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+    }
+    .tier-lock-actions a.tier-cta:hover { background: #2a1a10; }
 
     .action-challenge {
       background: var(--amber-xl);
@@ -322,6 +330,13 @@
           </div>`;
       } else {
         const safeTitle = l.out_title.replace(/'/g, "\\'");
+        // Scholar-only early access: Seeker will unlock this automatically once
+        // the early-access window passes, so lead with that instead of a raw paywall.
+        const tierNote = (l.out_required_tier === 'scholar' && l.out_early_access_days_left > 0)
+          ? `<p class="tier-lock-note">🌟 <strong>Early access</strong> — Scholar members can read this now. Seeker unlocks it in ${l.out_early_access_days_left} day${l.out_early_access_days_left === 1 ? '' : 's'}.</p>`
+          : (l.out_required_tier === 'seeker'
+              ? `<p class="tier-lock-note">🔑 Unlocked for <strong>Seeker</strong> &amp; <strong>Scholar</strong> subscribers.</p>`
+              : '');
         return `
           <div class="lesson locked">
             <div class="lesson-header">
@@ -332,10 +347,14 @@
               </button>
             </div>
             <p class="lesson-teaser">${l.out_teaser || 'इस lesson को unlock करें पूरा content पढ़ने के लिए।'}</p>
-            <button class="unlock-lesson-btn"
-              onclick="BNMPayments.unlockLesson('${l.out_id}', ${l.out_price_rs}, '${book.title.replace(/'/g, "\\'")}', '${safeTitle}')">
-              🔒 Unlock for ₹${l.out_price_rs}
-            </button>
+            ${tierNote}
+            <div class="tier-lock-actions">
+              <button class="unlock-lesson-btn"
+                onclick="BNMPayments.unlockLesson('${l.out_id}', ${l.out_price_rs}, '${book.title.replace(/'/g, "\\'")}', '${safeTitle}')">
+                🔒 Unlock for ₹${l.out_price_rs}
+              </button>
+              <a class="tier-cta" href="/index.html#subscription-promo">या Subscribe करें →</a>
+            </div>
           </div>`;
       }
     }).join('');
@@ -448,10 +467,15 @@
       ${allUnlocked ? '' : `
       <div class="pricing-banner">
         <div class="pricing-banner-inner">
-          <p>लेसन 1-2 हमेशा free हैं। बाकी ₹1/lesson या <strong>पूरी किताब सिर्फ ₹${book.price_rs}</strong> में unlock करें।</p>
-          <button class="unlock-book-btn" onclick="BNMPayments.unlockBook('${book.id}', ${book.price_rs}, '${book.title.replace(/'/g, "\\'")}')">
-            🔓 Unlock Full Book — ₹${book.price_rs}
-          </button>
+          <p>शुरुआती lesson हमेशा free हैं। बाकी ₹1/lesson या <strong>पूरी किताब सिर्फ ₹${book.price_rs}</strong> में unlock करें — या <strong>Seeker/Scholar subscription</strong> लेकर सभी books एक साथ unlock करें।</p>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+            <button class="unlock-book-btn" onclick="BNMPayments.unlockBook('${book.id}', ${book.price_rs}, '${book.title.replace(/'/g, "\\'")}')">
+              🔓 Unlock This Book — ₹${book.price_rs}
+            </button>
+            <a class="unlock-book-btn" style="text-decoration:none;display:inline-block;" href="/index.html#subscription-promo">
+              💎 See Subscription Plans
+            </a>
+          </div>
         </div>
       </div>`}
 

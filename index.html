@@ -241,14 +241,38 @@ nav.scrolled{padding:0.75rem 6%;}
 }
 .sub-promo-title em{color:var(--gold);font-style:italic;}
 .sub-promo-desc{font-size:0.92rem;line-height:1.85;color:rgba(245,236,215,0.75);}
+.sub-promo-toggle{
+  display:inline-flex;background:rgba(245,236,215,0.12);border-radius:999px;padding:0.25rem;
+  margin-bottom:1.2rem;gap:0.2rem;
+}
+.sub-promo-toggle button{
+  font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.02em;
+  color:rgba(245,236,215,0.75);background:transparent;border:none;border-radius:999px;
+  padding:0.5rem 1rem;cursor:pointer;transition:all .2s;
+}
+.sub-promo-toggle button.active{background:var(--gold);color:var(--ink);}
+.toggle-save{font-size:0.62rem;opacity:0.85;margin-left:0.3rem;}
+.sub-promo-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
 .sub-promo-card{
-  background:var(--cream);border-radius:var(--card-radius);padding:1.8rem;
+  position:relative;background:var(--cream);border-radius:var(--card-radius);padding:1.8rem;
   box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;
 }
+.sub-promo-card.featured{outline:2px solid var(--gold);}
+.sub-promo-card .tier-badge{
+  position:absolute;top:-0.7rem;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:var(--ink);font-family:'Raleway',sans-serif;
+  font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.25rem 0.7rem;border-radius:999px;white-space:nowrap;
+}
+.sub-promo-card .tier-name{
+  font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--sienna);margin-bottom:0.5rem;
+}
 .sub-promo-price{
-  font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:var(--sienna);margin-bottom:0.8rem;
+  font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:var(--sienna);margin-bottom:0.2rem;
 }
 .sub-promo-price span{font-size:1rem;font-weight:500;color:var(--muted);}
+.sub-promo-subprice{font-size:0.72rem;color:var(--muted);margin-bottom:0.8rem;}
 .sub-promo-list{list-style:none;text-align:left;margin-bottom:1.3rem;}
 .sub-promo-list li{font-size:0.85rem;color:var(--ink);padding:0.4rem 0;border-bottom:1px solid rgba(200,129,58,0.15);}
 .sub-promo-list li:last-child{border-bottom:none;}
@@ -256,6 +280,7 @@ nav.scrolled{padding:0.75rem 6%;}
 
 @media(max-width:900px){
   .sub-promo-inner{grid-template-columns:1fr;}
+  .sub-promo-cards{grid-template-columns:1fr;}
 }
 @media(max-width:720px){
   #subscription-promo{padding:3rem 4%;}
@@ -441,16 +466,36 @@ footer{
     <div class="sub-promo-text">
       <div class="section-label" style="color:var(--gold);">💎 Unlimited Access</div>
       <h2 class="sub-promo-title">सारी Lessons, <em>सारी Books</em> — एक ही Subscription में</h2>
-      <p class="sub-promo-desc">हर lesson के पहले 2 हिस्से हमेशा free हैं। बाकी unlock करें ₹1/lesson या ₹7/book में — या फिर सिर्फ ₹99/month में पूरी library access करें, बिना कुछ अलग से खरीदे।</p>
+      <p class="sub-promo-desc">हर lesson के पहले हिस्से हमेशा free हैं। बाकी unlock करें ₹1/lesson या ₹7/book में — या फिर subscription लेकर <span id="sub-promo-book-count">सभी</span> books की सारी lessons एक साथ unlock करें, बिना कुछ अलग से खरीदे।</p>
+      <div class="sub-promo-toggle" role="group" aria-label="Billing cycle">
+        <button type="button" class="active" data-cycle="monthly" onclick="setSubPromoCycle('monthly')">Monthly</button>
+        <button type="button" data-cycle="yearly" onclick="setSubPromoCycle('yearly')">Yearly <span class="toggle-save">2 महीने free</span></button>
+      </div>
     </div>
-    <div class="sub-promo-card">
-      <div class="sub-promo-price">₹99<span>/month</span></div>
-      <ul class="sub-promo-list">
-        <li>✓ <span id="sub-promo-book-count">सभी</span> books के सभी lessons</li>
-        <li>✓ नई books जुड़ते ही access</li>
-        <li>✓ कभी भी cancel करें</li>
-      </ul>
-      <button class="btn-primary sub-promo-btn" onclick="BNMPayments.subscribeMonthly()">Subscribe Now — ₹99/month</button>
+    <div class="sub-promo-cards">
+      <div class="sub-promo-card" data-tier="seeker">
+        <div class="tier-name">Seeker</div>
+        <div class="sub-promo-price"><span class="cycle-monthly">₹49<span>/month</span></span><span class="cycle-yearly" style="display:none;">₹199<span>/year</span></span></div>
+        <p class="sub-promo-subprice cycle-yearly-note" style="display:none;">यानी सिर्फ ₹17/month — सालाना बिल होता है</p>
+        <ul class="sub-promo-list">
+          <li>✓ सभी 44 books के सभी 440 lessons</li>
+          <li>✓ सारे Action Challenges unlock</li>
+          <li>✓ Full read tracking + My Library sync</li>
+        </ul>
+        <button class="btn-primary sub-promo-btn" onclick="BNMPayments.subscribe('seeker', currentSubPromoCycle)">Subscribe — Seeker</button>
+      </div>
+      <div class="sub-promo-card featured" data-tier="scholar">
+        <div class="tier-badge">सबसे लोकप्रिय</div>
+        <div class="tier-name">Scholar</div>
+        <div class="sub-promo-price"><span class="cycle-monthly">₹99<span>/month</span></span><span class="cycle-yearly" style="display:none;">₹399<span>/year</span></span></div>
+        <p class="sub-promo-subprice cycle-yearly-note" style="display:none;">यानी सिर्फ ₹33/month — सालाना बिल होता है</p>
+        <ul class="sub-promo-list">
+          <li>✓ Seeker में जो कुछ है, वो सब</li>
+          <li>✓ नई books turant unlock (Seeker को 2 हफ्ते बाद मिलती हैं)</li>
+          <li>✓ Downloadable / offline lesson notes</li>
+        </ul>
+        <button class="btn-primary sub-promo-btn" onclick="BNMPayments.subscribe('scholar', currentSubPromoCycle)">Subscribe — Scholar</button>
+      </div>
     </div>
   </div>
 </section>
@@ -673,6 +718,18 @@ document.getElementById('lessons-grid').innerHTML = HOMEPAGE_LESSONS.map((b, i) 
     ? `<a class="lsn-card${featured} reveal${delay}" href="books/${b.slug}.html">${inner}</a>`
     : `<div class="lsn-card lsn-coming${featured} reveal${delay}">${inner}</div>`;
 }).join('');
+
+// ── SUBSCRIPTION CARD: monthly/yearly toggle ─────────────
+let currentSubPromoCycle = 'monthly';
+function setSubPromoCycle(cycle){
+  currentSubPromoCycle = cycle;
+  document.querySelectorAll('.sub-promo-toggle button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cycle === cycle);
+  });
+  const showYearly = cycle === 'yearly';
+  document.querySelectorAll('.cycle-monthly').forEach(el => el.style.display = showYearly ? 'none' : '');
+  document.querySelectorAll('.cycle-yearly').forEach(el => el.style.display = showYearly ? '' : 'none');
+}
 
 // ── SUBSCRIPTION CARD: live book count ──────────────────
 // Pulls the real count from Supabase (same RPC lessons.html uses)
