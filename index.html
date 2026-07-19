@@ -50,8 +50,9 @@ body::before{
 .ebook-banner-cta:hover{background:var(--gold);color:var(--ink);}
 .ebook-banner-close{margin-left:0.4rem;background:none;border:none;color:rgba(255,255,255,0.55);font-size:1rem;cursor:pointer;line-height:1;padding:0 0.2rem;transition:color 0.2s;flex-shrink:0;}
 .ebook-banner-close:hover{color:#fff;}
-body.banner-active nav{top:30px;}
-body.banner-active #hero{padding-top:calc(7rem + 30px);}
+/* Nav/hero offset while the eBook banner is showing is now set
+   dynamically via JS (syncBannerOffset), since the banner's height
+   changes when its text wraps on narrow screens. */
 
 /* ── Nav ───────────────────────────────────────────────── */
 /* Nav styling now lives in nav.css (shared across every page) */
@@ -417,7 +418,7 @@ footer{
 </div>
 
 <!-- ── Nav ──────────────────────────────────────────── -->
-<nav id="navbar" data-page="home" data-cta-href="lessons.html" data-cta-label="Read Lessons"></nav>
+<nav id="navbar" data-page="home" data-cta-href="lessons.html" data-cta-label="Read Lessons" data-account-slot></nav>
 <script src="nav.js"></script>
 
 <!-- ── HERO ─────────────────────────────────────────── -->
@@ -765,17 +766,31 @@ function handleSubscribe(){
 }
 
 // ── BANNER ─────────────────────────────────────────────
+function syncBannerOffset(){
+  var banner = document.getElementById('ebookBanner');
+  var nav = document.getElementById('navbar');
+  var hero = document.getElementById('hero');
+  if(!banner || !nav) return;
+  var active = document.body.classList.contains('banner-active');
+  var bannerH = active ? banner.getBoundingClientRect().height : 0;
+  nav.style.top = bannerH + 'px';
+  if(hero){ hero.style.paddingTop = 'calc(7rem + ' + bannerH + 'px)'; }
+}
 (function(){
   if(!sessionStorage.getItem('ebookBannerClosed')){
     document.body.classList.add('banner-active');
   } else {
     document.getElementById('ebookBanner').style.display = 'none';
   }
+  syncBannerOffset();
+  window.addEventListener('load', syncBannerOffset);
+  window.addEventListener('resize', syncBannerOffset);
 })();
 function closeBanner(){
   document.getElementById('ebookBanner').style.display = 'none';
   document.body.classList.remove('banner-active');
   sessionStorage.setItem('ebookBannerClosed','1');
+  syncBannerOffset();
 }
 
 // ── BOOKS affiliate ────────────────────────────────────

@@ -3,6 +3,12 @@
    Renders identical nav markup/links into every page's
    <nav id="navbar" data-page="..."></nav> placeholder.
    Pair with nav.css. See nav.css header comment for usage.
+
+   Optional nav attributes:
+     data-page="home|about|books|lessons|library|subscribe"
+     data-cta-href / data-cta-label / data-cta-class   (optional CTA button)
+     data-account-slot   (renders Sign Up/Login, or Hi/Logout if
+                          auth.js + BNMAuth is loaded on the page)
    ============================================================ */
 (function () {
   var FALLBACK_LOGO = 'https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp';
@@ -12,13 +18,32 @@
 
   // key = value of the <nav data-page="..."> attribute on that page
   var LINKS = [
-    { key: 'home',     label: 'Home',       file: 'index.html',      hash: '' },
-    { key: 'about',    label: 'About',      file: 'index.html',      hash: '#about' },
-    { key: 'books',    label: 'Books',      file: 'books.html',      hash: '' },
-    { key: 'lessons',  label: 'Lessons',    file: 'lessons.html',    hash: '', icon: BOOK_ICON },
-    { key: 'library',  label: 'My Library', file: 'my-library.html', hash: '', icon: LIBRARY_ICON },
-    { key: 'subscribe',label: 'Subscribe',  file: 'index.html',      hash: '#subscribe' }
+    { key: 'home',      label: 'Home',       file: 'index.html',      hash: '' },
+    { key: 'about',     label: 'About',      file: 'index.html',      hash: '#about' },
+    { key: 'books',     label: 'Books',      file: 'books.html',      hash: '' },
+    { key: 'lessons',   label: 'Lessons',    file: 'lessons.html',    hash: '', icon: BOOK_ICON },
+    { key: 'library',   label: 'My Library', file: 'my-library.html', hash: '', icon: LIBRARY_ICON },
+    { key: 'subscribe', label: 'Subscribe',  file: 'index.html',      hash: '#subscribe' }
   ];
+
+  function renderAccountSlot() {
+    var slot = document.getElementById('nav-account-slot');
+    if (!slot) return;
+
+    function paint(user) {
+      if (user) {
+        slot.innerHTML = '<span>Hi, ' + user.email + '</span><button onclick="BNMAuth.logout()">Logout</button>';
+      } else {
+        slot.innerHTML = '<button onclick="BNMAuth.openModal(\'signup\')">Sign Up</button><button onclick="BNMAuth.openModal(\'login\')">Login</button>';
+      }
+    }
+
+    if (window.BNMAuth && typeof window.BNMAuth.onAuthChange === 'function') {
+      window.BNMAuth.onAuthChange(paint);
+    }
+    // If auth.js hasn't loaded on this page, the slot just stays empty —
+    // no Sign Up/Login shows rather than a broken button.
+  }
 
   function renderNav() {
     var nav = document.getElementById('navbar');
@@ -45,9 +70,8 @@
         '>' + ctaLabel + '</a></span>'
       : '';
 
-    var accountSlotHtml = nav.hasAttribute('data-account-slot')
-      ? '<div id="nav-account-slot"></div>'
-      : '';
+    var hasAccountSlot = nav.hasAttribute('data-account-slot');
+    var accountSlotHtml = hasAccountSlot ? '<div id="nav-account-slot"></div>' : '';
 
     var toggleHtml =
       '<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">' +
@@ -56,6 +80,8 @@
     nav.innerHTML =
       '<a href="index.html" class="nav-logo"><img data-site-logo src="' + logoUrl + '" alt="Books n Much More"></a>' +
       '<ul class="nav-links">' + linksHtml + '</ul>' + ctaHtml + accountSlotHtml + toggleHtml;
+
+    if (hasAccountSlot) renderAccountSlot();
 
     var toggleBtn = nav.querySelector('.nav-toggle');
     if (toggleBtn) {

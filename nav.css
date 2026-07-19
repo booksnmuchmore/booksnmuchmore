@@ -51,6 +51,17 @@ nav#navbar .nav-links a.active{color:#C8813A;}
 nav#navbar .nav-links a:hover::after,
 nav#navbar .nav-links a.active::after{width:100%;}
 
+nav#navbar #nav-account-slot{
+  font-size:0.78rem;display:flex;align-items:center;gap:0.6rem;flex-shrink:0;
+}
+nav#navbar #nav-account-slot span{color:#2C1A0E;white-space:nowrap;}
+nav#navbar #nav-account-slot button{
+  background:#C8813A;color:#fff;border:none;padding:0.4rem 1rem;border-radius:16px;
+  font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.03em;
+  white-space:nowrap;cursor:pointer;transition:background 0.2s;
+}
+nav#navbar #nav-account-slot button:hover{background:#A06020;}
+
 /* Spacer helper — add class="nav-spacer" to the first section on a
    page if it doesn't already have enough top padding to clear the
    fixed nav (nav is ~78px tall, ~65px once scrolled). */
@@ -76,6 +87,9 @@ nav#navbar.nav-open .nav-toggle span:nth-child(3){transform:translateY(-9px) rot
   nav#navbar{flex-wrap:wrap;}
   nav#navbar .nav-toggle{display:flex;}
   nav#navbar .nav-cta{display:none;}
+  nav#navbar #nav-account-slot{font-size:0.68rem;gap:0.35rem;}
+  nav#navbar #nav-account-slot span{display:none;} /* "Hi, email" hidden on mobile to save space; Logout still shows */
+  nav#navbar #nav-account-slot button{padding:0.32rem 0.7rem;font-size:0.66rem;}
 
   nav#navbar .nav-links{
     display:none;

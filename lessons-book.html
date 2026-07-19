@@ -76,10 +76,7 @@
     /* ── Nav ── */
     /* Nav layout/styling now lives in nav.css (shared across every page).
        Account slot below is page-specific (login/logout UI). */
-    #nav-account-slot { font-size: .85rem; display: flex; align-items: center; gap: .6rem; }
-    #nav-account-slot span { color: var(--ink, #2c1f0e); }
-    #nav-account-slot button { background: var(--amber); color: #fff; border: none; padding: .4rem 1rem; border-radius: 16px; font-size: .8rem; white-space: nowrap; cursor: pointer; }
-    #nav-account-slot button:hover { background: #A06020; }
+    /* #nav-account-slot styling now lives in nav.css (shared across every page) */
 
     /* ── Hero ── */
     .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 7.3rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
@@ -281,17 +278,6 @@
   function setMeta(id, val) {
     const el = document.getElementById(id);
     if (el && val) el.setAttribute('content', val);
-  }
-
-  async function renderNavAccount() {
-    const slot = document.getElementById('nav-account-slot');
-    if (!slot) return;
-    const user = await BNMAuth.getUser();
-    if (user) {
-      slot.innerHTML = `<span>Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
-    } else {
-      slot.innerHTML = `<button onclick="BNMAuth.openModal('signup')">Sign Up</button><button onclick="BNMAuth.openModal('login')">Login</button>`;
-    }
   }
 
   function renderLessonsHtml(lessons, book) {
@@ -519,9 +505,6 @@
 
   detectCountry();
 
-  BNMAuth.onAuthChange(() => {
-    renderNavAccount();
-  });
   BNMAuth.onAuthChange(() => {
     if (document.getElementById('app')) render();
   });
