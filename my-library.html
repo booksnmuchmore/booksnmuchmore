@@ -37,19 +37,16 @@
     }
     body { font-family: 'Lora', Georgia, serif; background: var(--parchment); color: var(--dark); line-height: 1.7; }
 
-    /* ── Nav (same pattern as lessons-book.html) ── */
-    nav { background: var(--dark); padding: .8rem 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; row-gap: .6rem; min-height: 60px; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; white-space: nowrap; display: flex; align-items: center; gap: 0.6rem; }
-    nav .logo img { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; display: block; }
-    nav ul { list-style: none; display: flex; gap: 1.8rem; align-items: center; flex-wrap: wrap; }
-    nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; white-space: nowrap; transition: color .2s; }
-    nav ul a:hover, nav ul a.active { color: var(--amber-l); }
+    /* ── Nav ── */
+    /* Nav layout/styling now lives in nav.css (shared across every page).
+       Account slot below is page-specific (login/logout UI). */
     #nav-account-slot { font-size: .85rem; display: flex; align-items: center; gap: .6rem; }
+    #nav-account-slot span { color: var(--ink, #2c1f0e); }
     #nav-account-slot button { background: var(--amber); color: #fff; border: none; padding: .4rem 1rem; border-radius: 16px; font-size: .8rem; white-space: nowrap; cursor: pointer; }
     #nav-account-slot button:hover { background: #A06020; }
 
     /* ── Hero ── */
-    .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 4rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 7.3rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23C07A2A' fill-opacity='0.08'/%3E%3C/svg%3E"); pointer-events: none; }
     .hero-tag { display: inline-block; background: var(--amber); color: #fff; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; margin-bottom: .5rem; color: #fff; }
@@ -107,27 +104,13 @@
     footer { background: var(--dark); color: #aaa; text-align: center; padding: 1.5rem; font-size: .82rem; }
     footer a { color: var(--amber-l); text-decoration: none; }
 
-    @media (max-width: 600px) {
-      nav { padding: .7rem 1.2rem; }
-      nav .logo { font-size: .92rem; order: 1; }
-      nav .logo img { height: 32px; width: 32px; }
-      #nav-account-slot { order: 2; }
-      nav ul { order: 3; flex-basis: 100%; justify-content: center; gap: 1rem; padding-top: .5rem; margin-top: .3rem; border-top: 1px solid rgba(255,255,255,.08); }
-    }
   </style>
+  <link rel="stylesheet" href="nav.css">
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="index.html"><img data-site-logo src="https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp" alt="Books n Much More"></a>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="books.html">Books</a></li>
-    <li><a href="lessons.html">📖 Lessons</a></li>
-    <li><a href="my-library.html" class="active"><svg class="inline-bookmark-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> My Library</a></li>
-  </ul>
-  <div id="nav-account-slot"></div>
-</nav>
+<nav id="navbar" data-page="library" data-account-slot></nav>
+<script src="nav.js"></script>
 
 <div class="hero">
   <span class="hero-tag"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;vertical-align:-2px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> आपकी Library</span>
@@ -152,7 +135,7 @@
     if (!slot) return;
     const user = await BNMAuth.getUser();
     if (user) {
-      slot.innerHTML = `<span style="color:#d9c9b0;">Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
+      slot.innerHTML = `<span>Hi, ${user.email}</span><button onclick="BNMAuth.logout()">Logout</button>`;
     } else {
       slot.innerHTML = `<button onclick="BNMAuth.openModal('signup')">Sign Up</button><button onclick="BNMAuth.openModal('login')">Login</button>`;
     }
@@ -264,7 +247,6 @@
   });
 </script>
 
-<script>document.querySelectorAll('img[data-site-logo]').forEach(img => img.src = SITE.logoUrl);</script>
 <script src="/pwa-init.js"></script>
 </body>
 </html>

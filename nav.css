@@ -1,0 +1,61 @@
+/* ============================================================
+   Shared site navigation — booksnmuchmore.com
+   One nav, one look, on every page.
+
+   USAGE:
+   1. <link rel="stylesheet" href="nav.css"> in <head>
+   2. <nav id="navbar" data-page="home"></nav> where the nav
+      should appear (data-page values: home | about | books |
+      lessons | library — omit or leave blank on pages with no
+      matching tab, e.g. the eBook page)
+   3. <script src="nav.js"></script> right after the <nav> tag
+   ============================================================ */
+
+nav#navbar{
+  position:fixed;top:0;left:0;width:100%;z-index:500;
+  padding:1.1rem 6%;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  background:rgba(251,246,236,0.94);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(200,129,58,0.18);
+  box-shadow:0 4px 32px rgba(44,26,14,0.13);
+  transition:padding 0.3s;
+  box-sizing:border-box;
+}
+
+nav#navbar.scrolled{padding:0.75rem 6%;}
+
+nav#navbar .nav-logo{text-decoration:none;flex-shrink:0;line-height:0;}
+nav#navbar .nav-logo img{
+  height:56px;width:56px;object-fit:cover;border-radius:50%;display:block;
+}
+
+nav#navbar .nav-links{
+  display:flex;gap:2rem;list-style:none;align-items:center;
+  margin:0;padding:0;flex-wrap:wrap;
+}
+
+nav#navbar .nav-links a{
+  font-family:'Raleway',sans-serif;font-size:0.75rem;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:#2C1A0E;text-decoration:none;white-space:nowrap;
+  position:relative;padding-bottom:3px;transition:color 0.2s;
+}
+nav#navbar .nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;
+  background:#C8813A;transition:width 0.3s ease;
+}
+nav#navbar .nav-links a:hover,
+nav#navbar .nav-links a.active{color:#C8813A;}
+nav#navbar .nav-links a:hover::after,
+nav#navbar .nav-links a.active::after{width:100%;}
+
+/* Spacer helper — add class="nav-spacer" to the first section on a
+   page if it doesn't already have enough top padding to clear the
+   fixed nav (nav is ~78px tall, ~65px once scrolled). */
+.nav-spacer{padding-top:6.5rem;}
+
+@media (max-width:860px){
+  nav#navbar .nav-links{display:none;}
+}

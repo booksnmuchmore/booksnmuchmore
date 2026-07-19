@@ -43,14 +43,10 @@
     body { font-family: 'Lora', Georgia, serif; background: var(--parchment); color: var(--dark); line-height: 1.7; }
 
     /* ── Nav ── */
-    nav { background: var(--dark); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 100; }
-    nav .logo { font-family: 'Playfair Display', serif; color: var(--amber-l); font-size: 1.1rem; text-decoration: none; }
-    nav ul { list-style: none; display: flex; gap: 1.8rem; }
-    nav ul a { color: #ccc; text-decoration: none; font-size: .88rem; transition: color .2s; }
-    nav ul a:hover, nav ul a.active { color: var(--amber-l); }
+    /* Nav styling now lives in nav.css (shared across every page) */
 
     /* ── Hero ── */
-    .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 4rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 7.3rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23C07A2A' fill-opacity='0.08'/%3E%3C/svg%3E"); pointer-events: none; }
     .hero-tag { display: inline-block; background: var(--amber); color: #fff; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 2.8rem); line-height: 1.25; margin-bottom: .5rem; color: #fff; }
@@ -137,18 +133,12 @@
       nav ul { gap: 1rem; }
     }
   </style>
+  <link rel="stylesheet" href="nav.css">
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="index.html">📚 Books 'n' Much More</a>
-  <ul>
-    <li><a href="index.html">होम</a></li>
-    <li><a href="stories.html">कहानियाँ</a></li>
-    <li><a href="books.html">किताबें</a></li>
-    <li><a href="lessons.html" class="active">📖 Lessons</a></li>
-  </ul>
-</nav>
+<nav id="navbar" data-page="lessons"></nav>
+<script src="nav.js"></script>
 
 <!-- HERO -->
 <div class="hero">
