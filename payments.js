@@ -36,6 +36,10 @@
   function openCheckout({ description, notes, onSuccess }) {
     BNMAuth.requireLogin(async () => {
       const user = await BNMAuth.getUser();
+  // notes.email must always be set — the webhook needs it to write
+  // the subscribers row (NOT NULL column). Missing it caused paid
+  // subscriptions to be silently dropped.
+      const fullNotes = { ...notes, user_id: user.id, email: user.email || '' };
 
       // Ask our own server (Edge Function) to create the Razorpay Order.
       // The server looks up the REAL price itself from the books/lessons
@@ -52,7 +56,7 @@
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${session?.session?.access_token || ''}`,
           },
-          body: JSON.stringify({ notes: { ...notes, user_id: user.id } }),
+          body: JSON.stringify({ notes: fullNotes }),
         });
         orderRes = await resp.json();
         if (!resp.ok) throw new Error(orderRes.error || 'Order creation failed');
@@ -73,7 +77,7 @@
         prefill: {
           email: user.email || '',
         },
-        notes: { ...notes, user_id: user.id },
+        notes: fullNotes,
         theme: {
           color: '#C8813A', // matches site's amber accent
         },
