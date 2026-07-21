@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account | Books 'n' Much More</title>
+  <meta name="description" content="Your account and subscription details on Books 'n' Much More."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYDPW03BMW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TYDPW03BMW');
+  </script>
+
+  <!-- Supabase + our auth/engagement modules -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+  <script src="payments.js"></script>
+  <script src="site-data.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --parchment: #FDF6EC;
+      --amber:     #C07A2A;
+      --amber-l:   #D4A45A;
+      --amber-xl:  #F5E6CC;
+      --dark:      #3D2010;
+      --brown:     #5A3520;
+      --mid:       #8B5A2B;
+      --lite:      #A0703A;
+      --cream:     #FFF8EE;
+      --sienna:    #7A4A1A;
+      --green:     #2E7D32;
+    }
+    body { font-family: 'Lora', Georgia, serif; background: var(--parchment); color: var(--dark); line-height: 1.7; }
+
+    .hero { background: linear-gradient(135deg, var(--dark) 0%, #6B3010 100%); color: var(--parchment); padding: 7.3rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23C07A2A' fill-opacity='0.08'/%3E%3C/svg%3E"); pointer-events: none; }
+    .hero-tag { display: inline-block; background: var(--amber); color: #fff; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; padding: .3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; margin-bottom: .5rem; color: #fff; }
+    .hero-desc { max-width: 560px; margin: 0 auto; font-size: 1rem; color: #d9c9b0; line-height: 1.8; }
+
+    .account-wrap { max-width: 720px; margin: 3rem auto 4rem; padding: 0 1.5rem; }
+
+    .account-card {
+      background: var(--cream); border: 1px solid var(--amber-xl);
+      border-radius: 12px; padding: 2rem; margin-bottom: 1.8rem;
+    }
+    .account-card h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      color: var(--dark); margin-bottom: 1.2rem;
+    }
+    .account-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: .7rem 0; border-bottom: 1px solid var(--amber-xl);
+      font-size: .92rem; gap: 1rem;
+    }
+    .account-row:last-child { border-bottom: none; }
+    .account-row .label { color: var(--mid); flex-shrink: 0; }
+    .account-row .value { color: var(--dark); text-align: right; font-weight: 600; }
+
+    .plan-badge {
+      display: inline-block; padding: .25rem .8rem; border-radius: 20px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    }
+    .plan-badge.free    { background: var(--amber-xl); color: var(--mid); }
+    .plan-badge.seeker  { background: #E8D9C0; color: var(--sienna); }
+    .plan-badge.scholar { background: var(--amber); color: #fff; }
+
+    .upgrade-note { font-size: .85rem; color: var(--mid); margin-top: 1rem; }
+    .upgrade-note a { color: var(--amber); text-decoration: none; font-weight: 600; }
+    .upgrade-note a:hover { text-decoration: underline; }
+
+    .purchase-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .7rem 0; border-bottom: 1px solid var(--amber-xl);
+      font-size: .88rem; gap: 1rem;
+    }
+    .purchase-item:last-child { border-bottom: none; }
+    .purchase-item a { color: var(--dark); text-decoration: none; }
+    .purchase-item a:hover { color: var(--sienna); text-decoration: underline; }
+    .purchase-item .price { color: var(--mid); flex-shrink: 0; }
+    .purchase-item .date { color: var(--lite); font-size: .78rem; flex-shrink: 0; }
+
+    .empty-note { color: var(--mid); font-size: .88rem; font-style: italic; }
+
+    .empty-state, .login-state, .loading-state { text-align: center; padding: 4rem 2rem; }
+    .empty-state h2, .login-state h2, .loading-state h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--dark); margin-bottom: .8rem; }
+    .empty-state p, .login-state p, .loading-state p { color: var(--mid); margin-bottom: 1.5rem; }
+    .login-state button { display: inline-block; background: var(--amber); color: #fff; padding: .6rem 1.6rem; border-radius: 20px; text-decoration: none; font-size: .88rem; border: none; cursor: pointer; }
+    .login-state button:hover { background: #A06020; }
+
+    .logout-btn {
+      display: inline-block; background: none; color: var(--mid);
+      padding: .5rem 1.4rem; border-radius: 20px; font-size: .82rem;
+      border: 1.5px solid var(--amber-xl); cursor: pointer; margin-top: .5rem;
+    }
+    .logout-btn:hover { border-color: var(--amber); color: var(--sienna); }
+
+    footer { background: var(--dark); color: #aaa; text-align: center; padding: 1.5rem; font-size: .82rem; }
+    footer a { color: var(--amber-l); text-decoration: none; }
+  </style>
+  <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+
+<nav id="navbar" data-page="" data-account-slot></nav>
+<script src="nav.js"></script>
+
+<div class="hero">
+  <span class="hero-tag">👤 My Account</span>
+  <h1>Account &amp; Subscription</h1>
+  <p class="hero-desc">आपकी login details और subscription की जानकारी यहाँ।</p>
+</div>
+
+<div id="app" class="account-wrap">
+  <div class="loading-state"><h2>Loading…</h2></div>
+</div>
+
+<footer>
+  <p>© 2026 Books 'n' Much More &nbsp;·&nbsp; <a href="https://youtube.com/@booksnmuchmore" target="_blank">YouTube</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="my-library.html">My Library</a></p>
+  <p style="margin-top:.4rem;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
+</footer>
+
+<script>
+  const PLAN_LABELS = { free: 'Free', seeker: 'Seeker', scholar: 'Scholar' };
+
+  function formatDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function renderLoginRequired() {
+    document.getElementById('app').innerHTML = `
+      <div class="login-state">
+        <h2>Login Required</h2>
+        <p>अपना account देखने के लिए login करें।</p>
+        <button onclick="BNMAuth.openModal('login')">Login</button>
+      </div>`;
+  }
+
+  function renderPurchaseItem(row) {
+    const title = row.out_title || 'Untitled';
+    const link = row.out_book_slug ? `books/${row.out_book_slug}.html` : '#';
+    const typeLabel = row.out_type === 'book' ? 'Full book' : 'Lesson';
+    return `
+      <div class="purchase-item">
+        <div>
+          <a href="${link}">${title}</a>
+          <div class="date">${typeLabel} · ${formatDate(row.out_purchased_at)}</div>
+        </div>
+        <div class="price">₹${row.out_amount_rs}</div>
+      </div>`;
+  }
+
+  async function render() {
+    const app = document.getElementById('app');
+    const user = await BNMAuth.getUser();
+
+    if (!user) {
+      renderLoginRequired();
+      return;
+    }
+
+    const [summaryRes, purchasesRes] = await Promise.all([
+      BNMAuth.supabase.rpc('get_my_account_summary'),
+      BNMAuth.supabase.rpc('get_my_purchases'),
+    ]);
+
+    if (summaryRes.error) {
+      console.error('get_my_account_summary error:', summaryRes.error.message);
+      app.innerHTML = `<div class="empty-state"><h2>Something went wrong</h2><p>Please try again shortly.</p></div>`;
+      return;
+    }
+
+    const summary = (summaryRes.data && summaryRes.data[0]) || {};
+    const plan = summary.out_plan || 'free';
+    const planLabel = PLAN_LABELS[plan] || plan;
+    const purchases = purchasesRes.data || [];
+
+    let planRowsHtml = `
+      <div class="account-row">
+        <span class="label">Current Plan</span>
+        <span class="value"><span class="plan-badge ${plan}">${planLabel}</span></span>
+      </div>`;
+
+    if (plan !== 'free' && summary.out_current_period_end) {
+      planRowsHtml += `
+      <div class="account-row">
+        <span class="label">Renews / Expires</span>
+        <span class="value">${formatDate(summary.out_current_period_end)}</span>
+      </div>`;
+    }
+
+    const upgradeNote = plan === 'scholar'
+      ? ''
+      : `<p class="upgrade-note">${plan === 'free' ? 'सभी lessons unlock करने के लिए' : 'Scholar में upgrade करके नई books turant पाने के लिए'} <a href="index.html#subscription-promo">Subscription plans देखें →</a></p>`;
+
+    const purchasesHtml = purchases.length
+      ? purchases.map(renderPurchaseItem).join('')
+      : `<p class="empty-note">अभी तक कोई individual lesson या book purchase नहीं। सारे lessons unlock करने के लिए ऊपर subscription देखें।</p>`;
+
+    app.innerHTML = `
+      <div class="account-card">
+        <h2>Account</h2>
+        <div class="account-row">
+          <span class="label">Email</span>
+          <span class="value">${summary.out_email || user.email}</span>
+        </div>
+        <div class="account-row">
+          <span class="label">Member Since</span>
+          <span class="value">${formatDate(summary.out_member_since)}</span>
+        </div>
+        <button class="logout-btn" onclick="BNMAuth.logout()">Logout</button>
+      </div>
+
+      <div class="account-card">
+        <h2>Subscription</h2>
+        ${planRowsHtml}
+        ${upgradeNote}
+      </div>
+
+      <div class="account-card">
+        <h2>Purchase History</h2>
+        ${purchasesHtml}
+      </div>
+    `;
+  }
+
+  BNMAuth.onAuthChange(() => {
+    if (document.getElementById('app')) render();
+  });
+</script>
+
+<script src="/pwa-init.js"></script>
+</body>
+</html>
