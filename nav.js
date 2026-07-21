@@ -32,7 +32,7 @@
 
     function paint(user) {
       if (user) {
-        slot.innerHTML = '<span>Hi, ' + user.email + '</span><button onclick="BNMAuth.logout()">Logout</button>';
+        slot.innerHTML = '<a href="profile.html" class="nav-account-link">Hi, ' + user.email + '</a><button onclick="BNMAuth.logout()">Logout</button>';
       } else {
         slot.innerHTML = '<button onclick="BNMAuth.openModal(\'signup\')">Sign Up</button><button onclick="BNMAuth.openModal(\'login\')">Login</button>';
       }
