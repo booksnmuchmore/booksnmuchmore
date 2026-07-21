@@ -23,7 +23,7 @@
     { key: 'books',     label: 'Books',      file: 'books.html',      hash: '' },
     { key: 'lessons',   label: 'Lessons',    file: 'lessons.html',    hash: '', icon: BOOK_ICON },
     { key: 'library',   label: 'My Library', file: 'my-library.html', hash: '', icon: LIBRARY_ICON },
-    { key: 'subscribe', label: 'Subscribe',  file: 'index.html',      hash: '#subscribe' }
+    { key: 'subscribe', label: 'Subscribe',  file: 'index.html',      hash: '#subscription-promo' }
   ];
 
   function renderAccountSlot() {

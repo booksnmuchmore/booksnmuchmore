@@ -320,22 +320,6 @@ body::before{
 .subscribe-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;color:var(--parchment);line-height:1.15;margin-bottom:0.9rem;}
 .subscribe-title em{color:var(--gold);font-style:italic;}
 .subscribe-desc{font-size:0.93rem;line-height:1.8;color:rgba(245,236,215,0.7);margin-bottom:1.8rem;}
-.subscribe-form{
-  display:flex;gap:0;max-width:420px;margin:0 auto 0.8rem;
-  border-radius:3px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.22);
-}
-.subscribe-form input{
-  flex:1;padding:0.9rem 1.1rem;border:none;
-  font-family:'Lora',serif;font-size:0.92rem;background:#fff;color:var(--ink);outline:none;
-}
-.subscribe-form button{
-  padding:0.9rem 1.3rem;border:none;background:var(--gold);color:var(--ink);
-  font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;
-  text-transform:uppercase;cursor:pointer;transition:background 0.2s;white-space:nowrap;
-}
-.subscribe-form button:hover{background:var(--amber);color:#fff;}
-.subscribe-note{font-family:'Raleway',sans-serif;font-size:0.68rem;letter-spacing:0.07em;color:rgba(245,236,215,0.35);margin-bottom:2rem;}
-#successMsg{display:none;font-family:'Raleway',sans-serif;font-size:0.85rem;color:var(--gold);letter-spacing:0.05em;margin-top:0.5rem;}
 .yt-subscribe-block{margin-top:1.8rem;}
 .yt-subscribe-block p{font-family:'Raleway',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,236,215,0.45);margin-bottom:0.7rem;}
 .btn-yt-big{
@@ -395,7 +379,6 @@ footer{
   .lsn-card.lsn-featured{grid-column:auto;}
   .books-grid{grid-template-columns:repeat(2,1fr);}
   .cta-strip{flex-direction:column;text-align:center;}
-  .subscribe-form{flex-direction:column;}
   .about-inner{grid-template-columns:1fr;text-align:center;}
   .about-tags{justify-content:center;}
   .hero-stats{gap:1.4rem;}
@@ -527,15 +510,8 @@ footer{
   <div class="subscribe-inner">
     <div class="section-label reveal">Never Miss a New Book</div>
     <h2 class="subscribe-title reveal reveal-delay-1">Get notified<br><em>when lessons drop</em></h2>
-    <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community. A quick note whenever a new book's lessons go live — straight to your inbox.</p>
-    <div class="subscribe-form reveal reveal-delay-2">
-      <input type="email" id="emailInput" placeholder="Your email address…"/>
-      <button type="button" onclick="handleSubscribe()">Subscribe</button>
-    </div>
-    <p class="subscribe-note reveal">No spam. Just new book lessons, as they're added. Unsubscribe anytime.</p>
-    <div id="successMsg">✓ Redirecting you to subscribe… 🎉</div>
-    <div class="yt-subscribe-block reveal reveal-delay-3">
-      <p>Or join us on YouTube</p>
+    <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community on YouTube — new book lessons, as they're added.</p>
+    <div class="yt-subscribe-block reveal reveal-delay-2">
       <a id="yt-sub-btn" href="#" target="_blank" class="btn-yt-big">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
         Subscribe on YouTube
@@ -747,23 +723,6 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ── SUBSCRIBE ──────────────────────────────────────────
-function handleSubscribe(){
-  const email = document.getElementById('emailInput').value;
-  if(!email.includes('@') || !email.includes('.')){
-    document.getElementById('emailInput').style.outline = '2px solid #D4A84B';
-    document.getElementById('emailInput').placeholder = 'Please enter a valid email…';
-    setTimeout(() => {
-      document.getElementById('emailInput').style.outline = '';
-      document.getElementById('emailInput').placeholder = 'Your email address…';
-    }, 2000);
-    return;
-  }
-  document.getElementById('successMsg').style.display = 'block';
-  document.querySelector('.subscribe-form').style.display = 'none';
-  setTimeout(() => { window.open(SITE.googleFormUrl, '_blank'); }, 800);
-}
 
 // ── BANNER ─────────────────────────────────────────────
 function syncBannerOffset(){
