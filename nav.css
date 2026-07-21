@@ -54,7 +54,9 @@ nav#navbar .nav-links a.active::after{width:100%;}
 nav#navbar #nav-account-slot{
   font-size:0.78rem;display:flex;align-items:center;gap:0.6rem;flex-shrink:0;
 }
-nav#navbar #nav-account-slot span{color:#2C1A0E;white-space:nowrap;}
+nav#navbar #nav-account-slot span,
+nav#navbar #nav-account-slot .nav-account-link{color:#2C1A0E;white-space:nowrap;text-decoration:none;}
+nav#navbar #nav-account-slot .nav-account-link:hover{color:#C07A2A;text-decoration:underline;}
 nav#navbar #nav-account-slot button{
   background:#C8813A;color:#fff;border:none;padding:0.4rem 1rem;border-radius:16px;
   font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.03em;
