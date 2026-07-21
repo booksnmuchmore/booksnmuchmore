@@ -4,7 +4,7 @@
 //   ₹1/lesson or ₹7/book — one-off micro-purchases
 //   Seeker  — ₹49/month or ₹199/year (all lessons + action challenges)
 //   Scholar — ₹99/month or ₹399/year (Seeker + immediate new-book access,
-//             downloadable notes — see 4Ps Marketing Plan, Price section)
+//           — see 4Ps Marketing Plan, Price section)
 //
 // Requires: auth.js loaded first (uses BNMAuth.supabase + BNMAuth.requireLogin)
 // Requires: Razorpay Checkout script loaded:
