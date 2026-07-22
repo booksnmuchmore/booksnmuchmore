@@ -706,7 +706,7 @@
 <div class="quiz-prompt-wrap">
   <div class="quiz-prompt">
     <span class="quiz-prompt-icon">🎯</span>
-    <p><strong>44 books, one right one for you today.</strong> Answer 4 quick questions and we'll match you to a lesson.</p>
+    <p><strong><span id="quizPromptBookCount">44</span> books, one right one for you today.</strong> Answer 4 quick questions and we'll match you to a lesson.</p>
     <a href="book-match-quiz.html" class="quiz-prompt-btn">Take the Quiz →</a>
   </div>
 </div>
@@ -1121,6 +1121,8 @@
 
       totalCount = count || firstPage.length;
       heading.textContent = `${totalCount} Must-Read Books`;
+      const quizPromptCountEl = document.getElementById('quizPromptBookCount');
+      if (quizPromptCountEl) quizPromptCountEl.textContent = totalCount;
 
       const placeholder = document.getElementById('loadingPlaceholder');
       if (placeholder) placeholder.remove();

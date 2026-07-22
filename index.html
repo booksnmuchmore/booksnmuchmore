@@ -437,7 +437,7 @@ footer{
     <div class="quiz-promo-text">
       <div class="section-label" style="margin-bottom:0.35rem;">Not sure where to start?</div>
       <h3 class="quiz-promo-title">Find <em>your</em> lesson in 30 seconds</h3>
-      <p class="quiz-promo-desc">4 quick questions, matched against all 44 books — no signup needed.</p>
+      <p class="quiz-promo-desc">4 quick questions, matched against all <span id="quiz-promo-book-count">44</span> books — no signup needed.</p>
     </div>
     <a href="book-match-quiz.html" class="btn-primary quiz-promo-btn">Take the Quiz →</a>
   </div>
@@ -593,6 +593,22 @@ async function updateHeroBookCount(){
   }
 }
 updateHeroBookCount();
+
+// Quiz-promo card "44 books" — same live-count pattern as the two above,
+// so this never drifts out of sync as books are added.
+async function updateQuizPromoBookCount(){
+  const el = document.getElementById('quiz-promo-book-count');
+  if (!el) return;
+  try {
+    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
+    if (error || !Array.isArray(books)) throw error || new Error('no data');
+    el.textContent = books.length;
+  } catch (e) {
+    console.error('Failed to fetch live book count for quiz promo:', e);
+    // leave the static "44" fallback already in the markup above
+  }
+}
+updateQuizPromoBookCount();
 
 // ── HERO ROTATING BOOK-COVER STACK ──────────────────────
 // Was: single latest-episode card. Now: a fanned stack of 3 book
