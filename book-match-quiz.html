@@ -31,14 +31,41 @@
 
   DROP-IN USAGE
   ------------------------------------------------------------------------
-  This file is self-contained (HTML + CSS + JS, no build step). Options:
-  1. Embed directly as its own page, e.g. quiz.html, linked from your nav.
-  2. Copy the <style>, #bmq-root block, and <script> into an existing page.
-  3. Wrap it in an <iframe> on any existing page if you want it isolated.
+  This is now a full standalone page (has its own <!DOCTYPE>, <head>, and
+  viewport tag) — that's what makes it render correctly on mobile. Deploy
+  it as-is at book-match-quiz.html. If you ever want to embed just the
+  card into an existing page instead, copy everything inside <body> (the
+  #bmq-root div, its <style>, and the <script>) rather than the whole file.
 
   Uses your established brand colors (parchment / amber / sienna).
   ============================================================================
 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which Lesson Finds You Today? — Books 'n' Much More</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+    background: #EADFC2;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    box-sizing: border-box;
+  }
+  @media (max-width: 640px) {
+    body { padding: 0; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
 <div id="bmq-root" class="bmq">
 
   <style>
@@ -54,6 +81,7 @@
       --bmq-radius: 14px;
       font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", serif;
       color: var(--bmq-ink);
+      width: 100%;
       max-width: 640px;
       margin: 0 auto;
       background: var(--bmq-parchment);
@@ -62,9 +90,20 @@
       padding: 0;
       overflow: hidden;
       box-shadow: 0 1px 0 rgba(46,32,19,0.05);
+      display: flex;
+      flex-direction: column;
     }
 
     #bmq-root.bmq * { box-sizing: border-box; }
+
+    @media (max-width: 640px) {
+      #bmq-root.bmq {
+        min-height: 100dvh;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
 
     #bmq-root .bmq-header {
       padding: 28px 30px 20px;
@@ -113,7 +152,7 @@
     #bmq-root .bmq-spine-tab.is-done { background: var(--bmq-amber); }
     #bmq-root .bmq-spine-tab.is-current { background: var(--bmq-sienna); }
 
-    #bmq-root .bmq-body { padding: 22px 30px 30px; min-height: 260px; }
+    #bmq-root .bmq-body { padding: 22px 30px 30px; min-height: 260px; flex: 1; }
 
     #bmq-root .bmq-qnum {
       font-family: "Helvetica Neue", Arial, sans-serif;
@@ -518,3 +557,5 @@
     });
 })();
 </script>
+</body>
+</html>
