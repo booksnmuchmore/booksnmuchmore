@@ -1,0 +1,520 @@
+<!--
+  ============================================================================
+  "Which Lesson Finds You Today?" — Book Match Quiz
+  For booksnmuchmore.com
+
+  LIVE DATA — ALREADY WIRED
+  ------------------------------------------------------------------------
+  This quiz pulls your real catalog at load time via the get_books_for_quiz()
+  Postgres RPC (deployed on project dcewvfkszrpknxdwyual). Every live book
+  is eligible automatically — no manual step needed when you add a book:
+
+    - books.quiz_tags (text[]) holds each book's quiz tags, e.g.
+      ["focus","habits","steady"].
+    - A BEFORE INSERT OR UPDATE trigger (set_book_quiz_tags) derives
+      quiz_tags from the book's `genre` column automatically, using the
+      quiz_tag_keywords lookup table. Add a new book with a genre like
+      "Mindset · Finance" and it's tagged and quiz-eligible the moment it
+      goes live — nothing to do on your end.
+    - If a genre segment isn't in quiz_tag_keywords yet, the trigger falls
+      back to a safe default (["reflect"]) so the book is still eligible
+      rather than silently invisible to the quiz.
+    - To teach the quiz a brand-new genre keyword, add a row to
+      public.quiz_tag_keywords (keyword, tags) — existing books with that
+      genre segment will pick it up next time they're saved, or you can
+      re-run: update books set quiz_tags = derive_quiz_tags(genre);
+
+  You don't need to fill anything in — this reads from window.BNM_ENV
+  (env.js) automatically if that's loaded on the page, matching your
+  site's single shared config file. A standalone fallback copy of the
+  same values is baked in below in case you test this file on its own.
+
+  DROP-IN USAGE
+  ------------------------------------------------------------------------
+  This file is self-contained (HTML + CSS + JS, no build step). Options:
+  1. Embed directly as its own page, e.g. quiz.html, linked from your nav.
+  2. Copy the <style>, #bmq-root block, and <script> into an existing page.
+  3. Wrap it in an <iframe> on any existing page if you want it isolated.
+
+  Uses your established brand colors (parchment / amber / sienna).
+  ============================================================================
+-->
+<div id="bmq-root" class="bmq">
+
+  <style>
+    #bmq-root.bmq {
+      --bmq-parchment: #F3E9D2;
+      --bmq-parchment-deep: #EADFC2;
+      --bmq-ink: #2E2013;
+      --bmq-ink-soft: #5A4A36;
+      --bmq-amber: #C68A2E;
+      --bmq-sienna: #9C4A24;
+      --bmq-sienna-deep: #7A3A1B;
+      --bmq-line: rgba(46, 32, 19, 0.14);
+      --bmq-radius: 14px;
+      font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", serif;
+      color: var(--bmq-ink);
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bmq-parchment);
+      border: 1px solid var(--bmq-line);
+      border-radius: var(--bmq-radius);
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 1px 0 rgba(46,32,19,0.05);
+    }
+
+    #bmq-root.bmq * { box-sizing: border-box; }
+
+    #bmq-root .bmq-header {
+      padding: 28px 30px 20px;
+      border-bottom: 1px solid var(--bmq-line);
+      background: linear-gradient(180deg, var(--bmq-parchment-deep), var(--bmq-parchment));
+    }
+
+    #bmq-root .bmq-eyebrow {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--bmq-sienna);
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+
+    #bmq-root .bmq-title {
+      font-size: 26px;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    #bmq-root .bmq-sub {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: var(--bmq-ink-soft);
+      margin: 0;
+    }
+
+    /* Spine progress: a row of bookmark tabs, one per question */
+    #bmq-root .bmq-spine {
+      display: flex;
+      gap: 6px;
+      padding: 16px 30px 0;
+    }
+    #bmq-root .bmq-spine-tab {
+      flex: 1;
+      height: 5px;
+      border-radius: 3px;
+      background: var(--bmq-line);
+      transition: background 0.35s ease;
+    }
+    #bmq-root .bmq-spine-tab.is-done { background: var(--bmq-amber); }
+    #bmq-root .bmq-spine-tab.is-current { background: var(--bmq-sienna); }
+
+    #bmq-root .bmq-body { padding: 22px 30px 30px; min-height: 260px; }
+
+    #bmq-root .bmq-qnum {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--bmq-ink-soft);
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    #bmq-root .bmq-question {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 20px;
+    }
+
+    #bmq-root .bmq-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #bmq-root .bmq-option {
+      text-align: left;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      color: var(--bmq-ink);
+      background: #fff;
+      border: 1px solid var(--bmq-line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+    }
+    #bmq-root .bmq-option:hover {
+      border-color: var(--bmq-amber);
+      background: #fffdf8;
+    }
+    #bmq-root .bmq-option:active { transform: scale(0.99); }
+    #bmq-root .bmq-option:focus-visible {
+      outline: 2px solid var(--bmq-sienna);
+      outline-offset: 2px;
+    }
+
+    #bmq-root .bmq-back {
+      margin-top: 18px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      color: var(--bmq-ink-soft);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #bmq-root .bmq-back:disabled { visibility: hidden; }
+
+    /* Result card */
+    #bmq-root .bmq-result {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    #bmq-root .bmq-cover {
+      width: 96px;
+      height: 140px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--bmq-parchment-deep);
+      border: 1px solid var(--bmq-line);
+    }
+    #bmq-root .bmq-result-text { flex: 1; min-width: 0; }
+    #bmq-root .bmq-result-label {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bmq-sienna);
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+    #bmq-root .bmq-result-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      line-height: 1.3;
+    }
+    #bmq-root .bmq-result-tagline {
+      font-size: 15px;
+      color: var(--bmq-ink-soft);
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
+    #bmq-root .bmq-cta {
+      display: inline-block;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--bmq-sienna);
+      padding: 11px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    #bmq-root .bmq-cta:hover { background: var(--bmq-sienna-deep); }
+
+    #bmq-root .bmq-restart {
+      margin-left: 12px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: var(--bmq-ink-soft);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    #bmq-root .bmq-footer {
+      border-top: 1px solid var(--bmq-line);
+      padding: 14px 30px;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      color: var(--bmq-ink-soft);
+      line-height: 1.5;
+      background: var(--bmq-parchment-deep);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bmq-root * { transition: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      #bmq-root .bmq-header { padding: 22px 20px 16px; }
+      #bmq-root .bmq-spine { padding: 14px 20px 0; }
+      #bmq-root .bmq-body { padding: 18px 20px 24px; }
+      #bmq-root .bmq-title { font-size: 22px; }
+      #bmq-root .bmq-result { flex-direction: column; align-items: center; text-align: center; }
+      #bmq-root .bmq-footer { padding: 12px 20px; }
+    }
+  </style>
+
+  <div class="bmq-header">
+    <p class="bmq-eyebrow">Books 'n' Much More</p>
+    <h2 class="bmq-title">Which lesson finds you today?</h2>
+    <p class="bmq-sub">Answer four quick questions — we'll match you to one lesson worth starting with.</p>
+  </div>
+
+  <div class="bmq-spine" id="bmq-spine"></div>
+
+  <div class="bmq-body" id="bmq-body"></div>
+
+  <div class="bmq-footer">
+    This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.
+  </div>
+</div>
+
+<script>
+(function () {
+  // ---------------------------------------------------------------------
+  // LIVE CONFIG — fill these in with your public Supabase project values
+  // (same anon key already used elsewhere on your site, e.g. in site-data.js)
+  // ---------------------------------------------------------------------
+  // If this quiz is embedded on the live site alongside env.js
+  // (<script src="env.js"></script> loaded earlier on the page), it will
+  // automatically use that single shared config. If run standalone
+  // (e.g. testing this file on its own), it falls back to the values below.
+  const SUPABASE_URL = (window.BNM_ENV && window.BNM_ENV.SUPABASE_URL) || "https://dcewvfkszrpknxdwyual.supabase.co";
+  const SUPABASE_ANON_KEY = (window.BNM_ENV && window.BNM_ENV.SUPABASE_ANON_KEY) || "sb_publishable_P6kjf7686KpEmyJLuEtbXw_QV2kRJll"; // matches env.js
+
+  // Confirmed from the repo: per-book pages live at books/<slug>.html
+  const BOOK_LINK_TEMPLATE = (slug) => `books/${slug}.html`;
+
+  let BOOK_DATA = []; // populated by loadBooks() before the quiz starts
+
+  async function loadBooks() {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_books_for_quiz`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: "{}"
+    });
+    if (!res.ok) {
+      throw new Error("Failed to load books for quiz: " + res.status);
+    }
+    const rows = await res.json();
+    return rows.map((row) => ({
+      title: row.title,
+      tagline: row.description || "",
+      cover: row.cover_url || "",
+      tags: row.quiz_tags || ["reflect"],
+      link: BOOK_LINK_TEMPLATE(row.slug)
+    }));
+  }
+
+  const QUESTIONS = [
+    {
+      q: "What does today feel like?",
+      options: [
+        { label: "Scattered — I can't focus on anything", tags: ["focus"] },
+        { label: "Heavy — something's weighing on my mind", tags: ["reflect", "calm"] },
+        { label: "Restless — I want to act on something", tags: ["action", "courage"] },
+        { label: "Quietly searching for meaning", tags: ["purpose", "spiritual"] }
+      ]
+    },
+    {
+      q: "Which area of life could use a lesson right now?",
+      options: [
+        { label: "Work & focus", tags: ["career", "focus"] },
+        { label: "Money & security", tags: ["money"] },
+        { label: "Relationships & people", tags: ["relationships"] },
+        { label: "My own peace of mind", tags: ["calm", "reflect"] }
+      ]
+    },
+    {
+      q: "How much time do you have for change?",
+      options: [
+        { label: "A few minutes a day, consistently", tags: ["habits", "steady"] },
+        { label: "I'm ready to make a bigger move", tags: ["action", "courage"] },
+        { label: "I just want to sit with an idea for a while", tags: ["reflect", "spiritual"] }
+      ]
+    },
+    {
+      q: "Pick the line that speaks to you most:",
+      options: [
+        { label: "\"Small steps, repeated, change everything.\"", tags: ["habits", "focus"] },
+        { label: "\"Let go of what others think of you.\"", tags: ["courage", "relationships"] },
+        { label: "\"Purpose isn't found, it's built.\"", tags: ["purpose", "career"] },
+        { label: "\"Stillness is where clarity begins.\"", tags: ["calm", "spiritual"] }
+      ]
+    }
+  ];
+
+  let current = 0;
+  const answers = []; // array of tag-arrays chosen
+
+  const spineEl = document.getElementById("bmq-spine");
+  const bodyEl = document.getElementById("bmq-body");
+
+  function renderSpine() {
+    spineEl.innerHTML = "";
+    QUESTIONS.forEach((_, i) => {
+      const tab = document.createElement("div");
+      tab.className = "bmq-spine-tab" +
+        (i < current ? " is-done" : "") +
+        (i === current ? " is-current" : "");
+      spineEl.appendChild(tab);
+    });
+  }
+
+  function renderQuestion() {
+    renderSpine();
+    const step = QUESTIONS[current];
+    bodyEl.innerHTML = "";
+
+    const qnum = document.createElement("p");
+    qnum.className = "bmq-qnum";
+    qnum.textContent = "Question " + (current + 1) + " of " + QUESTIONS.length;
+    bodyEl.appendChild(qnum);
+
+    const qtext = document.createElement("h3");
+    qtext.className = "bmq-question";
+    qtext.textContent = step.q;
+    bodyEl.appendChild(qtext);
+
+    const opts = document.createElement("div");
+    opts.className = "bmq-options";
+    step.options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.className = "bmq-option";
+      btn.type = "button";
+      btn.textContent = opt.label;
+      btn.addEventListener("click", () => {
+        answers[current] = opt.tags;
+        current++;
+        if (current < QUESTIONS.length) {
+          renderQuestion();
+        } else {
+          renderResult();
+        }
+      });
+      opts.appendChild(btn);
+    });
+    bodyEl.appendChild(opts);
+
+    const back = document.createElement("button");
+    back.className = "bmq-back";
+    back.type = "button";
+    back.textContent = "\u2190 Back";
+    back.disabled = current === 0;
+    back.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    });
+    bodyEl.appendChild(back);
+  }
+
+  function scoreBooks() {
+    const tagCounts = {};
+    answers.flat().forEach((t) => {
+      tagCounts[t] = (tagCounts[t] || 0) + 1;
+    });
+    let best = null;
+    let bestScore = -1;
+    BOOK_DATA.forEach((book) => {
+      const score = book.tags.reduce((sum, t) => sum + (tagCounts[t] || 0), 0);
+      if (score > bestScore) {
+        bestScore = score;
+        best = book;
+      }
+    });
+    return best || BOOK_DATA[0];
+  }
+
+  function renderResult() {
+    current = QUESTIONS.length;
+    renderSpine();
+    const book = scoreBooks();
+    bodyEl.innerHTML = "";
+
+    const wrap = document.createElement("div");
+    wrap.className = "bmq-result";
+
+    const img = document.createElement("img");
+    img.className = "bmq-cover";
+    img.src = book.cover || "";
+    img.alt = book.title + " cover";
+    img.onerror = function () { this.style.visibility = "hidden"; };
+    wrap.appendChild(img);
+
+    const textWrap = document.createElement("div");
+    textWrap.className = "bmq-result-text";
+
+    const label = document.createElement("p");
+    label.className = "bmq-result-label";
+    label.textContent = "Your lesson today";
+    textWrap.appendChild(label);
+
+    const title = document.createElement("h3");
+    title.className = "bmq-result-title";
+    title.textContent = book.title;
+    textWrap.appendChild(title);
+
+    const tagline = document.createElement("p");
+    tagline.className = "bmq-result-tagline";
+    tagline.textContent = book.tagline;
+    textWrap.appendChild(tagline);
+
+    const cta = document.createElement("a");
+    cta.className = "bmq-cta";
+    cta.href = book.link;
+    cta.textContent = "Read this lesson \u2192";
+    textWrap.appendChild(cta);
+
+    const restart = document.createElement("button");
+    restart.className = "bmq-restart";
+    restart.type = "button";
+    restart.textContent = "Try again";
+    restart.addEventListener("click", () => {
+      current = 0;
+      answers.length = 0;
+      renderQuestion();
+    });
+    textWrap.appendChild(restart);
+
+    wrap.appendChild(textWrap);
+    bodyEl.appendChild(wrap);
+  }
+
+  function renderLoading() {
+    bodyEl.innerHTML = '<p style="font-family: \'Helvetica Neue\', Arial, sans-serif; font-size: 14px; color: var(--bmq-ink-soft);">Loading your books\u2026</p>';
+  }
+
+  function renderLoadError() {
+    bodyEl.innerHTML = '<p style="font-family: \'Helvetica Neue\', Arial, sans-serif; font-size: 14px; color: var(--bmq-ink-soft);">Couldn\'t load the catalog right now. Please refresh to try again.</p>';
+  }
+
+  renderLoading();
+  loadBooks()
+    .then((books) => {
+      BOOK_DATA = books;
+      if (!BOOK_DATA.length) {
+        renderLoadError();
+        return;
+      }
+      renderQuestion();
+    })
+    .catch((err) => {
+      console.error(err);
+      renderLoadError();
+    });
+})();
+</script>

@@ -4,7 +4,8 @@
 // Include this script on any page that needs login (lesson
 // pages, account page, etc.) alongside the Supabase JS CDN.
 //
-// USAGE on any page:
+// USAGE on any page (env.js must load first):
+//   <script src="env.js"></script>
 //   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 //   <script src="auth.js"></script>
 //
@@ -15,10 +16,13 @@
 // ============================================================
 
 (function () {
-  // ---- EDIT THESE: your Supabase project URL + PUBLISHABLE key ----
-  // NEVER put the service_role/secret key here — this runs in the browser.
-  const SUPABASE_URL = 'https://dcewvfkszrpknxdwyual.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_P6kjf7686KpEmyJLuEtbXw_QV2kRJll'; // publishable key
+  // Supabase URL + publishable key now live in env.js — the one
+  // shared config file every page includes. Edit them there, not here.
+  if (!window.BNM_ENV) {
+    console.error('auth.js: window.BNM_ENV is missing — make sure <script src="env.js"> loads before auth.js.');
+  }
+  const SUPABASE_URL = window.BNM_ENV.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = window.BNM_ENV.SUPABASE_ANON_KEY;
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 

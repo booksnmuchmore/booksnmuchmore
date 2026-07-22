@@ -6,6 +6,7 @@
 //   Scholar — ₹99/month or ₹399/year (Seeker + immediate new-book access,
 //           — see 4Ps Marketing Plan, Price section)
 //
+// Requires: env.js loaded first (provides window.BNM_ENV)
 // Requires: auth.js loaded first (uses BNMAuth.supabase + BNMAuth.requireLogin)
 // Requires: Razorpay Checkout script loaded:
 //   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -26,7 +27,7 @@
   const SITE_NAME = "Books 'n' Much More";
   const SITE_LOGO = 'https://raw.githubusercontent.com/booksnmuchmore/booksnmuchmore/main/logo.webp';
 
-  const SUPABASE_FUNCTIONS_URL = 'https://dcewvfkszrpknxdwyual.supabase.co/functions/v1';
+  const SUPABASE_FUNCTIONS_URL = `${window.BNM_ENV.SUPABASE_URL}/functions/v1`;
 
   // ---- Core: create a server-verified order, then open Razorpay checkout against it ----
   // amountRs/description/notes describe what's being purchased; onSuccess
