@@ -19,7 +19,7 @@
   // key = value of the <nav data-page="..."> attribute on that page
   var LINKS = [
     { key: 'home',      label: 'Home',       file: 'index.html',      hash: '' },
-    { key: 'about',     label: 'About',      file: 'index.html',      hash: '#about' },
+    { key: 'about',     label: 'About',      file: 'about.html',      hash: '' },
     { key: 'books',     label: 'Books',      file: 'books.html',      hash: '' },
     { key: 'lessons',   label: 'Lessons',    file: 'lessons.html',    hash: '', icon: BOOK_ICON },
     { key: 'library',   label: 'My Library', file: 'my-library.html', hash: '', icon: LIBRARY_ICON },
