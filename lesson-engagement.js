@@ -54,6 +54,13 @@ async function getReadLessonIds() {
 
 // ---------- BOOKMARKS ----------
 
+// Key used to remember "the lesson someone was trying to bookmark when we
+// interrupted them with the login modal" — persisted (not just kept in a JS
+// variable) because a brand-new user's signup completes via an email
+// confirmation link, which reloads the page and would otherwise silently
+// lose track of what they were trying to do.
+const PENDING_BOOKMARK_KEY = 'bnm_pending_bookmark_lesson_id';
+
 /**
  * Toggles bookmark state for a lesson. Returns true if now bookmarked,
  * false if now unbookmarked, or null if the user isn't logged in.
@@ -61,9 +68,20 @@ async function getReadLessonIds() {
 async function toggleBookmark(lessonId) {
   const user = await BNMAuth.getUser();
   if (!user) {
-    BNMAuth.openModal('login', 'इस lesson को bookmark करने के लिए पहले लॉगिन करें।');
+    // Remember what they were trying to do so we can finish it automatically
+    // once they're logged in — including after a signup confirmation-link
+    // reload, when this same lessonId variable no longer exists in memory.
+    sessionStorage.setItem(PENDING_BOOKMARK_KEY, lessonId);
+    BNMAuth.openModal(
+      'login',
+      'इस lesson को bookmark करने के लिए पहले लॉगिन करें।',
+      // Same-tab OTP login resolves instantly, so also retry right away —
+      // resumePendingBookmark() (below) is the fallback for the reload case.
+      () => resumePendingBookmark()
+    );
     return null;
   }
+  sessionStorage.removeItem(PENDING_BOOKMARK_KEY);
 
   const { data: existing, error: fetchError } = await BNMAuth.supabase
     .from('bookmarks')
@@ -87,6 +105,28 @@ async function toggleBookmark(lessonId) {
       .insert({ user_id: user.id, lesson_id: lessonId });
     if (error) console.error('bookmark error:', error.message);
     return true;
+  }
+}
+
+/**
+ * If someone tried to bookmark a lesson while logged out, we stashed the
+ * lesson id in sessionStorage before showing the login modal. Once we know
+ * they're logged in — whether that's an instant OTP login in the same tab,
+ * or a fresh page load after they clicked a signup confirmation link in
+ * their email — this finishes the bookmark they originally asked for and
+ * updates the button on screen, so they never have to click it twice.
+ */
+async function resumePendingBookmark() {
+  const pendingLessonId = sessionStorage.getItem(PENDING_BOOKMARK_KEY);
+  if (!pendingLessonId) return;
+
+  const user = await BNMAuth.getUser();
+  if (!user) return; // still not logged in — leave it pending
+
+  const nowBookmarked = await toggleBookmark(pendingLessonId);
+  if (nowBookmarked === true) {
+    const btn = document.querySelector(`.bookmark-btn[data-lesson-id="${pendingLessonId}"]`);
+    if (btn) btn.classList.add('bookmarked');
   }
 }
 
@@ -117,6 +157,12 @@ async function getBookmarkedLessonIds() {
  * lesson cards are rendered into the DOM.
  */
 async function initBookmarkButtons() {
+  // If someone was interrupted by the login modal while bookmarking, and
+  // they're logged in now (OTP just completed, or this is a fresh page
+  // load after a signup confirmation-link click), finish that bookmark
+  // before wiring up the rest of the buttons.
+  await resumePendingBookmark();
+
   const bookmarked = await getBookmarkedLessonIds();
 
   document.querySelectorAll('.bookmark-btn').forEach(btn => {

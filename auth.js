@@ -137,6 +137,7 @@
           <input type="email" id="bnm-auth-email" placeholder="you@example.com" autocomplete="email">
           <button id="bnm-auth-send-otp">Send Login Code</button>
           <div id="bnm-auth-status"></div>
+          <p id="bnm-auth-mode-toggle" style="font-size:0.78rem; margin-top:0.9rem; margin-bottom:0; text-align:center;"></p>
         </div>
         <div id="bnm-auth-step-otp" style="display:none;">
           <h3>Enter the Code</h3>
@@ -282,7 +283,7 @@
     };
   }
 
-  function openModal(mode, contextMessage) {
+  function openModal(mode, contextMessage, onSuccess) {
     authMode = mode === 'signup' ? 'signup' : 'login';
     injectModal();
     document.getElementById('bnm-auth-overlay').classList.add('active');
@@ -294,19 +295,40 @@
     document.getElementById('bnm-auth-status').textContent = '';
     document.getElementById('bnm-auth-email').value = '';
 
+    // Only registered when the caller explicitly wants the original action
+    // (e.g. a bookmark click) retried automatically once login succeeds.
+    // Do NOT reset to null here when omitted — requireLogin() sets
+    // pendingCallback itself just before calling openModal() with no args,
+    // and clobbering it here would silently break that flow.
+    if (onSuccess) pendingCallback = onSuccess;
+
     // Set copy to match the mode
     const heading = document.getElementById('bnm-auth-heading');
     const subtext = document.getElementById('bnm-auth-subtext');
     const sendBtn = document.getElementById('bnm-auth-send-otp');
+    const toggleEl = document.getElementById('bnm-auth-mode-toggle');
     if (authMode === 'signup') {
       heading.textContent = 'Create Your Account';
       subtext.textContent = 'नया अकाउंट बनाने के लिए अपना ईमेल डालें — हम आपको एक confirmation link भेजेंगे, कोई पासवर्ड नहीं चाहिए।';
       sendBtn.textContent = 'Send Signup Link';
+      toggleEl.innerHTML = 'पहले से account है? <a href="#" id="bnm-auth-switch-mode" style="color:#C8813A;font-weight:700;">Login करें</a>';
     } else {
       heading.textContent = 'Login to Continue';
       subtext.textContent = 'हम आपको एक 6-digit OTP कोड भेजेंगे आपके ईमेल पर — पासवर्ड की ज़रूरत नहीं।';
       sendBtn.textContent = 'Send Login Code';
+      toggleEl.innerHTML = 'पहली बार यहाँ आए हैं? <a href="#" id="bnm-auth-switch-mode" style="color:#C8813A;font-weight:700;">Account बनाएं</a>';
     }
+    // Switching modes mid-flow should keep whatever email was already typed,
+    // and must NOT drop the pendingCallback — a new user who lands here via
+    // the bookmark button still needs the retry to fire after they sign up.
+    document.getElementById('bnm-auth-switch-mode').onclick = (e) => {
+      e.preventDefault();
+      const email = document.getElementById('bnm-auth-email').value.trim();
+      const nextMode = authMode === 'signup' ? 'login' : 'signup';
+      const savedCallback = pendingCallback;
+      openModal(nextMode, contextMessage, savedCallback);
+      if (email) document.getElementById('bnm-auth-email').value = email;
+    };
 
     // Optional contextual reason (e.g. "Log in to bookmark this lesson.")
     // shown above the default subtext, so the person understands why the
