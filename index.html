@@ -37,23 +37,6 @@ body::before{
   pointer-events:none;z-index:999;
 }
 
-/* ── eBook announcement bar ────────────────────────────── */
-.ebook-banner{
-  position:fixed;top:0;left:0;right:0;z-index:600;
-  background:linear-gradient(90deg,var(--sienna) 0%,var(--amber) 50%,var(--sienna) 100%);
-  padding:0.42rem 6%;display:flex;align-items:center;justify-content:center;gap:1.2rem;
-  box-shadow:0 2px 12px rgba(44,26,14,0.25);
-}
-.ebook-banner-text{font-family:'Raleway',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;opacity:0.92;}
-.ebook-banner-text strong{font-weight:700;opacity:1;}
-.ebook-banner-cta{font-family:'Raleway',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);background:#fff;padding:0.28rem 0.9rem;border-radius:2px;text-decoration:none;white-space:nowrap;transition:background 0.2s,color 0.2s;flex-shrink:0;}
-.ebook-banner-cta:hover{background:var(--gold);color:var(--ink);}
-.ebook-banner-close{margin-left:0.4rem;background:none;border:none;color:rgba(255,255,255,0.55);font-size:1rem;cursor:pointer;line-height:1;padding:0 0.2rem;transition:color 0.2s;flex-shrink:0;}
-.ebook-banner-close:hover{color:#fff;}
-/* Nav/hero offset while the eBook banner is showing is now set
-   dynamically via JS (syncBannerOffset), since the banner's height
-   changes when its text wraps on narrow screens. */
-
 /* ── Nav ───────────────────────────────────────────────── */
 /* Nav styling now lives in nav.css (shared across every page) */
 .btn-primary{
@@ -269,28 +252,6 @@ body::before{
   #subscription-promo{padding:3rem 4%;}
 }
 
-/* ── BOOKS promo ───────────────────────────────────────── */
-#books{padding:4.5rem 6%;background:var(--parchment);}
-
-.books-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem;margin-bottom:2rem;}
-.bk{
-  background:var(--cream);border:1px solid rgba(200,129,58,0.18);
-  border-radius:var(--card-radius);overflow:hidden;text-align:center;
-  transition:transform 0.25s,box-shadow 0.25s;
-}
-.bk:hover{transform:translateY(-4px);box-shadow:0 10px 30px var(--warm-shadow);}
-.bk img{width:100%;height:135px;object-fit:cover;object-position:top;display:block;}
-.bk-info{padding:0.65rem 0.55rem 0.85rem;}
-.bk-title{font-family:'Playfair Display',serif;font-size:0.78rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:0.25rem;}
-.bk-author{font-family:'Raleway',sans-serif;font-size:0.6rem;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.55rem;}
-.bk-btn{
-  display:inline-block;font-family:'Raleway',sans-serif;font-size:0.6rem;font-weight:700;
-  letter-spacing:0.08em;text-transform:uppercase;
-  color:#fff;background:var(--amber);padding:0.28rem 0.65rem;border-radius:2px;border:none;cursor:pointer;
-  transition:background 0.2s;
-}
-.bk-btn:hover{background:var(--sienna);}
-
 /* ── ABOUT — minimal strip ─────────────────────────────── */
 #about{padding:4.5rem 6%;background:var(--cream);}
 .about-inner{
@@ -314,40 +275,16 @@ body::before{
   padding:0.28rem 0.65rem;border:1px solid rgba(139,64,16,0.3);border-radius:2px;
 }
 
-/* ── SUBSCRIBE ─────────────────────────────────────────── */
-#subscribe{padding:5rem 6%;background:var(--sienna);text-align:center;}
-.subscribe-inner{max-width:560px;margin:0 auto;}
-.subscribe-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:800;color:var(--parchment);line-height:1.15;margin-bottom:0.9rem;}
-.subscribe-title em{color:var(--gold);font-style:italic;}
-.subscribe-desc{font-size:0.93rem;line-height:1.8;color:rgba(245,236,215,0.7);margin-bottom:1.8rem;}
-.yt-subscribe-block{margin-top:1.8rem;}
-.yt-subscribe-block p{font-family:'Raleway',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,236,215,0.45);margin-bottom:0.7rem;}
+/* ── Footer "Subscribe on YouTube" button (folded in from the old
+   standalone Subscribe section) ──────────────────────────────── */
 .btn-yt-big{
   display:inline-flex;align-items:center;gap:0.55rem;
   font-family:'Raleway',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
   color:#fff;background:#FF0000;padding:0.7rem 1.5rem;border-radius:3px;text-decoration:none;
-  transition:opacity 0.2s,transform 0.2s;
+  transition:opacity 0.2s,transform 0.2s;margin-top:1rem;
 }
 .btn-yt-big svg{width:15px;height:15px;}
 .btn-yt-big:hover{opacity:0.88;transform:translateY(-1px);}
-
-/* ── QUIZ PROMO ─────────────────────────────────────────── */
-#quiz-promo{padding:2.4rem 6% 0;}
-.quiz-promo-inner{
-  max-width:1100px;margin:0 auto;background:var(--parchment);border:1.5px solid rgba(200,129,58,0.3);
-  border-left:4px solid var(--amber);border-radius:var(--card-radius);
-  padding:1.5rem 2rem;display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;
-}
-.quiz-promo-icon{font-size:2rem;flex-shrink:0;}
-.quiz-promo-text{flex:1;min-width:220px;}
-.quiz-promo-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:0.3rem;}
-.quiz-promo-title em{color:var(--amber);font-style:italic;}
-.quiz-promo-desc{font-family:'Lora',serif;font-size:0.9rem;color:var(--ink);opacity:0.75;}
-.quiz-promo-btn{flex-shrink:0;white-space:nowrap;}
-@media (max-width:640px){
-  .quiz-promo-inner{flex-direction:column;text-align:center;padding:1.5rem;}
-  .quiz-promo-btn{width:100%;text-align:center;}
-}
 
 /* ── CTA STRIP ─────────────────────────────────────────── */
 .cta-strip{
@@ -383,7 +320,6 @@ footer{
   .lsn-card.lsn-featured{grid-column:span 2;}
   .lsn-featured .lsn-card-inner{flex-direction:column;}
   .lsn-featured .lsn-card-top{width:auto;}
-  .books-grid{grid-template-columns:repeat(3,1fr);}
   .hero-inner{grid-template-columns:1fr;}
   .hero-stack-wrap{display:none;}
 }
@@ -391,20 +327,16 @@ footer{
   nav{padding:1rem 4%;}
   .nav-links{display:none;}
   #hero{padding:6rem 4% 3rem;}
-  #lessons,#books,#about,#subscribe{padding:3.5rem 4%;}
+  #lessons,#about{padding:3.5rem 4%;}
   .section-header{flex-direction:column;align-items:flex-start;gap:0.8rem;}
   .lessons-grid{grid-template-columns:1fr;}
   .lsn-card.lsn-featured{grid-column:auto;}
-  .books-grid{grid-template-columns:repeat(2,1fr);}
   .cta-strip{flex-direction:column;text-align:center;}
   .about-inner{grid-template-columns:1fr;text-align:center;}
   .about-tags{justify-content:center;}
   .hero-stats{gap:1.4rem;}
 }
 @media(max-width:400px){
-  .ebook-banner{padding:0.38rem 4%;gap:0.5rem;}
-  .ebook-banner-text{font-size:0.6rem;}
-  .ebook-banner-cta{font-size:0.6rem;padding:0.2rem 0.55rem;}
 }
 </style>
 <link rel="stylesheet" href="nav.css">
@@ -412,34 +344,15 @@ footer{
 <body>
 
 <!-- ── eBook banner ─────────────────────────────────── -->
-<div class="ebook-banner" id="ebookBanner">
-  <span class="ebook-banner-text">📖 <strong>Free eBook:</strong> 5 Books That Changed How I Think &amp; Live</span>
-  <a href="ebook.html" class="ebook-banner-cta">Get It Free →</a>
-  <button class="ebook-banner-close" onclick="closeBanner()" aria-label="Close">&times;</button>
-</div>
-
 <!-- ── Nav ──────────────────────────────────────────── -->
 <nav id="navbar" data-page="home" data-cta-href="lessons.html" data-cta-label="Read Lessons" data-account-slot></nav>
 <script src="nav.js"></script>
 
-<!-- ── HERO ─────────────────────────────────────────── -->
+<!-- ── HERO — quiz CTA folded in as a secondary button ── -->
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-content" id="hero-content"></div>
     <div id="hero-stack-wrap" class="hero-stack-wrap"></div>
-  </div>
-</section>
-
-<!-- ── QUIZ PROMO — quick nudge right after the hero ─── -->
-<section id="quiz-promo">
-  <div class="quiz-promo-inner reveal">
-    <div class="quiz-promo-icon">🎯</div>
-    <div class="quiz-promo-text">
-      <div class="section-label" style="margin-bottom:0.35rem;">Not sure where to start?</div>
-      <h3 class="quiz-promo-title">Find <em>your</em> lesson in 30 seconds</h3>
-      <p class="quiz-promo-desc">4 quick questions, matched against all <span id="quiz-promo-book-count">44</span> books — no signup needed.</p>
-    </div>
-    <a href="book-match-quiz.html" class="btn-primary quiz-promo-btn">Take the Quiz →</a>
   </div>
 </section>
 
@@ -499,21 +412,6 @@ footer{
   </div>
 </section>
 
-<!-- ── BOOKS ─────────────────────────────────────────── -->
-<section id="books">
-  <div class="section-header">
-    <div>
-      <h2 class="section-title reveal reveal-delay-1">Books that <em>brings wisdom</em></h2>
-    </div>
-    <a href="books.html" class="view-all reveal">View All →</a>
-  </div>
-  <div class="books-grid" id="books-grid"></div>
-  <div class="cta-strip reveal">
-    <p>इन किताबों ने मुझे inspire किया — <span>शायद ये आपकी ज़िंदगी भी बदल दें।</span></p>
-    <a href="books.html" class="btn-primary">सभी Books देखें →</a>
-  </div>
-</section>
-
 <!-- ── ABOUT ─────────────────────────────────────────── -->
 <section id="about">
   <div class="about-inner">
@@ -532,21 +430,6 @@ footer{
         <span class="tag">One Lesson at a Time</span>
         <span class="tag">Life Lessons</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SUBSCRIBE ─────────────────────────────────────── -->
-<section id="subscribe">
-  <div class="subscribe-inner">
-    <div class="section-label reveal">Never Miss a New Book</div>
-    <h2 class="subscribe-title reveal reveal-delay-1">Get notified<br><em>when lessons drop</em></h2>
-    <p class="subscribe-desc reveal reveal-delay-2">Join the Books 'n' Much More community on YouTube — new book lessons, as they're added.</p>
-    <div class="yt-subscribe-block reveal reveal-delay-2">
-      <a id="yt-sub-btn" href="#" target="_blank" class="btn-yt-big">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
-        Subscribe on YouTube
-      </a>
     </div>
   </div>
 </section>
@@ -570,6 +453,7 @@ document.getElementById('hero-content').innerHTML = `
   </p>
   <div class="hero-actions">
     <a href="lessons.html" class="btn-primary">अपना पहला Lesson मुफ़्त पढ़ें →</a>
+    <a href="book-match-quiz.html" class="btn-secondary">🎯 Find Your Lesson (30 sec)</a>
   </div>
   <div class="hero-stats">
     <div><span class="stat-num" id="hero-stat-books">40+</span><span class="stat-label">Books</span></div>
@@ -593,22 +477,6 @@ async function updateHeroBookCount(){
   }
 }
 updateHeroBookCount();
-
-// Quiz-promo card "44 books" — same live-count pattern as the two above,
-// so this never drifts out of sync as books are added.
-async function updateQuizPromoBookCount(){
-  const el = document.getElementById('quiz-promo-book-count');
-  if (!el) return;
-  try {
-    const { data: books, error } = await BNMAuth.supabase.rpc('get_all_live_books');
-    if (error || !Array.isArray(books)) throw error || new Error('no data');
-    el.textContent = books.length;
-  } catch (e) {
-    console.error('Failed to fetch live book count for quiz promo:', e);
-    // leave the static "44" fallback already in the markup above
-  }
-}
-updateQuizPromoBookCount();
 
 // ── HERO ROTATING BOOK-COVER STACK ──────────────────────
 // Was: single latest-episode card. Now: a fanned stack of 3 book
@@ -741,67 +609,21 @@ async function updateSubPromoBookCount(){
 }
 updateSubPromoBookCount();
 
-// ── BOOKS ──────────────────────────────────────────────
-function renderBooks(){
-  document.getElementById('books-grid').innerHTML = PROMO_BOOKS.map((b, i) => {
-    const delay = i > 0 ? ` reveal-delay-${Math.min(i,3)}` : '';
-    return `
-    <div class="bk reveal${delay}">
-      <img src="${b.cover}" alt="${b.title}">
-      <div class="bk-info">
-        <div class="bk-title">${b.title}</div>
-        <div class="bk-author">${b.author}</div>
-        <button class="bk-btn" onclick="AFFILIATE.open(PROMO_BOOKS[${i}].amazon)">Buy →</button>
-      </div>
-    </div>`;
-  }).join('');
-  document.querySelectorAll('.bk.reveal').forEach(el => obs.observe(el));
-}
-
 // ── FOOTER ─────────────────────────────────────────────
 document.getElementById('footer').innerHTML = `
   <a href="index.html" class="footer-logo">Books <em>'n'</em> Much More</a>
   <p class="footer-copy">© 2026 Books 'n' Much More · पढ़ते रहिए, बढ़ते रहिए।</p>
   <p class="footer-disclaimer" style="font-size:0.7rem;color:var(--muted);margin-top:0.4rem;max-width:520px;">This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.</p>
-  <div class="footer-social"><a href="${SITE.youtubeChannel}" target="_blank">YouTube</a></div>`;
-document.getElementById('yt-sub-btn').href = SITE.youtubeChannel;
+  <a href="${SITE.youtubeChannel}" target="_blank" class="btn-yt-big">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+    Subscribe on YouTube
+  </a>`;
 
 // ── REVEAL ─────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ── BANNER ─────────────────────────────────────────────
-function syncBannerOffset(){
-  var banner = document.getElementById('ebookBanner');
-  var nav = document.getElementById('navbar');
-  var hero = document.getElementById('hero');
-  if(!banner || !nav) return;
-  var active = document.body.classList.contains('banner-active');
-  var bannerH = active ? banner.getBoundingClientRect().height : 0;
-  nav.style.top = bannerH + 'px';
-  if(hero){ hero.style.paddingTop = 'calc(7rem + ' + bannerH + 'px)'; }
-}
-(function(){
-  if(!sessionStorage.getItem('ebookBannerClosed')){
-    document.body.classList.add('banner-active');
-  } else {
-    document.getElementById('ebookBanner').style.display = 'none';
-  }
-  syncBannerOffset();
-  window.addEventListener('load', syncBannerOffset);
-  window.addEventListener('resize', syncBannerOffset);
-})();
-function closeBanner(){
-  document.getElementById('ebookBanner').style.display = 'none';
-  document.body.classList.remove('banner-active');
-  sessionStorage.setItem('ebookBannerClosed','1');
-  syncBannerOffset();
-}
-
-// ── BOOKS affiliate ────────────────────────────────────
-AFFILIATE.detect().then(renderBooks);
 </script>
 <script src="/pwa-init.js"></script>
 </body>
