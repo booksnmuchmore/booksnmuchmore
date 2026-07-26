@@ -61,7 +61,7 @@ async function getReadLessonIds() {
 async function toggleBookmark(lessonId) {
   const user = await BNMAuth.getUser();
   if (!user) {
-    BNMAuth.openModal('login');
+    BNMAuth.openModal('login', 'इस lesson को bookmark करने के लिए पहले लॉगिन करें।');
     return null;
   }
 

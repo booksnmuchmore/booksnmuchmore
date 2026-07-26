@@ -111,10 +111,15 @@
       }
       #bnm-auth-modal button:hover { background: #8B4010; }
       #bnm-auth-modal button:disabled { opacity: 0.5; cursor: not-allowed; }
-      #bnm-auth-close {
-        position: absolute; top: 1rem; right: 1.2rem; background: none; border: none;
-        font-size: 1.3rem; color: #7A6250; cursor: pointer; width: auto; padding: 0;
+      #bnm-auth-modal #bnm-auth-close {
+        position: absolute; top: 0.6rem; right: 0.7rem; background: none !important;
+        border: none; width: 1.8rem; height: 1.8rem; padding: 0; margin: 0;
+        font-size: 1.4rem; line-height: 1; font-weight: 400; text-transform: none;
+        letter-spacing: normal; color: #7A6250; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; z-index: 1;
       }
+      #bnm-auth-modal #bnm-auth-close:hover { background: rgba(122,98,80,0.12) !important; color: #2C1A0E; }
       #bnm-auth-status { font-size: 0.78rem; margin-top: 0.6rem; min-height: 1.2em; }
       #bnm-auth-status.error { color: #C0392B; }
       #bnm-auth-status.success { color: #2E7D32; }
@@ -277,7 +282,7 @@
     };
   }
 
-  function openModal(mode) {
+  function openModal(mode, contextMessage) {
     authMode = mode === 'signup' ? 'signup' : 'login';
     injectModal();
     document.getElementById('bnm-auth-overlay').classList.add('active');
@@ -301,6 +306,23 @@
       heading.textContent = 'Login to Continue';
       subtext.textContent = 'हम आपको एक 6-digit OTP कोड भेजेंगे आपके ईमेल पर — पासवर्ड की ज़रूरत नहीं।';
       sendBtn.textContent = 'Send Login Code';
+    }
+
+    // Optional contextual reason (e.g. "Log in to bookmark this lesson.")
+    // shown above the default subtext, so the person understands why the
+    // modal popped up instead of just seeing the generic login copy.
+    let reasonEl = document.getElementById('bnm-auth-reason');
+    if (contextMessage) {
+      if (!reasonEl) {
+        reasonEl = document.createElement('p');
+        reasonEl.id = 'bnm-auth-reason';
+        reasonEl.style.cssText = 'font-weight:700; color:#8B4010; margin-bottom:0.4rem;';
+        subtext.parentNode.insertBefore(reasonEl, subtext);
+      }
+      reasonEl.textContent = contextMessage;
+      reasonEl.style.display = 'block';
+    } else if (reasonEl) {
+      reasonEl.style.display = 'none';
     }
   }
 
