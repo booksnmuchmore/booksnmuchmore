@@ -125,6 +125,17 @@
     .lesson-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--amber-l); line-height: 1; flex-shrink: 0; }
     .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--dark); }
     .lesson-content { font-size: .95rem; color: var(--brown); line-height: 1.8; margin-bottom: .8rem; white-space: pre-line; }
+    .lesson-content .lang-part.lang-hidden { display: none; }
+
+    /* ── Language toggle ── */
+    .lang-toggle-wrap { display: flex; justify-content: center; margin-bottom: 1.8rem; }
+    .lang-toggle { display: inline-flex; background: var(--cream); border: 1px solid var(--amber-xl); border-radius: 22px; padding: .25rem; gap: .2rem; }
+    .lang-toggle button {
+      border: none; background: transparent; cursor: pointer;
+      padding: .45rem 1.2rem; border-radius: 18px; font-size: .85rem;
+      font-family: 'Lora', Georgia, serif; color: var(--brown); transition: background .2s, color .2s;
+    }
+    .lang-toggle button.active { background: var(--amber); color: #fff; }
     .lesson-quote { display: block; font-family: 'Playfair Display', serif; font-size: .95rem; color: var(--amber); margin-top: .8rem; font-style: italic; }
 
     /* ── Locked lesson state (new) ── */
@@ -281,6 +292,19 @@
     if (el && val) el.setAttribute('content', val);
   }
 
+  // Splits "Hindi text\n\n---\n\nEnglish text" into two language spans.
+  // Falls back to showing the whole string under both languages if the
+  // separator is ever missing on a lesson row.
+  function splitLessonContent(raw) {
+    const parts = (raw || '').split(/\n*---\n*/);
+    const hi = (parts[0] || '').trim();
+    const en = (parts[1] || '').trim();
+    if (!en) {
+      return `<span class="lang-part lang-hi">${hi}</span>`;
+    }
+    return `<span class="lang-part lang-hi">${hi}</span><span class="lang-part lang-en">${en}</span>`;
+  }
+
   function renderLessonsHtml(lessons, book) {
     return lessons.map(l => {
       if (l.out_unlocked) {
@@ -293,7 +317,7 @@
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </button>
             </div>
-            <p class="lesson-content">${l.out_content}</p>
+            <p class="lesson-content">${splitLessonContent(l.out_content)}</p>
             ${l.out_action_challenge ? `<div class="action-challenge"><strong>✅ आज का Challenge</strong>${l.out_action_challenge}</div>` : ''}
           </div>`;
       } else {
@@ -449,6 +473,13 @@
 
       <div class="lessons-wrap">
         <h2>10 Life-Changing Lessons</h2>
+        <div class="lang-toggle-wrap">
+          <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Language">
+            <button type="button" data-lang="both" class="active">दोनों / Both</button>
+            <button type="button" data-lang="hi">हिंदी</button>
+            <button type="button" data-lang="en">English</button>
+          </div>
+        </div>
         ${lessonsHtml}
       </div>
 
@@ -478,6 +509,25 @@
     document.getElementById('hero-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('strip-buy-btn').addEventListener('click', () => openAmazon(slug));
     document.getElementById('bottom-buy-btn').addEventListener('click', () => openAmazon(slug));
+
+    // ── Language toggle ──────────────────────────────────────
+    function applyLang(lang) {
+      document.querySelectorAll('.lang-part.lang-hi').forEach(el =>
+        el.classList.toggle('lang-hidden', lang === 'en'));
+      document.querySelectorAll('.lang-part.lang-en').forEach(el =>
+        el.classList.toggle('lang-hidden', lang === 'hi'));
+      document.querySelectorAll('#lang-toggle button').forEach(btn =>
+        btn.classList.toggle('active', btn.dataset.lang === lang));
+      localStorage.setItem('bnm_lang_pref', lang);
+    }
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', e => {
+        const btn = e.target.closest('button[data-lang]');
+        if (btn) applyLang(btn.dataset.lang);
+      });
+      applyLang(localStorage.getItem('bnm_lang_pref') || 'both');
+    }
 
     // ── Bookmarks + read-tracking ────────────────────────────
     // Wire up bookmark toggle buttons just rendered into the DOM.
