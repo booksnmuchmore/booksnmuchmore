@@ -125,7 +125,7 @@
     .lesson-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--amber-l); line-height: 1; flex-shrink: 0; }
     .lesson-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--dark); }
     .lesson-content { font-size: .95rem; color: var(--brown); line-height: 1.8; margin-bottom: .8rem; white-space: pre-line; }
-    .lesson-content .lang-part.lang-hidden { display: none; }
+    .lang-part.lang-hidden { display: none; }
 
     /* ── Language toggle ── */
     .lang-toggle-wrap { display: flex; justify-content: center; margin-bottom: 1.8rem; }
@@ -318,7 +318,7 @@
               </button>
             </div>
             <p class="lesson-content">${splitLessonContent(l.out_content)}</p>
-            ${l.out_action_challenge ? `<div class="action-challenge"><strong>✅ आज का Challenge</strong>${l.out_action_challenge}</div>` : ''}
+            ${l.out_action_challenge ? `<div class="action-challenge"><strong>✅ आज का Challenge</strong>${splitLessonContent(l.out_action_challenge)}</div>` : ''}
           </div>`;
       } else {
         const safeTitle = l.out_title.replace(/'/g, "\\'");
@@ -475,9 +475,9 @@
         <h2>10 Life-Changing Lessons</h2>
         <div class="lang-toggle-wrap">
           <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Language">
-            <button type="button" data-lang="both" class="active">दोनों / Both</button>
+            <button type="button" data-lang="both">दोनों / Both</button>
             <button type="button" data-lang="hi">हिंदी</button>
-            <button type="button" data-lang="en">English</button>
+            <button type="button" data-lang="en" class="active">English</button>
           </div>
         </div>
         ${lessonsHtml}
@@ -526,7 +526,7 @@
         const btn = e.target.closest('button[data-lang]');
         if (btn) applyLang(btn.dataset.lang);
       });
-      applyLang(localStorage.getItem('bnm_lang_pref') || 'both');
+      applyLang(localStorage.getItem('bnm_lang_pref') || 'en');
     }
 
     // ── Bookmarks + read-tracking ────────────────────────────
