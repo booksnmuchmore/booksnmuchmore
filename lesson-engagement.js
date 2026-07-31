@@ -149,6 +149,82 @@ async function getBookmarkedLessonIds() {
   return new Set(data.map(row => row.lesson_id));
 }
 
+// ---------- SHARING ----------
+
+/**
+ * Small non-blocking toast used instead of alert() for the copy-link
+ * fallback, so it doesn't feel jarring inside the installed PWA shell.
+ */
+function showShareToast(message) {
+  let toast = document.querySelector('.share-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'share-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  // Restart the transition even if a toast is already visible.
+  toast.classList.remove('visible');
+  // eslint-disable-next-line no-unused-expressions
+  toast.offsetHeight; // force reflow
+  toast.classList.add('visible');
+  clearTimeout(toast._hideTimer);
+  toast._hideTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
+}
+
+/**
+ * Shares a lesson or book via the Web Share API (works both in a normal
+ * browser tab and inside the installed standalone PWA — unlike the
+ * browser's own share icon, which disappears once installed). Falls back
+ * to copying the link to the clipboard when navigator.share isn't
+ * available, e.g. desktop Chrome/Firefox.
+ */
+async function shareLesson(title, url) {
+  const shareData = {
+    title: `${title} — Books 'n' Much More`,
+    text: `इस lesson को देखें "${title}" से — Books 'n' Much More पर 📖`,
+    url
+  };
+
+  if (navigator.share) {
+    try {
+      if (!navigator.canShare || navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        return;
+      }
+    } catch (err) {
+      if (err.name === 'AbortError') return; // user cancelled the share sheet
+      console.error('navigator.share failed, falling back to clipboard:', err);
+    }
+  }
+
+  try {
+    await navigator.clipboard.writeText(url);
+    showShareToast('Link copied! 🔗');
+  } catch (err) {
+    console.error('Clipboard copy failed:', err);
+    showShareToast('Could not copy link');
+  }
+}
+
+/**
+ * Attaches click handlers to all .share-btn elements rendered on the page.
+ * pageUrl is the canonical book-page URL; each button's data-lesson-anchor
+ * (if present) is appended as a #fragment so the shared link scrolls
+ * straight to that lesson.
+ */
+function initShareButtons(pageUrl) {
+  document.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const anchor = btn.dataset.lessonAnchor;
+      const url = anchor ? `${pageUrl}#${anchor}` : pageUrl;
+      shareLesson(btn.dataset.lessonTitle || document.title, url);
+    });
+  });
+}
+
 // ---------- UI WIRING ----------
 
 /**
