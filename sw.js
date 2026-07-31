@@ -4,7 +4,7 @@
 // - Static assets (css/js/images/fonts): stale-while-revalidate
 // - Supabase API calls: network-only (never cache live data/auth)
 
-const CACHE_VERSION = "bnmm-v2";
+const CACHE_VERSION = "bnmm-v3";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGES_CACHE = `${CACHE_VERSION}-pages`;
 const OFFLINE_URL = "/offline.html";
