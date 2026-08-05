@@ -365,6 +365,41 @@
           </div>`;
       } else {
         const safeTitle = l.out_title.replace(/'/g, "\\'");
+
+        // Lessons that only require a free account (out_required_tier === 'free')
+        // get a signup CTA instead of a payment CTA. This covers two cases:
+        //  1. Regular books: lessons 1-2 (is_free) now require a free account.
+        //  2. Promotional (free_forever) books: ALL locked lessons (3-10) only
+        //     need a free account too — the whole book is free, never paid.
+        if (l.out_required_tier === 'free') {
+          const teaserCopy = book.free_forever
+            ? (l.out_teaser || 'यह lesson भी इस किताब की तरह पूरी तरह free है।')
+            : (l.out_teaser || 'इस lesson को पढ़ने के लिए free account बनाएं।');
+          const noteCopy = book.free_forever
+            ? '🎁 <strong>हमेशा Free</strong> — यह पूरी किताब free है, बस sign up करें।'
+            : '🎁 <strong>Free</strong> — बस sign up करें, कोई payment नहीं चाहिए।';
+          return `
+            <div class="lesson locked">
+              <div class="lesson-header">
+                <span class="lesson-number">${pad(l.out_order_num)}</span>
+                <h3 class="lesson-title">${l.out_title}</h3>
+                <div class="lesson-actions">
+                  <button class="bookmark-btn" data-lesson-id="${l.out_id}" title="Save this lesson" aria-label="Bookmark this lesson">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
+                </div>
+              </div>
+              <p class="lesson-teaser">${teaserCopy}</p>
+              <p class="tier-lock-note">${noteCopy}</p>
+              <div class="tier-lock-actions">
+                <button class="unlock-lesson-btn"
+                  onclick="BNMAuth.openModal('signup', 'Sign up free to unlock this lesson', () => location.reload())">
+                  🎁 Sign Up Free to Unlock
+                </button>
+              </div>
+            </div>`;
+        }
+
         // Scholar-only early access: Seeker will unlock this automatically once
         // the early-access window passes, so lead with that instead of a raw paywall.
         const tierNote = (l.out_required_tier === 'scholar' && l.out_early_access_days_left > 0)
@@ -504,10 +539,20 @@
         </div>
       </div>
 
-      ${allUnlocked ? '' : `
+      ${allUnlocked ? '' : (book.free_forever ? `
       <div class="pricing-banner">
         <div class="pricing-banner-inner">
-          <p>शुरुआती lesson हमेशा free हैं। बाकी ₹1/lesson या <strong>पूरी किताब सिर्फ ₹${book.price_rs}</strong> में unlock करें — या <strong>Seeker/Scholar subscription</strong> लेकर सभी books एक साथ unlock करें।</p>
+          <p>🎉 <strong>${book.title}</strong> की सभी 10 lessons हमेशा के लिए <strong>free</strong> हैं — कोई payment कभी नहीं चाहिए। पहले 2 lessons अभी पढ़ें, बाकी 8 पढ़ने के लिए बस <strong>free account बनाएं</strong>।</p>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+            <button class="unlock-book-btn" onclick="BNMAuth.openModal('signup', 'Sign up free to unlock all lessons of this book', () => location.reload())">
+              🎁 Sign Up Free — Unlock All Lessons
+            </button>
+          </div>
+        </div>
+      </div>` : `
+      <div class="pricing-banner">
+        <div class="pricing-banner-inner">
+          <p>शुरुआती lesson हमेशा free हैं (free account के साथ)। बाकी ₹1/lesson या <strong>पूरी किताब सिर्फ ₹${book.price_rs}</strong> में unlock करें — या <strong>Seeker/Scholar subscription</strong> लेकर सभी books एक साथ unlock करें।</p>
           <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
             <button class="unlock-book-btn" onclick="BNMPayments.unlockBook('${book.id}', ${book.price_rs}, '${book.title.replace(/'/g, "\\'")}')">
               🔓 Unlock This Book — ₹${book.price_rs}
@@ -517,7 +562,7 @@
             </a>
           </div>
         </div>
-      </div>`}
+      </div>`)}
 
       <div class="lessons-wrap">
         <h2>10 Life-Changing Lessons</h2>
