@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Site Stats — Books 'n' Much More</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="env.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --parchment:#F5EFE0;
+    --parchment-deep:#EEE4CC;
+    --amber:#D9A45B;
+    --sienna:#A0522D;
+    --gold:#C9A227;
+    --ink:#2B2419;
+    --ink-soft:#6B5F4C;
+    --line:rgba(160,82,45,0.18);
+    --card:#FFFDF7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Lora',serif;
+    min-height:100vh;
+  }
+  .lock-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:1rem;
+    padding:2rem;
+    text-align:center;
+  }
+  .lock-screen h1{
+    font-family:'Playfair Display',serif;
+    font-size:1.4rem;
+    margin:0 0 0.25rem;
+  }
+  .lock-screen input{
+    font-family:'Lora',serif;
+    padding:0.65rem 0.9rem;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:var(--card);
+    font-size:1rem;
+    width:220px;
+    text-align:center;
+  }
+  .lock-screen button{
+    font-family:'Lora',serif;
+    padding:0.65rem 1.4rem;
+    border:none;
+    border-radius:6px;
+    background:var(--sienna);
+    color:#fff;
+    font-size:0.95rem;
+    cursor:pointer;
+    letter-spacing:0.02em;
+  }
+  .lock-screen button:hover{background:var(--ink);}
+  .lock-error{color:var(--sienna); font-size:0.85rem; min-height:1.2em;}
+
+  #dashboard{display:none;}
+
+  header.top{
+    padding:2.2rem 1.5rem 1.4rem;
+    border-bottom:1px solid var(--line);
+    background:var(--parchment-deep);
+  }
+  header.top .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.75rem;
+  }
+  header.top h1{
+    font-family:'Playfair Display',serif;
+    font-size:1.7rem;
+    margin:0;
+    color:var(--ink);
+  }
+  header.top .tagline{
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:0.9rem;
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:1.8rem 1.5rem 4rem;}
+
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    flex-wrap:wrap;
+    margin-bottom:1.6rem;
+  }
+  .controls label{font-size:0.85rem; color:var(--ink-soft);}
+  .range-btn{
+    font-family:'Lora',serif;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink);
+    padding:0.4rem 0.85rem;
+    border-radius:999px;
+    font-size:0.85rem;
+    cursor:pointer;
+  }
+  .range-btn.active{
+    background:var(--sienna);
+    border-color:var(--sienna);
+    color:#fff;
+  }
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:1rem;
+    margin-bottom:2.2rem;
+  }
+  .stat-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.2rem 1.3rem;
+  }
+  .stat-card .label{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    margin-bottom:0.35rem;
+  }
+  .stat-card .value{
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    color:var(--sienna);
+    line-height:1;
+  }
+  .stat-card.accent .value{color:var(--gold);}
+
+  h2.section-title{
+    font-family:'Playfair Display',serif;
+    font-size:1.2rem;
+    margin:0 0 0.9rem;
+    padding-bottom:0.5rem;
+    border-bottom:1px solid var(--line);
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  th, td{
+    text-align:left;
+    padding:0.7rem 1rem;
+    font-size:0.9rem;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    background:var(--parchment-deep);
+    font-weight:600;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+  }
+  tr:last-child td{border-bottom:none;}
+  td.num{text-align:right; font-variant-numeric:tabular-nums;}
+
+  .empty, .loading{
+    color:var(--ink-soft);
+    font-style:italic;
+    padding:1rem 0;
+  }
+
+  footer.copyright{
+    max-width:1080px;
+    margin:0 auto;
+    padding:1.5rem;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+  <div class="lock-screen" id="lockScreen">
+    <h1>Books 'n' Much More — Site Stats</h1>
+    <p style="color:var(--ink-soft); font-size:0.9rem;">This page is for admin use only.</p>
+    <input type="password" id="passInput" placeholder="Enter access code" autocomplete="off">
+    <button id="unlockBtn">View Stats</button>
+    <div class="lock-error" id="lockError"></div>
+  </div>
+
+  <div id="dashboard">
+    <header class="top">
+      <div class="wrap">
+        <h1>Site Stats</h1>
+        <span class="tagline">पढ़ते रहिए, बढ़ते रहिए</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="controls">
+        <label>Range:</label>
+        <button class="range-btn" data-days="1">Today</button>
+        <button class="range-btn" data-days="7">7 days</button>
+        <button class="range-btn active" data-days="30">30 days</button>
+        <button class="range-btn" data-days="90">90 days</button>
+      </div>
+
+      <div class="stat-grid" id="statGrid">
+        <div class="stat-card"><div class="label">Total Hits</div><div class="value" id="statTotal">—</div></div>
+        <div class="stat-card"><div class="label">Unique Sessions</div><div class="value" id="statSessions">—</div></div>
+        <div class="stat-card accent"><div class="label">Anonymous Hits</div><div class="value" id="statAnon">—</div></div>
+        <div class="stat-card"><div class="label">Logged-in Hits</div><div class="value" id="statLoggedIn">—</div></div>
+        <div class="stat-card"><div class="label">Unique Logged-in Users</div><div class="value" id="statUsers">—</div></div>
+      </div>
+
+      <h2 class="section-title">Hits by Page</h2>
+      <div id="breakdownWrap">
+        <p class="loading">Loading…</p>
+      </div>
+    </main>
+
+    <footer class="copyright">
+      This site contains summaries and personal takeaways. All book titles and content belong to their respective authors and publishers.
+    </footer>
+  </div>
+
+<script>
+  // ---- Access gate (client-side deterrent only, not real security) ----
+  // Change this to whatever code you want. Anyone with the RPC + anon key could
+  // still query stats directly, but this keeps casual visitors from finding it.
+  const ACCESS_CODE = "bnmm2026";
+
+  const lockScreen = document.getElementById('lockScreen');
+  const dashboard = document.getElementById('dashboard');
+  const passInput = document.getElementById('passInput');
+  const unlockBtn = document.getElementById('unlockBtn');
+  const lockError = document.getElementById('lockError');
+
+  function unlock(){
+    if(passInput.value === ACCESS_CODE){
+      sessionStorage.setItem('bnmm_stats_unlocked', '1');
+      lockScreen.style.display = 'none';
+      dashboard.style.display = 'block';
+      initDashboard();
+    } else {
+      lockError.textContent = "Incorrect code.";
+    }
+  }
+  unlockBtn.addEventListener('click', unlock);
+  passInput.addEventListener('keydown', e => { if(e.key === 'Enter') unlock(); });
+
+  if(sessionStorage.getItem('bnmm_stats_unlocked') === '1'){
+    lockScreen.style.display = 'none';
+    dashboard.style.display = 'block';
+    initDashboard();
+  }
+
+  // ---- Dashboard logic ----
+  let supabaseClient;
+  let dashboardInitialized = false;
+
+  function getClient(){
+    if(!supabaseClient){
+      if(!window.BNM_ENV){
+        console.error('analytics.html: window.BNM_ENV is missing — make sure env.js loads before this script.');
+        return null;
+      }
+      supabaseClient = supabase.createClient(window.BNM_ENV.SUPABASE_URL, window.BNM_ENV.SUPABASE_ANON_KEY);
+    }
+    return supabaseClient;
+  }
+
+  function fmt(n){
+    if(n === null || n === undefined) return '—';
+    return Number(n).toLocaleString('en-IN');
+  }
+
+  async function loadStats(days){
+    const client = getClient();
+    if(!client) return;
+    const end = new Date();
+    const start = new Date();
+    start.setDate(start.getDate() - days);
+
+    const statEls = {
+      total: document.getElementById('statTotal'),
+      sessions: document.getElementById('statSessions'),
+      anon: document.getElementById('statAnon'),
+      loggedIn: document.getElementById('statLoggedIn'),
+      users: document.getElementById('statUsers'),
+    };
+    Object.values(statEls).forEach(el => el.textContent = '…');
+
+    const breakdownWrap = document.getElementById('breakdownWrap');
+    breakdownWrap.innerHTML = '<p class="loading">Loading…</p>';
+
+    try {
+      const { data: statsData, error: statsErr } = await client.rpc('get_page_view_stats', {
+        p_start: start.toISOString(),
+        p_end: end.toISOString()
+      });
+      if(statsErr) throw statsErr;
+      const row = (statsData && statsData[0]) || {};
+      statEls.total.textContent = fmt(row.total_hits ?? 0);
+      statEls.sessions.textContent = fmt(row.unique_sessions ?? 0);
+      statEls.anon.textContent = fmt(row.anonymous_hits ?? 0);
+      statEls.loggedIn.textContent = fmt(row.logged_in_hits ?? 0);
+      statEls.users.textContent = fmt(row.unique_logged_in_users ?? 0);
+
+      const { data: breakdownData, error: breakdownErr } = await client.rpc('get_page_view_breakdown', {
+        p_start: start.toISOString(),
+        p_end: end.toISOString()
+      });
+      if(breakdownErr) throw breakdownErr;
+
+      if(!breakdownData || breakdownData.length === 0){
+        breakdownWrap.innerHTML = '<p class="empty">No hits recorded in this range yet.</p>';
+      } else {
+        let html = '<table><thead><tr><th>Page</th><th class="num">Hits</th><th class="num">Unique Sessions</th></tr></thead><tbody>';
+        breakdownData.forEach(r => {
+          html += `<tr><td>${r.page_path}</td><td class="num">${fmt(r.hits)}</td><td class="num">${fmt(r.unique_sessions)}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        breakdownWrap.innerHTML = html;
+      }
+    } catch(err){
+      console.error('Failed to load stats:', err);
+      breakdownWrap.innerHTML = '<p class="empty">Could not load stats. Check console for details.</p>';
+    }
+  }
+
+  function initDashboard(){
+    if(dashboardInitialized) return;
+    dashboardInitialized = true;
+
+    const buttons = document.querySelectorAll('.range-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadStats(parseInt(btn.dataset.days, 10));
+      });
+    });
+
+    loadStats(30);
+  }
+</script>
+</body>
+</html>
