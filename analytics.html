@@ -255,6 +255,8 @@
   const passInput = document.getElementById('passInput');
   const unlockBtn = document.getElementById('unlockBtn');
   const lockError = document.getElementById('lockError');
+  let supabaseClient;
+  let dashboardInitialized = false;
 
   function unlock(){
     if(passInput.value === ACCESS_CODE){
@@ -276,9 +278,6 @@
   }
 
   // ---- Dashboard logic ----
-  let supabaseClient;
-  let dashboardInitialized = false;
-
   function getClient(){
     if(!supabaseClient){
       if(!window.BNM_ENV){
